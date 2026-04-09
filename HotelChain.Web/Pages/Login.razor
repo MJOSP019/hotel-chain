@@ -1,0 +1,345 @@
+@page "/login"
+@inject HttpClient Http
+@inject IJSRuntime JS
+@inject NavigationManager Nav
+
+<PageTitle>Login</PageTitle>
+
+<div class="login-page">
+    <section class="login-hero">
+        <div class="login-hero__content">
+            <div class="login-badge">Acceso</div>
+            <h1>Inicia sesión</h1>
+            <p>
+                Accede al portal para gestionar tus reservaciones, completar el checkout,
+                descargar PDFs y publicar comentarios en hoteles.
+            </p>
+        </div>
+    </section>
+
+    <section class="login-panel">
+        <div class="login-card">
+            <div class="login-card__header">
+                <div>
+                    <h3>Bienvenido de nuevo</h3>
+                    <p>Ingresa tus credenciales para continuar.</p>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(error))
+            {
+                <div class="alert alert-danger login-alert">@error</div>
+            }
+
+            <div class="mb-3">
+                <label class="login-label">Email</label>
+                <input class="form-control login-input" @bind="email" />
+            </div>
+
+            <div class="mb-3">
+                <label class="login-label">Password</label>
+                <input type="password" class="form-control login-input" @bind="password" />
+            </div>
+
+            <div class="login-actions">
+                <button class="btn login-btn-primary" @onclick="DoLogin">
+                    Login
+                </button>
+
+                <a class="btn login-btn-secondary" href="/register">
+                    Crear cuenta
+                </a>
+            </div>
+        </div>
+
+        <div class="login-side-card">
+            <div class="login-side-card__badge">Portal HotelChain</div>
+            <h4>¿Qué puedes hacer al iniciar sesión?</h4>
+
+            <div class="login-feature-list">
+                <div class="login-feature">
+                    <span class="login-feature__title">Reservar habitaciones</span>
+                    <span class="login-feature__text">Confirma disponibilidad y genera tu código de reserva.</span>
+                </div>
+
+                <div class="login-feature">
+                    <span class="login-feature__title">Gestionar checkout</span>
+                    <span class="login-feature__text">Completa el pago demo y revisa el estado de tu reservación.</span>
+                </div>
+
+                <div class="login-feature">
+                    <span class="login-feature__title">Descargar PDF y comentar</span>
+                    <span class="login-feature__text">Consulta comprobantes y publica reviews en hoteles.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .login-page {
+        padding: 1.5rem 0 2rem 0;
+        color: #0f172a;
+    }
+
+    .login-hero {
+        background:
+            radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 28%),
+            linear-gradient(135deg, #0f172a 0%, #162033 45%, #1e293b 100%);
+        color: #fff;
+        border-radius: 28px;
+        padding: 2.2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .login-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent 30%);
+        pointer-events: none;
+    }
+
+    .login-hero__content {
+        position: relative;
+        z-index: 1;
+        max-width: 760px;
+    }
+
+    .login-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.38rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.12);
+        color: #dbeafe;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    .login-hero h1 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        margin-bottom: 0.8rem;
+        line-height: 1.05;
+    }
+
+    .login-hero p {
+        margin: 0;
+        max-width: 720px;
+        color: rgba(255,255,255,0.82);
+        font-size: 1.02rem;
+    }
+
+    .login-panel {
+        display: grid;
+        grid-template-columns: minmax(320px, 480px) minmax(280px, 1fr);
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    .login-card,
+    .login-side-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 1.5rem;
+        box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+    }
+
+    .login-card__header {
+        margin-bottom: 1rem;
+    }
+
+    .login-card__header h3,
+    .login-side-card h4 {
+        margin: 0 0 0.25rem 0;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .login-card__header p {
+        margin: 0;
+        color: #64748b;
+    }
+
+    .login-alert {
+        border-radius: 16px;
+    }
+
+    .login-label {
+        display: block;
+        margin-bottom: 0.45rem;
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: #334155;
+    }
+
+    .login-input {
+        min-height: 48px;
+        border-radius: 14px;
+        border: 1px solid #cbd5e1;
+        background: #f8fafc;
+        color: #0f172a;
+    }
+
+    .login-input:focus {
+        border-color: #3b82f6;
+        background: #fff;
+        box-shadow: 0 0 0 0.18rem rgba(59, 130, 246, 0.18);
+    }
+
+    .login-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+    }
+
+    .login-btn-primary {
+        background: linear-gradient(135deg, #1d4ed8 0%, #0f172a 100%);
+        color: #fff;
+        border: none;
+        border-radius: 14px;
+        padding: 0.8rem 1.2rem;
+        font-weight: 700;
+        box-shadow: 0 10px 24px rgba(29, 78, 216, 0.22);
+    }
+
+    .login-btn-primary:hover,
+    .login-btn-primary:focus {
+        color: #fff;
+        background: linear-gradient(135deg, #1e40af 0%, #0b1220 100%);
+    }
+
+    .login-btn-secondary {
+        background: #fff;
+        color: #0f172a;
+        border: 1px solid #cbd5e1;
+        border-radius: 14px;
+        padding: 0.8rem 1.2rem;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .login-btn-secondary:hover,
+    .login-btn-secondary:focus {
+        background: #f8fafc;
+        color: #0f172a;
+        border-color: #94a3b8;
+    }
+
+    .login-side-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    .login-side-card__badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.34rem 0.7rem;
+        border-radius: 999px;
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 0.8rem;
+    }
+
+    .login-feature-list {
+        display: grid;
+        gap: 0.9rem;
+        margin-top: 1rem;
+    }
+
+    .login-feature {
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.8);
+        padding: 0.95rem 1rem;
+    }
+
+    .login-feature__title {
+        display: block;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 0.2rem;
+    }
+
+    .login-feature__text {
+        display: block;
+        color: #64748b;
+        line-height: 1.55;
+        font-size: 0.95rem;
+    }
+
+    @@media (max-width: 991.98px) {
+        .login-panel {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @@media (max-width: 767.98px) {
+        .login-page {
+            padding-top: 0.75rem;
+        }
+
+        .login-hero {
+            padding: 1.5rem 1rem;
+        }
+
+        .login-card,
+        .login-side-card {
+            padding: 1.1rem;
+        }
+    }
+</style>
+
+@code {
+    string email = "";
+    string password = "";
+    string? error;
+
+    async Task DoLogin()
+    {
+        error = null;
+
+        var req = new
+        {
+            email = email,
+            password = password
+        };
+
+        var response = await Http.PostAsJsonAsync("/api/auth/login", req);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            error = "Credenciales inválidas";
+            return;
+        }
+
+        var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
+
+        if (result == null || string.IsNullOrEmpty(result.token))
+        {
+            error = "No se recibió token";
+            return;
+        }
+
+        await JS.InvokeVoidAsync("auth.setToken", result.token);
+
+        Nav.NavigateTo("/");
+    }
+
+    class LoginResponse
+    {
+        public string token { get; set; } = "";
+    }
+}

@@ -1,0 +1,657 @@
+@page "/checkout"
+@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject IJSRuntime JS
+@inject NavigationManager Nav
+
+@* 
+   Componente encargado del flujo de checkout y gestión de reservaciones.
+   Permite consultar estado, confirmar pago demo, abrir PDF y cancelar
+   siempre que se cumplan las reglas del negocio.
+*@
+
+<PageTitle>Checkout</PageTitle>
+
+<div class="checkout-page">
+    <section class="checkout-hero">
+        <div class="checkout-hero__content">
+            <div class="checkout-badge">Checkout · Reservación</div>
+            <h1>Gestiona tu reservación</h1>
+            <p>
+                Consulta el estado actual de tu reservación, realiza el pago demo, descarga el PDF
+                y, si aplica, cancela la reservación según las reglas ya implementadas en el sistema.
+            </p>
+
+            <div class="checkout-hero__actions">
+                <a class="btn checkout-btn-secondary" href="/my-reservations">Mis reservaciones</a>
+                <a class="btn checkout-btn-outline" href="/search">Buscar habitaciones</a>
+            </div>
+        </div>
+    </section>
+
+    @if (!string.IsNullOrWhiteSpace(error))
+    {
+        <div class="alert alert-danger checkout-alert">@error</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(success))
+    {
+        <div class="alert alert-success checkout-alert">@success</div>
+    }
+
+    <div class="checkout-grid">
+        <section class="checkout-card">
+            <div class="checkout-card__header">
+                <div>
+                    <h3>Reservación</h3>
+                    <p>Ingresa el código y consulta el estado actual.</p>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="checkout-label">Código de reservación</label>
+                <input class="form-control checkout-input" @bind="code" placeholder="R-20260305-XXXXXX" />
+                <small class="text-muted">Este código se genera al reservar.</small>
+            </div>
+
+            <div class="checkout-actions">
+                <button type="button" class="btn checkout-btn-secondary" @onclick="LoadReservation">
+                    @(isLoadingStatus ? "Cargando..." : "Cargar estado")
+                </button>
+
+                <button type="button" class="btn checkout-btn-outline" @onclick="OpenPdf">
+                    @(isDownloadingPdf ? "Abriendo..." : "Ver PDF")
+                </button>
+            </div>
+
+            @if (reservation != null)
+            {
+                <div class="reservation-status-card mt-4">
+                    <div class="reservation-status-card__top">
+                        <div>
+                            <div class="reservation-status-card__eyebrow">Resumen</div>
+                            <h4>@reservation.Code</h4>
+                        </div>
+
+                        <div class="@GetStatusBadgeClass(reservation.Status)">
+                            @reservation.Status
+                        </div>
+                    </div>
+
+                    <div class="reservation-status-card__body">
+                        <div class="status-feature">
+                            <span class="status-feature__label">Estado</span>
+                            <strong>@reservation.Status</strong>
+                        </div>
+
+                        <div class="status-feature">
+                            <span class="status-feature__label">Total</span>
+                            <strong>Q @reservation.TotalAmount.ToString("0.00")</strong>
+                        </div>
+                    </div>
+
+                    @if (ShowTimingWarning(reservation))
+                    {
+                        <div class="alert alert-warning mt-3 mb-0">
+                            Esta reservación ya no cumple la regla de más de 24 horas antes del check-in para cancelar.
+                        </div>
+                    }
+
+                    @if (IsPendingOrConfirmed(reservation.Status))
+                    {
+                        <div class="reservation-status-card__footer">
+                            <button type="button"
+                                    class="btn checkout-btn-danger"
+                                    @onclick="ToggleCancelSection"
+                                    disabled="@(!CanExecuteTimeRestrictedAction(reservation) || isCancelling)"
+                                    title="@GetTimeRestrictedActionTitle(reservation)">
+                                @(isCancelling ? "Cancelando..." : "Cancelar reservación")
+                            </button>
+                        </div>
+                    }
+                </div>
+            }
+
+            @if (showCancelSection)
+            {
+                <div class="cancel-card mt-4">
+                    <h5>Cancelar reservación</h5>
+
+                    <div class="mb-3">
+                        <label class="checkout-label">Razón</label>
+                        <textarea class="form-control checkout-input" rows="4" @bind="cancelReason"></textarea>
+                    </div>
+
+                    <div class="checkout-actions">
+                        <button type="button"
+                                class="btn checkout-btn-danger"
+                                @onclick="CancelReservation"
+                                disabled="@isCancelling">
+                            @(isCancelling ? "Cancelando..." : "Confirmar cancelación")
+                        </button>
+
+                        <button type="button"
+                                class="btn checkout-btn-secondary"
+                                @onclick="CloseCancelSection"
+                                disabled="@isCancelling">
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            }
+        </section>
+
+        <section class="checkout-card">
+            <div class="checkout-card__header">
+                <div>
+                    <h3>Pago demo</h3>
+                    <p>Completa los datos simulados para confirmar la reservación.</p>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-12">
+                    <label class="checkout-label">Número de tarjeta</label>
+                    <input class="form-control checkout-input" @bind="cardNumber" placeholder="4111111111111111" />
+                </div>
+
+                <div class="col-md-4">
+                    <label class="checkout-label">CVV</label>
+                    <input class="form-control checkout-input" @bind="cvv" placeholder="123" />
+                </div>
+
+                <div class="col-md-8">
+                    <label class="checkout-label">Nombre en tarjeta</label>
+                    <input class="form-control checkout-input" @bind="cardHolder" placeholder="Josue Pineda" />
+                </div>
+
+                <div class="col-12">
+                    <label class="checkout-label">Dirección de cobro</label>
+                    <input class="form-control checkout-input" @bind="billingAddress" placeholder="Ciudad de Guatemala" />
+                </div>
+            </div>
+
+            <div class="checkout-actions mt-4">
+                <button type="button"
+                        class="btn checkout-btn-primary"
+                        @onclick="DoCheckout"
+                        disabled="@(isPaying || IsCanceled(reservation?.Status) || isPaid)">
+                    @(isPaying ? "Procesando..." : (isPaid ? "Pagado" : "Pagar y confirmar"))
+                </button>
+
+                @if (isPaid)
+                {
+                    <button class="btn checkout-btn-outline" @onclick="OpenPdf" disabled="@isDownloadingPdf">
+                        @(isDownloadingPdf ? "Abriendo..." : "Descargar PDF")
+                    </button>
+
+                    <a class="btn checkout-btn-secondary" href="/my-reservations">Mis reservaciones</a>
+                }
+            </div>
+
+            <div class="checkout-note mt-4">
+                <div class="checkout-note__label">Nota</div>
+                <p>
+                    Este formulario usa el flujo demo ya existente. La confirmación real depende del estado
+                    actual de la reservación y de que el backend acepte el checkout.
+                </p>
+            </div>
+        </section>
+    </div>
+</div>
+
+@code {
+    /// <summary>
+    /// Indica si la reservación actual ya se encuentra pagada.
+    /// </summary>
+    bool isPaid;
+
+    /// <summary>
+    /// Indica si se está consultando el estado de la reservación.
+    /// </summary>
+    bool isLoadingStatus;
+
+    /// <summary>
+    /// Indica si el checkout está en proceso.
+    /// </summary>
+    bool isPaying;
+
+    /// <summary>
+    /// Indica si se está generando o abriendo el PDF.
+    /// </summary>
+    bool isDownloadingPdf;
+
+    /// <summary>
+    /// Código de reservación ingresado por el usuario.
+    /// </summary>
+    string code = "";
+
+    /// <summary>
+    /// Número de tarjeta usado en el flujo demo de pago.
+    /// </summary>
+    string cardNumber = "4111111111111111";
+
+    /// <summary>
+    /// CVV usado en el flujo demo de pago.
+    /// </summary>
+    string cvv = "123";
+
+    /// <summary>
+    /// Nombre del titular de la tarjeta.
+    /// </summary>
+    string cardHolder = "";
+
+    /// <summary>
+    /// Dirección de cobro registrada durante el checkout.
+    /// </summary>
+    string billingAddress = "";
+
+    /// <summary>
+    /// Mensaje de error mostrado en pantalla.
+    /// </summary>
+    string? error;
+
+    /// <summary>
+    /// Mensaje de éxito mostrado en pantalla.
+    /// </summary>
+    string? success;
+
+    /// <summary>
+    /// Indica si la sección de cancelación está visible.
+    /// </summary>
+    bool showCancelSection;
+
+    /// <summary>
+    /// Razón de cancelación ingresada por el usuario.
+    /// </summary>
+    string cancelReason = "";
+
+    /// <summary>
+    /// Indica si la cancelación está en proceso.
+    /// </summary>
+    bool isCancelling;
+
+    /// <summary>
+    /// Reservación actualmente cargada en pantalla.
+    /// </summary>
+    ReservationDto? reservation;
+
+    /// <summary>
+    /// Inicializa el componente leyendo el código desde el query string si existe.
+    /// </summary>
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = Nav.ToAbsoluteUri(Nav.Uri);
+        var qs = ParseQuery(uri.Query);
+        if (qs.TryGetValue("code", out var c))
+            code = c;
+
+        if (!string.IsNullOrWhiteSpace(code))
+            await LoadReservation();
+    }
+
+    /// <summary>
+    /// Consulta el estado actual de una reservación usando su código.
+    /// </summary>
+    async Task LoadReservation()
+    {
+        error = null;
+        success = null;
+        reservation = null;
+        showCancelSection = false;
+        cancelReason = "";
+
+        if (string.IsNullOrWhiteSpace(code))
+        {
+            error = "Ingresa el código de reservación.";
+            return;
+        }
+
+        isLoadingStatus = true;
+
+        try
+        {
+            var resp = await Http.GetAsync($"/api/public/reservations/{code}");
+
+            if (!resp.IsSuccessStatusCode)
+            {
+                error = await resp.Content.ReadAsStringAsync();
+                return;
+            }
+
+            reservation = await resp.Content.ReadFromJsonAsync<ReservationDto>();
+
+            if (reservation != null)
+            {
+                var status = (reservation.Status ?? "").ToUpperInvariant();
+
+                if (status == "CONFIRMED")
+                {
+                    isPaid = true;
+                    success = "✅ Esta reservación ya está confirmada.";
+                }
+                else if (status == "CANCELED" || status == "CANCELLED")
+                {
+                    isPaid = false;
+                    success = "ℹ️ Esta reservación está cancelada.";
+                }
+                else
+                {
+                    isPaid = false;
+                }
+            }
+            else
+            {
+                isPaid = false;
+            }
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+        finally
+        {
+            isLoadingStatus = false;
+        }
+    }
+
+    /// <summary>
+    /// Ejecuta el flujo demo de checkout para confirmar una reservación pendiente.
+    /// </summary>
+    async Task DoCheckout()
+    {
+        error = null;
+        success = null;
+
+        if (string.IsNullOrWhiteSpace(code))
+        {
+            error = "Ingresa el código de reservación.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(cardNumber) ||
+            string.IsNullOrWhiteSpace(cvv) ||
+            string.IsNullOrWhiteSpace(cardHolder) ||
+            string.IsNullOrWhiteSpace(billingAddress))
+        {
+            error = "Completa los datos de pago (demo).";
+            return;
+        }
+
+        isPaying = true;
+
+        try
+        {
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                error = "Necesitas iniciar sesión para hacer checkout.";
+                return;
+            }
+
+            var body = new
+            {
+                cardNumber,
+                cvv,
+                cardHolderName = cardHolder,
+                billingAddress
+            };
+
+            var req = new HttpRequestMessage(HttpMethod.Post, $"/api/public/reservations/{code}/checkout");
+            req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            req.Content = JsonContent.Create(body);
+
+            var resp = await Http.SendAsync(req);
+
+            if (!resp.IsSuccessStatusCode)
+            {
+                var txt = await resp.Content.ReadAsStringAsync();
+                error = string.IsNullOrWhiteSpace(txt) ? $"Error HTTP {(int)resp.StatusCode}" : txt;
+                return;
+            }
+
+            success = "✅ Pago aprobado. Reservación confirmada.";
+            isPaid = true;
+
+            await LoadReservation();
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+        finally
+        {
+            isPaying = false;
+        }
+    }
+
+    /// <summary>
+    /// Solicita el PDF de la reservación y lo abre en el navegador.
+    /// </summary>
+    async Task OpenPdf()
+    {
+        error = null;
+
+        if (string.IsNullOrWhiteSpace(code))
+        {
+            error = "Ingresa el código de reservación.";
+            return;
+        }
+
+        isDownloadingPdf = true;
+
+        try
+        {
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                error = "Necesitas iniciar sesión para ver el PDF.";
+                return;
+            }
+
+            var req = new HttpRequestMessage(HttpMethod.Get, $"/api/public/reservations/{code}/pdf");
+            req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var resp = await Http.SendAsync(req);
+
+            if (!resp.IsSuccessStatusCode)
+            {
+                var txt = await resp.Content.ReadAsStringAsync();
+                error = string.IsNullOrWhiteSpace(txt) ? $"Error HTTP {(int)resp.StatusCode}" : txt;
+                return;
+            }
+
+            var bytes = await resp.Content.ReadAsByteArrayAsync();
+            var base64 = Convert.ToBase64String(bytes);
+
+            await JS.InvokeVoidAsync("openPdfBase64", base64);
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+        finally
+        {
+            isDownloadingPdf = false;
+        }
+    }
+
+    /// <summary>
+    /// Muestra u oculta la sección de cancelación si la reservación todavía lo permite.
+    /// </summary>
+    void ToggleCancelSection()
+    {
+        if (reservation is null || !CanExecuteTimeRestrictedAction(reservation))
+            return;
+
+        showCancelSection = !showCancelSection;
+        if (!showCancelSection)
+            cancelReason = "";
+    }
+
+    /// <summary>
+    /// Cierra la sección de cancelación y limpia el motivo ingresado.
+    /// </summary>
+    void CloseCancelSection()
+    {
+        showCancelSection = false;
+        cancelReason = "";
+    }
+
+    /// <summary>
+    /// Cancela la reservación actual si todavía cumple la regla de tiempo.
+    /// </summary>
+    async Task CancelReservation()
+    {
+        error = null;
+        success = null;
+
+        if (string.IsNullOrWhiteSpace(code))
+        {
+            error = "Ingresa el código de reservación.";
+            return;
+        }
+
+        if (reservation is null || !CanExecuteTimeRestrictedAction(reservation))
+        {
+            error = "Esta reservación ya no cumple la regla de más de 24 horas antes del check-in para cancelar.";
+            return;
+        }
+
+        isCancelling = true;
+
+        try
+        {
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                error = "Necesitas iniciar sesión para cancelar.";
+                return;
+            }
+
+            var body = new { reason = cancelReason };
+
+            var req = new HttpRequestMessage(HttpMethod.Post, $"/api/public/reservations/{code}/cancel");
+            req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            req.Content = JsonContent.Create(body);
+
+            var resp = await Http.SendAsync(req);
+
+            if (!resp.IsSuccessStatusCode)
+            {
+                var txt = await resp.Content.ReadAsStringAsync();
+                error = string.IsNullOrWhiteSpace(txt) ? $"Error HTTP {(int)resp.StatusCode}" : txt;
+                return;
+            }
+
+            success = "✅ Reservación cancelada correctamente.";
+            showCancelSection = false;
+            cancelReason = "";
+            isPaid = false;
+
+            await LoadReservation();
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+        finally
+        {
+            isCancelling = false;
+        }
+    }
+
+    /// <summary>
+    /// DTO local con la información mínima de una reservación para el checkout.
+    /// </summary>
+    private class ReservationDto
+    {
+        public string? Code { get; set; }
+        public string? Status { get; set; }
+        public decimal TotalAmount { get; set; }
+        public DateTime CheckIn { get; set; }
+    }
+
+    /// <summary>
+    /// Determina si una reservación está en estado pendiente o confirmado.
+    /// </summary>
+    private static bool IsPendingOrConfirmed(string? status)
+    {
+        var normalized = (status ?? "").ToUpperInvariant();
+        return normalized == "PENDING" || normalized == "CONFIRMED";
+    }
+
+    /// <summary>
+    /// Determina si una reservación está cancelada.
+    /// </summary>
+    private static bool IsCanceled(string? status)
+    {
+        var normalized = (status ?? "").ToUpperInvariant();
+        return normalized == "CANCELED" || normalized == "CANCELLED";
+    }
+
+    /// <summary>
+    /// Valida si una acción restringida por tiempo todavía puede ejecutarse
+    /// según la regla de 24 horas antes del check-in.
+    /// </summary>
+    private static bool CanExecuteTimeRestrictedAction(ReservationDto reservation)
+    {
+        return DateTime.UtcNow <= reservation.CheckIn.AddHours(-24);
+    }
+
+    /// <summary>
+    /// Determina si se debe mostrar una advertencia de tiempo en la vista.
+    /// </summary>
+    private static bool ShowTimingWarning(ReservationDto reservation)
+    {
+        return IsPendingOrConfirmed(reservation.Status)
+               && !CanExecuteTimeRestrictedAction(reservation);
+    }
+
+    /// <summary>
+    /// Devuelve el texto descriptivo para el tooltip de acciones restringidas por tiempo.
+    /// </summary>
+    private static string GetTimeRestrictedActionTitle(ReservationDto reservation)
+    {
+        if (CanExecuteTimeRestrictedAction(reservation))
+            return "";
+
+        return "Esta acción solo está disponible si faltan más de 24 horas para el check-in.";
+    }
+
+    /// <summary>
+    /// Devuelve la clase CSS correspondiente al estado de la reservación.
+    /// </summary>
+    private static string GetStatusBadgeClass(string? status)
+    {
+        return (status ?? "").ToUpperInvariant() switch
+        {
+            "PENDING" => "status-badge status-badge--pending",
+            "CONFIRMED" => "status-badge status-badge--confirmed",
+            "CANCELED" => "status-badge status-badge--cancelled",
+            "CANCELLED" => "status-badge status-badge--cancelled",
+            _ => "status-badge status-badge--default"
+        };
+    }
+
+    /// <summary>
+    /// Analiza manualmente un query string y lo convierte en un diccionario clave-valor.
+    /// </summary>
+    private static Dictionary<string, string> ParseQuery(string query)
+    {
+        var dict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        if (string.IsNullOrWhiteSpace(query)) return dict;
+        if (query.StartsWith("?")) query = query[1..];
+
+        foreach (var part in query.Split('&', StringSplitOptions.RemoveEmptyEntries))
+        {
+            var kv = part.Split('=', 2);
+            var key = Uri.UnescapeDataString(kv[0]);
+            var val = kv.Length > 1 ? Uri.UnescapeDataString(kv[1]) : "";
+            dict[key] = val;
+        }
+
+        return dict;
+    }
+}

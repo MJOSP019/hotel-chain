@@ -1,0 +1,302 @@
+@page "/evacuation-info"
+
+<PageTitle>Proceso de evacuación</PageTitle>
+
+<div class="info-page">
+    <section class="info-hero">
+        <div class="info-hero__content">
+            <div class="info-badge">Portal informativo</div>
+            <h1>Proceso de evacuación</h1>
+            <p>
+                En caso de emergencia, es importante seguir un proceso ordenado, conservar la calma
+                y atender las indicaciones del personal del hotel para proteger a todos los huéspedes.
+            </p>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-section__header">
+            <div>
+                <div class="info-badge info-badge--light">Seguridad</div>
+                <h3>Pasos básicos ante una evacuación</h3>
+                <p>
+                    Estas indicaciones ayudan a actuar con rapidez y de forma organizada cuando sea necesario
+                    desalojar una habitación o una zona del hotel.
+                </p>
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <article class="info-card info-card--featured">
+                <div class="info-card__icon">1</div>
+                <h4>Mantén la calma</h4>
+                <p>
+                    Lo primero es evitar el pánico. Mantener la calma permite actuar con mayor claridad,
+                    escuchar instrucciones y apoyar a quienes se encuentren cerca.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-card__icon">2</div>
+                <h4>Sigue las indicaciones</h4>
+                <p>
+                    Atiende las instrucciones del personal del hotel, seguridad interna o responsables de la evacuación.
+                    Ellos indicarán la ruta y el punto seguro correspondiente.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-card__icon">3</div>
+                <h4>Ubica la salida más cercana</h4>
+                <p>
+                    Utiliza las rutas señalizadas y desplázate hacia la salida de emergencia o zona segura
+                    más próxima de forma ordenada.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-card__icon">4</div>
+                <h4>No uses elevadores</h4>
+                <p>
+                    En una evacuación, lo recomendable es utilizar escaleras y rutas de emergencia.
+                    Los elevadores pueden quedar fuera de servicio o representar un riesgo adicional.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-card__icon">5</div>
+                <h4>Ayuda si es seguro hacerlo</h4>
+                <p>
+                    Si la situación lo permite, brinda apoyo a menores, adultos mayores o personas que
+                    necesiten asistencia, sin ponerte en peligro.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-card__icon">6</div>
+                <h4>Dirígete al punto de reunión</h4>
+                <p>
+                    Una vez fuera del área de riesgo, permanece en el punto de reunión indicado hasta recibir
+                    nueva información por parte del personal autorizado.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="info-highlight">
+        <div class="info-highlight__content">
+            <div>
+                <div class="info-badge info-badge--light">Importante</div>
+                <h3>No regreses al edificio sin autorización</h3>
+                <p>
+                    Aunque parezca que la situación ha terminado, el reingreso solo debe realizarse cuando
+                    el personal autorizado confirme que el área es segura.
+                </p>
+            </div>
+
+            <div class="info-highlight__box">
+                <div class="info-highlight__label">Recomendación</div>
+                <p>
+                    Al llegar al hotel, identifica rutas de salida, escaleras y zonas seguras.
+                    Esto puede ayudarte a reaccionar mejor en una situación real.
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .info-page {
+        padding: 1.5rem 0 2rem 0;
+        color: #0f172a;
+    }
+
+    .info-hero {
+        background:
+            radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 28%),
+            linear-gradient(135deg, #0f172a 0%, #162033 45%, #1e293b 100%);
+        color: #fff;
+        border-radius: 28px;
+        padding: 2.2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .info-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent 30%);
+        pointer-events: none;
+    }
+
+    .info-hero__content {
+        position: relative;
+        z-index: 1;
+        max-width: 820px;
+    }
+
+    .info-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.38rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.12);
+        color: #dbeafe;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    .info-badge--light {
+        background: #eff6ff;
+        color: #1d4ed8;
+    }
+
+    .info-hero h1 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        margin-bottom: 0.8rem;
+        line-height: 1.05;
+    }
+
+    .info-hero p {
+        margin: 0;
+        max-width: 720px;
+        color: rgba(255,255,255,0.82);
+        font-size: 1.02rem;
+    }
+
+    .info-section {
+        margin-top: 1.25rem;
+    }
+
+    .info-section__header {
+        margin-bottom: 1rem;
+    }
+
+    .info-section__header h3 {
+        margin: 0.3rem 0 0.25rem 0;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .info-section__header p {
+        margin: 0;
+        color: #64748b;
+        max-width: 760px;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1rem;
+    }
+
+    .info-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 1.2rem;
+        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
+        min-height: 220px;
+    }
+
+    .info-card--featured {
+        grid-column: span 2;
+    }
+
+    .info-card__icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-size: 1.1rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+    }
+
+    .info-card h4 {
+        margin-bottom: 0.55rem;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .info-card p {
+        margin: 0;
+        color: #64748b;
+        line-height: 1.65;
+    }
+
+    .info-highlight {
+        margin-top: 1.4rem;
+    }
+
+    .info-highlight__content {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 28px;
+        padding: 1.5rem;
+        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    .info-highlight__content h3 {
+        margin: 0.3rem 0 0.45rem 0;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .info-highlight__content p {
+        margin: 0;
+        color: #64748b;
+        line-height: 1.65;
+    }
+
+    .info-highlight__box {
+        background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+        border: 1px solid #dbeafe;
+        border-radius: 22px;
+        padding: 1.1rem;
+    }
+
+    .info-highlight__label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #1d4ed8;
+        font-weight: 800;
+        margin-bottom: 0.45rem;
+    }
+
+    @@media (max-width: 991.98px) {
+        .info-highlight__content {
+            grid-template-columns: 1fr;
+        }
+
+        .info-card--featured {
+            grid-column: span 1;
+        }
+    }
+
+    @@media (max-width: 767.98px) {
+        .info-page {
+            padding-top: 0.75rem;
+        }
+
+        .info-hero {
+            padding: 1.5rem 1rem;
+        }
+    }
+</style>

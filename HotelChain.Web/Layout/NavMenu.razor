@@ -1,0 +1,529 @@
+﻿@using System.Net.Http.Headers
+@using System.Text.Json
+@implements IDisposable
+@inject IJSRuntime JS
+@inject NavigationManager Nav
+@inject HttpClient Http
+
+<div class="hc-nav">
+    <div class="hc-nav__brand">
+        <a class="hc-nav__brand-link" href="">
+            <span class="hc-nav__brand-mark">HC</span>
+            <span class="hc-nav__brand-text">
+                <strong>HotelChain Collection</strong>
+                <small>Cadena hotelera · Portal oficial</small>
+            </span>
+        </a>
+
+        <button type="button" class="hc-nav__toggle" title="Abrir/cerrar menú" @onclick="ToggleNavMenu">
+            ☰
+        </button>
+    </div>
+
+    <div class="hc-nav__intro">
+        <div class="hc-nav__intro-badge">Hospitalidad · Destinos · Reservas</div>
+        <p>
+            Descubre hoteles de la cadena, consulta disponibilidad, explora información útil y administra tu experiencia de hospedaje.
+        </p>
+    </div>
+
+    <div class="@(collapseNavMenu ? "hc-nav__menu hc-nav__menu--collapsed" : "hc-nav__menu")">
+        <nav class="hc-nav__links">
+            <div class="hc-nav__section">Portal público</div>
+
+            <div class="hc-nav__item">
+                <NavLink class="hc-nav__link" href="" Match="NavLinkMatch.All">
+                    <span class="hc-nav__icon">⌂</span>
+                    <span>Inicio</span>
+                </NavLink>
+            </div>
+
+            <div class="hc-nav__item">
+                <NavLink class="hc-nav__link" href="search">
+                    <span class="hc-nav__icon">⌕</span>
+                    <span>Buscar hoteles</span>
+                </NavLink>
+            </div>
+
+            <div class="hc-nav__item">
+                <NavLink class="hc-nav__link" href="amenities">
+                    <span class="hc-nav__icon">✦</span>
+                    <span>Servicios y amenidades</span>
+                </NavLink>
+            </div>
+
+            <div class="hc-nav__item">
+                <NavLink class="hc-nav__link" href="room-types">
+                    <span class="hc-nav__icon">▣</span>
+                    <span>Tipos de habitación</span>
+                </NavLink>
+            </div>
+
+            <div class="hc-nav__item">
+                <NavLink class="hc-nav__link" href="check-in-checkout">
+                    <span class="hc-nav__icon">⇄</span>
+                    <span>Check-in y checkout</span>
+                </NavLink>
+            </div>
+
+            <div class="hc-nav__item">
+                <NavLink class="hc-nav__link" href="hotel-rules">
+                    <span class="hc-nav__icon">≣</span>
+                    <span>Políticas de hospedaje</span>
+                </NavLink>
+            </div>
+
+            <div class="hc-nav__item">
+                <NavLink class="hc-nav__link" href="evacuation-info">
+                    <span class="hc-nav__icon">△</span>
+                    <span>Seguridad y evacuación</span>
+                </NavLink>
+            </div>
+
+            @if (!isLoggedIn)
+            {
+                <div class="hc-nav__section">Acceso de huéspedes</div>
+
+                <div class="hc-nav__item">
+                    <NavLink class="hc-nav__link" href="register">
+                        <span class="hc-nav__icon">＋</span>
+                        <span>Crear cuenta</span>
+                    </NavLink>
+                </div>
+
+                <div class="hc-nav__item">
+                    <NavLink class="hc-nav__link" href="login">
+                        <span class="hc-nav__icon">→</span>
+                        <span>Iniciar sesión</span>
+                    </NavLink>
+                </div>
+            }
+
+            @if (canSeeMyReservations)
+            {
+                <div class="hc-nav__section">Mi experiencia</div>
+
+                <div class="hc-nav__item">
+                    <NavLink class="hc-nav__link" href="my-reservations">
+                        <span class="hc-nav__icon">≡</span>
+                        <span>Mis reservaciones</span>
+                    </NavLink>
+                </div>
+            }
+
+            @if (isAdmin)
+            {
+                <div class="hc-nav__section">Gestión interna</div>
+
+                <div class="hc-nav__item">
+                    <NavLink class="hc-nav__link" href="admin/hotels">
+                        <span class="hc-nav__icon">□</span>
+                        <span>Hoteles</span>
+                    </NavLink>
+                </div>
+
+                <div class="hc-nav__item">
+                    <NavLink class="hc-nav__link" href="admin/rooms">
+                        <span class="hc-nav__icon">▦</span>
+                        <span>Habitaciones</span>
+                    </NavLink>
+                </div>
+
+                <div class="hc-nav__item">
+                    <NavLink class="hc-nav__link" href="admin/inventories">
+                        <span class="hc-nav__icon">◫</span>
+                        <span>Inventario</span>
+                    </NavLink>
+                </div>
+
+                <div class="hc-nav__item">
+                    <NavLink class="hc-nav__link" href="admin/reservations">
+                        <span class="hc-nav__icon">◪</span>
+                        <span>Reservaciones</span>
+                    </NavLink>
+                </div>
+
+                <div class="hc-nav__item">
+                    <NavLink class="hc-nav__link" href="admin/users">
+                        <span class="hc-nav__icon">◎</span>
+                        <span>Usuarios y roles</span>
+                    </NavLink>
+                </div>
+
+                <div class="hc-nav__item">
+                    <NavLink class="hc-nav__link" href="admin/analytics">
+                        <span class="hc-nav__icon">◔</span>
+                        <span>Analytics</span>
+                    </NavLink>
+                </div>
+            }
+
+            @if (isLoggedIn)
+            {
+                <div class="hc-nav__section">Sesión</div>
+
+                <div class="hc-nav__item">
+                    <button type="button" class="hc-nav__link hc-nav__link--button" @onclick="Logout">
+                        <span class="hc-nav__icon">↩</span>
+                        <span>Cerrar sesión</span>
+                    </button>
+                </div>
+            }
+        </nav>
+    </div>
+</div>
+
+<style>
+    .hc-nav {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background:
+            radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 28%),
+            linear-gradient(180deg, #0f172a 0%, #14213a 55%, #172554 100%);
+        color: #fff;
+    }
+
+    .hc-nav__brand {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 1.1rem 1rem 0.9rem 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hc-nav__brand-link {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        text-decoration: none;
+        color: #fff;
+        min-width: 0;
+    }
+
+    .hc-nav__brand-link:hover {
+        color: #fff;
+    }
+
+    .hc-nav__brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 0.92rem;
+        letter-spacing: 0.04em;
+        color: #dbeafe;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.28), rgba(255,255,255,0.08));
+        border: 1px solid rgba(255,255,255,0.10);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .hc-nav__brand-text {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    .hc-nav__brand-text strong {
+        font-size: 1rem;
+        line-height: 1.1;
+        color: #fff;
+    }
+
+    .hc-nav__brand-text small {
+        color: rgba(255,255,255,0.68);
+        font-size: 0.78rem;
+        margin-top: 0.12rem;
+    }
+
+    .hc-nav__intro {
+        padding: 0.95rem 1rem 0.4rem 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .hc-nav__intro-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.32rem 0.65rem;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.10);
+        color: #dbeafe;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 0.7rem;
+    }
+
+    .hc-nav__intro p {
+        margin: 0;
+        color: rgba(255,255,255,0.74);
+        font-size: 0.88rem;
+        line-height: 1.55;
+    }
+
+    .hc-nav__toggle {
+        display: none;
+        border: 1px solid rgba(255,255,255,0.14);
+        background: rgba(255,255,255,0.08);
+        color: #fff;
+        border-radius: 12px;
+        width: 42px;
+        height: 42px;
+        font-size: 1.15rem;
+        line-height: 1;
+    }
+
+    .hc-nav__menu {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1rem 0.8rem 1rem 0.8rem;
+    }
+
+    .hc-nav__links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .hc-nav__section {
+        padding: 0.9rem 0.65rem 0.35rem 0.65rem;
+        font-size: 0.72rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(255,255,255,0.46);
+    }
+
+    .hc-nav__item {
+        display: block;
+    }
+
+    .hc-nav__link {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        text-decoration: none;
+        color: rgba(255,255,255,0.82);
+        padding: 0.78rem 0.8rem;
+        border-radius: 16px;
+        border: 1px solid transparent;
+        transition: all 0.18s ease;
+        font-weight: 600;
+        background: transparent;
+    }
+
+    .hc-nav__link:hover {
+        color: #fff;
+        background: rgba(255,255,255,0.07);
+        border-color: rgba(255,255,255,0.08);
+    }
+
+    .hc-nav__link.active {
+        color: #fff;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.35), rgba(255,255,255,0.08));
+        border-color: rgba(147, 197, 253, 0.18);
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.22);
+    }
+
+    .hc-nav__link--button {
+        border: none;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .hc-nav__icon {
+        width: 22px;
+        min-width: 22px;
+        text-align: center;
+        color: #93c5fd;
+        font-size: 0.95rem;
+        font-weight: 700;
+    }
+
+    .hc-nav__menu::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .hc-nav__menu::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.16);
+        border-radius: 999px;
+    }
+
+    .hc-nav__menu::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    @@media (max-width: 991.98px) {
+        .hc-nav__toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hc-nav__menu--collapsed {
+            display: none;
+        }
+
+        .hc-nav__brand {
+            padding: 0.9rem 0.9rem 0.8rem 0.9rem;
+        }
+
+        .hc-nav__intro {
+            padding: 0.85rem 0.9rem 0.3rem 0.9rem;
+        }
+
+        .hc-nav__menu {
+            padding-top: 0.7rem;
+        }
+    }
+
+    @@media (min-width: 992px) {
+        .hc-nav__menu--collapsed {
+            display: block;
+        }
+    }
+</style>
+
+@code {
+    private bool collapseNavMenu = true;
+    private bool isLoggedIn;
+    private bool isAdmin;
+    private bool isRegistered;
+    private bool isWebService;
+    private bool canSeeMyReservations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Nav.LocationChanged += OnLocationChanged;
+        await RefreshAuthState();
+    }
+
+    private async void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+    {
+        await RefreshAuthState();
+
+        if (collapseNavMenu == false)
+            collapseNavMenu = true;
+
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task RefreshAuthState()
+    {
+        var token = await JS.InvokeAsync<string>("auth.getToken");
+
+        isLoggedIn = !string.IsNullOrWhiteSpace(token);
+        isAdmin = false;
+        isRegistered = false;
+        isWebService = false;
+        canSeeMyReservations = false;
+
+        if (!isLoggedIn)
+            return;
+
+        try
+        {
+            var roles = GetRolesFromJwt(token);
+
+            isAdmin = roles.Any(r => string.Equals(r, "ADMIN", StringComparison.OrdinalIgnoreCase));
+            isRegistered = roles.Any(r => string.Equals(r, "REGISTERED", StringComparison.OrdinalIgnoreCase));
+            isWebService = roles.Any(r => string.Equals(r, "WEBSERVICE", StringComparison.OrdinalIgnoreCase));
+
+            canSeeMyReservations = isAdmin || isRegistered;
+        }
+        catch
+        {
+            isLoggedIn = false;
+            isAdmin = false;
+            isRegistered = false;
+            isWebService = false;
+            canSeeMyReservations = false;
+        }
+    }
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    private async Task Logout()
+    {
+        await JS.InvokeVoidAsync("auth.clearToken");
+        Http.DefaultRequestHeaders.Authorization = null;
+        isLoggedIn = false;
+        isAdmin = false;
+        isRegistered = false;
+        isWebService = false;
+        canSeeMyReservations = false;
+        collapseNavMenu = true;
+        Nav.NavigateTo("/login");
+    }
+
+    private static List<string> GetRolesFromJwt(string jwt)
+    {
+        var parts = jwt.Split('.');
+        if (parts.Length < 2)
+            return new List<string>();
+
+        var payload = parts[1];
+        payload = payload.Replace('-', '+').Replace('_', '/');
+
+        switch (payload.Length % 4)
+        {
+            case 2:
+                payload += "==";
+                break;
+            case 3:
+                payload += "=";
+                break;
+        }
+
+        var jsonBytes = Convert.FromBase64String(payload);
+        using var doc = JsonDocument.Parse(jsonBytes);
+
+        var roles = new List<string>();
+        var root = doc.RootElement;
+
+        AddRolesFromClaim(root, "role", roles);
+        AddRolesFromClaim(root, "roles", roles);
+        AddRolesFromClaim(root, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", roles);
+
+        return roles;
+    }
+
+    private static void AddRolesFromClaim(JsonElement root, string claimName, List<string> roles)
+    {
+        if (!root.TryGetProperty(claimName, out var claim))
+            return;
+
+        if (claim.ValueKind == JsonValueKind.String)
+        {
+            var value = claim.GetString();
+            if (!string.IsNullOrWhiteSpace(value))
+                roles.Add(value);
+        }
+        else if (claim.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var item in claim.EnumerateArray())
+            {
+                if (item.ValueKind == JsonValueKind.String)
+                {
+                    var value = item.GetString();
+                    if (!string.IsNullOrWhiteSpace(value))
+                        roles.Add(value);
+                }
+            }
+        }
+    }
+
+    public void Dispose()
+    {
+        Nav.LocationChanged -= OnLocationChanged;
+    }
+}

@@ -1,0 +1,335 @@
+@page "/check-in-checkout"
+
+<PageTitle>Check-in y checkout</PageTitle>
+
+<div class="info-page">
+    <section class="info-hero">
+        <div class="info-hero__content">
+            <div class="info-badge">Portal informativo</div>
+            <h1>Proceso de check-in y checkout</h1>
+            <p>
+                Consulta de forma clara cómo funciona el ingreso y la salida en los hoteles de la cadena,
+                qué datos debes tener a mano y qué recomendaciones tomar en cuenta para una estadía más fluida.
+            </p>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-section__header">
+            <div>
+                <div class="info-badge info-badge--light">Llegada al hotel</div>
+                <h3>¿Cómo funciona el check-in?</h3>
+                <p>
+                    El proceso de ingreso permite validar tu reservación, asignar tu habitación
+                    y brindarte la información básica para iniciar tu hospedaje.
+                </p>
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <article class="info-card info-card--featured">
+                <div class="info-card__icon">1</div>
+                <h4>Presenta tu reservación</h4>
+                <p>
+                    Al llegar al hotel, comparte tu código de reservación y los datos principales
+                    con el personal de recepción para localizar tu registro más rápidamente.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-card__icon">2</div>
+                <h4>Validación de identidad</h4>
+                <p>
+                    El hotel puede solicitar un documento de identificación y la confirmación
+                    de los datos de la reservación para completar el ingreso.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-card__icon">3</div>
+                <h4>Asignación de habitación</h4>
+                <p>
+                    Una vez validada la información, recepción confirma la habitación asignada
+                    y comunica los datos necesarios para tu ingreso.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-card__icon">4</div>
+                <h4>Información importante</h4>
+                <p>
+                    Durante el check-in puedes consultar horarios, reglas del hotel, uso de áreas comunes,
+                    servicios disponibles y cualquier condición particular de tu estadía.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-section__header">
+            <div>
+                <div class="info-badge info-badge--light">Salida del hotel</div>
+                <h3>¿Cómo funciona el checkout?</h3>
+                <p>
+                    El proceso de salida permite cerrar formalmente tu hospedaje y dejar tu reservación finalizada.
+                </p>
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <article class="info-card info-card--featured">
+                <div class="info-card__icon">1</div>
+                <h4>Confirma tu salida</h4>
+                <p>
+                    Antes de retirarte, acércate a recepción o sigue el proceso indicado por el hotel
+                    para informar la finalización de tu hospedaje.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-card__icon">2</div>
+                <h4>Entrega de habitación</h4>
+                <p>
+                    Asegúrate de dejar la habitación en condiciones adecuadas y verificar que no
+                    olvides objetos personales antes de retirarte.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-card__icon">3</div>
+                <h4>Revisión final</h4>
+                <p>
+                    El personal puede confirmar el cierre de la estadía y resolver cualquier duda
+                    relacionada con el uso del servicio durante tu visita.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-card__icon">4</div>
+                <h4>Conserva tu información</h4>
+                <p>
+                    Guarda tu código de reservación y la confirmación correspondiente para futuras
+                    consultas dentro del portal de la cadena.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="info-highlight">
+        <div class="info-highlight__content">
+            <div>
+                <div class="info-badge info-badge--light">Recomendaciones</div>
+                <h3>Antes de llegar y antes de salir</h3>
+                <p>
+                    Verifica con anticipación tus fechas, huéspedes registrados y código de reservación.
+                    También es recomendable revisar las políticas del hotel y la información de seguridad
+                    para tener una estadía más organizada.
+                </p>
+            </div>
+
+            <div class="info-highlight__box">
+                <div class="info-highlight__label">Importante</div>
+                <p>
+                    Los horarios específicos de ingreso y salida pueden variar según la sede,
+                    la temporada o condiciones operativas del hotel.
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .info-page {
+        padding: 1.5rem 0 2rem 0;
+        color: #0f172a;
+    }
+
+    .info-hero {
+        background:
+            radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 28%),
+            linear-gradient(135deg, #0f172a 0%, #162033 45%, #1e293b 100%);
+        color: #fff;
+        border-radius: 28px;
+        padding: 2.2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .info-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent 30%);
+        pointer-events: none;
+    }
+
+    .info-hero__content {
+        position: relative;
+        z-index: 1;
+        max-width: 820px;
+    }
+
+    .info-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.38rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.12);
+        color: #dbeafe;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    .info-badge--light {
+        background: #eff6ff;
+        color: #1d4ed8;
+    }
+
+    .info-hero h1 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        margin-bottom: 0.8rem;
+        line-height: 1.05;
+    }
+
+    .info-hero p {
+        margin: 0;
+        max-width: 720px;
+        color: rgba(255,255,255,0.82);
+        font-size: 1.02rem;
+    }
+
+    .info-section {
+        margin-top: 1.25rem;
+    }
+
+    .info-section__header {
+        margin-bottom: 1rem;
+    }
+
+    .info-section__header h3 {
+        margin: 0.3rem 0 0.25rem 0;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .info-section__header p {
+        margin: 0;
+        color: #64748b;
+        max-width: 760px;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1rem;
+    }
+
+    .info-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 1.2rem;
+        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
+        min-height: 220px;
+    }
+
+    .info-card--featured {
+        grid-column: span 2;
+    }
+
+    .info-card__icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-size: 1.1rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+    }
+
+    .info-card h4 {
+        margin-bottom: 0.55rem;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .info-card p {
+        margin: 0;
+        color: #64748b;
+        line-height: 1.65;
+    }
+
+    .info-highlight {
+        margin-top: 1.4rem;
+    }
+
+    .info-highlight__content {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 28px;
+        padding: 1.5rem;
+        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    .info-highlight__content h3 {
+        margin: 0.3rem 0 0.45rem 0;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .info-highlight__content p {
+        margin: 0;
+        color: #64748b;
+        line-height: 1.65;
+    }
+
+    .info-highlight__box {
+        background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+        border: 1px solid #dbeafe;
+        border-radius: 22px;
+        padding: 1.1rem;
+    }
+
+    .info-highlight__label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #1d4ed8;
+        font-weight: 800;
+        margin-bottom: 0.45rem;
+    }
+
+    @@media (max-width: 991.98px) {
+        .info-highlight__content {
+            grid-template-columns: 1fr;
+        }
+
+        .info-card--featured {
+            grid-column: span 1;
+        }
+    }
+
+    @@media (max-width: 767.98px) {
+        .info-page {
+            padding-top: 0.75rem;
+        }
+
+        .info-hero {
+            padding: 1.5rem 1rem;
+        }
+    }
+</style>

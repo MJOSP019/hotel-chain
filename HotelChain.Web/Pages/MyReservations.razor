@@ -1,0 +1,614 @@
+@page "/my-reservations"
+@using System.Net.Http.Headers
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+@* 
+   Componente encargado del historial de reservaciones del usuario autenticado.
+   Permite consultar reservaciones, abrir PDF, cancelar y cambiar fechas
+   respetando las reglas del negocio implementadas en backend.
+*@
+
+<PageTitle>Mis reservaciones</PageTitle>
+
+<div class="my-res-page">
+    <section class="my-res-hero">
+        <div class="my-res-hero__content">
+            <div class="my-res-badge">Área de usuario</div>
+            <h1>Mis reservaciones</h1>
+            <p>
+                Consulta el historial de tus reservaciones, revisa el detalle, abre el PDF,
+                cambia las fechas cuando aplique y cancela cuando el estado y las reglas del sistema lo permitan.
+            </p>
+        </div>
+    </section>
+
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger my-res-alert">@errorMessage</div>
+    }
+    else if (reservations == null)
+    {
+        <div class="my-res-loading">
+            <div class="my-res-loading__card">
+                <h4>Cargando reservaciones...</h4>
+                <p>Estamos obteniendo tu historial desde el backend.</p>
+            </div>
+        </div>
+    }
+    else if (!reservations.Any())
+    {
+        <div class="my-res-empty">
+            <h4>No tienes reservaciones registradas</h4>
+            <p>Cuando realices una reservación, aparecerá aquí para que puedas consultarla y gestionarla.</p>
+            <a class="btn my-res-btn-primary" href="/search">Ir a buscar habitaciones</a>
+        </div>
+    }
+    else
+    {
+        <section class="my-res-section">
+            <div class="my-res-section__header">
+                <div>
+                    <div class="my-res-badge my-res-badge--light">Historial</div>
+                    <h3>Tus reservaciones activas y pasadas</h3>
+                    <p>Se encontraron @reservations.Count reservación(es) en tu cuenta.</p>
+                </div>
+            </div>
+
+            <div class="my-res-grid">
+                @foreach (var r in reservations)
+                {
+                    <article class="reservation-card">
+                        <div class="reservation-card__top">
+                            <div>
+                                <div class="reservation-card__eyebrow">Código</div>
+                                <h4>@r.Code</h4>
+                            </div>
+
+                            <div class="@GetStatusBadgeClass(r.Status)">
+                                @r.Status
+                            </div>
+                        </div>
+
+                        <div class="reservation-card__hotel">
+                            @r.Hotel
+                        </div>
+
+                        <div class="reservation-card__body">
+                            <div class="reservation-feature">
+                                <span class="reservation-feature__label">Check-in</span>
+                                <strong>@r.CheckIn.ToString("dd/MM/yyyy")</strong>
+                            </div>
+
+                            <div class="reservation-feature">
+                                <span class="reservation-feature__label">Check-out</span>
+                                <strong>@r.CheckOut.ToString("dd/MM/yyyy")</strong>
+                            </div>
+
+                            <div class="reservation-feature">
+                                <span class="reservation-feature__label">Huéspedes</span>
+                                <strong>@r.Guests</strong>
+                            </div>
+
+                            <div class="reservation-feature">
+                                <span class="reservation-feature__label">Total</span>
+                                <strong>Q @r.TotalAmount.ToString("0.00")</strong>
+                            </div>
+
+                            <div class="reservation-feature reservation-feature--wide">
+                                <span class="reservation-feature__label">Creada</span>
+                                <strong>@r.CreatedAt.ToString("dd/MM/yyyy HH:mm")</strong>
+                            </div>
+                        </div>
+
+                        @if (ShowTimingWarning(r))
+                        {
+                            <div class="alert alert-warning mb-0">
+                                Esta reservación ya no cumple la regla de más de 24 horas antes del check-in para cambiar fecha o cancelar.
+                            </div>
+                        }
+
+                        <div class="reservation-card__footer">
+                            <a class="btn my-res-btn-secondary btn-sm" href="/checkout?code=@r.Code">
+                                Ver
+                            </a>
+
+                            <button class="btn my-res-btn-outline btn-sm"
+                                    @onclick="() => OpenPdf(r.Code)">
+                                Ver PDF
+                            </button>
+
+                            @if (CanShowChangeDates(r.Status))
+                            {
+                                <button class="btn my-res-btn-info btn-sm"
+                                        @onclick="() => OpenChangeDatesModal(r)"
+                                        disabled="@(!CanExecuteTimeRestrictedAction(r))"
+                                        title="@GetTimeRestrictedActionTitle(r)">
+                                    Cambiar fecha
+                                </button>
+                            }
+
+                            @if (CanShowCancel(r.Status))
+                            {
+                                <button class="btn my-res-btn-danger btn-sm"
+                                        @onclick="() => OpenCancelModal(r)"
+                                        disabled="@(!CanExecuteTimeRestrictedAction(r))"
+                                        title="@GetTimeRestrictedActionTitle(r)">
+                                    Cancelar
+                                </button>
+                            }
+                        </div>
+                    </article>
+                }
+            </div>
+        </section>
+    }
+</div>
+
+@if (showChangeDatesModal && selectedReservation is not null)
+{
+    <div class="my-modal-backdrop">
+        <div class="my-modal-card">
+            <div class="my-modal-card__header">
+                <div>
+                    <div class="my-res-badge my-res-badge--light">Gestión</div>
+                    <h4>Cambiar fechas de reservación</h4>
+                </div>
+
+                <button type="button" class="my-modal-close" @onclick="CloseChangeDatesModal">×</button>
+            </div>
+
+            <div class="my-modal-card__body">
+                <p>
+                    Estás modificando la reservación
+                    <strong>@selectedReservation.Code</strong>.
+                </p>
+
+                <div class="my-res-form-grid">
+                    <div>
+                        <label class="my-res-label">Nuevo check-in</label>
+                        <input type="date"
+                               class="form-control my-res-input"
+                               @bind="changeCheckIn"
+                               @bind:format="yyyy-MM-dd" />
+                    </div>
+
+                    <div>
+                        <label class="my-res-label">Nuevo check-out</label>
+                        <input type="date"
+                               class="form-control my-res-input"
+                               @bind="changeCheckOut"
+                               @bind:format="yyyy-MM-dd" />
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <label class="my-res-label">Razón</label>
+                    <textarea class="form-control my-res-input" rows="4" @bind="changeReason"></textarea>
+                </div>
+
+                <div class="my-res-help-text">
+                    La disponibilidad y las reglas de cambio se validan en el backend al confirmar.
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(changeError))
+                {
+                    <div class="alert alert-danger my-res-alert mb-0 mt-3">@changeError</div>
+                }
+            </div>
+
+            <div class="my-modal-card__footer">
+                <button class="btn my-res-btn-secondary" @onclick="CloseChangeDatesModal">Cerrar</button>
+                <button class="btn my-res-btn-info" @onclick="ConfirmChangeDates">Confirmar cambio</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (showCancelModal && selectedReservation is not null)
+{
+    <div class="my-modal-backdrop">
+        <div class="my-modal-card">
+            <div class="my-modal-card__header">
+                <div>
+                    <div class="my-res-badge my-res-badge--light">Acción</div>
+                    <h4>Cancelar reservación</h4>
+                </div>
+
+                <button type="button" class="my-modal-close" @onclick="CloseCancelModal">×</button>
+            </div>
+
+            <div class="my-modal-card__body">
+                <p>
+                    ¿Seguro que deseas cancelar la reservación
+                    <strong>@selectedReservation.Code</strong>?
+                </p>
+
+                <div class="mb-3">
+                    <label class="my-res-label">Razón</label>
+                    <textarea class="form-control my-res-input" rows="4" @bind="cancelReason"></textarea>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(cancelError))
+                {
+                    <div class="alert alert-danger my-res-alert mb-0">@cancelError</div>
+                }
+            </div>
+
+            <div class="my-modal-card__footer">
+                <button class="btn my-res-btn-secondary" @onclick="CloseCancelModal">Cerrar</button>
+                <button class="btn my-res-btn-danger" @onclick="ConfirmCancel">Confirmar cancelación</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    /// <summary>
+    /// Historial de reservaciones del usuario autenticado.
+    /// </summary>
+    private List<ReservationHistoryDto>? reservations;
+
+    /// <summary>
+    /// Mensaje de error mostrado en la vista.
+    /// </summary>
+    private string? errorMessage;
+
+    /// <summary>
+    /// Reservación seleccionada para gestión.
+    /// </summary>
+    private ReservationHistoryDto? selectedReservation;
+
+    /// <summary>
+    /// Estado del modal de cancelación.
+    /// </summary>
+    private bool showCancelModal = false;
+    private string cancelReason = "";
+    private string? cancelError;
+
+    /// <summary>
+    /// Estado del modal de cambio de fechas.
+    /// </summary>
+    private bool showChangeDatesModal = false;
+    private DateTime? changeCheckIn;
+    private DateTime? changeCheckOut;
+    private string changeReason = "";
+    private string? changeError;
+
+    /// <summary>
+    /// Carga el historial del usuario al iniciar el componente.
+    /// </summary>
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadReservations();
+    }
+
+    /// <summary>
+    /// DTO local usado para representar el historial de reservaciones.
+    /// </summary>
+    public class ReservationHistoryDto
+    {
+        public string Code { get; set; } = "";
+        public string Hotel { get; set; } = "";
+        public DateTime CheckIn { get; set; }
+        public DateTime CheckOut { get; set; }
+        public int Guests { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string Status { get; set; } = "";
+        public DateTime CreatedAt { get; set; }
+    }
+
+    /// <summary>
+    /// Abre el modal de cancelación si la regla de tiempo lo permite.
+    /// </summary>
+    private void OpenCancelModal(ReservationHistoryDto reservation)
+    {
+        if (!CanExecuteTimeRestrictedAction(reservation))
+            return;
+
+        CloseChangeDatesModal();
+
+        selectedReservation = reservation;
+        cancelReason = "";
+        cancelError = null;
+        showCancelModal = true;
+    }
+
+    /// <summary>
+    /// Cierra el modal de cancelación y limpia su estado.
+    /// </summary>
+    private void CloseCancelModal()
+    {
+        showCancelModal = false;
+        selectedReservation = null;
+        cancelReason = "";
+        cancelError = null;
+    }
+
+    /// <summary>
+    /// Abre el modal de cambio de fechas si la regla de tiempo lo permite.
+    /// </summary>
+    private void OpenChangeDatesModal(ReservationHistoryDto reservation)
+    {
+        if (!CanExecuteTimeRestrictedAction(reservation))
+            return;
+
+        CloseCancelModal();
+
+        selectedReservation = reservation;
+        changeCheckIn = reservation.CheckIn.Date;
+        changeCheckOut = reservation.CheckOut.Date;
+        changeReason = "";
+        changeError = null;
+        showChangeDatesModal = true;
+    }
+
+    /// <summary>
+    /// Cierra el modal de cambio de fechas y limpia su estado.
+    /// </summary>
+    private void CloseChangeDatesModal()
+    {
+        showChangeDatesModal = false;
+        selectedReservation = null;
+        changeCheckIn = null;
+        changeCheckOut = null;
+        changeReason = "";
+        changeError = null;
+    }
+
+    /// <summary>
+    /// Confirma la cancelación de la reservación seleccionada.
+    /// </summary>
+    private async Task ConfirmCancel()
+    {
+        if (selectedReservation is null)
+            return;
+
+        try
+        {
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                cancelError = "No se encontró el token. Inicia sesión nuevamente.";
+                return;
+            }
+
+            Http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var body = new
+            {
+                reason = cancelReason
+            };
+
+            var response = await Http.PostAsJsonAsync(
+                $"api/public/reservations/{selectedReservation.Code}/cancel",
+                body);
+
+            if (response.IsSuccessStatusCode)
+            {
+                showCancelModal = false;
+                selectedReservation = null;
+                cancelReason = "";
+                cancelError = null;
+
+                await LoadReservations();
+            }
+            else
+            {
+                var errorText = await response.Content.ReadAsStringAsync();
+                cancelError = $"No se pudo cancelar: {errorText}";
+            }
+        }
+        catch (Exception ex)
+        {
+            cancelError = $"Error al cancelar: {ex.Message}";
+        }
+    }
+
+    /// <summary>
+    /// Confirma el cambio de fechas de la reservación seleccionada.
+    /// </summary>
+    private async Task ConfirmChangeDates()
+    {
+        if (selectedReservation is null)
+            return;
+
+        if (!changeCheckIn.HasValue)
+        {
+            changeError = "Ingresa una fecha válida de check-in.";
+            return;
+        }
+
+        if (!changeCheckOut.HasValue)
+        {
+            changeError = "Ingresa una fecha válida de check-out.";
+            return;
+        }
+
+        var newCheckIn = changeCheckIn.Value.Date;
+        var newCheckOut = changeCheckOut.Value.Date;
+
+        if (newCheckOut <= newCheckIn)
+        {
+            changeError = "El check-out debe ser mayor al check-in.";
+            return;
+        }
+
+        try
+        {
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                changeError = "No se encontró el token. Inicia sesión nuevamente.";
+                return;
+            }
+
+            Http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var body = new
+            {
+                checkIn = newCheckIn,
+                checkOut = newCheckOut,
+                reason = changeReason
+            };
+
+            var response = await Http.PostAsJsonAsync(
+                $"api/public/reservations/{selectedReservation.Code}/change-dates",
+                body);
+
+            if (response.IsSuccessStatusCode)
+            {
+                showChangeDatesModal = false;
+                selectedReservation = null;
+                changeCheckIn = null;
+                changeCheckOut = null;
+                changeReason = "";
+                changeError = null;
+
+                await LoadReservations();
+            }
+            else
+            {
+                var errorText = await response.Content.ReadAsStringAsync();
+                changeError = $"No se pudo cambiar la fecha: {errorText}";
+            }
+        }
+        catch (Exception ex)
+        {
+            changeError = $"Error al cambiar la fecha: {ex.Message}";
+        }
+    }
+
+    /// <summary>
+    /// Carga desde backend el historial de reservaciones del usuario autenticado.
+    /// </summary>
+    private async Task LoadReservations()
+    {
+        try
+        {
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                errorMessage = "No se encontró el token. Inicia sesión nuevamente.";
+                reservations = new();
+                return;
+            }
+
+            Http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            reservations = await Http.GetFromJsonAsync<List<ReservationHistoryDto>>("api/user/reservations")
+                           ?? new List<ReservationHistoryDto>();
+
+            errorMessage = null;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al cargar reservaciones: {ex.Message}";
+            reservations = new();
+        }
+    }
+
+    /// <summary>
+    /// Abre el PDF asociado a una reservación.
+    /// </summary>
+    /// <param name="reservationCode">Código de la reservación.</param>
+    private async Task OpenPdf(string reservationCode)
+    {
+        try
+        {
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                errorMessage = "No se encontró el token. Inicia sesión nuevamente.";
+                return;
+            }
+
+            Http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await Http.GetAsync($"api/public/reservations/{reservationCode}/pdf");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorText = await response.Content.ReadAsStringAsync();
+                errorMessage = $"No se pudo abrir el PDF: {errorText}";
+                return;
+            }
+
+            var bytes = await response.Content.ReadAsByteArrayAsync();
+            var base64 = Convert.ToBase64String(bytes);
+
+            await JS.InvokeVoidAsync("openPdfBase64", base64);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al abrir PDF: {ex.Message}";
+        }
+    }
+
+    /// <summary>
+    /// Determina si una reservación puede mostrar botón de cancelación.
+    /// </summary>
+    private static bool CanShowCancel(string status)
+    {
+        return status == "PENDING" || status == "CONFIRMED";
+    }
+
+    /// <summary>
+    /// Determina si una reservación puede mostrar botón de cambio de fechas.
+    /// </summary>
+    private static bool CanShowChangeDates(string status)
+    {
+        return status == "PENDING" || status == "CONFIRMED";
+    }
+
+    /// <summary>
+    /// Determina si una acción restringida por tiempo todavía está permitida.
+    /// </summary>
+    private static bool CanExecuteTimeRestrictedAction(ReservationHistoryDto reservation)
+    {
+        return DateTime.UtcNow <= reservation.CheckIn.AddHours(-24);
+    }
+
+    /// <summary>
+    /// Determina si se debe mostrar advertencia de tiempo.
+    /// </summary>
+    private static bool ShowTimingWarning(ReservationHistoryDto reservation)
+    {
+        return (reservation.Status == "PENDING" || reservation.Status == "CONFIRMED")
+               && !CanExecuteTimeRestrictedAction(reservation);
+    }
+
+    /// <summary>
+    /// Devuelve el tooltip para acciones restringidas por tiempo.
+    /// </summary>
+    private static string GetTimeRestrictedActionTitle(ReservationHistoryDto reservation)
+    {
+        if (CanExecuteTimeRestrictedAction(reservation))
+            return "";
+
+        return "Esta acción solo está disponible si faltan más de 24 horas para el check-in.";
+    }
+
+    /// <summary>
+    /// Devuelve la clase CSS correspondiente al estado de la reservación.
+    /// </summary>
+    private static string GetStatusBadgeClass(string status)
+    {
+        return status switch
+        {
+            "PENDING" => "status-badge status-badge--pending",
+            "CONFIRMED" => "status-badge status-badge--confirmed",
+            "CANCELED" => "status-badge status-badge--cancelled",
+            "CANCELLED" => "status-badge status-badge--cancelled",
+            _ => "status-badge status-badge--default"
+        };
+    }
+}

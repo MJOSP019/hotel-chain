@@ -1,0 +1,432 @@
+@page "/admin/hotels"
+@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<h3>Administración de hoteles</h3>
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+@if (!string.IsNullOrWhiteSpace(successMessage))
+{
+    <div class="alert alert-success">@successMessage</div>
+}
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="card p-3">
+            <h5>@(isEditMode ? "Editar hotel" : "Crear hotel")</h5>
+
+            <div class="mb-2">
+                <label>Código</label>
+                <input class="form-control" @bind="model.Code" />
+            </div>
+
+            <div class="mb-2">
+                <label>Nombre</label>
+                <input class="form-control" @bind="model.Name" />
+            </div>
+
+            <div class="mb-2">
+                <label>Dirección</label>
+                <input class="form-control" @bind="model.Address" />
+            </div>
+
+            <div class="mb-2">
+                <label>Descripción</label>
+                <textarea class="form-control" rows="3" @bind="model.Description"></textarea>
+            </div>
+
+            <div class="mb-2">
+                <label>Ciudad</label>
+                <select class="form-select" @bind="model.CityId">
+                    <option value="0">Seleccione una ciudad</option>
+                    @foreach (var city in cities)
+                    {
+                        <option value="@city.Id">@city.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="d-flex gap-2 mt-3">
+                <button class="btn btn-primary" @onclick="SaveHotel" disabled="@isSaving">
+                    @(isSaving ? "Guardando..." : (isEditMode ? "Actualizar" : "Crear"))
+                </button>
+
+                <button class="btn btn-outline-secondary" @onclick="ResetForm" disabled="@isSaving">
+                    Limpiar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <div class="card p-3">
+            <h5>Hoteles</h5>
+
+            @if (isLoading)
+            {
+                <p>Cargando hoteles...</p>
+            }
+            else if (!hotels.Any())
+            {
+                <p>No hay hoteles registrados.</p>
+            }
+            else
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Ciudad</th>
+                            <th>Estado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var h in hotels)
+                        {
+                            <tr>
+                                <td>@h.Code</td>
+                                <td>@h.Name</td>
+                                <td>@h.CityName</td>
+                                <td>@(h.IsActive ? "Activo" : "Inactivo")</td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-sm btn-outline-primary"
+                                                disabled="@(!h.IsActive)"
+                                                @onclick="() => EditHotel(h)">
+                                            Editar
+                                        </button>
+
+                                        @if (h.IsActive)
+                                        {
+                                            <button class="btn btn-sm btn-outline-danger"
+                                                    disabled="@(deactivatingHotelId == h.Id || reactivatingHotelId == h.Id)"
+                                                    @onclick="() => DeactivateHotel(h)">
+                                                @(deactivatingHotelId == h.Id ? "Desactivando..." : "Desactivar")
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-sm btn-outline-success"
+                                                    disabled="@(reactivatingHotelId == h.Id || deactivatingHotelId == h.Id)"
+                                                    @onclick="() => ReactivateHotel(h)">
+                                                @(reactivatingHotelId == h.Id ? "Reactivando..." : "Reactivar")
+                                            </button>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<AdminHotelDto> hotels = new();
+    private List<CityDto> cities = new();
+
+    private SaveHotelRequest model = new();
+    private bool isLoading;
+    private bool isSaving;
+    private bool isEditMode;
+    private string? errorMessage;
+    private string? successMessage;
+    private int editingHotelId;
+    private int? deactivatingHotelId;
+    private int? reactivatingHotelId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCities();
+        await LoadHotels();
+    }
+
+    private async Task LoadCities()
+    {
+        try
+        {
+            var result = await Http.GetFromJsonAsync<List<CityDto>>("api/public/cities");
+            cities = result ?? new List<CityDto>();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al cargar ciudades: {ex.Message}";
+        }
+    }
+
+    private async Task LoadHotels()
+    {
+        isLoading = true;
+        errorMessage = null;
+
+        try
+        {
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                errorMessage = "Debes iniciar sesión como administrador.";
+                return;
+            }
+
+            Http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var result = await Http.GetFromJsonAsync<List<AdminHotelDto>>("api/admin/hotels");
+            hotels = result ?? new List<AdminHotelDto>();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al cargar hoteles: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void EditHotel(AdminHotelDto hotel)
+    {
+        if (!hotel.IsActive)
+            return;
+
+        editingHotelId = hotel.Id;
+        isEditMode = true;
+        successMessage = null;
+        errorMessage = null;
+
+        model = new SaveHotelRequest
+        {
+            Code = hotel.Code,
+            Name = hotel.Name,
+            Address = hotel.Address,
+            Description = hotel.Description,
+            CityId = hotel.CityId
+        };
+    }
+
+    private void ResetForm()
+    {
+        model = new SaveHotelRequest();
+        isEditMode = false;
+        editingHotelId = 0;
+        errorMessage = null;
+        successMessage = null;
+    }
+
+    private async Task SaveHotel()
+    {
+        errorMessage = null;
+        successMessage = null;
+
+        if (string.IsNullOrWhiteSpace(model.Code))
+        {
+            errorMessage = "El código es obligatorio.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(model.Name))
+        {
+            errorMessage = "El nombre es obligatorio.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(model.Address))
+        {
+            errorMessage = "La dirección es obligatoria.";
+            return;
+        }
+
+        if (model.CityId <= 0)
+        {
+            errorMessage = "Debes seleccionar una ciudad.";
+            return;
+        }
+
+        isSaving = true;
+
+        try
+        {
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                errorMessage = "Debes iniciar sesión como administrador.";
+                return;
+            }
+
+            Http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            HttpResponseMessage response;
+
+            if (isEditMode)
+            {
+                response = await Http.PutAsJsonAsync($"api/admin/hotels/{editingHotelId}", model);
+            }
+            else
+            {
+                response = await Http.PostAsJsonAsync("api/admin/hotels", model);
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = "No se pudo guardar el hotel. Verifica que todos los campos requeridos estén completos y que el código no esté repetido.";
+                return;
+            }
+
+            successMessage = isEditMode
+                ? "Hotel actualizado correctamente."
+                : "Hotel creado correctamente.";
+
+            ResetForm();
+            await LoadHotels();
+        }
+        catch (Exception)
+        {
+            errorMessage = "Ocurrió un error al guardar el hotel. Verifica que todos los campos requeridos estén completos.";
+        }
+        finally
+        {
+            isSaving = false;
+        }
+    }
+
+    private async Task DeactivateHotel(AdminHotelDto hotel)
+    {
+        if (!hotel.IsActive)
+            return;
+
+        errorMessage = null;
+        successMessage = null;
+
+        try
+        {
+            var confirm = await JS.InvokeAsync<bool>("confirm", $"¿Deseas desactivar el hotel {hotel.Name}?");
+            if (!confirm)
+                return;
+
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                errorMessage = "Debes iniciar sesión como administrador.";
+                return;
+            }
+
+            deactivatingHotelId = hotel.Id;
+
+            Http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await Http.PostAsync($"api/admin/hotels/{hotel.Id}/deactivate", null);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = await response.Content.ReadAsStringAsync();
+                return;
+            }
+
+            successMessage = $"Hotel {hotel.Name} desactivado correctamente.";
+
+            if (isEditMode && editingHotelId == hotel.Id)
+            {
+                ResetForm();
+            }
+
+            await LoadHotels();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al desactivar hotel: {ex.Message}";
+        }
+        finally
+        {
+            deactivatingHotelId = null;
+        }
+    }
+
+    private async Task ReactivateHotel(AdminHotelDto hotel)
+    {
+        if (hotel.IsActive)
+            return;
+
+        errorMessage = null;
+        successMessage = null;
+
+        try
+        {
+            var confirm = await JS.InvokeAsync<bool>("confirm", $"¿Deseas reactivar el hotel {hotel.Name}?");
+            if (!confirm)
+                return;
+
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                errorMessage = "Debes iniciar sesión como administrador.";
+                return;
+            }
+
+            reactivatingHotelId = hotel.Id;
+
+            Http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await Http.PostAsync($"api/admin/hotels/{hotel.Id}/reactivate", null);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = await response.Content.ReadAsStringAsync();
+                return;
+            }
+
+            successMessage = $"Hotel {hotel.Name} reactivado correctamente.";
+            await LoadHotels();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al reactivar hotel: {ex.Message}";
+        }
+        finally
+        {
+            reactivatingHotelId = null;
+        }
+    }
+
+    public class AdminHotelDto
+    {
+        public int Id { get; set; }
+        public string Code { get; set; } = "";
+        public string Name { get; set; } = "";
+        public string Address { get; set; } = "";
+        public string Description { get; set; } = "";
+        public int CityId { get; set; }
+        public string CityName { get; set; } = "";
+        public bool IsActive { get; set; }
+    }
+
+    public class SaveHotelRequest
+    {
+        public string Code { get; set; } = "";
+        public string Name { get; set; } = "";
+        public string Address { get; set; } = "";
+        public string? Description { get; set; }
+        public int CityId { get; set; }
+    }
+
+    public class CityDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = "";
+    }
+}

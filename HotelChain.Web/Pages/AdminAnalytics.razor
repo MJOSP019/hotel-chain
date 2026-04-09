@@ -1,0 +1,308 @@
+@page "/admin/analytics"
+@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<h3>Analytics de búsquedas</h3>
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+@if (!string.IsNullOrWhiteSpace(successMessage))
+{
+    <div class="alert alert-success">@successMessage</div>
+}
+
+<div class="card p-3 mb-3">
+    <h5>Filtros</h5>
+
+    <div class="row">
+        <div class="col-md-3 mb-2">
+            <label>Origen</label>
+            <select class="form-select" @bind="filters.Source">
+                <option value="">Todos</option>
+                <option value="WEB">WEB</option>
+                <option value="INTEGRATION">INTEGRATION</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 mb-2">
+            <label>Ciudad</label>
+            <select class="form-select" @bind="filters.CityId">
+                <option value="">Todas</option>
+                @foreach (var city in cities)
+                {
+                    <option value="@city.Id">@city.Name</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-3 mb-2">
+            <label>Desde</label>
+            <InputDate class="form-control" @bind-Value="filters.From" />
+        </div>
+
+        <div class="col-md-3 mb-2">
+            <label>Hasta</label>
+            <InputDate class="form-control" @bind-Value="filters.To" />
+        </div>
+    </div>
+
+    <div class="d-flex gap-2 mt-3">
+        <button class="btn btn-primary" @onclick="LoadSearches" disabled="@isLoading">
+            @(isLoading ? "Buscando..." : "Buscar")
+        </button>
+
+        <button class="btn btn-outline-secondary" @onclick="ClearFilters" disabled="@isLoading">
+            Limpiar
+        </button>
+
+        <button type="button" class="btn btn-outline-success" @onclick="OnExportClick" disabled="@(isLoading || isExporting)">
+    @(isExporting ? "Exportando..." : "Exportar CSV")
+</button>
+    </div>
+</div>
+
+<div class="card p-3">
+    <h5>Búsquedas registradas</h5>
+
+    @if (isLoading && searches.Count == 0)
+    {
+        <p>Cargando búsquedas...</p>
+    }
+    else if (searches.Count == 0)
+    {
+        <p>No hay búsquedas registradas para esos filtros.</p>
+    }
+    else
+    {
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Origen</th>
+                    <th>Ciudad</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Huéspedes</th>
+                    <th>Precio</th>
+                    <th>Tipo habitación</th>
+                    <th>Rating mín.</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in searches)
+                {
+                    <tr>
+                        <td>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@item.Source</td>
+                        <td>@item.City</td>
+                        <td>@item.CheckIn.ToString("dd/MM/yyyy")</td>
+                        <td>@item.CheckOut.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Guests</td>
+                        <td>@FormatPriceRange(item.MinPrice, item.MaxPrice)</td>
+                        <td>@(string.IsNullOrWhiteSpace(item.RoomType) ? "-" : item.RoomType)</td>
+                        <td>@(item.MinRating.HasValue ? item.MinRating.Value.ToString("0.0") : "-")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    private const string SearchesEndpoint = "api/admin/analytics/searches";
+    private const string ExportEndpoint = "api/admin/analytics/searches/export";
+    private const string CitiesEndpoint = "api/public/cities";
+
+    private List<SearchAuditDto> searches = new();
+    private List<CityDto> cities = new();
+    private string? errorMessage;
+    private string? successMessage;
+    private bool isLoading;
+    private bool isExporting;
+
+    private FilterModel filters = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCities();
+        await LoadSearches();
+    }
+
+    private async Task LoadCities()
+    {
+        try
+        {
+            cities = await Http.GetFromJsonAsync<List<CityDto>>(CitiesEndpoint) ?? new();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"No se pudieron cargar las ciudades: {ex.Message}";
+        }
+    }
+
+    private async Task LoadSearches()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+            successMessage = null;
+
+            var url = BuildUrl(SearchesEndpoint);
+            searches = await Http.GetFromJsonAsync<List<SearchAuditDto>>(url) ?? new();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error cargando analytics: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task OnExportClick()
+{
+    successMessage = "Click detectado en Exportar CSV.";
+    errorMessage = null;
+    StateHasChanged();
+
+    await ExportCsv();
+}
+
+private async Task ExportCsv()
+{
+    try
+    {
+        isExporting = true;
+        errorMessage = null;
+        successMessage = "Entró a ExportCsv().";
+        StateHasChanged();
+
+        var url = BuildUrl(ExportEndpoint);
+        successMessage = $"Llamando a: {url}";
+        StateHasChanged();
+
+        var response = await Http.GetAsync(url);
+
+        successMessage = $"HTTP {(int)response.StatusCode}";
+        StateHasChanged();
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorText = await response.Content.ReadAsStringAsync();
+            errorMessage = $"No se pudo exportar el CSV: {errorText}";
+            return;
+        }
+
+        var bytes = await response.Content.ReadAsByteArrayAsync();
+
+        successMessage = $"CSV recibido: {bytes.Length} bytes";
+        StateHasChanged();
+
+        if (bytes == null || bytes.Length == 0)
+        {
+            errorMessage = "El archivo CSV llegó vacío.";
+            return;
+        }
+
+        var base64 = Convert.ToBase64String(bytes);
+
+        await JS.InvokeVoidAsync("downloadFileFromBase64", new
+        {
+            fileName = $"searches-report-{DateTime.Now:yyyyMMdd-HHmmss}.csv",
+            contentType = "text/csv",
+            base64
+        });
+
+        successMessage = "Se llamó a downloadFileFromBase64().";
+    }
+    catch (Exception ex)
+    {
+        errorMessage = $"Error exportando CSV: {ex.Message}";
+    }
+    finally
+    {
+        isExporting = false;
+    }
+}
+
+    private async Task ClearFilters()
+    {
+        filters = new FilterModel();
+        await LoadSearches();
+    }
+
+    private string BuildUrl(string baseEndpoint)
+    {
+        var queryParams = new List<string>();
+
+        if (!string.IsNullOrWhiteSpace(filters.Source))
+            queryParams.Add($"source={Uri.EscapeDataString(filters.Source)}");
+
+        if (filters.CityId.HasValue)
+            queryParams.Add($"cityId={filters.CityId.Value}");
+
+        if (filters.From.HasValue)
+            queryParams.Add($"from={filters.From.Value:yyyy-MM-dd}");
+
+        if (filters.To.HasValue)
+            queryParams.Add($"to={filters.To.Value:yyyy-MM-dd}");
+
+        if (queryParams.Count == 0)
+            return baseEndpoint;
+
+        return $"{baseEndpoint}?{string.Join("&", queryParams)}";
+    }
+
+    private static string FormatPriceRange(decimal? minPrice, decimal? maxPrice)
+    {
+        if (!minPrice.HasValue && !maxPrice.HasValue)
+            return "-";
+
+        if (minPrice.HasValue && maxPrice.HasValue)
+            return $"Q {minPrice.Value:0.00} - Q {maxPrice.Value:0.00}";
+
+        if (minPrice.HasValue)
+            return $"Desde Q {minPrice.Value:0.00}";
+
+        return $"Hasta Q {maxPrice!.Value:0.00}";
+    }
+
+    private class FilterModel
+    {
+        public string? Source { get; set; }
+        public int? CityId { get; set; }
+        public DateTime? From { get; set; }
+        public DateTime? To { get; set; }
+    }
+
+    private class SearchAuditDto
+    {
+        public int Id { get; set; }
+        public int CityId { get; set; }
+        public string City { get; set; } = "";
+        public Guid? UserId { get; set; }
+        public DateTime CheckIn { get; set; }
+        public DateTime CheckOut { get; set; }
+        public int Guests { get; set; }
+        public decimal? MinPrice { get; set; }
+        public decimal? MaxPrice { get; set; }
+        public int? RoomTypeId { get; set; }
+        public string? RoomType { get; set; }
+        public double? MinRating { get; set; }
+        public string Source { get; set; } = "";
+        public DateTime CreatedAt { get; set; }
+    }
+
+    private class CityDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = "";
+    }
+    
+}

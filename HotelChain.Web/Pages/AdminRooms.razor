@@ -1,0 +1,470 @@
+@page "/admin/rooms"
+@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<h3>Administración de habitaciones</h3>
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+@if (!string.IsNullOrWhiteSpace(successMessage))
+{
+    <div class="alert alert-success">@successMessage</div>
+}
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="card p-3">
+            <h5>@(isEditMode ? "Editar habitación" : "Crear habitación")</h5>
+
+            <div class="mb-2">
+                <label>Hotel</label>
+                <select class="form-select" @bind="model.HotelId">
+                    <option value="0">Seleccione un hotel</option>
+                    @foreach (var hotel in hotels)
+                    {
+                        <option value="@hotel.Id">@hotel.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-2">
+                <label>Tipo de habitación</label>
+                <select class="form-select" @bind="model.RoomTypeId">
+                    <option value="0">Seleccione un tipo</option>
+                    @foreach (var roomType in roomTypes)
+                    {
+                        <option value="@roomType.Id">@roomType.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-2">
+                <label>Nombre o número</label>
+                <input class="form-control" @bind="model.NameOrNumber" />
+            </div>
+
+            <div class="mb-2">
+                <label>Precio base por noche</label>
+                <input type="number" step="0.01" class="form-control" @bind="model.BasePricePerNight" />
+            </div>
+
+            <div class="mb-2">
+                <label>Máximo de huéspedes</label>
+                <input type="number" class="form-control" @bind="model.MaxGuests" />
+            </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" @bind="model.IsActive" />
+                <label class="form-check-label">Activa</label>
+            </div>
+
+            <button class="btn btn-primary me-2" @onclick="SaveRoom">
+                @(isEditMode ? "Actualizar" : "Crear")
+            </button>
+
+            <button class="btn btn-secondary" @onclick="ResetForm">
+                Limpiar
+            </button>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <div class="card p-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5>Habitaciones</h5>
+
+                <select class="form-select w-auto"
+                        @bind="selectedHotelFilter"
+                        @bind:after="OnHotelFilterChanged">
+                    <option value="0">Todos los hoteles</option>
+                    @foreach (var hotel in hotels)
+                    {
+                        <option value="@hotel.Id">@hotel.Name</option>
+                    }
+                </select>
+            </div>
+
+            @if (rooms.Count == 0)
+            {
+                <p>No hay habitaciones registradas.</p>
+            }
+            else
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Hotel</th>
+                            <th>Tipo</th>
+                            <th>Nombre/Número</th>
+                            <th>Precio</th>
+                            <th>Huéspedes</th>
+                            <th>Estado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var room in rooms)
+                        {
+                            <tr>
+                                <td>@room.HotelName</td>
+                                <td>@room.RoomTypeName</td>
+                                <td>@room.NameOrNumber</td>
+                                <td>@room.BasePricePerNight.ToString("0.00")</td>
+                                <td>@room.MaxGuests</td>
+                                <td>@(room.IsActive ? "Activa" : "Inactiva")</td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-sm btn-outline-primary"
+                                                disabled="@(!room.IsActive)"
+                                                @onclick="() => EditRoom(room.Id)">
+                                            Editar
+                                        </button>
+
+                                        @if (room.IsActive)
+                                        {
+                                            <button class="btn btn-sm btn-outline-danger"
+                                                    disabled="@(deactivatingRoomId == room.Id || reactivatingRoomId == room.Id)"
+                                                    @onclick="() => DeactivateRoom(room)">
+                                                @(deactivatingRoomId == room.Id ? "Desactivando..." : "Desactivar")
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-sm btn-outline-success"
+                                                    disabled="@(reactivatingRoomId == room.Id || deactivatingRoomId == room.Id)"
+                                                    @onclick="() => ReactivateRoom(room)">
+                                                @(reactivatingRoomId == room.Id ? "Reactivando..." : "Reactivar")
+                                            </button>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<AdminRoomDto> rooms = new();
+    private List<HotelOption> hotels = new();
+    private List<RoomTypeOption> roomTypes = new();
+
+    private SaveRoomRequest model = new() { IsActive = true };
+    private bool isEditMode = false;
+    private int editingRoomId = 0;
+    private int selectedHotelFilter = 0;
+    private int? deactivatingRoomId;
+    private int? reactivatingRoomId;
+
+    private string? errorMessage;
+    private string? successMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await SetToken();
+        await LoadHotels();
+        await LoadRoomTypes();
+        await LoadRooms();
+    }
+
+    private async Task SetToken()
+    {
+        var token = await JS.InvokeAsync<string>("auth.getToken");
+        Http.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", token);
+    }
+
+    private async Task LoadHotels()
+    {
+        try
+        {
+            var result = await Http.GetFromJsonAsync<List<HotelOption>>("api/admin/hotels");
+            hotels = result?.Select(x => new HotelOption
+            {
+                Id = x.Id,
+                Name = x.Name
+            }).ToList() ?? new();
+        }
+        catch
+        {
+            errorMessage = "No se pudieron cargar los hoteles.";
+        }
+    }
+
+    private async Task LoadRoomTypes()
+    {
+        try
+        {
+            roomTypes = await Http.GetFromJsonAsync<List<RoomTypeOption>>("api/public/room-types") ?? new();
+        }
+        catch
+        {
+            errorMessage = "No se pudieron cargar los tipos de habitación.";
+        }
+    }
+
+    private async Task LoadRooms()
+    {
+        try
+        {
+            errorMessage = null;
+
+            var url = "api/admin/rooms";
+            if (selectedHotelFilter > 0)
+            {
+                url += $"?hotelId={selectedHotelFilter}";
+            }
+
+            rooms = await Http.GetFromJsonAsync<List<AdminRoomDto>>(url) ?? new();
+        }
+        catch
+        {
+            errorMessage = "No se pudieron cargar las habitaciones.";
+        }
+    }
+
+    private async Task SaveRoom()
+    {
+        errorMessage = null;
+        successMessage = null;
+
+        if (model.HotelId <= 0)
+        {
+            errorMessage = "Debe seleccionar un hotel.";
+            return;
+        }
+
+        if (model.RoomTypeId <= 0)
+        {
+            errorMessage = "Debe seleccionar un tipo de habitación.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(model.NameOrNumber))
+        {
+            errorMessage = "El nombre o número es obligatorio.";
+            return;
+        }
+
+        if (model.BasePricePerNight <= 0)
+        {
+            errorMessage = "El precio debe ser mayor a 0.";
+            return;
+        }
+
+        if (model.MaxGuests <= 0)
+        {
+            errorMessage = "La cantidad máxima de huéspedes debe ser mayor a 0.";
+            return;
+        }
+
+        try
+        {
+            HttpResponseMessage response;
+
+            if (isEditMode)
+            {
+                response = await Http.PutAsJsonAsync($"api/admin/rooms/{editingRoomId}", model);
+            }
+            else
+            {
+                response = await Http.PostAsJsonAsync("api/admin/rooms", model);
+            }
+
+            if (response.IsSuccessStatusCode)
+            {
+                successMessage = isEditMode
+                    ? "Habitación actualizada correctamente."
+                    : "Habitación creada correctamente.";
+
+                ResetForm();
+                await LoadRooms();
+                return;
+            }
+
+            errorMessage = "No se pudo guardar la habitación.";
+        }
+        catch
+        {
+            errorMessage = "Ocurrió un error al guardar la habitación.";
+        }
+    }
+
+    private async Task EditRoom(int id)
+    {
+        try
+        {
+            errorMessage = null;
+            successMessage = null;
+
+            var room = await Http.GetFromJsonAsync<AdminRoomDto>($"api/admin/rooms/{id}");
+
+            if (room is null)
+            {
+                errorMessage = "No se encontró la habitación.";
+                return;
+            }
+
+            if (!room.IsActive)
+            {
+                errorMessage = "No se puede editar una habitación inactiva.";
+                return;
+            }
+
+            editingRoomId = room.Id;
+            isEditMode = true;
+
+            model = new SaveRoomRequest
+            {
+                HotelId = room.HotelId,
+                RoomTypeId = room.RoomTypeId,
+                NameOrNumber = room.NameOrNumber,
+                MaxGuests = room.MaxGuests,
+                BasePricePerNight = room.BasePricePerNight,
+                IsActive = room.IsActive
+            };
+        }
+        catch
+        {
+            errorMessage = "No se pudo cargar la habitación para edición.";
+        }
+    }
+
+    private async Task DeactivateRoom(AdminRoomDto room)
+    {
+        if (!room.IsActive)
+            return;
+
+        errorMessage = null;
+        successMessage = null;
+
+        try
+        {
+            var confirm = await JS.InvokeAsync<bool>("confirm", $"¿Deseas desactivar la habitación {room.NameOrNumber} del hotel {room.HotelName}?");
+            if (!confirm)
+                return;
+
+            deactivatingRoomId = room.Id;
+
+            var response = await Http.PostAsync($"api/admin/rooms/{room.Id}/deactivate", null);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = await response.Content.ReadAsStringAsync();
+                return;
+            }
+
+            successMessage = $"Habitación {room.NameOrNumber} desactivada correctamente.";
+
+            if (isEditMode && editingRoomId == room.Id)
+            {
+                ResetForm();
+            }
+
+            await LoadRooms();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al desactivar habitación: {ex.Message}";
+        }
+        finally
+        {
+            deactivatingRoomId = null;
+        }
+    }
+
+    private async Task ReactivateRoom(AdminRoomDto room)
+    {
+        if (room.IsActive)
+            return;
+
+        errorMessage = null;
+        successMessage = null;
+
+        try
+        {
+            var confirm = await JS.InvokeAsync<bool>("confirm", $"¿Deseas reactivar la habitación {room.NameOrNumber} del hotel {room.HotelName}?");
+            if (!confirm)
+                return;
+
+            reactivatingRoomId = room.Id;
+
+            var response = await Http.PostAsync($"api/admin/rooms/{room.Id}/reactivate", null);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = await response.Content.ReadAsStringAsync();
+                return;
+            }
+
+            successMessage = $"Habitación {room.NameOrNumber} reactivada correctamente.";
+            await LoadRooms();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al reactivar habitación: {ex.Message}";
+        }
+        finally
+        {
+            reactivatingRoomId = null;
+        }
+    }
+
+    private void ResetForm()
+    {
+        model = new SaveRoomRequest
+        {
+            IsActive = true
+        };
+
+        isEditMode = false;
+        editingRoomId = 0;
+    }
+
+    private async Task OnHotelFilterChanged()
+    {
+        await LoadRooms();
+    }
+
+    public class AdminRoomDto
+    {
+        public int Id { get; set; }
+        public int HotelId { get; set; }
+        public string HotelName { get; set; } = string.Empty;
+        public int RoomTypeId { get; set; }
+        public string RoomTypeName { get; set; } = string.Empty;
+        public string NameOrNumber { get; set; } = string.Empty;
+        public int MaxGuests { get; set; }
+        public decimal BasePricePerNight { get; set; }
+        public bool IsActive { get; set; }
+    }
+
+    public class SaveRoomRequest
+    {
+        public int HotelId { get; set; }
+        public int RoomTypeId { get; set; }
+        public string NameOrNumber { get; set; } = string.Empty;
+        public int MaxGuests { get; set; }
+        public decimal BasePricePerNight { get; set; }
+        public bool IsActive { get; set; } = true;
+    }
+
+    public class HotelOption
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+    }
+
+    public class RoomTypeOption
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+    }
+}

@@ -1,0 +1,333 @@
+@page "/admin/inventories"
+@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.Forms
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<h3>Administración de inventario</h3>
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+@if (!string.IsNullOrWhiteSpace(successMessage))
+{
+    <div class="alert alert-success">@successMessage</div>
+}
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="card p-3">
+            <h5>Actualizar disponibilidad por rango</h5>
+            <p class="text-muted mb-3">
+                Este módulo administra la disponibilidad diaria de una habitación individual.
+                Para una habitación física, la cantidad total permitida por fecha es 0 o 1.
+            </p>
+
+            <div class="mb-2">
+                <label>Hotel</label>
+                <select class="form-select" @bind="selectedHotelId" @bind:after="OnHotelChanged">
+                    <option value="0">Seleccione un hotel</option>
+                    @foreach (var hotel in hotels)
+                    {
+                        <option value="@hotel.Id">@hotel.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-2">
+                <label>Habitación</label>
+                <select class="form-select" @bind="model.RoomId" @bind:after="OnRoomChanged">
+                    <option value="0">Seleccione una habitación</option>
+                    @foreach (var room in filteredRooms)
+                    {
+                        <option value="@room.Id">@($"{room.NameOrNumber} - {room.RoomTypeName}")</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-2">
+                <label>Fecha inicio</label>
+                <InputDate @bind-Value="startDateValue" class="form-control" />
+            </div>
+
+            <div class="mb-2">
+                <label>Fecha fin</label>
+                <InputDate @bind-Value="endDateValue" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Disponibilidad total por día</label>
+                <input type="number" min="0" max="1" class="form-control" @bind="model.QuantityTotal" />
+                <small class="text-muted">Use 1 para disponible y 0 para no disponible.</small>
+            </div>
+
+            <button class="btn btn-primary me-2" @onclick="SaveInventory">
+                Guardar
+            </button>
+
+            <button class="btn btn-secondary" @onclick="ResetForm">
+                Limpiar
+            </button>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <div class="card p-3">
+            <h5>Disponibilidad de la habitación</h5>
+
+            @if (inventoryItems.Count == 0)
+            {
+                <p>No hay inventario para mostrar.</p>
+            }
+            else
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                            <th>Reservadas</th>
+                            <th>Disponibles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in inventoryItems)
+                        {
+                            <tr>
+                                <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                                <td>@item.QuantityTotal</td>
+                                <td>@item.QuantityReserved</td>
+                                <td>@item.QuantityAvailable</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<HotelOption> hotels = new();
+    private List<RoomOption> rooms = new();
+    private List<RoomOption> filteredRooms = new();
+    private List<AdminRoomInventoryDto> inventoryItems = new();
+
+    private UpsertRoomInventoryRangeRequest model = new();
+    private int selectedHotelId = 0;
+
+    private DateTime? startDateValue;
+    private DateTime? endDateValue;
+
+    private string? errorMessage;
+    private string? successMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await SetToken();
+        await LoadHotels();
+        await LoadRooms();
+    }
+
+    private async Task SetToken()
+    {
+        var token = await JS.InvokeAsync<string>("auth.getToken");
+        Http.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", token);
+    }
+
+    private async Task LoadHotels()
+    {
+        try
+        {
+            errorMessage = null;
+            hotels = await Http.GetFromJsonAsync<List<HotelOption>>("api/admin/hotels") ?? new();
+        }
+        catch
+        {
+            errorMessage = "No se pudieron cargar los hoteles.";
+        }
+    }
+
+    private async Task LoadRooms()
+    {
+        try
+        {
+            errorMessage = null;
+            rooms = await Http.GetFromJsonAsync<List<RoomOption>>("api/admin/rooms") ?? new();
+        }
+        catch
+        {
+            errorMessage = "No se pudieron cargar las habitaciones.";
+        }
+    }
+
+    private async Task OnHotelChanged()
+    {
+        filteredRooms = rooms
+            .Where(x => x.HotelId == selectedHotelId)
+            .OrderBy(x => x.NameOrNumber)
+            .ToList();
+
+        model.RoomId = 0;
+        inventoryItems.Clear();
+        await Task.CompletedTask;
+    }
+
+    private async Task OnRoomChanged()
+    {
+        await LoadInventory();
+    }
+
+    private async Task LoadInventory()
+    {
+        try
+        {
+            errorMessage = null;
+
+            if (model.RoomId <= 0)
+            {
+                inventoryItems.Clear();
+                return;
+            }
+
+            inventoryItems = await Http.GetFromJsonAsync<List<AdminRoomInventoryDto>>(
+                $"api/admin/room-inventories?roomId={model.RoomId}") ?? new();
+        }
+        catch
+        {
+            errorMessage = "No se pudo cargar el inventario.";
+        }
+    }
+
+    private async Task SaveInventory()
+    {
+        errorMessage = null;
+        successMessage = null;
+
+        if (selectedHotelId <= 0)
+        {
+            errorMessage = "Debe seleccionar un hotel.";
+            return;
+        }
+
+        if (model.RoomId <= 0)
+        {
+            errorMessage = "Debe seleccionar una habitación.";
+            return;
+        }
+
+        if (!startDateValue.HasValue)
+        {
+            errorMessage = "Debe ingresar una fecha de inicio válida.";
+            return;
+        }
+
+        if (!endDateValue.HasValue)
+        {
+            errorMessage = "Debe ingresar una fecha fin válida.";
+            return;
+        }
+
+        var startDate = startDateValue.Value.Date;
+        var endDate = endDateValue.Value.Date;
+
+        if (endDate < startDate)
+        {
+            errorMessage = "La fecha fin no puede ser menor que la fecha inicio.";
+            return;
+        }
+
+        if (model.QuantityTotal < 0)
+        {
+            errorMessage = "La cantidad total no puede ser negativa.";
+            return;
+        }
+
+        if (model.QuantityTotal > 1)
+        {
+            errorMessage = "Para una habitación individual, la disponibilidad total no puede ser mayor que 1.";
+            return;
+        }
+
+        var request = new UpsertRoomInventoryRangeRequest
+        {
+            RoomId = model.RoomId,
+            StartDate = startDate,
+            EndDate = endDate,
+            QuantityTotal = model.QuantityTotal
+        };
+
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/admin/room-inventories/upsert-range", request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                successMessage = "Inventario actualizado correctamente.";
+                await LoadInventory();
+                return;
+            }
+
+            errorMessage = await response.Content.ReadAsStringAsync();
+        }
+        catch
+        {
+            errorMessage = "Ocurrió un error al guardar el inventario.";
+        }
+    }
+
+    private void ResetForm()
+    {
+        selectedHotelId = 0;
+        model = new UpsertRoomInventoryRangeRequest();
+        filteredRooms.Clear();
+        inventoryItems.Clear();
+        startDateValue = null;
+        endDateValue = null;
+        errorMessage = null;
+        successMessage = null;
+    }
+
+    public class HotelOption
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+    }
+
+    public class RoomOption
+    {
+        public int Id { get; set; }
+        public int HotelId { get; set; }
+        public string HotelName { get; set; } = string.Empty;
+        public int RoomTypeId { get; set; }
+        public string RoomTypeName { get; set; } = string.Empty;
+        public string NameOrNumber { get; set; } = string.Empty;
+        public int MaxGuests { get; set; }
+        public decimal BasePricePerNight { get; set; }
+        public bool IsActive { get; set; }
+    }
+
+    public class AdminRoomInventoryDto
+    {
+        public int Id { get; set; }
+        public int RoomId { get; set; }
+        public string RoomNameOrNumber { get; set; } = string.Empty;
+        public int HotelId { get; set; }
+        public string HotelName { get; set; } = string.Empty;
+        public DateTime Date { get; set; }
+        public int QuantityTotal { get; set; }
+        public int QuantityReserved { get; set; }
+        public int QuantityAvailable { get; set; }
+    }
+
+    public class UpsertRoomInventoryRangeRequest
+    {
+        public int RoomId { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public int QuantityTotal { get; set; }
+    }
+}

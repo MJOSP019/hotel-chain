@@ -1,0 +1,101 @@
+{
+  "source_base_path": "C:/Users/josue/OneDrive/Documentos/hotel-chain/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api.md",
+      "output": {
+        ".html": {
+          "relative_path": "api.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "arquitectura.md",
+      "output": {
+        ".html": {
+          "relative_path": "arquitectura.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "autenticacion.md",
+      "output": {
+        ".html": {
+          "relative_path": "autenticacion.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "backend.md",
+      "output": {
+        ".html": {
+          "relative_path": "backend.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentacion-codigo.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentacion-codigo.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "flujo-reservacion.md",
+      "output": {
+        ".html": {
+          "relative_path": "flujo-reservacion.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "frontend.md",
+      "output": {
+        ".html": {
+          "relative_path": "frontend.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "modulos.md",
+      "output": {
+        ".html": {
+          "relative_path": "modulos.html"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

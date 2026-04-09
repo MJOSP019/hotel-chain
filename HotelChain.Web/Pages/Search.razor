@@ -1,0 +1,1116 @@
+@page "/search"
+@using System.Net.Http.Headers
+@using Microsoft.AspNetCore.WebUtilities
+@inject HttpClient Http
+@inject IJSRuntime JS
+@inject NavigationManager Nav
+
+@* 
+   Componente encargado del flujo público de búsqueda de hoteles.
+   Permite filtrar por ciudad, fechas, huéspedes, precio, tipo de habitación
+   y rating, además de iniciar el flujo de reservación.
+*@
+
+<div class="search-page">
+    <section class="search-hero">
+        <div class="search-hero__content">
+            <div class="search-badge">HotelChain Collection · Explora nuestra cadena</div>
+            <h1>Encuentra el hotel ideal para tu próxima estadía</h1>
+            <p>
+                Consulta disponibilidad en los hoteles de nuestra cadena por ciudad, fechas, huéspedes,
+                tipo de habitación, precio y calificación. Compara propiedades, revisa sus opciones
+                disponibles y continúa con tu reservación.
+            </p>
+
+            <div class="search-hero__meta">
+                <div class="hero-stat">
+                    <span class="hero-stat__label">Check-in</span>
+                    <span class="hero-stat__value">@model.CheckIn.ToString("dd/MM/yyyy")</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat__label">Check-out</span>
+                    <span class="hero-stat__value">@model.CheckOut.ToString("dd/MM/yyyy")</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat__label">Huéspedes</span>
+                    <span class="hero-stat__value">@model.Guests</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="search-panel">
+        <div class="search-card">
+            <div class="search-card__header">
+                <div>
+                    <div class="search-section-badge">Reserva directa</div>
+                    <h3>Busca disponibilidad en nuestros hoteles</h3>
+                    <p>Completa los filtros y consulta propiedades activas de la cadena hotelera.</p>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-lg-4">
+                    <label class="search-label">Ciudad</label>
+                    <select class="form-select search-input" @bind="model.CityId">
+                        <option value="0">-- Selecciona --</option>
+                        @if (cities != null)
+                        {
+                            @foreach (var c in cities)
+                            {
+                                <option value="@c.Id">@c.Name (@c.CountryCode)</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6 col-lg-2">
+                    <label class="search-label">Check-in</label>
+                    <InputDate class="form-control search-input" @bind-Value="model.CheckIn" />
+                </div>
+
+                <div class="col-md-6 col-lg-2">
+                    <label class="search-label">Check-out</label>
+                    <InputDate class="form-control search-input" @bind-Value="model.CheckOut" />
+                </div>
+
+                <div class="col-md-6 col-lg-2">
+                    <label class="search-label">Huéspedes</label>
+                    <input type="number" class="form-control search-input" min="1" @bind="model.Guests" />
+                </div>
+
+                <div class="col-md-6 col-lg-2">
+                    <label class="search-label">Tipo</label>
+                    <select class="form-select search-input" @bind="model.RoomTypeId">
+                        <option value="">-- Todos --</option>
+                        @if (roomTypes != null)
+                        {
+                            @foreach (var rt in roomTypes)
+                            {
+                                <option value="@rt.Id">@rt.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="search-label">Precio mínimo</label>
+                    <input type="number" step="0.01" min="0" class="form-control search-input" @bind="model.MinPrice" />
+                </div>
+
+                <div class="col-md-4">
+                    <label class="search-label">Precio máximo</label>
+                    <input type="number" step="0.01" min="0" class="form-control search-input" @bind="model.MaxPrice" />
+                </div>
+
+                <div class="col-md-4">
+                    <label class="search-label">Calificación mínima</label>
+                    <select class="form-select search-input" @bind="model.MinRating">
+                        <option value="">-- Cualquiera --</option>
+                        <option value="1">1+ estrellas</option>
+                        <option value="2">2+ estrellas</option>
+                        <option value="3">3+ estrellas</option>
+                        <option value="4">4+ estrellas</option>
+                        <option value="5">5 estrellas</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="search-actions">
+                <button class="btn search-btn-primary" @onclick="DoSearch" disabled="@isLoading">
+                    @(isLoading ? "Buscando..." : "Buscar hoteles")
+                </button>
+
+                <a class="btn search-btn-secondary" href="/login">Iniciar sesión</a>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(success))
+            {
+                <div class="alert alert-success search-alert mt-3">@success</div>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(error))
+            {
+                <div class="alert alert-danger search-alert mt-3">@error</div>
+            }
+        </div>
+    </section>
+
+    @if (groupedHotels != null)
+    {
+        <section class="results-section">
+            <div class="results-header">
+                <div>
+                    <div class="search-section-badge">Resultados</div>
+                    <h3>Hoteles disponibles</h3>
+                    <p>
+                        @if (groupedHotels.Count == 0)
+                        {
+                            <span>No encontramos hoteles disponibles con los filtros seleccionados.</span>
+                        }
+                        else
+                        {
+                            <span>Se encontraron @groupedHotels.Count hotel(es) disponibles dentro de la cadena.</span>
+                        }
+                    </p>
+                </div>
+
+                @if (groupedHotels.Count > 0)
+                {
+                    <div class="results-summary">
+                        <div class="results-summary__item">
+                            <span class="results-summary__label">Ciudad</span>
+                            <strong>@GetSelectedCityName()</strong>
+                        </div>
+                        <div class="results-summary__item">
+                            <span class="results-summary__label">Fechas</span>
+                            <strong>@GetStayRange()</strong>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @if (groupedHotels.Count == 0)
+            {
+                <div class="empty-state">
+                    <h4>Sin resultados disponibles</h4>
+                    <p>
+                        Prueba otra ciudad, modifica las fechas o ajusta el rango de precio y la calificación mínima para ampliar la búsqueda.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="hotel-results-grid">
+                    @foreach (var hotel in groupedHotels)
+                    {
+                        <article class="hotel-result-card">
+                            <div class="hotel-result-card__top">
+                                <div>
+                                    <div class="hotel-result-card__eyebrow">Propiedad de la cadena</div>
+                                    <h4>@hotel.HotelName</h4>
+
+                                    <div class="hotel-result-card__meta">
+                                        @if (hotel.ReviewsCount > 0)
+                                        {
+                                            <div class="rating-block">
+                                                <span class="rating-stars">@GetStars(hotel.AverageRating)</span>
+                                                <span class="rating-text">@hotel.AverageRating.ToString("0.00") · @GetReviewsText(hotel.ReviewsCount)</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <span class="hotel-result-card__meta-text">Sin opiniones publicadas</span>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="hotel-result-price">
+                                    <span class="hotel-result-price__label">Desde</span>
+                                    <span class="hotel-result-price__value">Q @hotel.StartingPrice.ToString("0.00")</span>
+                                    <span class="hotel-result-price__suffix">por noche</span>
+                                </div>
+                            </div>
+
+                            <div class="hotel-result-card__body">
+                                <div class="hotel-result-feature">
+                                    <span class="hotel-result-feature__label">Opciones encontradas</span>
+                                    <strong>@hotel.RoomsCount</strong>
+                                </div>
+
+                                <div class="hotel-result-feature">
+                                    <span class="hotel-result-feature__label">Capacidad máxima</span>
+                                    <strong>@hotel.MaxGuests huésped(es)</strong>
+                                </div>
+
+                                <div class="hotel-result-feature hotel-result-feature--wide">
+                                    <span class="hotel-result-feature__label">Tipos de habitación disponibles</span>
+                                    <strong>@string.Join(", ", hotel.RoomTypes)</strong>
+                                </div>
+                            </div>
+
+                            <div class="hotel-result-card__rooms">
+                                <div class="hotel-result-card__rooms-title">Opciones destacadas</div>
+
+                                <div class="hotel-room-chips">
+                                    @foreach (var room in hotel.FeaturedRooms)
+                                    {
+                                        <div class="hotel-room-chip">
+                                            <div class="hotel-room-chip__name">@room.RoomType</div>
+                                            <div class="hotel-room-chip__detail">@room.NameOrNumber · Q @room.BasePricePerNight.ToString("0.00")</div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="hotel-result-card__description">
+                                <p>
+                                    Explora el detalle de este hotel, revisa sus opiniones y conoce las habitaciones disponibles antes de continuar con la reservación.
+                                </p>
+                            </div>
+
+                            <div class="hotel-result-card__footer">
+                                <button class="btn search-btn-secondary btn-sm" @onclick="() => GoToHotel(hotel.HotelId)">
+                                    Ver detalle del hotel
+                                </button>
+
+                                <button class="btn search-btn-primary btn-sm" @onclick="() => ReserveCheapest(hotel)">
+                                    Reservar desde Q @hotel.StartingPrice.ToString("0.00")
+                                </button>
+                            </div>
+                        </article>
+                    }
+                </div>
+            }
+        </section>
+    }
+</div>
+
+<style>
+    .search-page {
+        padding: 1.5rem 0 2rem 0;
+        color: #0f172a;
+    }
+
+    .search-hero {
+        background:
+            radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 28%),
+            linear-gradient(135deg, #0f172a 0%, #162033 45%, #1e293b 100%);
+        color: #fff;
+        border-radius: 28px;
+        padding: 2.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .search-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent 30%);
+        pointer-events: none;
+    }
+
+    .search-hero__content {
+        position: relative;
+        z-index: 1;
+        max-width: 940px;
+    }
+
+    .search-badge,
+    .search-section-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.38rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+    }
+
+    .search-badge {
+        background: rgba(255,255,255,0.12);
+        color: #dbeafe;
+        margin-bottom: 1rem;
+    }
+
+    .search-section-badge {
+        background: #eff6ff;
+        color: #1d4ed8;
+        margin-bottom: 0.8rem;
+    }
+
+    .search-hero h1 {
+        font-size: clamp(2rem, 4vw, 3.3rem);
+        font-weight: 800;
+        margin-bottom: 0.9rem;
+        line-height: 1.05;
+    }
+
+    .search-hero p {
+        margin: 0;
+        max-width: 780px;
+        color: rgba(255,255,255,0.82);
+        font-size: 1.02rem;
+        line-height: 1.7;
+    }
+
+    .search-hero__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+        margin-top: 1.5rem;
+    }
+
+    .hero-stat {
+        min-width: 160px;
+        padding: 0.95rem 1rem;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.10);
+        border: 1px solid rgba(255,255,255,0.12);
+        backdrop-filter: blur(6px);
+    }
+
+    .hero-stat__label {
+        display: block;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: rgba(255,255,255,0.70);
+        margin-bottom: 0.2rem;
+    }
+
+    .hero-stat__value {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    .search-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 1.5rem;
+        box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+    }
+
+    .search-card__header {
+        margin-bottom: 1rem;
+    }
+
+    .search-card__header h3 {
+        margin: 0 0 0.25rem 0;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .search-card__header p {
+        margin: 0;
+        color: #64748b;
+    }
+
+    .search-label {
+        display: block;
+        margin-bottom: 0.45rem;
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: #334155;
+    }
+
+    .search-input {
+        min-height: 48px;
+        border-radius: 14px;
+        border: 1px solid #cbd5e1;
+        background: #f8fafc;
+        color: #0f172a;
+    }
+
+    .search-input:focus {
+        border-color: #3b82f6;
+        background: #fff;
+        box-shadow: 0 0 0 0.18rem rgba(59, 130, 246, 0.18);
+    }
+
+    .search-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+    }
+
+    .search-btn-primary {
+        background: linear-gradient(135deg, #1d4ed8 0%, #0f172a 100%);
+        color: #fff;
+        border: none;
+        border-radius: 14px;
+        padding: 0.8rem 1.2rem;
+        font-weight: 700;
+        box-shadow: 0 10px 24px rgba(29, 78, 216, 0.22);
+    }
+
+    .search-btn-primary:hover,
+    .search-btn-primary:focus {
+        color: #fff;
+        background: linear-gradient(135deg, #1e40af 0%, #0b1220 100%);
+    }
+
+    .search-btn-secondary {
+        background: #fff;
+        color: #0f172a;
+        border: 1px solid #cbd5e1;
+        border-radius: 14px;
+        padding: 0.8rem 1.2rem;
+        font-weight: 700;
+    }
+
+    .search-btn-secondary:hover,
+    .search-btn-secondary:focus {
+        background: #f8fafc;
+        color: #0f172a;
+        border-color: #94a3b8;
+    }
+
+    .search-alert {
+        border-radius: 16px;
+    }
+
+    .results-section {
+        margin-top: 1.75rem;
+    }
+
+    .results-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .results-header h3 {
+        margin: 0.3rem 0 0.25rem 0;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .results-header p {
+        margin: 0;
+        color: #64748b;
+    }
+
+    .results-summary {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .results-summary__item {
+        min-width: 150px;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 0.8rem 0.95rem;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    .results-summary__label {
+        display: block;
+        color: #64748b;
+        font-size: 0.78rem;
+        margin-bottom: 0.2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    .hotel-results-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 1rem;
+    }
+
+    .hotel-result-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 26px;
+        padding: 1.25rem;
+        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        height: 100%;
+    }
+
+    .hotel-result-card__top {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .hotel-result-card__eyebrow {
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        margin-bottom: 0.2rem;
+        font-weight: 700;
+    }
+
+    .hotel-result-card__top h4 {
+        margin: 0;
+        color: #0f172a;
+        font-weight: 800;
+        font-size: 1.25rem;
+    }
+
+    .hotel-result-card__meta {
+        margin-top: 0.55rem;
+    }
+
+    .hotel-result-card__meta-text {
+        color: #475569;
+        font-size: 0.92rem;
+        font-weight: 600;
+    }
+
+    .hotel-result-price {
+        text-align: right;
+        min-width: 120px;
+    }
+
+    .hotel-result-price__label {
+        display: block;
+        font-size: 0.75rem;
+        color: #64748b;
+        text-transform: uppercase;
+    }
+
+    .hotel-result-price__value {
+        display: block;
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: #1d4ed8;
+        line-height: 1.1;
+        margin-top: 0.15rem;
+    }
+
+    .hotel-result-price__suffix {
+        display: block;
+        font-size: 0.8rem;
+        color: #64748b;
+        margin-top: 0.1rem;
+    }
+
+    .hotel-result-card__body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.85rem;
+    }
+
+    .hotel-result-feature {
+        background: rgba(255,255,255,0.78);
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 0.85rem;
+    }
+
+    .hotel-result-feature--wide {
+        grid-column: 1 / -1;
+    }
+
+    .hotel-result-feature__label {
+        display: block;
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        margin-bottom: 0.25rem;
+        font-weight: 700;
+    }
+
+    .hotel-result-feature strong {
+        color: #0f172a;
+        font-size: 0.98rem;
+    }
+
+    .hotel-result-card__rooms {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 0.95rem;
+    }
+
+    .hotel-result-card__rooms-title {
+        font-size: 0.82rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #475569;
+        margin-bottom: 0.75rem;
+    }
+
+    .hotel-room-chips {
+        display: grid;
+        gap: 0.6rem;
+    }
+
+    .hotel-room-chip {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 0.75rem 0.85rem;
+    }
+
+    .hotel-room-chip__name {
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 0.15rem;
+    }
+
+    .hotel-room-chip__detail {
+        color: #64748b;
+        font-size: 0.9rem;
+    }
+
+    .rating-block {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    .rating-stars {
+        color: #f59e0b;
+        font-size: 1rem;
+        letter-spacing: 0.04em;
+    }
+
+    .rating-text {
+        color: #475569;
+        font-size: 0.88rem;
+        font-weight: 600;
+    }
+
+    .hotel-result-card__description p {
+        margin: 0;
+        color: #475569;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+
+    .hotel-result-card__footer {
+        margin-top: auto;
+        display: flex;
+        gap: 0.75rem;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .empty-state {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px dashed #cbd5e1;
+        border-radius: 24px;
+        padding: 2rem;
+        text-align: center;
+        color: #475569;
+    }
+
+    .empty-state h4 {
+        color: #0f172a;
+        margin-bottom: 0.5rem;
+        font-weight: 800;
+    }
+
+    @@media (max-width: 991.98px) {
+        .search-hero {
+            padding: 2rem 1.25rem;
+        }
+
+        .hotel-result-card__body {
+            grid-template-columns: 1fr;
+        }
+
+        .hotel-result-feature--wide {
+            grid-column: auto;
+        }
+    }
+
+    @@media (max-width: 767.98px) {
+        .search-page {
+            padding-top: 0.75rem;
+        }
+
+        .search-card {
+            padding: 1.1rem;
+        }
+
+        .results-header {
+            flex-direction: column;
+        }
+
+        .hotel-result-card__top {
+            flex-direction: column;
+        }
+
+        .hotel-result-price {
+            text-align: left;
+        }
+    }
+</style>
+
+@code {
+    /// <summary>
+    /// Catálogo de ciudades disponibles para filtrar la búsqueda.
+    /// </summary>
+    private List<CityDto>? cities;
+
+    /// <summary>
+    /// Catálogo de tipos de habitación disponibles.
+    /// </summary>
+    private List<RoomTypeDto>? roomTypes;
+
+    /// <summary>
+    /// Resultados crudos devueltos por la API de búsqueda.
+    /// </summary>
+    private List<SearchResultDto>? results;
+
+    /// <summary>
+    /// Resultados agrupados por hotel para una mejor presentación visual.
+    /// </summary>
+    private List<GroupedHotelResult>? groupedHotels;
+
+    /// <summary>
+    /// Mensaje de error mostrado en pantalla.
+    /// </summary>
+    private string? error;
+
+    /// <summary>
+    /// Indica si hay una búsqueda en ejecución.
+    /// </summary>
+    private bool isLoading;
+
+    /// <summary>
+    /// Mensaje de éxito mostrado en pantalla.
+    /// </summary>
+    private string? success;
+
+    /// <summary>
+    /// Modelo principal de filtros utilizado para realizar búsquedas.
+    /// </summary>
+    private SearchRequest model = new()
+    {
+        CityId = 0,
+        Guests = 2,
+        CheckIn = DateTime.Today.AddDays(1),
+        CheckOut = DateTime.Today.AddDays(3),
+        RoomTypeId = null,
+        MinPrice = null,
+        MaxPrice = null,
+        MinRating = null
+    };
+
+    /// <summary>
+    /// Carga catálogos iniciales y parámetros opcionales provenientes del query string.
+    /// </summary>
+    protected override async Task OnInitializedAsync()
+    {
+        cities = await Http.GetFromJsonAsync<List<CityDto>>("/api/public/cities");
+        roomTypes = await Http.GetFromJsonAsync<List<RoomTypeDto>>("/api/public/room-types");
+
+        var uri = Nav.ToAbsoluteUri(Nav.Uri);
+        var qs = QueryHelpers.ParseQuery(uri.Query);
+
+        if (qs.TryGetValue("cityId", out var cityIdStr) && int.TryParse(cityIdStr, out var cityId))
+            model.CityId = cityId;
+
+        if (qs.TryGetValue("guests", out var guestsStr) && int.TryParse(guestsStr, out var guests))
+            model.Guests = guests;
+
+        if (qs.TryGetValue("checkIn", out var checkInStr) && DateTime.TryParse(checkInStr, out var checkIn))
+            model.CheckIn = checkIn;
+
+        if (qs.TryGetValue("checkOut", out var checkOutStr) && DateTime.TryParse(checkOutStr, out var checkOut))
+            model.CheckOut = checkOut;
+
+        if (model.CityId > 0)
+            await DoSearch();
+    }
+
+    /// <summary>
+    /// Ejecuta la búsqueda pública de hoteles según los filtros ingresados.
+    /// </summary>
+    private async Task DoSearch()
+    {
+        error = null;
+        success = null;
+        results = null;
+        groupedHotels = null;
+
+        if (model.CityId <= 0)
+        {
+            error = "Selecciona una ciudad.";
+            return;
+        }
+
+        if (model.CheckOut.Date <= model.CheckIn.Date)
+        {
+            error = "Check-out debe ser mayor que Check-in.";
+            return;
+        }
+
+        if (model.MinPrice.HasValue && model.MaxPrice.HasValue && model.MinPrice.Value > model.MaxPrice.Value)
+        {
+            error = "El precio mínimo no puede ser mayor que el precio máximo.";
+            return;
+        }
+
+        if (model.MinRating.HasValue && (model.MinRating.Value < 1 || model.MinRating.Value > 5))
+        {
+            error = "La calificación mínima debe estar entre 1 y 5.";
+            return;
+        }
+
+        isLoading = true;
+
+        try
+        {
+            var resp = await Http.PostAsJsonAsync("/api/public/search", model);
+            if (!resp.IsSuccessStatusCode)
+            {
+                error = await resp.Content.ReadAsStringAsync();
+                return;
+            }
+
+            results = await resp.Content.ReadFromJsonAsync<List<SearchResultDto>>() ?? new();
+            groupedHotels = BuildGroupedHotels(results);
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    /// <summary>
+    /// Agrupa resultados por hotel para facilitar su renderizado como tarjetas.
+    /// </summary>
+    /// <param name="items">Resultados individuales devueltos por la API.</param>
+    /// <returns>Lista de resultados agrupados por hotel.</returns>
+    private List<GroupedHotelResult> BuildGroupedHotels(List<SearchResultDto> items)
+    {
+        return items
+            .GroupBy(x => new
+            {
+                x.HotelId,
+                x.Hotel,
+                x.AverageRating,
+                x.ReviewsCount
+            })
+            .Select(g =>
+            {
+                var orderedRooms = g
+                    .OrderBy(x => x.BasePricePerNight)
+                    .ThenBy(x => x.RoomType)
+                    .ToList();
+
+                return new GroupedHotelResult
+                {
+                    HotelId = g.Key.HotelId,
+                    HotelName = g.Key.Hotel,
+                    AverageRating = g.Key.AverageRating,
+                    ReviewsCount = g.Key.ReviewsCount,
+                    StartingPrice = orderedRooms.Min(x => x.BasePricePerNight),
+                    RoomsCount = orderedRooms.Count,
+                    MaxGuests = orderedRooms.Max(x => x.MaxGuests),
+                    RoomTypes = orderedRooms
+                        .Select(x => x.RoomType)
+                        .Where(x => !string.IsNullOrWhiteSpace(x))
+                        .Distinct()
+                        .ToList(),
+                    FeaturedRooms = orderedRooms.Take(3).ToList(),
+                    CheapestRoom = orderedRooms.First()
+                };
+            })
+            .OrderBy(x => x.StartingPrice)
+            .ThenByDescending(x => x.AverageRating)
+            .ToList();
+    }
+
+    /// <summary>
+    /// Inicia una reservación utilizando la habitación seleccionada.
+    /// </summary>
+    /// <param name="r">Resultado de búsqueda correspondiente a la habitación seleccionada.</param>
+    private async Task Reserve(SearchResultDto r)
+    {
+        success = null;
+        error = null;
+
+        try
+        {
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                error = "Necesitas iniciar sesión para reservar.";
+                return;
+            }
+
+            var body = new
+            {
+                roomId = r.Id,
+                checkIn = model.CheckIn,
+                checkOut = model.CheckOut,
+                guests = model.Guests
+            };
+
+            var req = new HttpRequestMessage(HttpMethod.Post, "/api/public/reservations");
+            req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            req.Content = JsonContent.Create(body);
+
+            var resp = await Http.SendAsync(req);
+
+            if (!resp.IsSuccessStatusCode)
+            {
+                error = await resp.Content.ReadAsStringAsync();
+                return;
+            }
+
+            var data = await resp.Content.ReadFromJsonAsync<ReserveResponse>();
+            success = $"✅ Reserva creada: {data!.Code} (Total: {data.TotalAmount})";
+            Nav.NavigateTo($"/checkout?code={data.Code}");
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
+
+    /// <summary>
+    /// Inicia una reservación utilizando la habitación más económica del hotel agrupado.
+    /// </summary>
+    /// <param name="hotel">Hotel agrupado mostrado en la tarjeta de resultados.</param>
+    private async Task ReserveCheapest(GroupedHotelResult hotel)
+    {
+        await Reserve(hotel.CheapestRoom);
+    }
+
+    /// <summary>
+    /// Navega al detalle de un hotel preservando filtros relevantes en el query string.
+    /// </summary>
+    /// <param name="hotelId">Identificador del hotel a consultar.</param>
+    private void GoToHotel(int hotelId)
+    {
+        var query = new Dictionary<string, string?>
+        {
+            ["cityId"] = model.CityId > 0 ? model.CityId.ToString() : null,
+            ["checkIn"] = model.CheckIn.ToString("yyyy-MM-dd"),
+            ["checkOut"] = model.CheckOut.ToString("yyyy-MM-dd"),
+            ["guests"] = model.Guests.ToString()
+        };
+
+        var url = QueryHelpers.AddQueryString($"/hotels/{hotelId}", query);
+        Nav.NavigateTo(url);
+    }
+
+    /// <summary>
+    /// Convierte una calificación decimal en una representación visual con estrellas.
+    /// </summary>
+    private string GetStars(decimal rating)
+    {
+        var rounded = (int)Math.Round(rating, MidpointRounding.AwayFromZero);
+        rounded = Math.Max(0, Math.Min(5, rounded));
+        return new string('★', rounded) + new string('☆', 5 - rounded);
+    }
+
+    /// <summary>
+    /// Obtiene el nombre descriptivo de la ciudad seleccionada.
+    /// </summary>
+    private string GetSelectedCityName()
+    {
+        if (cities is null || model.CityId <= 0)
+            return "No definida";
+
+        var city = cities.FirstOrDefault(x => x.Id == model.CityId);
+        return city is null ? "No definida" : $"{city.Name} ({city.CountryCode})";
+    }
+
+    /// <summary>
+    /// Devuelve un rango corto de estancia para mostrar en la vista.
+    /// </summary>
+    private string GetStayRange()
+    {
+        return $"{model.CheckIn:dd/MM} - {model.CheckOut:dd/MM}";
+    }
+
+    /// <summary>
+    /// Devuelve un texto amigable para la cantidad de opiniones.
+    /// </summary>
+    private string GetReviewsText(int count)
+    {
+        return count == 1 ? "1 opinión" : $"{count} opiniones";
+    }
+
+    /// <summary>
+    /// DTO local para catálogo de ciudades.
+    /// </summary>
+    private class CityDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = "";
+        public string CountryCode { get; set; } = "";
+    }
+
+    /// <summary>
+    /// DTO local para catálogo de tipos de habitación.
+    /// </summary>
+    private class RoomTypeDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = "";
+    }
+
+    /// <summary>
+    /// Modelo de solicitud utilizado en la búsqueda pública.
+    /// </summary>
+    private class SearchRequest
+    {
+        public int CityId { get; set; }
+        public DateTime CheckIn { get; set; }
+        public DateTime CheckOut { get; set; }
+        public int Guests { get; set; }
+        public decimal? MinPrice { get; set; }
+        public decimal? MaxPrice { get; set; }
+        public int? RoomTypeId { get; set; }
+        public double? MinRating { get; set; }
+    }
+
+    /// <summary>
+    /// DTO local para representar un resultado individual de búsqueda.
+    /// </summary>
+    private class SearchResultDto
+    {
+        public int Id { get; set; }
+        public int HotelId { get; set; }
+        public string NameOrNumber { get; set; } = "";
+        public int MaxGuests { get; set; }
+        public decimal BasePricePerNight { get; set; }
+        public string RoomType { get; set; } = "";
+        public string Hotel { get; set; } = "";
+        public decimal AverageRating { get; set; }
+        public int ReviewsCount { get; set; }
+    }
+
+    /// <summary>
+    /// Resultado agrupado por hotel para su presentación en tarjetas.
+    /// </summary>
+    private class GroupedHotelResult
+    {
+        public int HotelId { get; set; }
+        public string HotelName { get; set; } = "";
+        public decimal AverageRating { get; set; }
+        public int ReviewsCount { get; set; }
+        public decimal StartingPrice { get; set; }
+        public int RoomsCount { get; set; }
+        public int MaxGuests { get; set; }
+        public List<string> RoomTypes { get; set; } = new();
+        public List<SearchResultDto> FeaturedRooms { get; set; } = new();
+        public SearchResultDto CheapestRoom { get; set; } = new();
+    }
+
+    /// <summary>
+    /// DTO local para la respuesta de creación de reservación.
+    /// </summary>
+    private class ReserveResponse
+    {
+        public int Id { get; set; }
+        public string Code { get; set; } = "";
+        public string Status { get; set; } = "";
+        public decimal TotalAmount { get; set; }
+    }
+}

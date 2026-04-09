@@ -1,0 +1,1315 @@
+@page "/hotels/{Id:int}"
+@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.WebUtilities
+@using HotelChain.Web.Models
+@inject IHttpClientFactory HttpClientFactory
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+@* 
+   Componente que muestra el detalle público de un hotel.
+   Presenta información general, habitaciones, reseñas y permite reservar
+   o publicar opiniones cuando el usuario está autenticado.
+*@
+
+<PageTitle>Detalle del hotel</PageTitle>
+
+<div class="hotel-detail-page">
+    @if (!string.IsNullOrWhiteSpace(errorMessage))
+    {
+        <div class="alert alert-danger hotel-alert">@errorMessage</div>
+    }
+    else if (hotel is null)
+    {
+        <div class="hotel-loading">
+            <div class="hotel-loading__card">
+                <h4>Cargando información del hotel...</h4>
+                <p>Estamos obteniendo el detalle, las opciones de habitación y las opiniones publicadas.</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <section class="hotel-hero">
+            <div class="hotel-hero__top">
+                <button class="btn hotel-btn-secondary" @onclick="GoBackToSearch">
+                    Volver a resultados
+                </button>
+            </div>
+
+            <div class="hotel-hero__content">
+                <div class="hotel-hero__main">
+                    <div class="hotel-badge">HotelChain Collection · Propiedad de la cadena</div>
+                    <h1>@hotel.Name</h1>
+                    <p class="hotel-hero__city">@hotel.City</p>
+
+                    <div class="hotel-hero__meta">
+                        <div class="hotel-meta-card">
+                            <span class="hotel-meta-card__label">Código</span>
+                            <strong>@hotel.Code</strong>
+                        </div>
+
+                        <div class="hotel-meta-card hotel-meta-card--wide">
+                            <span class="hotel-meta-card__label">Dirección</span>
+                            <strong>@hotel.Address</strong>
+                        </div>
+
+                        @if (HasSearchContext)
+                        {
+                            <div class="hotel-meta-card">
+                                <span class="hotel-meta-card__label">Estadía</span>
+                                <strong>@GetStaySummary()</strong>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="hotel-rating-card">
+                    <div class="hotel-rating-card__stars">@GetStars(hotel.AverageRating)</div>
+                    <div class="hotel-rating-card__value">
+                        @(hotel.ReviewsCount > 0 ? hotel.AverageRating.ToString("0.00") : "Sin calificaciones")
+                    </div>
+                    <div class="hotel-rating-card__count">@GetReviewsLabel(hotel.ReviewsCount)</div>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(hotel.Description))
+            {
+                <div class="hotel-description-panel">
+                    <div class="hotel-description-panel__label">Descripción del hotel</div>
+                    <p>@hotel.Description</p>
+                </div>
+            }
+            else
+            {
+                <div class="hotel-description-panel">
+                    <div class="hotel-description-panel__label">Descripción del hotel</div>
+                    <p>Este hotel forma parte de nuestra cadena y cuenta con opciones disponibles para tu próxima reservación.</p>
+                </div>
+            }
+        </section>
+
+        <section class="hotel-section">
+            <div class="hotel-info-grid">
+                <article class="info-card">
+                    <div class="info-card__label">Ciudad</div>
+                    <h4>@hotel.City</h4>
+                    <p>Ubicación donde se encuentra este hotel dentro de la cadena.</p>
+                </article>
+
+                <article class="info-card">
+                    <div class="info-card__label">Dirección</div>
+                    <h4>Ubicación del hotel</h4>
+                    <p>@hotel.Address</p>
+                </article>
+
+                <article class="info-card">
+                    <div class="info-card__label">Experiencia</div>
+                    <h4>Opiniones de huéspedes</h4>
+                    <p>@GetExperienceText()</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="hotel-section">
+            <div class="hotel-section__header hotel-section__header--with-action">
+                <div>
+                    <div class="hotel-badge hotel-badge--light">Habitaciones</div>
+                    <h3>Opciones de habitación</h3>
+                    <p>
+                        Explora las habitaciones activas disponibles en esta propiedad de la cadena
+                        y continúa con tu proceso de reservación.
+                    </p>
+                </div>
+
+                <div class="hotel-section__actions">
+                    <button class="btn hotel-btn-secondary" @onclick="GoBackToSearch">
+                        Volver a resultados
+                    </button>
+                </div>
+            </div>
+
+            @if (hotel.RoomOptions is not null && hotel.RoomOptions.Any())
+            {
+                <div class="rooms-summary-card">
+                    <div class="rooms-summary-card__item">
+                        <span class="rooms-summary-card__label">Opciones disponibles</span>
+                        <strong>@hotel.RoomOptions.Count</strong>
+                    </div>
+
+                    <div class="rooms-summary-card__item">
+                        <span class="rooms-summary-card__label">Precio más bajo</span>
+                        <strong>Q @hotel.RoomOptions.Min(x => x.BasePricePerNight).ToString("0.00")</strong>
+                    </div>
+
+                    <div class="rooms-summary-card__item">
+                        <span class="rooms-summary-card__label">Capacidad máxima</span>
+                        <strong>@hotel.RoomOptions.Max(x => x.MaxGuests) huésped(es)</strong>
+                    </div>
+                </div>
+
+                <div class="rooms-grid">
+                    @foreach (var room in hotel.RoomOptions.OrderBy(x => x.BasePricePerNight).ThenBy(x => x.RoomType))
+                    {
+                        <article class="room-card">
+                            <div class="room-card__header">
+                                <div>
+                                    <div class="room-card__eyebrow">Opción de habitación</div>
+                                    <h4>@room.NameOrNumber</h4>
+                                </div>
+
+                                <div class="room-card__price">
+                                    <span class="room-card__price-label">Precio</span>
+                                    <span class="room-card__price-value">Q @room.BasePricePerNight.ToString("0.00")</span>
+                                    <span class="room-card__price-suffix">por noche</span>
+                                </div>
+                            </div>
+
+                            <div class="room-card__body">
+                                <div class="room-feature">
+                                    <span class="room-feature__label">Tipo</span>
+                                    <strong>@room.RoomType</strong>
+                                </div>
+
+                                <div class="room-feature">
+                                    <span class="room-feature__label">Máx. huéspedes</span>
+                                    <strong>@room.MaxGuests</strong>
+                                </div>
+                            </div>
+
+                            <div class="room-card__footer">
+                                <p class="room-card__hint">
+                                    @GetRoomHint()
+                                </p>
+
+                                <button class="btn hotel-btn-primary hotel-btn-primary--full" @onclick="() => ReserveRoom(room.RoomId)">
+                                    Reservar esta opción
+                                </button>
+                            </div>
+                        </article>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="empty-card">
+                    <h4>Sin habitaciones activas</h4>
+                    <p>No hay opciones de habitación activas para este hotel en este momento.</p>
+                </div>
+            }
+        </section>
+
+        <section class="hotel-section">
+            <div class="hotel-section__header">
+                <div>
+                    <div class="hotel-badge hotel-badge--light">Opiniones</div>
+                    <h3>Comentarios y calificaciones</h3>
+                    <p>Opiniones compartidas por usuarios registrados sobre su experiencia en este hotel.</p>
+                </div>
+            </div>
+
+            @if (hotel.Reviews is not null && hotel.Reviews.Any())
+            {
+                <div class="reviews-summary">
+                    <div class="reviews-summary__score">
+                        <span class="reviews-summary__value">@hotel.AverageRating.ToString("0.00")</span>
+                        <span class="reviews-summary__stars">@GetStars(hotel.AverageRating)</span>
+                    </div>
+
+                    <div class="reviews-summary__text">
+                        <strong>@GetReviewsLabel(hotel.ReviewsCount)</strong>
+                        <p>Las opiniones ayudan a otros usuarios a conocer mejor la experiencia de hospedarse en este hotel.</p>
+                    </div>
+                </div>
+
+                <div class="reviews-list">
+                    @foreach (var review in hotel.Reviews.OrderByDescending(x => x.CreatedAt))
+                    {
+                        <article class="review-card">
+                            <div class="review-card__header">
+                                <div>
+                                    <div class="review-card__user">@review.UserName</div>
+                                    <div class="review-card__rating">
+                                        @GetStars(review.Rating)
+                                        <span class="review-card__rating-text">(@review.Rating/5)</span>
+                                    </div>
+                                </div>
+
+                                <div class="review-card__date">
+                                    @review.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+                                </div>
+                            </div>
+
+                            @if (!string.IsNullOrWhiteSpace(review.Comment))
+                            {
+                                <div class="review-card__body">
+                                    @review.Comment
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="review-card__body review-card__body--muted">
+                                    El usuario publicó una calificación sin comentario adicional.
+                                </div>
+                            }
+                        </article>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="empty-card">
+                    <h4>Sin opiniones todavía</h4>
+                    <p>Este hotel todavía no tiene comentarios publicados. Sé la primera persona en compartir su experiencia.</p>
+                </div>
+            }
+        </section>
+
+        @if (isLoggedIn)
+        {
+            <section class="hotel-section">
+                <div class="review-form-card">
+                    <div class="hotel-section__header mb-3">
+                        <div>
+                            <div class="hotel-badge hotel-badge--light">Tu opinión</div>
+                            <h3>Comparte tu experiencia</h3>
+                            <p>Califica este hotel y deja un comentario para otros usuarios de la cadena.</p>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(successMessage))
+                    {
+                        <div class="alert alert-success hotel-alert">@successMessage</div>
+                    }
+
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="hotel-label">Calificación</label>
+                            <select class="form-select hotel-input" @bind="newReview.Rating">
+                                <option value="1">1 estrella</option>
+                                <option value="2">2 estrellas</option>
+                                <option value="3">3 estrellas</option>
+                                <option value="4">4 estrellas</option>
+                                <option value="5">5 estrellas</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="hotel-label">Comentario</label>
+                            <textarea class="form-control hotel-input hotel-textarea" rows="5" @bind="newReview.Comment" placeholder="Cuéntanos cómo fue tu experiencia en este hotel."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <button class="btn hotel-btn-primary" @onclick="SubmitReview">
+                            Publicar opinión
+                        </button>
+                    </div>
+                </div>
+            </section>
+        }
+        else
+        {
+            <div class="alert alert-info hotel-alert">
+                Inicia sesión para comentar y calificar este hotel.
+            </div>
+        }
+    }
+</div>
+
+<style>
+    .hotel-detail-page {
+        padding: 1.5rem 0 2rem 0;
+        color: #0f172a;
+    }
+
+    .hotel-alert {
+        border-radius: 16px;
+    }
+
+    .hotel-loading {
+        padding: 2rem 0;
+    }
+
+    .hotel-loading__card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 2rem;
+        box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+    }
+
+    .hotel-loading__card h4 {
+        margin-bottom: 0.5rem;
+        font-weight: 800;
+    }
+
+    .hotel-loading__card p {
+        margin: 0;
+        color: #64748b;
+    }
+
+    .hotel-hero {
+        background:
+            radial-gradient(circle at top right, rgba(59, 130, 246, 0.16), transparent 26%),
+            linear-gradient(135deg, #0f172a 0%, #162033 45%, #1e293b 100%);
+        color: #fff;
+        border-radius: 28px;
+        padding: 1.5rem 1.5rem 2rem 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hotel-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent 30%);
+        pointer-events: none;
+    }
+
+    .hotel-hero__top,
+    .hotel-hero__content,
+    .hotel-description-panel {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hotel-hero__top {
+        margin-bottom: 1.25rem;
+    }
+
+    .hotel-hero__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .hotel-hero__main {
+        flex: 1 1 620px;
+    }
+
+    .hotel-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.38rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.12);
+        color: #dbeafe;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    .hotel-badge--light {
+        background: #eff6ff;
+        color: #1d4ed8;
+    }
+
+    .hotel-hero h1 {
+        font-size: clamp(2rem, 4vw, 3.1rem);
+        font-weight: 800;
+        margin-bottom: 0.55rem;
+        line-height: 1.05;
+    }
+
+    .hotel-hero__city {
+        font-size: 1.02rem;
+        color: rgba(255,255,255,0.78);
+        margin-bottom: 1.15rem;
+    }
+
+    .hotel-hero__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+    }
+
+    .hotel-meta-card {
+        min-width: 170px;
+        padding: 0.95rem 1rem;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.10);
+        border: 1px solid rgba(255,255,255,0.12);
+        backdrop-filter: blur(6px);
+    }
+
+    .hotel-meta-card--wide {
+        min-width: 280px;
+        max-width: 520px;
+    }
+
+    .hotel-meta-card__label {
+        display: block;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: rgba(255,255,255,0.70);
+        margin-bottom: 0.2rem;
+    }
+
+    .hotel-meta-card strong {
+        color: #fff;
+        font-size: 1rem;
+    }
+
+    .hotel-rating-card {
+        min-width: 220px;
+        padding: 1.2rem;
+        border-radius: 22px;
+        background: rgba(255,255,255,0.10);
+        border: 1px solid rgba(255,255,255,0.12);
+        text-align: center;
+        backdrop-filter: blur(6px);
+    }
+
+    .hotel-rating-card__stars {
+        font-size: 1.35rem;
+        color: #fbbf24;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.45rem;
+    }
+
+    .hotel-rating-card__value {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.1;
+    }
+
+    .hotel-rating-card__count {
+        margin-top: 0.25rem;
+        color: rgba(255,255,255,0.72);
+        font-size: 0.95rem;
+    }
+
+    .hotel-description-panel {
+        margin-top: 1.5rem;
+        padding: 1rem 1.1rem;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .hotel-description-panel__label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: rgba(255,255,255,0.72);
+        margin-bottom: 0.35rem;
+        font-weight: 700;
+    }
+
+    .hotel-description-panel p {
+        margin: 0;
+        color: rgba(255,255,255,0.90);
+        line-height: 1.65;
+    }
+
+    .hotel-section {
+        margin-top: 1.5rem;
+    }
+
+    .hotel-section__header {
+        margin-bottom: 1rem;
+    }
+
+    .hotel-section__header--with-action {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .hotel-section__header h3 {
+        margin: 0.3rem 0 0.25rem 0;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .hotel-section__header p {
+        margin: 0;
+        color: #64748b;
+    }
+
+    .hotel-section__actions {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .hotel-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1rem;
+    }
+
+    .info-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 22px;
+        padding: 1.2rem;
+        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    .info-card__label {
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        margin-bottom: 0.35rem;
+        font-weight: 700;
+    }
+
+    .info-card h4 {
+        margin: 0 0 0.4rem 0;
+        font-size: 1.05rem;
+        color: #0f172a;
+        font-weight: 800;
+    }
+
+    .info-card p {
+        margin: 0;
+        color: #475569;
+        line-height: 1.6;
+    }
+
+    .rooms-summary-card {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 22px;
+        padding: 1rem;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+    }
+
+    .rooms-summary-card__item {
+        background: rgba(255,255,255,0.78);
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 0.85rem;
+    }
+
+    .rooms-summary-card__label {
+        display: block;
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        margin-bottom: 0.25rem;
+        font-weight: 700;
+    }
+
+    .rooms-summary-card__item strong {
+        color: #0f172a;
+        font-size: 1rem;
+    }
+
+    .rooms-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .room-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 1.2rem;
+        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        height: 100%;
+    }
+
+    .room-card__header {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .room-card__eyebrow {
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        margin-bottom: 0.2rem;
+        font-weight: 700;
+    }
+
+    .room-card__header h4 {
+        margin: 0;
+        color: #0f172a;
+        font-weight: 800;
+        font-size: 1.15rem;
+    }
+
+    .room-card__price {
+        text-align: right;
+        min-width: 120px;
+    }
+
+    .room-card__price-label {
+        display: block;
+        font-size: 0.75rem;
+        color: #64748b;
+        text-transform: uppercase;
+    }
+
+    .room-card__price-value {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: #1d4ed8;
+        line-height: 1.1;
+        margin-top: 0.15rem;
+    }
+
+    .room-card__price-suffix {
+        display: block;
+        font-size: 0.8rem;
+        color: #64748b;
+        margin-top: 0.1rem;
+    }
+
+    .room-card__body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.85rem;
+    }
+
+    .room-feature {
+        background: rgba(255,255,255,0.78);
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 0.85rem;
+    }
+
+    .room-feature__label {
+        display: block;
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        margin-bottom: 0.25rem;
+        font-weight: 700;
+    }
+
+    .room-feature strong {
+        color: #0f172a;
+        font-size: 0.98rem;
+    }
+
+    .room-card__footer {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+    }
+
+    .room-card__hint {
+        margin: 0;
+        color: #475569;
+        line-height: 1.55;
+        font-size: 0.95rem;
+    }
+
+    .hotel-btn-primary--full {
+        width: 100%;
+    }
+
+    .reviews-summary {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 22px;
+        padding: 1.2rem;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .reviews-summary__score {
+        min-width: 180px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .reviews-summary__value {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #0f172a;
+        line-height: 1;
+    }
+
+    .reviews-summary__stars {
+        color: #f59e0b;
+        font-size: 1.1rem;
+    }
+
+    .reviews-summary__text {
+        flex: 1;
+    }
+
+    .reviews-summary__text strong {
+        display: block;
+        color: #0f172a;
+        margin-bottom: 0.3rem;
+        font-size: 1rem;
+    }
+
+    .reviews-summary__text p {
+        margin: 0;
+        color: #64748b;
+        line-height: 1.6;
+    }
+
+    .reviews-list {
+        display: grid;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .review-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 22px;
+        padding: 1.15rem;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+    }
+
+    .review-card__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .review-card__user {
+        font-size: 1rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 0.2rem;
+    }
+
+    .review-card__rating {
+        color: #f59e0b;
+        font-size: 1rem;
+    }
+
+    .review-card__rating-text {
+        color: #64748b;
+        font-size: 0.92rem;
+        margin-left: 0.35rem;
+    }
+
+    .review-card__date {
+        color: #64748b;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+
+    .review-card__body {
+        margin-top: 0.75rem;
+        color: #334155;
+        line-height: 1.65;
+    }
+
+    .review-card__body--muted {
+        color: #64748b;
+        font-style: italic;
+    }
+
+    .review-form-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 1.5rem;
+        box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+    }
+
+    .hotel-label {
+        display: block;
+        margin-bottom: 0.45rem;
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: #334155;
+    }
+
+    .hotel-input {
+        min-height: 48px;
+        border-radius: 14px;
+        border: 1px solid #cbd5e1;
+        background: #f8fafc;
+        color: #0f172a;
+    }
+
+    .hotel-textarea {
+        min-height: unset;
+        resize: vertical;
+    }
+
+    .hotel-input:focus {
+        border-color: #3b82f6;
+        background: #fff;
+        box-shadow: 0 0 0 0.18rem rgba(59, 130, 246, 0.18);
+    }
+
+    .hotel-btn-primary {
+        background: linear-gradient(135deg, #1d4ed8 0%, #0f172a 100%);
+        color: #fff;
+        border: none;
+        border-radius: 14px;
+        padding: 0.8rem 1.2rem;
+        font-weight: 700;
+        box-shadow: 0 10px 24px rgba(29, 78, 216, 0.22);
+    }
+
+    .hotel-btn-primary:hover,
+    .hotel-btn-primary:focus {
+        color: #fff;
+        background: linear-gradient(135deg, #1e40af 0%, #0b1220 100%);
+    }
+
+    .hotel-btn-secondary {
+        background: #fff;
+        color: #0f172a;
+        border: 1px solid rgba(203, 213, 225, 0.55);
+        border-radius: 14px;
+        padding: 0.8rem 1.2rem;
+        font-weight: 700;
+    }
+
+    .hotel-btn-secondary:hover,
+    .hotel-btn-secondary:focus {
+        background: #f8fafc;
+        color: #0f172a;
+        border-color: #94a3b8;
+    }
+
+    .empty-card {
+        margin-top: 1rem;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px dashed #cbd5e1;
+        border-radius: 24px;
+        padding: 2rem;
+        text-align: center;
+        color: #475569;
+    }
+
+    .empty-card h4 {
+        color: #0f172a;
+        margin-bottom: 0.5rem;
+        font-weight: 800;
+    }
+
+    .empty-card p {
+        margin: 0;
+    }
+
+    @@media (max-width: 991.98px) {
+        .hotel-hero__content {
+            flex-direction: column;
+        }
+
+        .hotel-rating-card {
+            width: 100%;
+        }
+
+        .room-card__body {
+            grid-template-columns: 1fr;
+        }
+
+        .hotel-section__header--with-action {
+            align-items: flex-start;
+        }
+    }
+
+    @@media (max-width: 767.98px) {
+        .hotel-detail-page {
+            padding-top: 0.75rem;
+        }
+
+        .hotel-hero {
+            padding: 1.2rem 1rem 1.5rem 1rem;
+        }
+
+        .room-card__header {
+            flex-direction: column;
+        }
+
+        .room-card__price {
+            text-align: left;
+        }
+
+        .review-form-card {
+            padding: 1.1rem;
+        }
+
+        .reviews-summary {
+            padding: 1rem;
+        }
+    }
+</style>
+
+@code {
+    /// <summary>
+    /// Identificador del hotel mostrado en la ruta.
+    /// </summary>
+    [Parameter]
+    public int Id { get; set; }
+
+    /// <summary>
+    /// Detalle del hotel cargado desde la API.
+    /// </summary>
+    private HotelDetailDto? hotel;
+
+    /// <summary>
+    /// Mensaje de error mostrado al usuario.
+    /// </summary>
+    private string? errorMessage;
+
+    /// <summary>
+    /// Mensaje de éxito mostrado al usuario.
+    /// </summary>
+    private string? successMessage;
+
+    /// <summary>
+    /// Indica si el usuario actual está autenticado.
+    /// </summary>
+    private bool isLoggedIn;
+
+    /// <summary>
+    /// Contexto de búsqueda recibido por query string.
+    /// </summary>
+    private int? searchCityId;
+    private DateTime? searchCheckIn;
+    private DateTime? searchCheckOut;
+    private int? searchGuests;
+
+    /// <summary>
+    /// Modelo para creación de una nueva reseña.
+    /// </summary>
+    private CreateHotelReviewRequest newReview = new()
+    {
+        Rating = 5,
+        Comment = ""
+    };
+
+    /// <summary>
+    /// Indica si la vista tiene suficiente contexto de búsqueda para reservar.
+    /// </summary>
+    private bool HasSearchContext =>
+        searchCheckIn.HasValue && searchCheckOut.HasValue && searchGuests.HasValue;
+
+    /// <summary>
+    /// Inicializa la vista leyendo contexto de búsqueda, estado de login y detalle del hotel.
+    /// </summary>
+    protected override async Task OnInitializedAsync()
+    {
+        ReadSearchContextFromQuery();
+        await CheckLoginAsync();
+        await LoadHotelAsync();
+    }
+
+    /// <summary>
+    /// Lee filtros relevantes desde el query string para preservar el contexto de navegación.
+    /// </summary>
+    private void ReadSearchContextFromQuery()
+    {
+        var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
+        var qs = QueryHelpers.ParseQuery(uri.Query);
+
+        if (qs.TryGetValue("cityId", out var cityIdStr) && int.TryParse(cityIdStr, out var cityId))
+            searchCityId = cityId;
+
+        if (qs.TryGetValue("guests", out var guestsStr) && int.TryParse(guestsStr, out var guests))
+            searchGuests = guests;
+
+        if (qs.TryGetValue("checkIn", out var checkInStr) && DateTime.TryParse(checkInStr, out var checkIn))
+            searchCheckIn = checkIn;
+
+        if (qs.TryGetValue("checkOut", out var checkOutStr) && DateTime.TryParse(checkOutStr, out var checkOut))
+            searchCheckOut = checkOut;
+    }
+
+    /// <summary>
+    /// Verifica si existe un token JWT en el cliente.
+    /// </summary>
+    private async Task CheckLoginAsync()
+    {
+        var token = await JS.InvokeAsync<string>("auth.getToken");
+        isLoggedIn = !string.IsNullOrWhiteSpace(token);
+    }
+
+    /// <summary>
+    /// Carga el detalle completo del hotel desde la API pública.
+    /// </summary>
+    private async Task LoadHotelAsync()
+    {
+        try
+        {
+            errorMessage = null;
+
+            var http = HttpClientFactory.CreateClient("Api");
+            hotel = await http.GetFromJsonAsync<HotelDetailDto>($"api/public/hotels/{Id}");
+
+            if (hotel is null)
+            {
+                errorMessage = "No se pudo cargar el detalle del hotel.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error cargando hotel: {ex.Message}";
+        }
+    }
+
+    /// <summary>
+    /// Publica una reseña para el hotel actual usando el usuario autenticado.
+    /// </summary>
+    private async Task SubmitReview()
+    {
+        try
+        {
+            errorMessage = null;
+            successMessage = null;
+
+            if (newReview.Rating < 1 || newReview.Rating > 5)
+            {
+                errorMessage = "La calificación debe estar entre 1 y 5.";
+                return;
+            }
+
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                errorMessage = "Debes iniciar sesión.";
+                return;
+            }
+
+            var http = HttpClientFactory.CreateClient("Api");
+            http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await http.PostAsJsonAsync(
+                $"api/public/hotels/{Id}/reviews",
+                newReview);
+
+            if (response.IsSuccessStatusCode)
+            {
+                successMessage = "Tu opinión se publicó correctamente.";
+
+                newReview = new CreateHotelReviewRequest
+                {
+                    Rating = 5,
+                    Comment = ""
+                };
+
+                await LoadHotelAsync();
+            }
+            else
+            {
+                var body = await response.Content.ReadAsStringAsync();
+                errorMessage = $"No se pudo publicar la opinión. {body}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al publicar comentario: {ex.Message}";
+        }
+    }
+
+    /// <summary>
+    /// Crea una reservación usando la habitación seleccionada desde el detalle del hotel.
+    /// </summary>
+    /// <param name="roomId">Identificador de la habitación.</param>
+    private async Task ReserveRoom(int roomId)
+    {
+        try
+        {
+            errorMessage = null;
+            successMessage = null;
+
+            if (!searchCheckIn.HasValue || !searchCheckOut.HasValue || !searchGuests.HasValue)
+            {
+                errorMessage = "Para reservar desde esta vista necesitas llegar con fechas y número de huéspedes desde la búsqueda.";
+                return;
+            }
+
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                errorMessage = "Debes iniciar sesión para reservar.";
+                return;
+            }
+
+            var http = HttpClientFactory.CreateClient("Api");
+            http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var body = new
+            {
+                roomId = roomId,
+                checkIn = searchCheckIn.Value,
+                checkOut = searchCheckOut.Value,
+                guests = searchGuests.Value
+            };
+
+            var response = await http.PostAsJsonAsync("api/public/reservations", body);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadFromJsonAsync<ReserveResponse>();
+
+                if (data is not null)
+                {
+                    successMessage = $"Reserva creada correctamente: {data.Code}";
+                    Navigation.NavigateTo($"/checkout?code={data.Code}");
+                    return;
+                }
+
+                successMessage = "Reserva creada correctamente.";
+                return;
+            }
+
+            var errorBody = await response.Content.ReadAsStringAsync();
+            errorMessage = $"No se pudo crear la reserva. {errorBody}";
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al reservar habitación: {ex.Message}";
+        }
+    }
+
+    /// <summary>
+    /// Regresa a la búsqueda preservando el contexto anterior.
+    /// </summary>
+    private void GoBackToSearch()
+    {
+        var query = new Dictionary<string, string?>();
+
+        if (searchCityId.HasValue)
+            query["cityId"] = searchCityId.Value.ToString();
+
+        if (searchCheckIn.HasValue)
+            query["checkIn"] = searchCheckIn.Value.ToString("yyyy-MM-dd");
+
+        if (searchCheckOut.HasValue)
+            query["checkOut"] = searchCheckOut.Value.ToString("yyyy-MM-dd");
+
+        if (searchGuests.HasValue)
+            query["guests"] = searchGuests.Value.ToString();
+
+        var url = QueryHelpers.AddQueryString("/search", query);
+        Navigation.NavigateTo(url);
+    }
+
+    /// <summary>
+    /// Devuelve una cadena corta con el resumen de estadía.
+    /// </summary>
+    private string GetStaySummary()
+    {
+        if (!searchCheckIn.HasValue || !searchCheckOut.HasValue || !searchGuests.HasValue)
+            return "Sin contexto";
+
+        return $"{searchCheckIn:dd/MM} - {searchCheckOut:dd/MM} · {searchGuests} huésped(es)";
+    }
+
+    /// <summary>
+    /// Devuelve un texto contextual para la reserva de una habitación.
+    /// </summary>
+    private string GetRoomHint()
+    {
+        if (HasSearchContext)
+            return $"Disponible para la estadía seleccionada: {searchCheckIn:dd/MM/yyyy} al {searchCheckOut:dd/MM/yyyy}, para {searchGuests} huésped(es).";
+
+        return "Para reservar esta opción, vuelve a la búsqueda y selecciona las fechas y huéspedes de tu viaje.";
+    }
+
+    /// <summary>
+    /// Convierte una calificación decimal en estrellas visuales.
+    /// </summary>
+    private string GetStars(decimal rating)
+    {
+        var rounded = (int)Math.Round(rating, MidpointRounding.AwayFromZero);
+        rounded = Math.Max(0, Math.Min(5, rounded));
+
+        return new string('★', rounded) + new string('☆', 5 - rounded);
+    }
+
+    /// <summary>
+    /// Convierte una calificación entera en estrellas visuales.
+    /// </summary>
+    private string GetStars(int rating)
+    {
+        var normalized = Math.Max(0, Math.Min(5, rating));
+        return new string('★', normalized) + new string('☆', 5 - normalized);
+    }
+
+    /// <summary>
+    /// Devuelve una etiqueta amigable para la cantidad de opiniones.
+    /// </summary>
+    private string GetReviewsLabel(int count)
+    {
+        return count switch
+        {
+            0 => "Sin opiniones publicadas",
+            1 => "1 opinión publicada",
+            _ => $"{count} opiniones publicadas"
+        };
+    }
+
+    /// <summary>
+    /// Genera un texto descriptivo según el promedio de calificaciones del hotel.
+    /// </summary>
+    private string GetExperienceText()
+    {
+        if (hotel is null)
+            return "Aún no hay suficiente información disponible.";
+
+        if (hotel.ReviewsCount == 0)
+            return "Todavía no hay opiniones publicadas para este hotel.";
+
+        if (hotel.AverageRating >= 4.5m)
+            return "Los usuarios han dejado una experiencia excelente en este hotel.";
+
+        if (hotel.AverageRating >= 4.0m)
+            return "Los usuarios han valorado muy bien su estadía en este hotel.";
+
+        if (hotel.AverageRating >= 3.0m)
+            return "Este hotel cuenta con opiniones positivas y comentarios útiles para nuevos huéspedes.";
+
+        return "Las opiniones publicadas pueden ayudarte a evaluar mejor este hotel antes de reservar.";
+    }
+
+    /// <summary>
+    /// Respuesta local utilizada al crear una reservación desde esta vista.
+    /// </summary>
+    private class ReserveResponse
+    {
+        public int Id { get; set; }
+        public string Code { get; set; } = "";
+        public string Status { get; set; } = "";
+        public decimal TotalAmount { get; set; }
+    }
+}

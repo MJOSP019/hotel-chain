@@ -1,0 +1,555 @@
+@page "/register"
+@inject HttpClient Http
+@inject NavigationManager Nav
+
+<PageTitle>Registro</PageTitle>
+
+<div class="register-page">
+    <section class="register-hero">
+        <div class="register-hero__content">
+            <div class="register-badge">Acceso · Registro</div>
+            <h1>Crea tu cuenta</h1>
+            <p>
+                Regístrate para reservar habitaciones, gestionar el checkout, descargar PDFs
+                y dejar comentarios en los hoteles del sistema.
+            </p>
+        </div>
+    </section>
+
+    @if (!string.IsNullOrWhiteSpace(success))
+    {
+        <div class="alert alert-success register-alert">@success</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(error))
+    {
+        <div class="alert alert-danger register-alert register-alert--multiline">@error</div>
+    }
+
+    <section class="register-panel">
+        <div class="register-card">
+            <div class="register-card__header">
+                <div>
+                    <h3>Datos de la cuenta</h3>
+                    <p>Completa la información requerida por el backend actual.</p>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="register-label">Email</label>
+                    <input class="form-control register-input" @bind="email" />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="register-label">Password</label>
+                    <input type="password" class="form-control register-input" @bind="password" />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="register-label">Nombre</label>
+                    <input class="form-control register-input" @bind="firstName" />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="register-label">Apellido</label>
+                    <input class="form-control register-input" @bind="lastName" />
+                </div>
+
+                <div class="col-md-4">
+                    <label class="register-label">Edad</label>
+                    <input type="number" class="form-control register-input" min="1" @bind="age" />
+                </div>
+
+                <div class="col-md-4">
+                    <label class="register-label">País</label>
+                    <input class="form-control register-input" @bind="country" />
+                </div>
+
+                <div class="col-md-4">
+                    <label class="register-label">No. Pasaporte</label>
+                    <input class="form-control register-input" @bind="passportNumber" />
+                </div>
+            </div>
+
+            <div class="captcha-card mt-4">
+                <div class="captcha-card__header">
+                    <div>
+                        <div class="register-badge register-badge--light">Captcha</div>
+                        <h4>Verificación simple</h4>
+                    </div>
+
+                    <button class="btn register-btn-secondary" @onclick="LoadCaptcha" type="button">
+                        Generar captcha
+                    </button>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(captchaQuestion))
+                {
+                    <div class="captcha-question">
+                        @captchaQuestion
+                    </div>
+
+                    <div class="mt-3">
+                        <label class="register-label">Respuesta</label>
+                        <input class="form-control register-input" @bind="captchaAnswer" />
+                    </div>
+                }
+            </div>
+
+            <div class="register-actions">
+                <button class="btn register-btn-primary" @onclick="DoRegister" disabled="@isLoading">
+                    @(isLoading ? "Registrando..." : "Registrar")
+                </button>
+
+                <a class="btn register-btn-link" href="/login">Ya tengo cuenta</a>
+            </div>
+        </div>
+
+        <div class="register-side-card">
+            <div class="register-side-card__badge">Portal HotelChain</div>
+            <h4>Beneficios del registro</h4>
+
+            <div class="register-feature-list">
+                <div class="register-feature">
+                    <span class="register-feature__title">Reservaciones protegidas</span>
+                    <span class="register-feature__text">Tu cuenta permite asociar tus reservas y consultar tu historial.</span>
+                </div>
+
+                <div class="register-feature">
+                    <span class="register-feature__title">Checkout y PDF</span>
+                    <span class="register-feature__text">Podrás confirmar reservas, revisar estados y abrir el PDF generado.</span>
+                </div>
+
+                <div class="register-feature">
+                    <span class="register-feature__title">Comentarios y ratings</span>
+                    <span class="register-feature__text">Después de iniciar sesión podrás dejar calificaciones en los hoteles.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .register-page {
+        padding: 1.5rem 0 2rem 0;
+        color: #0f172a;
+    }
+
+    .register-hero {
+        background:
+            radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 28%),
+            linear-gradient(135deg, #0f172a 0%, #162033 45%, #1e293b 100%);
+        color: #fff;
+        border-radius: 28px;
+        padding: 2.2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .register-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent 30%);
+        pointer-events: none;
+    }
+
+    .register-hero__content {
+        position: relative;
+        z-index: 1;
+        max-width: 760px;
+    }
+
+    .register-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.38rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.12);
+        color: #dbeafe;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    .register-badge--light {
+        background: #eff6ff;
+        color: #1d4ed8;
+    }
+
+    .register-hero h1 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        margin-bottom: 0.8rem;
+        line-height: 1.05;
+    }
+
+    .register-hero p {
+        margin: 0;
+        max-width: 720px;
+        color: rgba(255,255,255,0.82);
+        font-size: 1.02rem;
+    }
+
+    .register-alert {
+        border-radius: 16px;
+    }
+
+    .register-alert--multiline {
+        white-space: pre-line;
+    }
+
+    .register-panel {
+        display: grid;
+        grid-template-columns: minmax(340px, 1.2fr) minmax(280px, 0.8fr);
+        gap: 1rem;
+        align-items: start;
+    }
+
+    .register-card,
+    .register-side-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 1.5rem;
+        box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+    }
+
+    .register-card__header {
+        margin-bottom: 1rem;
+    }
+
+    .register-card__header h3,
+    .register-side-card h4,
+    .captcha-card__header h4 {
+        margin: 0 0 0.25rem 0;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .register-card__header p {
+        margin: 0;
+        color: #64748b;
+    }
+
+    .register-label {
+        display: block;
+        margin-bottom: 0.45rem;
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: #334155;
+    }
+
+    .register-input {
+        min-height: 48px;
+        border-radius: 14px;
+        border: 1px solid #cbd5e1;
+        background: #f8fafc;
+        color: #0f172a;
+    }
+
+    .register-input:focus {
+        border-color: #3b82f6;
+        background: #fff;
+        box-shadow: 0 0 0 0.18rem rgba(59, 130, 246, 0.18);
+    }
+
+    .captcha-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 22px;
+        padding: 1.1rem;
+    }
+
+    .captcha-card__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .captcha-question {
+        margin-top: 0.8rem;
+        padding: 0.95rem 1rem;
+        border-radius: 16px;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        color: #1e3a8a;
+        font-weight: 700;
+    }
+
+    .register-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+    }
+
+    .register-btn-primary {
+        background: linear-gradient(135deg, #1d4ed8 0%, #0f172a 100%);
+        color: #fff;
+        border: none;
+        border-radius: 14px;
+        padding: 0.8rem 1.2rem;
+        font-weight: 700;
+        box-shadow: 0 10px 24px rgba(29, 78, 216, 0.22);
+    }
+
+    .register-btn-primary:hover,
+    .register-btn-primary:focus {
+        color: #fff;
+        background: linear-gradient(135deg, #1e40af 0%, #0b1220 100%);
+    }
+
+    .register-btn-secondary {
+        background: #fff;
+        color: #0f172a;
+        border: 1px solid #cbd5e1;
+        border-radius: 14px;
+        padding: 0.7rem 1rem;
+        font-weight: 700;
+    }
+
+    .register-btn-secondary:hover,
+    .register-btn-secondary:focus {
+        background: #f8fafc;
+        color: #0f172a;
+        border-color: #94a3b8;
+    }
+
+    .register-btn-link {
+        background: transparent;
+        color: #1d4ed8;
+        border: none;
+        padding: 0.8rem 0.2rem;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .register-btn-link:hover,
+    .register-btn-link:focus {
+        color: #1e40af;
+    }
+
+    .register-side-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    .register-side-card__badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.34rem 0.7rem;
+        border-radius: 999px;
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 0.8rem;
+    }
+
+    .register-feature-list {
+        display: grid;
+        gap: 0.9rem;
+        margin-top: 1rem;
+    }
+
+    .register-feature {
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.8);
+        padding: 0.95rem 1rem;
+    }
+
+    .register-feature__title {
+        display: block;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 0.2rem;
+    }
+
+    .register-feature__text {
+        display: block;
+        color: #64748b;
+        line-height: 1.55;
+        font-size: 0.95rem;
+    }
+
+    @@media (max-width: 991.98px) {
+        .register-panel {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @@media (max-width: 767.98px) {
+        .register-page {
+            padding-top: 0.75rem;
+        }
+
+        .register-hero {
+            padding: 1.5rem 1rem;
+        }
+
+        .register-card,
+        .register-side-card {
+            padding: 1.1rem;
+        }
+    }
+</style>
+
+@code {
+    string email = "";
+    string password = "";
+
+    string firstName = "";
+    string lastName = "";
+    int age = 18;
+    string country = "GT";
+    string passportNumber = "";
+
+    string captchaId = "";
+    string captchaQuestion = "";
+    string captchaAnswer = "";
+
+    string? error;
+    string? success;
+
+    bool isLoading;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCaptcha();
+    }
+
+    async Task LoadCaptcha()
+    {
+        error = null;
+
+        try
+        {
+            var data = await Http.GetFromJsonAsync<CaptchaResponse>("/api/auth/captcha");
+            captchaId = data!.captchaId;
+            captchaQuestion = data.question;
+            captchaAnswer = "";
+        }
+        catch (Exception ex)
+        {
+            error = "No se pudo cargar captcha: " + ex.Message;
+        }
+    }
+
+    async Task DoRegister()
+    {
+        error = null;
+        success = null;
+
+        if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+        {
+            error = "Email y password son requeridos.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
+        {
+            error = "Nombre y apellido son requeridos.";
+            return;
+        }
+
+        if (age <= 0)
+        {
+            error = "Edad inválida.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(country))
+        {
+            error = "País es requerido.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(passportNumber))
+        {
+            error = "No. Pasaporte es requerido.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(captchaAnswer))
+        {
+            error = "Resuelve el captcha.";
+            return;
+        }
+
+        isLoading = true;
+
+        try
+        {
+            var body = new
+            {
+                email,
+                password,
+                firstName,
+                lastName,
+                age,
+                country,
+                passportNumber,
+                captchaId,
+                captchaAnswer
+            };
+
+            var resp = await Http.PostAsJsonAsync("/api/auth/register", body);
+
+            if (!resp.IsSuccessStatusCode)
+            {
+                var raw = await resp.Content.ReadAsStringAsync();
+                error = raw;
+
+                try
+                {
+                    var details = System.Text.Json.JsonSerializer.Deserialize<ValidationProblem>(
+                        raw,
+                        new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    if (details?.errors != null && details.errors.Count > 0)
+                    {
+                        error = string.Join("\n", details.errors.SelectMany(e => e.Value));
+                    }
+                }
+                catch
+                {
+                }
+
+                await LoadCaptcha();
+                return;
+            }
+
+            success = "Usuario creado correctamente.";
+            Nav.NavigateTo("/login");
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    class CaptchaResponse
+    {
+        public string captchaId { get; set; } = "";
+        public string question { get; set; } = "";
+    }
+
+    class ValidationProblem
+    {
+        public Dictionary<string, string[]> errors { get; set; } = new();
+    }
+}

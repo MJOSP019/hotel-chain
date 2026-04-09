@@ -1,0 +1,268 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Api\\HotelChain.Api.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Api\\HotelChain.Api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Api\\HotelChain.Api.csproj",
+        "projectName": "HotelChain.Api",
+        "projectPath": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Api\\HotelChain.Api.csproj",
+        "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Api\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Domain\\HotelChain.Domain.csproj": {
+                "projectPath": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Domain\\HotelChain.Domain.csproj"
+              },
+              "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Infrastructure\\HotelChain.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Infrastructure\\HotelChain.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.24, )"
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.24, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.IdentityModel.JsonWebTokens": {
+              "target": "Package",
+              "version": "[8.16.0, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[8.16.0, )"
+            },
+            "PdfSharpCore": {
+              "target": "Package",
+              "version": "[1.3.65, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.6.2, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.16.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Domain\\HotelChain.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Domain\\HotelChain.Domain.csproj",
+        "projectName": "HotelChain.Domain",
+        "projectPath": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Domain\\HotelChain.Domain.csproj",
+        "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Infrastructure\\HotelChain.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Infrastructure\\HotelChain.Infrastructure.csproj",
+        "projectName": "HotelChain.Infrastructure",
+        "projectPath": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Infrastructure\\HotelChain.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Domain\\HotelChain.Domain.csproj": {
+                "projectPath": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Domain\\HotelChain.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[8.16.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

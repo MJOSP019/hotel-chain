@@ -1,0 +1,12 @@
+{
+  "build": {
+    "content": [
+      {
+        "files": [
+          "*.md"
+        ]
+      }
+    ],
+    "dest": "_site"
+  }
+}

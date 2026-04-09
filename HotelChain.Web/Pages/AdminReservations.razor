@@ -1,0 +1,180 @@
+@page "/admin/reservations"
+@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<h3>Administración de reservaciones</h3>
+
+@if (!string.IsNullOrWhiteSpace(successMessage))
+{
+    <div class="alert alert-success">@successMessage</div>
+}
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+else if (reservations is null)
+{
+    <p>Cargando reservaciones...</p>
+}
+else if (reservations.Count == 0)
+{
+    <p>No hay reservaciones registradas.</p>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Hotel</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Huéspedes</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Pago</th>
+                <th>Pagada</th>
+                <th>UserId</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in reservations)
+            {
+                <tr>
+                    <td>@r.Code</td>
+                    <td>@r.Hotel</td>
+                    <td>@r.CheckIn.ToString("dd/MM/yyyy")</td>
+                    <td>@r.CheckOut.ToString("dd/MM/yyyy")</td>
+                    <td>@r.Guests</td>
+                    <td>@r.TotalAmount.ToString("0.00")</td>
+                    <td>@r.Status</td>
+                    <td>@r.PaymentStatus</td>
+                    <td>@(r.IsPaid ? "Sí" : "No")</td>
+                    <td>@(r.UserId?.ToString() ?? "-")</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger"
+                                disabled="@(r.Status == "CANCELED" || cancelingReservationId == r.Id)"
+                                @onclick="() => CancelReservation(r)">
+                            @(cancelingReservationId == r.Id ? "Cancelando..." : "Cancelar")
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<AdminReservationDto>? reservations;
+    private string? errorMessage;
+    private string? successMessage;
+    private int? cancelingReservationId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadReservations();
+    }
+
+    private async Task LoadReservations()
+    {
+        try
+        {
+            errorMessage = null;
+
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                errorMessage = "No hay token. Inicia sesión como admin.";
+                return;
+            }
+
+            Http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            reservations = await Http.GetFromJsonAsync<List<AdminReservationDto>>("/api/admin/reservations");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error cargando reservaciones: {ex.Message}";
+        }
+    }
+
+    private async Task CancelReservation(AdminReservationDto reservation)
+    {
+        try
+        {
+            errorMessage = null;
+            successMessage = null;
+
+            var reason = await JS.InvokeAsync<string?>("prompt",
+                $"Motivo de cancelación para la reserva {reservation.Code}:",
+                "Cancelación administrativa");
+
+            if (reason is null)
+                return;
+
+            if (string.IsNullOrWhiteSpace(reason))
+            {
+                errorMessage = "Debes ingresar un motivo de cancelación.";
+                return;
+            }
+
+            cancelingReservationId = reservation.Id;
+
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                errorMessage = "No hay token. Inicia sesión como admin.";
+                return;
+            }
+
+            Http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await Http.PostAsJsonAsync(
+                $"/api/admin/reservations/{reservation.Id}/cancel",
+                new CancelReservationRequest { Reason = reason });
+
+            if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = await response.Content.ReadAsStringAsync();
+                return;
+            }
+
+            successMessage = $"Reserva {reservation.Code} cancelada correctamente.";
+            await LoadReservations();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error cancelando reservación: {ex.Message}";
+        }
+        finally
+        {
+            cancelingReservationId = null;
+        }
+    }
+
+    private class CancelReservationRequest
+    {
+        public string Reason { get; set; } = "";
+    }
+
+    private class AdminReservationDto
+    {
+        public int Id { get; set; }
+        public string Code { get; set; } = "";
+        public string Hotel { get; set; } = "";
+        public DateTime CheckIn { get; set; }
+        public DateTime CheckOut { get; set; }
+        public int Guests { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string Status { get; set; } = "";
+        public string PaymentStatus { get; set; } = "";
+        public bool IsPaid { get; set; }
+        public Guid? UserId { get; set; }
+    }
+}

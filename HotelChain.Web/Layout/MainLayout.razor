@@ -1,0 +1,170 @@
+﻿@inherits LayoutComponentBase
+
+<div class="hc-layout">
+    <aside class="hc-layout__sidebar">
+        <NavMenu />
+    </aside>
+
+    <div class="hc-layout__main">
+        <header class="hc-layout__topbar">
+            <div class="hc-layout__topbar-left">
+                <span class="hc-layout__eyebrow">Cadena hotelera · Portal oficial</span>
+                <h2>HotelChain Collection</h2>
+                <p class="hc-layout__subtitle">
+                    Múltiples hoteles, una sola experiencia de hospedaje.
+                </p>
+            </div>
+
+            <div class="hc-layout__topbar-right">
+                <a class="hc-layout__topbar-link" href="/">Inicio</a>
+                <a class="hc-layout__topbar-link hc-layout__topbar-link--primary" href="search">Buscar hoteles</a>
+            </div>
+        </header>
+
+        <main class="hc-layout__content">
+            @Body
+        </main>
+    </div>
+</div>
+
+<style>
+    .hc-layout {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 300px minmax(0, 1fr);
+        background:
+            radial-gradient(circle at top right, rgba(59, 130, 246, 0.10), transparent 22%),
+            linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    }
+
+    .hc-layout__sidebar {
+        min-height: 100vh;
+        position: sticky;
+        top: 0;
+        align-self: start;
+        border-right: 1px solid rgba(15, 23, 42, 0.06);
+        box-shadow: 8px 0 30px rgba(15, 23, 42, 0.06);
+        z-index: 20;
+    }
+
+    .hc-layout__main {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .hc-layout__topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.5rem;
+        background: rgba(248, 250, 252, 0.88);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    }
+
+    .hc-layout__topbar-left {
+        min-width: 0;
+    }
+
+    .hc-layout__eyebrow {
+        display: inline-block;
+        font-size: 0.72rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #64748b;
+        margin-bottom: 0.2rem;
+    }
+
+    .hc-layout__topbar h2 {
+        margin: 0;
+        color: #0f172a;
+        font-size: 1.35rem;
+        font-weight: 800;
+        line-height: 1.1;
+    }
+
+    .hc-layout__subtitle {
+        margin: 0.22rem 0 0 0;
+        color: #64748b;
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+
+    .hc-layout__topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .hc-layout__topbar-link {
+        text-decoration: none;
+        color: #0f172a;
+        font-weight: 700;
+        padding: 0.72rem 1rem;
+        border-radius: 14px;
+        border: 1px solid #cbd5e1;
+        background: #fff;
+        transition: all 0.18s ease;
+    }
+
+    .hc-layout__topbar-link:hover {
+        color: #0f172a;
+        background: #f8fafc;
+        border-color: #94a3b8;
+    }
+
+    .hc-layout__topbar-link--primary {
+        background: linear-gradient(135deg, #1d4ed8 0%, #0f172a 100%);
+        color: #fff;
+        border: none;
+        box-shadow: 0 10px 24px rgba(29, 78, 216, 0.18);
+    }
+
+    .hc-layout__topbar-link--primary:hover {
+        color: #fff;
+        background: linear-gradient(135deg, #1e40af 0%, #0b1220 100%);
+    }
+
+    .hc-layout__content {
+        padding: 1.5rem;
+        min-width: 0;
+    }
+
+    @@media (max-width: 991.98px) {
+        .hc-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .hc-layout__sidebar {
+            min-height: auto;
+            position: relative;
+            top: auto;
+        }
+
+        .hc-layout__topbar {
+            padding: 0.95rem 1rem;
+        }
+
+        .hc-layout__content {
+            padding: 1rem;
+        }
+    }
+
+    @@media (max-width: 767.98px) {
+        .hc-layout__topbar {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .hc-layout__topbar-right {
+            width: 100%;
+        }
+    }
+</style>

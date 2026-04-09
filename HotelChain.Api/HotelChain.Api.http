@@ -1,0 +1,9 @@
+@HotelChain.Api_HostAddress = http://localhost:5225
+
+GET {{HotelChain.Api_HostAddress}}/weatherforecast/
+
+Accept: application/json
+
+### Cancelar reserva
+POST https://localhost:xxxx/api/public/reservations/R-20260226-330589/cancel
+Content-Type: application/json

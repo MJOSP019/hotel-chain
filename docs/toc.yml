@@ -1,0 +1,18 @@
+- name: Inicio
+  href: index.md
+- name: Arquitectura
+  href: arquitectura.md
+- name: Backend
+  href: backend.md
+- name: Frontend
+  href: frontend.md
+- name: Módulos
+  href: modulos.md
+- name: Autenticación
+  href: autenticacion.md
+- name: API REST
+  href: api.md
+- name: Flujo de reservación
+  href: flujo-reservacion.md
+- name: Documentación del código
+  href: documentacion-codigo.md

@@ -1,0 +1,13 @@
+C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Domain\bin\Debug\net8.0\HotelChain.Domain.deps.json
+C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Domain\bin\Debug\net8.0\HotelChain.Domain.dll
+C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Domain\bin\Debug\net8.0\HotelChain.Domain.pdb
+C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Domain\obj\Debug\net8.0\HotelChain.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Domain\obj\Debug\net8.0\HotelChain.Domain.AssemblyInfoInputs.cache
+C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Domain\obj\Debug\net8.0\HotelChain.Domain.AssemblyInfo.cs
+C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Domain\obj\Debug\net8.0\HotelChain.Domain.csproj.CoreCompileInputs.cache
+C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Domain\obj\Debug\net8.0\HotelChain.Domain.dll
+C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Domain\obj\Debug\net8.0\refint\HotelChain.Domain.dll
+C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Domain\obj\Debug\net8.0\HotelChain.Domain.pdb
+C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Domain\obj\Debug\net8.0\ref\HotelChain.Domain.dll
+C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Domain\bin\Debug\net8.0\HotelChain.Domain.xml
+C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Domain\obj\Debug\net8.0\HotelChain.Domain.xml

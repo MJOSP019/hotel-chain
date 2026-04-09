@@ -1,0 +1,73 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Web\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Web\\obj\\Debug\\net8.0\\compressed\\eorkfd1cih.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Web\\obj\\Debug\\net8.0\\scopedcss\\bundle\\HotelChain.Web.styles.css",
+      "PackagePath": "staticwebassets\\HotelChain.Web.styles.css"
+    },
+    {
+      "Id": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Web\\wwwroot\\appsettings.json",
+      "PackagePath": "staticwebassets\\appsettings.json"
+    },
+    {
+      "Id": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Web\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Web\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Web\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Web\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Web\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Web\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Web\\wwwroot\\js\\auth.js",
+      "PackagePath": "staticwebassets\\js\\auth.js"
+    },
+    {
+      "Id": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Web\\wwwroot\\js\\pdf.js",
+      "PackagePath": "staticwebassets\\js\\pdf.js"
+    },
+    {
+      "Id": "C:\\Users\\josue\\OneDrive\\Documentos\\hotel-chain\\HotelChain.Web\\wwwroot\\sample-data\\weather.json",
+      "PackagePath": "staticwebassets\\sample-data\\weather.json"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.HotelChain.Web.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.HotelChain.Web.props",
+      "PackagePath": "build\\HotelChain.Web.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.HotelChain.Web.props",
+      "PackagePath": "buildMultiTargeting\\HotelChain.Web.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.HotelChain.Web.props",
+      "PackagePath": "buildTransitive\\HotelChain.Web.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,186 @@
+@page "/admin/users"
+@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<h3>Administración de usuarios</h3>
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+@if (!string.IsNullOrWhiteSpace(successMessage))
+{
+    <div class="alert alert-success">@successMessage</div>
+}
+
+@if (users is null)
+{
+    <p>Cargando usuarios...</p>
+}
+else if (users.Count == 0)
+{
+    <p>No hay usuarios registrados.</p>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Edad</th>
+                <th>País</th>
+                <th>Pasaporte</th>
+                <th>Rol actual</th>
+                <th>Nuevo rol</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var u in users)
+            {
+                <tr>
+                    <td>@u.FirstName @u.LastName</td>
+                    <td>@u.UserName</td>
+                    <td>@u.Email</td>
+                    <td>@u.Age</td>
+                    <td>@u.Country</td>
+                    <td>@u.PassportNumber</td>
+                    <td>@u.Role</td>
+                    <td style="width: 180px;">
+                        <select class="form-select" @bind="u.SelectedRole">
+                        <option value="REGISTERED">REGISTERED</option>
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="WEBSERVICE">WEBSERVICE</option>
+                    </select>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" @onclick="() => UpdateRole(u)">
+                            Guardar
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<AdminUserRowDto>? users;
+    private string? errorMessage;
+    private string? successMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadUsers();
+    }
+
+    private async Task LoadUsers()
+    {
+        try
+        {
+            errorMessage = null;
+            successMessage = null;
+
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                errorMessage = "No hay token. Inicia sesión como admin.";
+                return;
+            }
+
+            Http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var result = await Http.GetFromJsonAsync<List<AdminUserDto>>("/api/admin/users");
+
+            users = result?
+                .Select(x => new AdminUserRowDto
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    UserName = x.UserName,
+                    Email = x.Email,
+                    Age = x.Age,
+                    Country = x.Country,
+                    PassportNumber = x.PassportNumber,
+                    Role = x.Role,
+                    SelectedRole = x.Role
+                })
+                .ToList()
+                ?? new List<AdminUserRowDto>();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error cargando usuarios: {ex.Message}";
+        }
+    }
+
+    private async Task UpdateRole(AdminUserRowDto user)
+    {
+        try
+        {
+            errorMessage = null;
+            successMessage = null;
+
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                errorMessage = "No hay token. Inicia sesión como admin.";
+                return;
+            }
+
+            Http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await Http.PutAsJsonAsync(
+                $"/api/admin/users/{user.Id}/role",
+                new UpdateUserRoleRequest
+                {
+                    Role = user.SelectedRole
+                });
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var body = await response.Content.ReadAsStringAsync();
+                errorMessage = $"No se pudo actualizar el rol. {body}";
+                return;
+            }
+
+            user.Role = user.SelectedRole;
+            successMessage = $"Rol actualizado correctamente para {user.UserName}.";
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error actualizando rol: {ex.Message}";
+        }
+    }
+
+    private class AdminUserDto
+    {
+        public Guid Id { get; set; }
+        public string FirstName { get; set; } = "";
+        public string LastName { get; set; } = "";
+        public string UserName { get; set; } = "";
+        public string Email { get; set; } = "";
+        public int Age { get; set; }
+        public string Country { get; set; } = "";
+        public string PassportNumber { get; set; } = "";
+        public string Role { get; set; } = "";
+    }
+
+    private class AdminUserRowDto : AdminUserDto
+    {
+        public string SelectedRole { get; set; } = "";
+    }
+
+    private class UpdateUserRoleRequest
+    {
+        public string Role { get; set; } = "";
+    }
+}
