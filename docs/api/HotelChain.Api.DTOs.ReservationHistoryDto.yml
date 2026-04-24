@@ -1,0 +1,1024 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto
+  commentId: T:HotelChain.Api.DTOs.ReservationHistoryDto
+  id: ReservationHistoryDto
+  parent: HotelChain.Api.DTOs
+  children:
+  - HotelChain.Api.DTOs.ReservationHistoryDto.BaseAmount
+  - HotelChain.Api.DTOs.ReservationHistoryDto.CardLast4
+  - HotelChain.Api.DTOs.ReservationHistoryDto.ChargesTotal
+  - HotelChain.Api.DTOs.ReservationHistoryDto.CheckIn
+  - HotelChain.Api.DTOs.ReservationHistoryDto.CheckOut
+  - HotelChain.Api.DTOs.ReservationHistoryDto.Code
+  - HotelChain.Api.DTOs.ReservationHistoryDto.CreatedAt
+  - HotelChain.Api.DTOs.ReservationHistoryDto.ExpiresAt
+  - HotelChain.Api.DTOs.ReservationHistoryDto.GrandTotal
+  - HotelChain.Api.DTOs.ReservationHistoryDto.Guests
+  - HotelChain.Api.DTOs.ReservationHistoryDto.Hotel
+  - HotelChain.Api.DTOs.ReservationHistoryDto.HotelId
+  - HotelChain.Api.DTOs.ReservationHistoryDto.IsPaid
+  - HotelChain.Api.DTOs.ReservationHistoryDto.Nights
+  - HotelChain.Api.DTOs.ReservationHistoryDto.PaymentStatus
+  - HotelChain.Api.DTOs.ReservationHistoryDto.Status
+  - HotelChain.Api.DTOs.ReservationHistoryDto.TotalAmount
+  langs:
+  - csharp
+  - vb
+  name: ReservationHistoryDto
+  nameWithType: ReservationHistoryDto
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto
+  type: Class
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ReservationHistoryDto
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 2
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public class ReservationHistoryDto
+    content.vb: Public Class ReservationHistoryDto
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.HotelId
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.HotelId
+  id: HotelId
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: HotelId
+  nameWithType: ReservationHistoryDto.HotelId
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.HotelId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: HotelId
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 4
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public int HotelId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property HotelId As Integer
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.HotelId*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.Code
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.Code
+  id: Code
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: Code
+  nameWithType: ReservationHistoryDto.Code
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.Code
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Code
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 5
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public string Code { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Code As String
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.Code*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.Hotel
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.Hotel
+  id: Hotel
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: Hotel
+  nameWithType: ReservationHistoryDto.Hotel
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.Hotel
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Hotel
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 6
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public string Hotel { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Hotel As String
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.Hotel*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.CheckIn
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.CheckIn
+  id: CheckIn
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: CheckIn
+  nameWithType: ReservationHistoryDto.CheckIn
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.CheckIn
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CheckIn
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 7
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public DateTime CheckIn { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CheckIn As Date
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.CheckIn*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.CheckOut
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.CheckOut
+  id: CheckOut
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: CheckOut
+  nameWithType: ReservationHistoryDto.CheckOut
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.CheckOut
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CheckOut
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 8
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public DateTime CheckOut { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CheckOut As Date
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.CheckOut*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.Nights
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.Nights
+  id: Nights
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: Nights
+  nameWithType: ReservationHistoryDto.Nights
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.Nights
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Nights
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 9
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public int Nights { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Nights As Integer
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.Nights*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.Guests
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.Guests
+  id: Guests
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: Guests
+  nameWithType: ReservationHistoryDto.Guests
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.Guests
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Guests
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 10
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public int Guests { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Guests As Integer
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.Guests*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.BaseAmount
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.BaseAmount
+  id: BaseAmount
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: BaseAmount
+  nameWithType: ReservationHistoryDto.BaseAmount
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.BaseAmount
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: BaseAmount
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 11
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public decimal BaseAmount { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+    content.vb: Public Property BaseAmount As Decimal
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.BaseAmount*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.ChargesTotal
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.ChargesTotal
+  id: ChargesTotal
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: ChargesTotal
+  nameWithType: ReservationHistoryDto.ChargesTotal
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.ChargesTotal
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ChargesTotal
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 12
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public decimal ChargesTotal { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+    content.vb: Public Property ChargesTotal As Decimal
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.ChargesTotal*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.GrandTotal
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.GrandTotal
+  id: GrandTotal
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: GrandTotal
+  nameWithType: ReservationHistoryDto.GrandTotal
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.GrandTotal
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: GrandTotal
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 13
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public decimal GrandTotal { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+    content.vb: Public Property GrandTotal As Decimal
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.GrandTotal*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.TotalAmount
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.TotalAmount
+  id: TotalAmount
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: TotalAmount
+  nameWithType: ReservationHistoryDto.TotalAmount
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.TotalAmount
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: TotalAmount
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 14
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public decimal TotalAmount { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+    content.vb: Public Property TotalAmount As Decimal
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.TotalAmount*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.Status
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.Status
+  id: Status
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: Status
+  nameWithType: ReservationHistoryDto.Status
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.Status
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Status
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 15
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public string Status { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Status As String
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.Status*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.IsPaid
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.IsPaid
+  id: IsPaid
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: IsPaid
+  nameWithType: ReservationHistoryDto.IsPaid
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.IsPaid
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: IsPaid
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 16
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public bool IsPaid { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsPaid As Boolean
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.IsPaid*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.PaymentStatus
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.PaymentStatus
+  id: PaymentStatus
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: PaymentStatus
+  nameWithType: ReservationHistoryDto.PaymentStatus
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.PaymentStatus
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: PaymentStatus
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 17
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public string? PaymentStatus { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PaymentStatus As String
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.PaymentStatus*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.CardLast4
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.CardLast4
+  id: CardLast4
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: CardLast4
+  nameWithType: ReservationHistoryDto.CardLast4
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.CardLast4
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CardLast4
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 18
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public string? CardLast4 { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CardLast4 As String
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.CardLast4*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.CreatedAt
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.CreatedAt
+  id: CreatedAt
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: CreatedAt
+  nameWithType: ReservationHistoryDto.CreatedAt
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.CreatedAt
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CreatedAt
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 19
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public DateTime CreatedAt { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CreatedAt As Date
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.CreatedAt*
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.ExpiresAt
+  commentId: P:HotelChain.Api.DTOs.ReservationHistoryDto.ExpiresAt
+  id: ExpiresAt
+  parent: HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: ExpiresAt
+  nameWithType: ReservationHistoryDto.ExpiresAt
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.ExpiresAt
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/ReservationHistoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ExpiresAt
+    path: ../HotelChain.Api/DTOs/ReservationHistoryDto.cs
+    startLine: 20
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs
+  syntax:
+    content: public DateTime? ExpiresAt { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.DateTime}
+    content.vb: Public Property ExpiresAt As Date?
+  overload: HotelChain.Api.DTOs.ReservationHistoryDto.ExpiresAt*
+references:
+- uid: HotelChain.Api.DTOs
+  commentId: N:HotelChain.Api.DTOs
+  href: HotelChain.html
+  name: HotelChain.Api.DTOs
+  nameWithType: HotelChain.Api.DTOs
+  fullName: HotelChain.Api.DTOs
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.DTOs
+    name: DTOs
+    href: HotelChain.Api.DTOs.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.DTOs
+    name: DTOs
+    href: HotelChain.Api.DTOs.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.HotelId*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.HotelId
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_HotelId
+  name: HotelId
+  nameWithType: ReservationHistoryDto.HotelId
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.HotelId
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.Code*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.Code
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_Code
+  name: Code
+  nameWithType: ReservationHistoryDto.Code
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.Code
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.Hotel*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.Hotel
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_Hotel
+  name: Hotel
+  nameWithType: ReservationHistoryDto.Hotel
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.Hotel
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.CheckIn*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.CheckIn
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_CheckIn
+  name: CheckIn
+  nameWithType: ReservationHistoryDto.CheckIn
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.CheckIn
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+  nameWithType.vb: Date
+  fullName.vb: Date
+  name.vb: Date
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.CheckOut*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.CheckOut
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_CheckOut
+  name: CheckOut
+  nameWithType: ReservationHistoryDto.CheckOut
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.CheckOut
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.Nights*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.Nights
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_Nights
+  name: Nights
+  nameWithType: ReservationHistoryDto.Nights
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.Nights
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.Guests*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.Guests
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_Guests
+  name: Guests
+  nameWithType: ReservationHistoryDto.Guests
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.Guests
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.BaseAmount*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.BaseAmount
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_BaseAmount
+  name: BaseAmount
+  nameWithType: ReservationHistoryDto.BaseAmount
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.BaseAmount
+- uid: System.Decimal
+  commentId: T:System.Decimal
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.decimal
+  name: decimal
+  nameWithType: decimal
+  fullName: decimal
+  nameWithType.vb: Decimal
+  fullName.vb: Decimal
+  name.vb: Decimal
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.ChargesTotal*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.ChargesTotal
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_ChargesTotal
+  name: ChargesTotal
+  nameWithType: ReservationHistoryDto.ChargesTotal
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.ChargesTotal
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.GrandTotal*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.GrandTotal
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_GrandTotal
+  name: GrandTotal
+  nameWithType: ReservationHistoryDto.GrandTotal
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.GrandTotal
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.TotalAmount*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.TotalAmount
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_TotalAmount
+  name: TotalAmount
+  nameWithType: ReservationHistoryDto.TotalAmount
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.TotalAmount
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.Status*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.Status
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_Status
+  name: Status
+  nameWithType: ReservationHistoryDto.Status
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.Status
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.IsPaid*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.IsPaid
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_IsPaid
+  name: IsPaid
+  nameWithType: ReservationHistoryDto.IsPaid
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.IsPaid
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.PaymentStatus*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.PaymentStatus
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_PaymentStatus
+  name: PaymentStatus
+  nameWithType: ReservationHistoryDto.PaymentStatus
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.PaymentStatus
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.CardLast4*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.CardLast4
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_CardLast4
+  name: CardLast4
+  nameWithType: ReservationHistoryDto.CardLast4
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.CardLast4
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.CreatedAt*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.CreatedAt
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_CreatedAt
+  name: CreatedAt
+  nameWithType: ReservationHistoryDto.CreatedAt
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.CreatedAt
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto.ExpiresAt*
+  commentId: Overload:HotelChain.Api.DTOs.ReservationHistoryDto.ExpiresAt
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html#HotelChain_Api_DTOs_ReservationHistoryDto_ExpiresAt
+  name: ExpiresAt
+  nameWithType: ReservationHistoryDto.ExpiresAt
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto.ExpiresAt
+- uid: System.Nullable{System.DateTime}
+  commentId: T:System.Nullable{System.DateTime}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime?
+  nameWithType: DateTime?
+  fullName: System.DateTime?
+  nameWithType.vb: Date?
+  fullName.vb: Date?
+  name.vb: Date?
+  spec.csharp:
+  - uid: System.DateTime
+    name: DateTime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: '?'
+  spec.vb:
+  - uid: System.DateTime
+    name: Date
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

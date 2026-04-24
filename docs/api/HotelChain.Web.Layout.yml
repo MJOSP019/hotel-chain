@@ -1,0 +1,30 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Web.Layout
+  commentId: N:HotelChain.Web.Layout
+  id: HotelChain.Web.Layout
+  children:
+  - HotelChain.Web.Layout.MainLayout
+  - HotelChain.Web.Layout.NavMenu
+  langs:
+  - csharp
+  - vb
+  name: HotelChain.Web.Layout
+  nameWithType: HotelChain.Web.Layout
+  fullName: HotelChain.Web.Layout
+  type: Namespace
+  assemblies:
+  - HotelChain.Web
+references:
+- uid: HotelChain.Web.Layout.MainLayout
+  commentId: T:HotelChain.Web.Layout.MainLayout
+  href: HotelChain.Web.Layout.MainLayout.html
+  name: MainLayout
+  nameWithType: MainLayout
+  fullName: HotelChain.Web.Layout.MainLayout
+- uid: HotelChain.Web.Layout.NavMenu
+  commentId: T:HotelChain.Web.Layout.NavMenu
+  href: HotelChain.Web.Layout.NavMenu.html
+  name: NavMenu
+  nameWithType: NavMenu
+  fullName: HotelChain.Web.Layout.NavMenu

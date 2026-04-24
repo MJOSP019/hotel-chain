@@ -1,0 +1,813 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  commentId: T:HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  id: AdminRooms.AdminRoomDto
+  parent: HotelChain.Web.Pages
+  children:
+  - HotelChain.Web.Pages.AdminRooms.AdminRoomDto.AreaSquareMeters
+  - HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BasePricePerNight
+  - HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BedType
+  - HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelId
+  - HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelName
+  - HotelChain.Web.Pages.AdminRooms.AdminRoomDto.Id
+  - HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ImageUrl
+  - HotelChain.Web.Pages.AdminRooms.AdminRoomDto.IsActive
+  - HotelChain.Web.Pages.AdminRooms.AdminRoomDto.MaxGuests
+  - HotelChain.Web.Pages.AdminRooms.AdminRoomDto.NameOrNumber
+  - HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeId
+  - HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeName
+  - HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ShortDescription
+  langs:
+  - csharp
+  - vb
+  name: AdminRooms.AdminRoomDto
+  nameWithType: AdminRooms.AdminRoomDto
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  type: Class
+  source:
+    id: AdminRoomDto
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminRooms_razor.g.cs
+    startLine: 1223
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public class AdminRooms.AdminRoomDto
+    content.vb: Public Class AdminRooms.AdminRoomDto
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.Id
+  commentId: P:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.Id
+  id: Id
+  parent: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: AdminRooms.AdminRoomDto.Id
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.Id
+  type: Property
+  source:
+    id: Id
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminRooms_razor.g.cs
+    startLine: 1225
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public int Id { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Id As Integer
+  overload: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.Id*
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelId
+  commentId: P:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelId
+  id: HotelId
+  parent: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  langs:
+  - csharp
+  - vb
+  name: HotelId
+  nameWithType: AdminRooms.AdminRoomDto.HotelId
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelId
+  type: Property
+  source:
+    id: HotelId
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminRooms_razor.g.cs
+    startLine: 1226
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public int HotelId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property HotelId As Integer
+  overload: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelId*
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelName
+  commentId: P:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelName
+  id: HotelName
+  parent: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  langs:
+  - csharp
+  - vb
+  name: HotelName
+  nameWithType: AdminRooms.AdminRoomDto.HotelName
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelName
+  type: Property
+  source:
+    id: HotelName
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminRooms_razor.g.cs
+    startLine: 1227
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public string HotelName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property HotelName As String
+  overload: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelName*
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeId
+  commentId: P:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeId
+  id: RoomTypeId
+  parent: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  langs:
+  - csharp
+  - vb
+  name: RoomTypeId
+  nameWithType: AdminRooms.AdminRoomDto.RoomTypeId
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeId
+  type: Property
+  source:
+    id: RoomTypeId
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminRooms_razor.g.cs
+    startLine: 1228
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public int RoomTypeId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property RoomTypeId As Integer
+  overload: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeId*
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeName
+  commentId: P:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeName
+  id: RoomTypeName
+  parent: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  langs:
+  - csharp
+  - vb
+  name: RoomTypeName
+  nameWithType: AdminRooms.AdminRoomDto.RoomTypeName
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeName
+  type: Property
+  source:
+    id: RoomTypeName
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminRooms_razor.g.cs
+    startLine: 1229
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public string RoomTypeName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RoomTypeName As String
+  overload: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeName*
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.NameOrNumber
+  commentId: P:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.NameOrNumber
+  id: NameOrNumber
+  parent: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  langs:
+  - csharp
+  - vb
+  name: NameOrNumber
+  nameWithType: AdminRooms.AdminRoomDto.NameOrNumber
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.NameOrNumber
+  type: Property
+  source:
+    id: NameOrNumber
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminRooms_razor.g.cs
+    startLine: 1230
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public string NameOrNumber { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property NameOrNumber As String
+  overload: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.NameOrNumber*
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.MaxGuests
+  commentId: P:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.MaxGuests
+  id: MaxGuests
+  parent: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  langs:
+  - csharp
+  - vb
+  name: MaxGuests
+  nameWithType: AdminRooms.AdminRoomDto.MaxGuests
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.MaxGuests
+  type: Property
+  source:
+    id: MaxGuests
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminRooms_razor.g.cs
+    startLine: 1231
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public int MaxGuests { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property MaxGuests As Integer
+  overload: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.MaxGuests*
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BasePricePerNight
+  commentId: P:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BasePricePerNight
+  id: BasePricePerNight
+  parent: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  langs:
+  - csharp
+  - vb
+  name: BasePricePerNight
+  nameWithType: AdminRooms.AdminRoomDto.BasePricePerNight
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BasePricePerNight
+  type: Property
+  source:
+    id: BasePricePerNight
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminRooms_razor.g.cs
+    startLine: 1232
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public decimal BasePricePerNight { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+    content.vb: Public Property BasePricePerNight As Decimal
+  overload: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BasePricePerNight*
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BedType
+  commentId: P:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BedType
+  id: BedType
+  parent: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  langs:
+  - csharp
+  - vb
+  name: BedType
+  nameWithType: AdminRooms.AdminRoomDto.BedType
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BedType
+  type: Property
+  source:
+    id: BedType
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminRooms_razor.g.cs
+    startLine: 1233
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public string? BedType { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property BedType As String
+  overload: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BedType*
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.AreaSquareMeters
+  commentId: P:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.AreaSquareMeters
+  id: AreaSquareMeters
+  parent: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  langs:
+  - csharp
+  - vb
+  name: AreaSquareMeters
+  nameWithType: AdminRooms.AdminRoomDto.AreaSquareMeters
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.AreaSquareMeters
+  type: Property
+  source:
+    id: AreaSquareMeters
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminRooms_razor.g.cs
+    startLine: 1234
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public decimal? AreaSquareMeters { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Decimal}
+    content.vb: Public Property AreaSquareMeters As Decimal?
+  overload: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.AreaSquareMeters*
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ShortDescription
+  commentId: P:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ShortDescription
+  id: ShortDescription
+  parent: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  langs:
+  - csharp
+  - vb
+  name: ShortDescription
+  nameWithType: AdminRooms.AdminRoomDto.ShortDescription
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ShortDescription
+  type: Property
+  source:
+    id: ShortDescription
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminRooms_razor.g.cs
+    startLine: 1235
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public string? ShortDescription { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ShortDescription As String
+  overload: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ShortDescription*
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ImageUrl
+  commentId: P:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ImageUrl
+  id: ImageUrl
+  parent: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  langs:
+  - csharp
+  - vb
+  name: ImageUrl
+  nameWithType: AdminRooms.AdminRoomDto.ImageUrl
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ImageUrl
+  type: Property
+  source:
+    id: ImageUrl
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminRooms_razor.g.cs
+    startLine: 1236
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public string? ImageUrl { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ImageUrl As String
+  overload: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ImageUrl*
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.IsActive
+  commentId: P:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.IsActive
+  id: IsActive
+  parent: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  langs:
+  - csharp
+  - vb
+  name: IsActive
+  nameWithType: AdminRooms.AdminRoomDto.IsActive
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.IsActive
+  type: Property
+  source:
+    id: IsActive
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminRooms_razor.g.cs
+    startLine: 1237
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public bool IsActive { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsActive As Boolean
+  overload: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.IsActive*
+references:
+- uid: HotelChain.Web.Pages
+  commentId: N:HotelChain.Web.Pages
+  href: HotelChain.html
+  name: HotelChain.Web.Pages
+  nameWithType: HotelChain.Web.Pages
+  fullName: HotelChain.Web.Pages
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Web
+    name: Web
+    href: HotelChain.Web.html
+  - name: .
+  - uid: HotelChain.Web.Pages
+    name: Pages
+    href: HotelChain.Web.Pages.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Web
+    name: Web
+    href: HotelChain.Web.html
+  - name: .
+  - uid: HotelChain.Web.Pages
+    name: Pages
+    href: HotelChain.Web.Pages.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.Id*
+  commentId: Overload:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.Id
+  href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html#HotelChain_Web_Pages_AdminRooms_AdminRoomDto_Id
+  name: Id
+  nameWithType: AdminRooms.AdminRoomDto.Id
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.Id
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelId*
+  commentId: Overload:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelId
+  href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html#HotelChain_Web_Pages_AdminRooms_AdminRoomDto_HotelId
+  name: HotelId
+  nameWithType: AdminRooms.AdminRoomDto.HotelId
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelId
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelName*
+  commentId: Overload:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelName
+  href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html#HotelChain_Web_Pages_AdminRooms_AdminRoomDto_HotelName
+  name: HotelName
+  nameWithType: AdminRooms.AdminRoomDto.HotelName
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.HotelName
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeId*
+  commentId: Overload:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeId
+  href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html#HotelChain_Web_Pages_AdminRooms_AdminRoomDto_RoomTypeId
+  name: RoomTypeId
+  nameWithType: AdminRooms.AdminRoomDto.RoomTypeId
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeId
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeName*
+  commentId: Overload:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeName
+  href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html#HotelChain_Web_Pages_AdminRooms_AdminRoomDto_RoomTypeName
+  name: RoomTypeName
+  nameWithType: AdminRooms.AdminRoomDto.RoomTypeName
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.RoomTypeName
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.NameOrNumber*
+  commentId: Overload:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.NameOrNumber
+  href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html#HotelChain_Web_Pages_AdminRooms_AdminRoomDto_NameOrNumber
+  name: NameOrNumber
+  nameWithType: AdminRooms.AdminRoomDto.NameOrNumber
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.NameOrNumber
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.MaxGuests*
+  commentId: Overload:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.MaxGuests
+  href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html#HotelChain_Web_Pages_AdminRooms_AdminRoomDto_MaxGuests
+  name: MaxGuests
+  nameWithType: AdminRooms.AdminRoomDto.MaxGuests
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.MaxGuests
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BasePricePerNight*
+  commentId: Overload:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BasePricePerNight
+  href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html#HotelChain_Web_Pages_AdminRooms_AdminRoomDto_BasePricePerNight
+  name: BasePricePerNight
+  nameWithType: AdminRooms.AdminRoomDto.BasePricePerNight
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BasePricePerNight
+- uid: System.Decimal
+  commentId: T:System.Decimal
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.decimal
+  name: decimal
+  nameWithType: decimal
+  fullName: decimal
+  nameWithType.vb: Decimal
+  fullName.vb: Decimal
+  name.vb: Decimal
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BedType*
+  commentId: Overload:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BedType
+  href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html#HotelChain_Web_Pages_AdminRooms_AdminRoomDto_BedType
+  name: BedType
+  nameWithType: AdminRooms.AdminRoomDto.BedType
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.BedType
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.AreaSquareMeters*
+  commentId: Overload:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.AreaSquareMeters
+  href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html#HotelChain_Web_Pages_AdminRooms_AdminRoomDto_AreaSquareMeters
+  name: AreaSquareMeters
+  nameWithType: AdminRooms.AdminRoomDto.AreaSquareMeters
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.AreaSquareMeters
+- uid: System.Nullable{System.Decimal}
+  commentId: T:System.Nullable{System.Decimal}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.decimal
+  name: decimal?
+  nameWithType: decimal?
+  fullName: decimal?
+  nameWithType.vb: Decimal?
+  fullName.vb: Decimal?
+  name.vb: Decimal?
+  spec.csharp:
+  - uid: System.Decimal
+    name: decimal
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.decimal
+  - name: '?'
+  spec.vb:
+  - uid: System.Decimal
+    name: Decimal
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.decimal
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ShortDescription*
+  commentId: Overload:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ShortDescription
+  href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html#HotelChain_Web_Pages_AdminRooms_AdminRoomDto_ShortDescription
+  name: ShortDescription
+  nameWithType: AdminRooms.AdminRoomDto.ShortDescription
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ShortDescription
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ImageUrl*
+  commentId: Overload:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ImageUrl
+  href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html#HotelChain_Web_Pages_AdminRooms_AdminRoomDto_ImageUrl
+  name: ImageUrl
+  nameWithType: AdminRooms.AdminRoomDto.ImageUrl
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.ImageUrl
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.IsActive*
+  commentId: Overload:HotelChain.Web.Pages.AdminRooms.AdminRoomDto.IsActive
+  href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html#HotelChain_Web_Pages_AdminRooms_AdminRoomDto_IsActive
+  name: IsActive
+  nameWithType: AdminRooms.AdminRoomDto.IsActive
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.IsActive
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean

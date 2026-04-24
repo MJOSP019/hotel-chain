@@ -3,13 +3,15 @@
 <PageTitle>Reglas del hotel</PageTitle>
 
 <div class="info-page">
-    <section class="info-hero">
+    <section class="info-hero info-hero--rules">
+        <div class="info-hero__overlay"></div>
+
         <div class="info-hero__content">
             <div class="info-badge">Portal informativo</div>
             <h1>Reglas del hotel</h1>
             <p>
                 Estas reglas ayudan a mantener una estadía ordenada, segura y cómoda para todos los huéspedes.
-                Te recomendamos revisarlas antes y durante tu visita.
+                Se recomienda revisarlas antes y durante tu visita.
             </p>
         </div>
     </section>
@@ -25,61 +27,78 @@
             </div>
         </div>
 
-        <div class="info-grid">
-            <article class="info-card info-card--featured">
-                <div class="info-card__icon">✓</div>
+        <div class="rules-grid">
+            <article class="rule-card rule-card--wide">
+                <div class="rule-card__icon">✓</div>
                 <h4>Check-in y check-out</h4>
                 <p>
                     El ingreso y salida deben realizarse dentro de los horarios establecidos por el hotel.
-                    Cualquier solicitud especial de ingreso temprano o salida tardía está sujeta a disponibilidad.
+                    Cualquier solicitud especial de ingreso temprano o salida tardía queda sujeta a disponibilidad.
                 </p>
             </article>
 
-            <article class="info-card">
-                <div class="info-card__icon">☾</div>
+            <article class="rule-card">
+                <div class="rule-card__icon">☾</div>
                 <h4>Respeto al descanso</h4>
                 <p>
-                    Se solicita mantener niveles moderados de ruido, especialmente durante la noche,
-                    para no afectar la tranquilidad de otros huéspedes.
+                    Se solicita mantener niveles moderados de ruido, especialmente durante la noche.
                 </p>
             </article>
 
-            <article class="info-card">
-                <div class="info-card__icon">⌂</div>
+            <article class="rule-card">
+                <div class="rule-card__icon">⌂</div>
                 <h4>Cuidado de habitaciones</h4>
                 <p>
-                    Las instalaciones, muebles y equipos deben utilizarse de forma responsable.
-                    Cualquier daño puede requerir revisión y reporte a administración.
+                    Las instalaciones, muebles y equipos deben utilizarse de manera responsable.
                 </p>
             </article>
 
-            <article class="info-card">
-                <div class="info-card__icon">◎</div>
+            <article class="rule-card">
+                <div class="rule-card__icon">◎</div>
                 <h4>Capacidad permitida</h4>
                 <p>
-                    La ocupación de cada habitación debe respetar el límite autorizado según el tipo de reserva
-                    y la capacidad definida por el hotel.
+                    La ocupación debe respetar el límite autorizado según tipo de habitación y reservación.
                 </p>
             </article>
 
-            <article class="info-card">
-                <div class="info-card__icon">⛔</div>
+            <article class="rule-card">
+                <div class="rule-card__icon">⛔</div>
                 <h4>Conducta y seguridad</h4>
                 <p>
-                    No se permiten conductas que comprometan la seguridad, el orden interno o la experiencia
-                    de otros usuarios dentro del hotel.
+                    No se permiten conductas que comprometan la seguridad, el orden interno o la experiencia de otros huéspedes.
                 </p>
             </article>
 
-            <article class="info-card">
-                <div class="info-card__icon">✦</div>
+            <article class="rule-card">
+                <div class="rule-card__icon">✦</div>
                 <h4>Uso de áreas comunes</h4>
                 <p>
-                    Las áreas compartidas deben utilizarse respetando horarios, limpieza y normas internas
-                    establecidas por cada sede.
+                    Las áreas compartidas deben utilizarse respetando horarios, limpieza y normas internas de cada sede.
                 </p>
             </article>
         </div>
+    </section>
+
+    <section class="rules-summary">
+        <article class="rules-summary__item">
+            <span class="rules-summary__label">Convivencia</span>
+            <strong>Respeto a otros huéspedes</strong>
+        </article>
+
+        <article class="rules-summary__item">
+            <span class="rules-summary__label">Ocupación</span>
+            <strong>Capacidad autorizada</strong>
+        </article>
+
+        <article class="rules-summary__item">
+            <span class="rules-summary__label">Instalaciones</span>
+            <strong>Uso responsable</strong>
+        </article>
+
+        <article class="rules-summary__item">
+            <span class="rules-summary__label">Seguridad</span>
+            <strong>Orden y cumplimiento</strong>
+        </article>
     </section>
 
     <section class="info-highlight">
@@ -96,7 +115,7 @@
             <div class="info-highlight__box">
                 <div class="info-highlight__label">Importante</div>
                 <p>
-                    Algunas reglas pueden complementarse con políticas internas específicas según la sede,
+                    Algunas reglas pueden complementarse con políticas internas específicas según sede,
                     temporada o tipo de servicio contratado.
                 </p>
             </div>
@@ -104,74 +123,96 @@
     </section>
 </div>
 
+
+    <section class="info-section">
+        <div class="info-section__header">
+            <div>
+                <div class="info-badge info-badge--light">Resumen rápido</div>
+                <h3>Reglas que más suelen impactar la estadía</h3>
+            </div>
+        </div>
+
+        <div class="rules-summary-grid">
+            <article class="rules-summary-card"><span>Ocupación</span><strong>Respetar capacidad de la habitación</strong></article>
+            <article class="rules-summary-card"><span>Convivencia</span><strong>Evitar ruido y molestias a otros huéspedes</strong></article>
+            <article class="rules-summary-card"><span>Seguridad</span><strong>Registrar visitantes cuando aplique</strong></article>
+            <article class="rules-summary-card"><span>Consumo</span><strong>Cargos adicionales pueden reflejarse al checkout</strong></article>
+        </div>
+    </section>
+
 <style>
     .info-page {
-        padding: 1.5rem 0 2rem 0;
-        color: #0f172a;
+        color: #111827;
     }
 
     .info-hero {
-        background:
-            radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 28%),
-            linear-gradient(135deg, #0f172a 0%, #162033 45%, #1e293b 100%);
-        color: #fff;
-        border-radius: 28px;
-        padding: 2.2rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
-        overflow: hidden;
         position: relative;
+        min-height: 420px;
+        border-radius: 30px;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
     }
 
-    .info-hero::after {
-        content: "";
+    .info-hero--rules {
+        background:
+            linear-gradient(180deg, rgba(17, 24, 39, 0.18), rgba(17, 24, 39, 0.42)),
+            linear-gradient(135deg, #d7c8b5 0%, #ece5dd 35%, #c5cfd7 62%, #8898a8 100%);
+    }
+
+    .info-hero__overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent 30%);
+        background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 30%, rgba(17,24,39,0.12) 100%);
         pointer-events: none;
     }
 
     .info-hero__content {
         position: relative;
         z-index: 1;
-        max-width: 820px;
+        max-width: 760px;
+        padding: 2.2rem;
+        color: #fff;
     }
 
     .info-badge {
         display: inline-flex;
         align-items: center;
-        padding: 0.38rem 0.75rem;
+        padding: 0.38rem 0.78rem;
         border-radius: 999px;
-        background: rgba(255,255,255,0.12);
-        color: #dbeafe;
-        font-size: 0.82rem;
-        font-weight: 700;
-        letter-spacing: 0.03em;
+        background: rgba(255,255,255,0.14);
+        color: rgba(255,255,255,0.92);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
         text-transform: uppercase;
         margin-bottom: 1rem;
+        backdrop-filter: blur(8px);
     }
 
     .info-badge--light {
-        background: #eff6ff;
-        color: #1d4ed8;
+        background: #f3f4f6;
+        color: #111827;
     }
 
     .info-hero h1 {
-        font-size: clamp(2rem, 4vw, 3rem);
+        margin: 0 0 0.85rem 0;
+        font-size: clamp(2.2rem, 5vw, 3.7rem);
+        line-height: 1.02;
         font-weight: 800;
-        margin-bottom: 0.8rem;
-        line-height: 1.05;
+        letter-spacing: -0.02em;
     }
 
     .info-hero p {
         margin: 0;
-        max-width: 720px;
-        color: rgba(255,255,255,0.82);
+        color: rgba(255,255,255,0.88);
         font-size: 1.02rem;
+        line-height: 1.7;
+        max-width: 700px;
     }
 
     .info-section {
-        margin-top: 1.25rem;
+        margin-top: 1.6rem;
     }
 
     .info-section__header {
@@ -179,72 +220,103 @@
     }
 
     .info-section__header h3 {
-        margin: 0.3rem 0 0.25rem 0;
+        margin: 0 0 0.3rem 0;
+        color: #111827;
         font-weight: 800;
-        color: #0f172a;
     }
 
     .info-section__header p {
         margin: 0;
-        color: #64748b;
-        max-width: 760px;
+        color: #6b7280;
+        line-height: 1.6;
+        max-width: 820px;
     }
 
-    .info-grid {
+    .rules-grid,
+    .rules-summary {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: 1rem;
     }
 
-    .info-card {
-        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-        border: 1px solid #e2e8f0;
+    .rules-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .rule-card,
+    .rules-summary__item,
+    .info-highlight__content {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 14px 35px rgba(15, 23, 42, 0.07);
+    }
+
+    .rule-card {
         border-radius: 24px;
         padding: 1.2rem;
-        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
         min-height: 220px;
     }
 
-    .info-card--featured {
+    .rule-card--wide {
         grid-column: span 2;
     }
 
-    .info-card__icon {
-        width: 46px;
-        height: 46px;
+    .rule-card__icon {
+        width: 42px;
+        height: 42px;
         border-radius: 14px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        background: #eff6ff;
-        color: #1d4ed8;
-        font-size: 1.2rem;
+        background: #f3f4f6;
+        color: #111827;
         font-weight: 800;
         margin-bottom: 1rem;
     }
 
-    .info-card h4 {
-        margin-bottom: 0.55rem;
+    .rule-card h4 {
+        margin: 0 0 0.5rem 0;
+        color: #111827;
         font-weight: 800;
-        color: #0f172a;
     }
 
-    .info-card p {
+    .rule-card p {
         margin: 0;
-        color: #64748b;
+        color: #4b5563;
         line-height: 1.65;
     }
 
+    .rules-summary {
+        margin-top: 1.6rem;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .rules-summary__item {
+        border-radius: 22px;
+        padding: 1rem 1.1rem;
+    }
+
+    .rules-summary__label {
+        display: block;
+        margin-bottom: 0.3rem;
+        color: #6b7280;
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    .rules-summary__item strong {
+        color: #111827;
+        font-size: 1rem;
+    }
+
     .info-highlight {
-        margin-top: 1.4rem;
+        margin-top: 1.6rem;
     }
 
     .info-highlight__content {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
         border-radius: 28px;
-        padding: 1.5rem;
-        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
+        padding: 1.4rem;
         display: grid;
         grid-template-columns: 1.4fr 1fr;
         gap: 1rem;
@@ -252,50 +324,125 @@
     }
 
     .info-highlight__content h3 {
-        margin: 0.3rem 0 0.45rem 0;
+        margin: 0 0 0.45rem 0;
         font-weight: 800;
-        color: #0f172a;
+        color: #111827;
     }
 
     .info-highlight__content p {
         margin: 0;
-        color: #64748b;
+        color: #4b5563;
         line-height: 1.65;
     }
 
     .info-highlight__box {
-        background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
-        border: 1px solid #dbeafe;
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
         border-radius: 22px;
         padding: 1.1rem;
     }
 
     .info-highlight__label {
-        font-size: 0.8rem;
+        font-size: 0.78rem;
+        font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: #1d4ed8;
-        font-weight: 800;
+        color: #111827;
         margin-bottom: 0.45rem;
     }
 
+    @@media (max-width: 1199.98px) {
+        .rules-grid,
+        .rules-summary {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
     @@media (max-width: 991.98px) {
+        .info-hero {
+            min-height: 360px;
+        }
+
+        .info-hero__content {
+            padding: 1.5rem 1.2rem;
+        }
+
+        .rule-card--wide,
         .info-highlight__content {
             grid-template-columns: 1fr;
         }
 
-        .info-card--featured {
+        .rule-card--wide {
             grid-column: span 1;
+        }
+
+        .info-highlight__content {
+            display: grid;
         }
     }
 
     @@media (max-width: 767.98px) {
-        .info-page {
-            padding-top: 0.75rem;
+        .rules-grid,
+        .rules-summary {
+            grid-template-columns: 1fr;
         }
 
-        .info-hero {
-            padding: 1.5rem 1rem;
+        .info-hero h1 {
+            font-size: 2.2rem;
         }
     }
+    .info-section {
+        margin-top: 1.6rem;
+    }
+
+    .info-section__header {
+        margin-bottom: 1rem;
+    }
+
+    .info-section__header h3 {
+        margin: 0;
+        color: #111827;
+        font-weight: 800;
+    }
+
+    .rules-summary-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+    }
+
+    .rules-summary-card {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 22px;
+        padding: 1rem;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.07);
+    }
+
+    .rules-summary-card span {
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #6b7280;
+        margin-bottom: 0.35rem;
+    }
+
+    .rules-summary-card strong {
+        color: #111827;
+    }
+
+    @@media (max-width: 1199.98px) {
+        .rules-summary-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @@media (max-width: 767.98px) {
+        .rules-summary-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
 </style>

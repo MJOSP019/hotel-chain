@@ -15,8 +15,11 @@ public class Hotel
     public int Id { get; set; }
 
     /// <summary>
-    /// Código único del hotel, por ejemplo "HGT001".
+    /// Código único del hotel.
     /// </summary>
+    /// <remarks>
+    /// Ejemplo: HGT001.
+    /// </remarks>
     public string Code { get; set; } = null!;
 
     /// <summary>
@@ -33,6 +36,21 @@ public class Hotel
     /// Descripción general del hotel.
     /// </summary>
     public string? Description { get; set; } = "";
+
+    /// <summary>
+    /// URL o ruta de la imagen principal del hotel.
+    /// </summary>
+    public string? MainImageUrl { get; set; }
+
+    /// <summary>
+    /// Información descriptiva de la zona donde se ubica el hotel.
+    /// </summary>
+    public string? ZoneInfo { get; set; }
+
+    /// <summary>
+    /// Amenidades o servicios principales del hotel.
+    /// </summary>
+    public string? Amenities { get; set; }
 
     /// <summary>
     /// Indica si el hotel se encuentra activo para búsquedas y operaciones.

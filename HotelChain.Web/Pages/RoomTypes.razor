@@ -3,133 +3,101 @@
 <PageTitle>Tipos de habitación</PageTitle>
 
 <div class="info-page">
-    <section class="info-hero">
+    <section class="info-hero info-hero--rooms">
         <div class="info-hero__content">
             <div class="info-badge">Portal informativo</div>
             <h1>Tipos de habitación</h1>
             <p>
-                Conoce las categorías de hospedaje disponibles dentro de la cadena y consulta
-                de forma general qué tipo de experiencia puede ofrecer cada opción antes de reservar.
+                Conoce de forma general las categorías de hospedaje disponibles dentro de la cadena.
+                Esta versión agrega una estructura visual más fuerte para que cada categoría tenga un
+                bloque tipo galería y se sienta más cercana a un hotel real.
             </p>
+        </div>
+
+        <div class="room-hero-stack">
+            <div class="room-hero-stack__card room-hero-stack__card--double"><span>Doble</span></div>
+            <div class="room-hero-stack__card room-hero-stack__card--junior"><span>Junior suite</span></div>
+            <div class="room-hero-stack__card room-hero-stack__card--suite"><span>Suite</span></div>
+            <div class="room-hero-stack__card room-hero-stack__card--grand"><span>Gran suite</span></div>
         </div>
     </section>
 
     <section class="info-section">
         <div class="info-section__header">
             <div>
-                <div class="info-badge info-badge--light">Alojamiento</div>
-                <h3>Opciones de habitación dentro de la cadena</h3>
+                <div class="info-badge info-badge--light">Categorías visuales</div>
+                <h3>Tipos de habitación con galería orientativa</h3>
                 <p>
-                    La disponibilidad exacta puede variar según el hotel, la temporada y la capacidad
-                    operativa de cada sede.
+                    Estas fichas no reemplazan la disponibilidad real del motor de búsqueda, pero sí ayudan a que el huésped entienda
+                    mejor qué puede esperar en cada categoría antes de reservar.
                 </p>
             </div>
         </div>
 
-        <div class="room-types-grid">
-            <article class="room-type-card room-type-card--featured">
-                <div class="room-type-card__media">
-                    <div class="room-type-card__image">Doble</div>
-                </div>
-
-                <div class="room-type-card__body">
-                    <div class="room-type-card__badge">Habitación estándar</div>
-                    <h4>Habitación doble</h4>
-                    <p>
-                        Una opción funcional y cómoda para estancias prácticas, ideal para viajes cortos,
-                        escapadas en pareja o visitas de negocios con necesidades esenciales de hospedaje.
-                    </p>
-
-                    <div class="room-type-specs">
-                        <div class="room-type-spec">
-                            <span>Capacidad sugerida</span>
-                            <strong>2 huéspedes</strong>
+        <div class="room-catalogue">
+            @foreach (var room in RoomCategories)
+            {
+                <article class="room-catalogue-card">
+                    <div class="room-catalogue-card__intro">
+                        <div>
+                            <div class="room-catalogue-card__badge">@room.Badge</div>
+                            <h4>@room.Title</h4>
+                            <p>@room.Description</p>
                         </div>
-                        <div class="room-type-spec">
-                            <span>Perfil</span>
-                            <strong>Descanso y practicidad</strong>
-                        </div>
-                    </div>
-                </div>
-            </article>
 
-            <article class="room-type-card">
-                <div class="room-type-card__media">
-                    <div class="room-type-card__image">Junior Suite</div>
-                </div>
-
-                <div class="room-type-card__body">
-                    <div class="room-type-card__badge">Mayor amplitud</div>
-                    <h4>Junior suite</h4>
-                    <p>
-                        Diseñada para quienes buscan un poco más de espacio y comodidad, con una experiencia
-                        superior frente a una habitación estándar.
-                    </p>
-
-                    <div class="room-type-specs">
-                        <div class="room-type-spec">
-                            <span>Capacidad sugerida</span>
-                            <strong>2 a 3 huéspedes</strong>
-                        </div>
-                        <div class="room-type-spec">
-                            <span>Perfil</span>
-                            <strong>Comodidad ampliada</strong>
+                        <div class="room-catalogue-card__specs">
+                            <div>
+                                <span>Capacidad</span>
+                                <strong>@room.Capacity</strong>
+                            </div>
+                            <div>
+                                <span>Cama sugerida</span>
+                                <strong>@room.Bed</strong>
+                            </div>
+                            <div>
+                                <span>Área orientativa</span>
+                                <strong>@room.Area</strong>
+                            </div>
+                            <div>
+                                <span>Perfil</span>
+                                <strong>@room.Profile</strong>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </article>
 
-            <article class="room-type-card">
-                <div class="room-type-card__media">
-                    <div class="room-type-card__image">Suite</div>
-                </div>
-
-                <div class="room-type-card__body">
-                    <div class="room-type-card__badge">Experiencia superior</div>
-                    <h4>Suite</h4>
-                    <p>
-                        Una alternativa pensada para una estadía más cómoda, con mayor sensación de privacidad
-                        y una experiencia más completa dentro del hotel.
-                    </p>
-
-                    <div class="room-type-specs">
-                        <div class="room-type-spec">
-                            <span>Capacidad sugerida</span>
-                            <strong>2 a 4 huéspedes</strong>
-                        </div>
-                        <div class="room-type-spec">
-                            <span>Perfil</span>
-                            <strong>Espacio y confort</strong>
-                        </div>
+                    <div class="room-gallery-grid">
+                        @foreach (var photo in room.Photos)
+                        {
+                            <div class="room-gallery-grid__item @photo.CssClass">
+                                <div class="room-gallery-grid__overlay"></div>
+                                <div class="room-gallery-grid__caption">
+                                    <span>@photo.Tag</span>
+                                    <strong>@photo.Title</strong>
+                                </div>
+                            </div>
+                        }
                     </div>
-                </div>
-            </article>
+                </article>
+            }
+        </div>
+    </section>
 
-            <article class="room-type-card">
-                <div class="room-type-card__media">
-                    <div class="room-type-card__image">Gran Suite</div>
-                </div>
+    <section class="info-section">
+        <div class="info-section__header">
+            <div>
+                <div class="info-badge info-badge--light">Comparación general</div>
+                <h3>Qué cambia de una categoría a otra</h3>
+                <p>
+                    A mayor categoría normalmente aumenta la sensación de amplitud, privacidad, zonas de descanso y presencia visual.
+                </p>
+            </div>
+        </div>
 
-                <div class="room-type-card__body">
-                    <div class="room-type-card__badge">Categoría premium</div>
-                    <h4>Gran suite</h4>
-                    <p>
-                        La opción más amplia dentro de las categorías presentadas, ideal para quienes priorizan
-                        una experiencia más exclusiva o una estancia con mayor nivel de comodidad.
-                    </p>
-
-                    <div class="room-type-specs">
-                        <div class="room-type-spec">
-                            <span>Capacidad sugerida</span>
-                            <strong>4 huéspedes o más</strong>
-                        </div>
-                        <div class="room-type-spec">
-                            <span>Perfil</span>
-                            <strong>Premium y amplitud</strong>
-                        </div>
-                    </div>
-                </div>
-            </article>
+        <div class="comparison-grid">
+            <article class="comparison-card"><span class="comparison-card__label">Doble</span><strong>Practicidad</strong></article>
+            <article class="comparison-card"><span class="comparison-card__label">Junior suite</span><strong>Más amplitud</strong></article>
+            <article class="comparison-card"><span class="comparison-card__label">Suite</span><strong>Mayor confort</strong></article>
+            <article class="comparison-card"><span class="comparison-card__label">Gran suite</span><strong>Experiencia premium</strong></article>
         </div>
     </section>
 
@@ -137,273 +105,164 @@
         <div class="info-highlight__content">
             <div>
                 <div class="info-badge info-badge--light">Importante</div>
-                <h3>La selección final depende de la disponibilidad real</h3>
+                <h3>La asignación final depende de disponibilidad, reglas e inventario real</h3>
                 <p>
-                    Estas categorías se presentan como referencia informativa para ayudarte a entender mejor
-                    las opciones de hospedaje de la cadena. La disponibilidad, precio y capacidad exacta
-                    deben confirmarse dentro del flujo de búsqueda y reservación.
+                    Estas fichas son informativas. La búsqueda y la reservación siguen siendo la fuente de verdad para precio,
+                    capacidad, restricciones comerciales y opción exacta disponible.
                 </p>
             </div>
-
             <div class="info-highlight__box">
-                <div class="info-highlight__label">Recomendación</div>
+                <div class="info-highlight__label">Sugerencia visual</div>
                 <p>
-                    Consulta también las amenidades, políticas del hotel y el detalle de cada propiedad
-                    antes de completar tu reservación.
+                    Si luego tomas fotos propias del proyecto, reemplaza primero la imagen principal de cada categoría y después los
+                    detalles de cama, baño y sala; eso te dará el mayor impacto visual con menos esfuerzo.
                 </p>
             </div>
         </div>
     </section>
 </div>
 
+@code {
+    private List<RoomCategoryVm> RoomCategories { get; } =
+    [
+        new(
+            "Estándar",
+            "Habitación doble",
+            "Una categoría funcional y cómoda para viajes cortos, escapadas en pareja o estadías donde se prioriza practicidad y descanso.",
+            "2 huéspedes",
+            "1 cama doble o 2 camas",
+            "22–28 m²",
+            "Funcional y cómoda",
+            [
+                new("Vista general", "Habitación", "room-double-1"),
+                new("Zona de cama", "Descanso", "room-double-2"),
+                new("Escritorio", "Trabajo", "room-double-3")
+            ]),
+        new(
+            "Mayor amplitud",
+            "Junior suite",
+            "Pensada para quien quiere un poco más de espacio, mejor distribución y una experiencia superior frente a la categoría estándar.",
+            "2 a 3 huéspedes",
+            "King o doble amplia",
+            "30–38 m²",
+            "Comodidad ampliada",
+            [
+                new("Vista completa", "Suite", "room-junior-1"),
+                new("Área lounge", "Confort", "room-junior-2"),
+                new("Detalle premium", "Diseño", "room-junior-3")
+            ]),
+        new(
+            "Experiencia superior",
+            "Suite",
+            "Una alternativa con mayor sensación de privacidad, amplitud y confort, ideal para estadías más completas o viajes especiales.",
+            "2 a 4 huéspedes",
+            "King size",
+            "40–52 m²",
+            "Espacio y confort",
+            [
+                new("Dormitorio principal", "Privacidad", "room-suite-1"),
+                new("Sala integrada", "Amplitud", "room-suite-2"),
+                new("Baño destacado", "Detalle", "room-suite-3")
+            ]),
+        new(
+            "Categoría premium",
+            "Gran suite",
+            "La opción más amplia del catálogo, ideal para huéspedes que priorizan una experiencia premium, mayor distribución y sensación de exclusividad.",
+            "4 huéspedes o más",
+            "King premium + apoyo",
+            "55–80 m²",
+            "Premium y amplitud",
+            [
+                new("Vista principal", "Premium", "room-grand-1"),
+                new("Sala y estancia", "Experiencia", "room-grand-2"),
+                new("Baño o detalle VIP", "Exclusivo", "room-grand-3")
+            ])
+    ];
+
+    private sealed record RoomCategoryVm(
+        string Badge,
+        string Title,
+        string Description,
+        string Capacity,
+        string Bed,
+        string Area,
+        string Profile,
+        List<RoomPhotoVm> Photos);
+
+    private sealed record RoomPhotoVm(string Title, string Tag, string CssClass);
+}
+
 <style>
-    .info-page {
-        padding: 1.5rem 0 2rem 0;
-        color: #0f172a;
-    }
-
+    .info-page { color:#111827; }
     .info-hero {
-        background:
-            radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 28%),
-            linear-gradient(135deg, #0f172a 0%, #162033 45%, #1e293b 100%);
-        color: #fff;
-        border-radius: 28px;
-        padding: 2.2rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
-        overflow: hidden;
-        position: relative;
+        display:grid; grid-template-columns: 1.08fr .92fr; gap:1.2rem; align-items:stretch;
+        min-height: 420px; border-radius:30px; overflow:hidden; margin-bottom:1.5rem;
+        box-shadow:0 24px 60px rgba(15,23,42,.16);
+        background: linear-gradient(135deg, #d7c9b0 0%, #ebe4db 35%, #b9c7d4 62%, #7d94a8 100%);
+        padding:1.25rem;
     }
-
-    .info-hero::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent 30%);
-        pointer-events: none;
+    .info-hero__content { padding:1.2rem; color:#fff; display:flex; flex-direction:column; justify-content:flex-end; }
+    .info-hero__content h1 { font-size: clamp(2.2rem, 4vw, 3.6rem); line-height:1; margin:0 0 .8rem; font-weight:900; }
+    .info-hero__content p { color: rgba(255,255,255,.92); max-width:680px; }
+    .info-badge { display:inline-flex; width:max-content; align-items:center; padding:.38rem .78rem; border-radius:999px; background:rgba(255,255,255,.14); color:#fff; font-size:.78rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
+    .info-badge--light { background:#fff; color:#475569; border:1px solid #e2e8f0; }
+    .room-hero-stack { display:grid; grid-template-columns: 1fr 1fr; gap:.85rem; }
+    .room-hero-stack__card, .room-gallery-grid__item {
+        position:relative; border-radius:24px; overflow:hidden; min-height:150px;
+        box-shadow: 0 18px 35px rgba(15,23,42,.12); border:1px solid rgba(255,255,255,.26);
     }
-
-    .info-hero__content {
-        position: relative;
-        z-index: 1;
-        max-width: 820px;
+    .room-hero-stack__card span { position:absolute; left:1rem; bottom:1rem; z-index:2; color:#fff; font-weight:800; }
+    .room-hero-stack__card::before, .room-gallery-grid__item::before {
+        content:""; position:absolute; inset:0; background-size:cover; background-position:center;
     }
-
-    .info-badge {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.38rem 0.75rem;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.12);
-        color: #dbeafe;
-        font-size: 0.82rem;
-        font-weight: 700;
-        letter-spacing: 0.03em;
-        text-transform: uppercase;
-        margin-bottom: 1rem;
+    .room-hero-stack__card::after, .room-gallery-grid__overlay {
+        content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,23,42,.04), rgba(15,23,42,.5));
     }
+    .room-hero-stack__card--double::before, .room-double-1::before { background: linear-gradient(135deg, #d8d3cc, #f8f7f5 52%, #bcccdc); }
+    .room-hero-stack__card--junior::before, .room-junior-1::before { background: linear-gradient(135deg, #d1c0a7, #f3ebe0 50%, #a0b4c4); }
+    .room-hero-stack__card--suite::before, .room-suite-1::before { background: linear-gradient(135deg, #becad5, #ecf2f6 48%, #879db1); }
+    .room-hero-stack__card--grand::before, .room-grand-1::before { background: linear-gradient(135deg, #98aeb6, #e6eff1 50%, #6d8498); }
+    .room-double-2::before { background: linear-gradient(135deg, #e3ddd6, #ffffff 50%, #cad7e2); }
+    .room-double-3::before { background: linear-gradient(135deg, #d4cec8, #f7f5f1 50%, #aebeca); }
+    .room-junior-2::before { background: linear-gradient(135deg, #d3c1b0, #faf4ee 50%, #b6c7d2); }
+    .room-junior-3::before { background: linear-gradient(135deg, #c4b4a7, #efe5dc 50%, #a8bac8); }
+    .room-suite-2::before { background: linear-gradient(135deg, #cad8e2, #f2f7fa 50%, #9fb4c3); }
+    .room-suite-3::before { background: linear-gradient(135deg, #b9c9d4, #eef4f8 50%, #879db0); }
+    .room-grand-2::before { background: linear-gradient(135deg, #9eb3ba, #edf3f4 50%, #7d93a7); }
+    .room-grand-3::before { background: linear-gradient(135deg, #a5b7bf, #eef4f6 50%, #7e94a7); }
 
-    .info-badge--light {
-        background: #eff6ff;
-        color: #1d4ed8;
+    .info-section, .info-highlight { margin-top:2rem; }
+    .info-section__header h3 { margin:.4rem 0 .35rem; font-size: clamp(1.7rem, 2vw, 2.35rem); font-weight:900; }
+    .info-section__header p { max-width: 920px; color:#475569; }
+    .room-catalogue { display:grid; gap:1.25rem; margin-top:1rem; }
+    .room-catalogue-card { border:1px solid #e5e7eb; border-radius:28px; background:#fff; padding:1.1rem; box-shadow:0 20px 45px rgba(15,23,42,.06); }
+    .room-catalogue-card__intro { display:flex; justify-content:space-between; gap:1rem; margin-bottom:1rem; }
+    .room-catalogue-card__badge { display:inline-flex; padding:.28rem .65rem; border-radius:999px; background:#111827; color:#fff; font-size:.73rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; }
+    .room-catalogue-card h4 { margin:.55rem 0 .45rem; font-size:1.55rem; font-weight:900; }
+    .room-catalogue-card p { margin:0; color:#475569; max-width: 760px; }
+    .room-catalogue-card__specs { display:grid; grid-template-columns: 1fr 1fr; gap:.75rem; min-width:340px; }
+    .room-catalogue-card__specs div { border:1px solid #e5e7eb; border-radius:18px; padding:.8rem .95rem; background:#f8fafc; }
+    .room-catalogue-card__specs span { display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:#64748b; font-weight:800; margin-bottom:.2rem; }
+    .room-gallery-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:.85rem; }
+    .room-gallery-grid__item { min-height: 220px; }
+    .room-gallery-grid__caption { position:absolute; left:.9rem; right:.9rem; bottom:.85rem; z-index:2; color:#fff; }
+    .room-gallery-grid__caption span { display:inline-flex; padding:.22rem .55rem; border-radius:999px; background:rgba(255,255,255,.16); backdrop-filter: blur(8px); font-size:.68rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; }
+    .room-gallery-grid__caption strong { display:block; margin-top:.45rem; font-size:1rem; line-height:1.1; }
+    .comparison-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:.9rem; margin-top:1rem; }
+    .comparison-card { border:1px solid #e5e7eb; border-radius:22px; background:#fff; padding:1rem; box-shadow: 0 10px 24px rgba(15,23,42,.05); }
+    .comparison-card__label { display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:#64748b; font-weight:800; margin-bottom:.25rem; }
+    .info-highlight__content { display:grid; grid-template-columns: 1.2fr .8fr; gap:1rem; border:1px solid #dbeafe; background: linear-gradient(180deg, #fff, #f8fbff); border-radius:26px; padding:1.15rem; }
+    .info-highlight__content h3 { margin:.45rem 0; font-size:1.7rem; font-weight:900; }
+    .info-highlight__box { border:1px solid #dbeafe; background:#fff; border-radius:20px; padding:1rem; }
+    .info-highlight__label { display:inline-flex; padding:.25rem .58rem; border-radius:999px; background:#eff6ff; color:#1d4ed8; font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; margin-bottom:.45rem; }
+
+    @@media (max-width: 1100px) {
+        .info-hero { grid-template-columns:1fr; }
+        .room-catalogue-card__intro, .info-highlight__content { display:grid; grid-template-columns:1fr; }
+        .comparison-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
-    .info-hero h1 {
-        font-size: clamp(2rem, 4vw, 3rem);
-        font-weight: 800;
-        margin-bottom: 0.8rem;
-        line-height: 1.05;
-    }
-
-    .info-hero p {
-        margin: 0;
-        max-width: 720px;
-        color: rgba(255,255,255,0.82);
-        font-size: 1.02rem;
-    }
-
-    .info-section {
-        margin-top: 1.25rem;
-    }
-
-    .info-section__header {
-        margin-bottom: 1rem;
-    }
-
-    .info-section__header h3 {
-        margin: 0.3rem 0 0.25rem 0;
-        font-weight: 800;
-        color: #0f172a;
-    }
-
-    .info-section__header p {
-        margin: 0;
-        color: #64748b;
-        max-width: 760px;
-    }
-
-    .room-types-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1rem;
-    }
-
-    .room-type-card {
-        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-        border: 1px solid #e2e8f0;
-        border-radius: 24px;
-        overflow: hidden;
-        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
-    }
-
-    .room-type-card--featured {
-        grid-column: span 2;
-    }
-
-    .room-type-card__media {
-        padding: 1rem 1rem 0 1rem;
-    }
-
-    .room-type-card__image {
-        min-height: 180px;
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 1rem;
-        background:
-            radial-gradient(circle at top right, rgba(59, 130, 246, 0.16), transparent 30%),
-            linear-gradient(135deg, #dbeafe 0%, #eff6ff 45%, #f8fafc 100%);
-        color: #1d4ed8;
-        font-size: 1.15rem;
-        font-weight: 800;
-        border: 1px solid #dbeafe;
-    }
-
-    .room-type-card__body {
-        padding: 1.2rem;
-    }
-
-    .room-type-card__badge {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.34rem 0.7rem;
-        border-radius: 999px;
-        background: #eff6ff;
-        color: #1d4ed8;
-        font-size: 0.78rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        margin-bottom: 0.75rem;
-    }
-
-    .room-type-card h4 {
-        margin: 0 0 0.55rem 0;
-        font-weight: 800;
-        color: #0f172a;
-    }
-
-    .room-type-card p {
-        margin: 0;
-        color: #64748b;
-        line-height: 1.65;
-    }
-
-    .room-type-specs {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.75rem;
-        margin-top: 1rem;
-    }
-
-    .room-type-spec {
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
-        border-radius: 16px;
-        padding: 0.85rem;
-    }
-
-    .room-type-spec span {
-        display: block;
-        font-size: 0.78rem;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        color: #64748b;
-        margin-bottom: 0.25rem;
-    }
-
-    .room-type-spec strong {
-        color: #0f172a;
-        font-size: 0.95rem;
-    }
-
-    .info-highlight {
-        margin-top: 1.4rem;
-    }
-
-    .info-highlight__content {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 28px;
-        padding: 1.5rem;
-        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
-        display: grid;
-        grid-template-columns: 1.4fr 1fr;
-        gap: 1rem;
-        align-items: stretch;
-    }
-
-    .info-highlight__content h3 {
-        margin: 0.3rem 0 0.45rem 0;
-        font-weight: 800;
-        color: #0f172a;
-    }
-
-    .info-highlight__content p {
-        margin: 0;
-        color: #64748b;
-        line-height: 1.65;
-    }
-
-    .info-highlight__box {
-        background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
-        border: 1px solid #dbeafe;
-        border-radius: 22px;
-        padding: 1.1rem;
-    }
-
-    .info-highlight__label {
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #1d4ed8;
-        font-weight: 800;
-        margin-bottom: 0.45rem;
-    }
-
-    @@media (max-width: 991.98px) {
-        .info-highlight__content {
-            grid-template-columns: 1fr;
-        }
-
-        .room-type-card--featured {
-            grid-column: span 1;
-        }
-    }
-
-    @@media (max-width: 767.98px) {
-        .info-page {
-            padding-top: 0.75rem;
-        }
-
-        .info-hero {
-            padding: 1.5rem 1rem;
-        }
-
-        .room-type-specs {
-            grid-template-columns: 1fr;
-        }
+    @@media (max-width: 720px) {
+        .room-hero-stack { grid-template-columns:1fr 1fr; }
+        .room-gallery-grid, .comparison-grid, .room-catalogue-card__specs { grid-template-columns:1fr; min-width:0; }
     }
 </style>

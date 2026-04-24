@@ -1,0 +1,869 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  commentId: T:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  id: MyReservations.ReservationHistoryDto
+  parent: HotelChain.Web.Pages
+  children:
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.BaseAmount
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CardLast4
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.ChargesTotal
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckIn
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckOut
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Code
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CreatedAt
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.GrandTotal
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Guests
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Hotel
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.HotelId
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.IsPaid
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Nights
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.PaymentStatus
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Status
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.TotalAmount
+  langs:
+  - csharp
+  - vb
+  name: MyReservations.ReservationHistoryDto
+  nameWithType: MyReservations.ReservationHistoryDto
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  type: Class
+  source:
+    id: ReservationHistoryDto
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1057
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public class MyReservations.ReservationHistoryDto
+    content.vb: Public Class MyReservations.ReservationHistoryDto
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.HotelId
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.HotelId
+  id: HotelId
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: HotelId
+  nameWithType: MyReservations.ReservationHistoryDto.HotelId
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.HotelId
+  type: Property
+  source:
+    id: HotelId
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1059
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public int HotelId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property HotelId As Integer
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.HotelId*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Code
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Code
+  id: Code
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: Code
+  nameWithType: MyReservations.ReservationHistoryDto.Code
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Code
+  type: Property
+  source:
+    id: Code
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1060
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public string Code { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Code As String
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Code*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Hotel
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Hotel
+  id: Hotel
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: Hotel
+  nameWithType: MyReservations.ReservationHistoryDto.Hotel
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Hotel
+  type: Property
+  source:
+    id: Hotel
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1061
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public string Hotel { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Hotel As String
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Hotel*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckIn
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckIn
+  id: CheckIn
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: CheckIn
+  nameWithType: MyReservations.ReservationHistoryDto.CheckIn
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckIn
+  type: Property
+  source:
+    id: CheckIn
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1062
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public DateTime CheckIn { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CheckIn As Date
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckIn*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckOut
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckOut
+  id: CheckOut
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: CheckOut
+  nameWithType: MyReservations.ReservationHistoryDto.CheckOut
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckOut
+  type: Property
+  source:
+    id: CheckOut
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1063
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public DateTime CheckOut { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CheckOut As Date
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckOut*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Nights
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Nights
+  id: Nights
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: Nights
+  nameWithType: MyReservations.ReservationHistoryDto.Nights
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Nights
+  type: Property
+  source:
+    id: Nights
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1064
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public int Nights { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Nights As Integer
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Nights*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Guests
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Guests
+  id: Guests
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: Guests
+  nameWithType: MyReservations.ReservationHistoryDto.Guests
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Guests
+  type: Property
+  source:
+    id: Guests
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1065
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public int Guests { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Guests As Integer
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Guests*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.BaseAmount
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.BaseAmount
+  id: BaseAmount
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: BaseAmount
+  nameWithType: MyReservations.ReservationHistoryDto.BaseAmount
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.BaseAmount
+  type: Property
+  source:
+    id: BaseAmount
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1066
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public decimal BaseAmount { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+    content.vb: Public Property BaseAmount As Decimal
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.BaseAmount*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.ChargesTotal
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.ChargesTotal
+  id: ChargesTotal
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: ChargesTotal
+  nameWithType: MyReservations.ReservationHistoryDto.ChargesTotal
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.ChargesTotal
+  type: Property
+  source:
+    id: ChargesTotal
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1067
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public decimal ChargesTotal { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+    content.vb: Public Property ChargesTotal As Decimal
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.ChargesTotal*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.GrandTotal
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.GrandTotal
+  id: GrandTotal
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: GrandTotal
+  nameWithType: MyReservations.ReservationHistoryDto.GrandTotal
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.GrandTotal
+  type: Property
+  source:
+    id: GrandTotal
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1068
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public decimal GrandTotal { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+    content.vb: Public Property GrandTotal As Decimal
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.GrandTotal*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.TotalAmount
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.TotalAmount
+  id: TotalAmount
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: TotalAmount
+  nameWithType: MyReservations.ReservationHistoryDto.TotalAmount
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.TotalAmount
+  type: Property
+  source:
+    id: TotalAmount
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1069
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public decimal TotalAmount { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+    content.vb: Public Property TotalAmount As Decimal
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.TotalAmount*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Status
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Status
+  id: Status
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: Status
+  nameWithType: MyReservations.ReservationHistoryDto.Status
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Status
+  type: Property
+  source:
+    id: Status
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1070
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public string Status { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Status As String
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Status*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.IsPaid
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.IsPaid
+  id: IsPaid
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: IsPaid
+  nameWithType: MyReservations.ReservationHistoryDto.IsPaid
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.IsPaid
+  type: Property
+  source:
+    id: IsPaid
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1071
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public bool IsPaid { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsPaid As Boolean
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.IsPaid*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.PaymentStatus
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.PaymentStatus
+  id: PaymentStatus
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: PaymentStatus
+  nameWithType: MyReservations.ReservationHistoryDto.PaymentStatus
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.PaymentStatus
+  type: Property
+  source:
+    id: PaymentStatus
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1072
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public string? PaymentStatus { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PaymentStatus As String
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.PaymentStatus*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CardLast4
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CardLast4
+  id: CardLast4
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: CardLast4
+  nameWithType: MyReservations.ReservationHistoryDto.CardLast4
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CardLast4
+  type: Property
+  source:
+    id: CardLast4
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1073
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public string? CardLast4 { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CardLast4 As String
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CardLast4*
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CreatedAt
+  commentId: P:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CreatedAt
+  id: CreatedAt
+  parent: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: CreatedAt
+  nameWithType: MyReservations.ReservationHistoryDto.CreatedAt
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CreatedAt
+  type: Property
+  source:
+    id: CreatedAt
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_MyReservations_razor.g.cs
+    startLine: 1074
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public DateTime CreatedAt { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CreatedAt As Date
+  overload: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CreatedAt*
+references:
+- uid: HotelChain.Web.Pages
+  commentId: N:HotelChain.Web.Pages
+  href: HotelChain.html
+  name: HotelChain.Web.Pages
+  nameWithType: HotelChain.Web.Pages
+  fullName: HotelChain.Web.Pages
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Web
+    name: Web
+    href: HotelChain.Web.html
+  - name: .
+  - uid: HotelChain.Web.Pages
+    name: Pages
+    href: HotelChain.Web.Pages.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Web
+    name: Web
+    href: HotelChain.Web.html
+  - name: .
+  - uid: HotelChain.Web.Pages
+    name: Pages
+    href: HotelChain.Web.Pages.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.HotelId*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.HotelId
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_HotelId
+  name: HotelId
+  nameWithType: MyReservations.ReservationHistoryDto.HotelId
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.HotelId
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Code*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Code
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_Code
+  name: Code
+  nameWithType: MyReservations.ReservationHistoryDto.Code
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Code
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Hotel*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Hotel
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_Hotel
+  name: Hotel
+  nameWithType: MyReservations.ReservationHistoryDto.Hotel
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Hotel
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckIn*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckIn
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_CheckIn
+  name: CheckIn
+  nameWithType: MyReservations.ReservationHistoryDto.CheckIn
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckIn
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+  nameWithType.vb: Date
+  fullName.vb: Date
+  name.vb: Date
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckOut*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckOut
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_CheckOut
+  name: CheckOut
+  nameWithType: MyReservations.ReservationHistoryDto.CheckOut
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CheckOut
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Nights*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Nights
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_Nights
+  name: Nights
+  nameWithType: MyReservations.ReservationHistoryDto.Nights
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Nights
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Guests*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Guests
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_Guests
+  name: Guests
+  nameWithType: MyReservations.ReservationHistoryDto.Guests
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Guests
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.BaseAmount*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.BaseAmount
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_BaseAmount
+  name: BaseAmount
+  nameWithType: MyReservations.ReservationHistoryDto.BaseAmount
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.BaseAmount
+- uid: System.Decimal
+  commentId: T:System.Decimal
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.decimal
+  name: decimal
+  nameWithType: decimal
+  fullName: decimal
+  nameWithType.vb: Decimal
+  fullName.vb: Decimal
+  name.vb: Decimal
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.ChargesTotal*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.ChargesTotal
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_ChargesTotal
+  name: ChargesTotal
+  nameWithType: MyReservations.ReservationHistoryDto.ChargesTotal
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.ChargesTotal
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.GrandTotal*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.GrandTotal
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_GrandTotal
+  name: GrandTotal
+  nameWithType: MyReservations.ReservationHistoryDto.GrandTotal
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.GrandTotal
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.TotalAmount*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.TotalAmount
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_TotalAmount
+  name: TotalAmount
+  nameWithType: MyReservations.ReservationHistoryDto.TotalAmount
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.TotalAmount
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Status*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Status
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_Status
+  name: Status
+  nameWithType: MyReservations.ReservationHistoryDto.Status
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.Status
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.IsPaid*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.IsPaid
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_IsPaid
+  name: IsPaid
+  nameWithType: MyReservations.ReservationHistoryDto.IsPaid
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.IsPaid
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.PaymentStatus*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.PaymentStatus
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_PaymentStatus
+  name: PaymentStatus
+  nameWithType: MyReservations.ReservationHistoryDto.PaymentStatus
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.PaymentStatus
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CardLast4*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CardLast4
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_CardLast4
+  name: CardLast4
+  nameWithType: MyReservations.ReservationHistoryDto.CardLast4
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CardLast4
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CreatedAt*
+  commentId: Overload:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CreatedAt
+  href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html#HotelChain_Web_Pages_MyReservations_ReservationHistoryDto_CreatedAt
+  name: CreatedAt
+  nameWithType: MyReservations.ReservationHistoryDto.CreatedAt
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.CreatedAt

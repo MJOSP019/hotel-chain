@@ -62,6 +62,10 @@ public class AdminRoomsController : ControllerBase
                 NameOrNumber = r.NameOrNumber,
                 MaxGuests = r.MaxGuests,
                 BasePricePerNight = r.BasePricePerNight,
+                BedType = r.BedType,
+                AreaSquareMeters = r.AreaSquareMeters,
+                ShortDescription = r.ShortDescription,
+                ImageUrl = r.ImageUrl,
                 IsActive = r.IsActive
             })
             .ToListAsync();
@@ -91,6 +95,10 @@ public class AdminRoomsController : ControllerBase
                 NameOrNumber = r.NameOrNumber,
                 MaxGuests = r.MaxGuests,
                 BasePricePerNight = r.BasePricePerNight,
+                BedType = r.BedType,
+                AreaSquareMeters = r.AreaSquareMeters,
+                ShortDescription = r.ShortDescription,
+                ImageUrl = r.ImageUrl,
                 IsActive = r.IsActive
             })
             .FirstOrDefaultAsync();
@@ -136,6 +144,10 @@ public class AdminRoomsController : ControllerBase
             NameOrNumber = normalizedName,
             MaxGuests = request.MaxGuests,
             BasePricePerNight = request.BasePricePerNight,
+            BedType = string.IsNullOrWhiteSpace(request.BedType) ? null : request.BedType.Trim(),
+            AreaSquareMeters = request.AreaSquareMeters,
+            ShortDescription = string.IsNullOrWhiteSpace(request.ShortDescription) ? null : request.ShortDescription.Trim(),
+            ImageUrl = string.IsNullOrWhiteSpace(request.ImageUrl) ? null : request.ImageUrl.Trim(),
             IsActive = request.IsActive
         };
 
@@ -184,6 +196,10 @@ public class AdminRoomsController : ControllerBase
         room.NameOrNumber = normalizedName;
         room.MaxGuests = request.MaxGuests;
         room.BasePricePerNight = request.BasePricePerNight;
+        room.BedType = string.IsNullOrWhiteSpace(request.BedType) ? null : request.BedType.Trim();
+        room.AreaSquareMeters = request.AreaSquareMeters;
+        room.ShortDescription = string.IsNullOrWhiteSpace(request.ShortDescription) ? null : request.ShortDescription.Trim();
+        room.ImageUrl = string.IsNullOrWhiteSpace(request.ImageUrl) ? null : request.ImageUrl.Trim();
         room.IsActive = request.IsActive;
 
         await _db.SaveChangesAsync();

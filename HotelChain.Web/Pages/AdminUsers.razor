@@ -8,71 +8,351 @@
 
 @if (!string.IsNullOrWhiteSpace(errorMessage))
 {
-    <div class="alert alert-danger">@errorMessage</div>
+    <div class="alert alert-danger admin-users-alert">@errorMessage</div>
 }
 
 @if (!string.IsNullOrWhiteSpace(successMessage))
 {
-    <div class="alert alert-success">@successMessage</div>
+    <div class="alert alert-success admin-users-alert">@successMessage</div>
 }
 
 @if (users is null)
 {
-    <p>Cargando usuarios...</p>
-}
-else if (users.Count == 0)
-{
-    <p>No hay usuarios registrados.</p>
+    <div class="admin-users-loading">
+        <div class="admin-users-loading__card">
+            <h4>Cargando usuarios...</h4>
+            <p>Estamos obteniendo el listado administrativo desde el backend.</p>
+        </div>
+    </div>
 }
 else
 {
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>UserName</th>
-                <th>Email</th>
-                <th>Edad</th>
-                <th>País</th>
-                <th>Pasaporte</th>
-                <th>Rol actual</th>
-                <th>Nuevo rol</th>
-                <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var u in users)
+    <div class="admin-users-summary-grid mb-4">
+        <div class="admin-users-summary-card">
+            <div class="admin-users-summary-card__label">Total</div>
+            <div class="admin-users-summary-card__value">@users.Count</div>
+        </div>
+
+        <div class="admin-users-summary-card">
+            <div class="admin-users-summary-card__label">Admins</div>
+            <div class="admin-users-summary-card__value">@users.Count(x => x.Role == "ADMIN")</div>
+        </div>
+
+        <div class="admin-users-summary-card">
+            <div class="admin-users-summary-card__label">Registered</div>
+            <div class="admin-users-summary-card__value">@users.Count(x => x.Role == "REGISTERED")</div>
+        </div>
+
+        <div class="admin-users-summary-card">
+            <div class="admin-users-summary-card__label">Webservice</div>
+            <div class="admin-users-summary-card__value">@users.Count(x => x.Role == "WEBSERVICE")</div>
+        </div>
+    </div>
+
+    <div class="card p-3 mb-3">
+        <div class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label">Filtrar por rol</label>
+                <select class="form-select" @bind="selectedRoleFilter">
+                    <option value="">Todos</option>
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="REGISTERED">REGISTERED</option>
+                    <option value="WEBSERVICE">WEBSERVICE</option>
+                    <option value="SIN_ROL">SIN_ROL</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Buscar</label>
+                <input class="form-control" @bind="searchText" placeholder="Nombre, username o email" />
+            </div>
+
+            <div class="col-md-4">
+                <div class="text-muted">
+                    Mostrando @FilteredUsers.Count usuario(s).
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (FilteredUsers.Count == 0)
+    {
+        <p>No hay usuarios que coincidan con los filtros actuales.</p>
+    }
+    else
+    {
+        <div class="admin-users-grid">
+            @foreach (var u in FilteredUsers)
             {
-                <tr>
-                    <td>@u.FirstName @u.LastName</td>
-                    <td>@u.UserName</td>
-                    <td>@u.Email</td>
-                    <td>@u.Age</td>
-                    <td>@u.Country</td>
-                    <td>@u.PassportNumber</td>
-                    <td>@u.Role</td>
-                    <td style="width: 180px;">
-                        <select class="form-select" @bind="u.SelectedRole">
-                        <option value="REGISTERED">REGISTERED</option>
-                        <option value="ADMIN">ADMIN</option>
-                        <option value="WEBSERVICE">WEBSERVICE</option>
-                    </select>
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-primary" @onclick="() => UpdateRole(u)">
-                            Guardar
+                <article class="admin-user-card">
+                    <div class="admin-user-card__top">
+                        <div>
+                            <div class="admin-user-card__eyebrow">Usuario</div>
+                            <h4>@GetFullName(u)</h4>
+                        </div>
+
+                        <div class="@GetRoleBadgeClass(u.Role)">
+                            @u.Role
+                        </div>
+                    </div>
+
+                    <div class="admin-user-card__body">
+                        <div class="admin-user-feature">
+                            <span class="admin-user-feature__label">UserName</span>
+                            <strong>@u.UserName</strong>
+                        </div>
+
+                        <div class="admin-user-feature">
+                            <span class="admin-user-feature__label">Email</span>
+                            <strong>@u.Email</strong>
+                        </div>
+
+                        <div class="admin-user-feature">
+                            <span class="admin-user-feature__label">Edad</span>
+                            <strong>@u.Age</strong>
+                        </div>
+
+                        <div class="admin-user-feature">
+                            <span class="admin-user-feature__label">País</span>
+                            <strong>@(string.IsNullOrWhiteSpace(u.Country) ? "-" : u.Country)</strong>
+                        </div>
+
+                        <div class="admin-user-feature admin-user-feature--wide">
+                            <span class="admin-user-feature__label">Pasaporte</span>
+                            <strong>@(string.IsNullOrWhiteSpace(u.PassportNumber) ? "-" : u.PassportNumber)</strong>
+                        </div>
+                    </div>
+
+                    <div class="admin-user-card__footer">
+                        <div class="admin-user-role-editor">
+                            <label class="form-label mb-1">Nuevo rol</label>
+                            <select class="form-select" @bind="u.SelectedRole">
+                                <option value="REGISTERED">REGISTERED</option>
+                                <option value="ADMIN">ADMIN</option>
+                                <option value="WEBSERVICE">WEBSERVICE</option>
+                            </select>
+                        </div>
+
+                        <button class="btn admin-users-btn-primary"
+                                disabled="@IsUpdatingUser(u.Id)"
+                                @onclick="() => UpdateRole(u)">
+                            @(IsUpdatingUser(u.Id) ? "Guardando..." : "Guardar rol")
                         </button>
-                    </td>
-                </tr>
+                    </div>
+                </article>
             }
-        </tbody>
-    </table>
+        </div>
+    }
 }
+
+<style>
+    .admin-users-alert {
+        border-radius: 16px;
+    }
+
+    .admin-users-loading__card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 2rem;
+        box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+    }
+
+    .admin-users-loading__card h4 {
+        margin-bottom: 0.5rem;
+        font-weight: 800;
+    }
+
+    .admin-users-loading__card p {
+        margin: 0;
+        color: #64748b;
+    }
+
+    .admin-users-summary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+    }
+
+    .admin-users-summary-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 22px;
+        padding: 1rem 1.1rem;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+    }
+
+    .admin-users-summary-card__label {
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        margin-bottom: 0.2rem;
+        font-weight: 700;
+    }
+
+    .admin-users-summary-card__value {
+        font-size: 1.55rem;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .admin-users-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 1rem;
+    }
+
+    .admin-user-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 1.2rem;
+        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        height: 100%;
+    }
+
+    .admin-user-card__top {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .admin-user-card__eyebrow {
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        margin-bottom: 0.2rem;
+        font-weight: 700;
+    }
+
+    .admin-user-card__top h4 {
+        margin: 0;
+        color: #0f172a;
+        font-weight: 800;
+        font-size: 1.15rem;
+    }
+
+    .admin-user-card__body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.85rem;
+    }
+
+    .admin-user-feature {
+        background: rgba(255,255,255,0.78);
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 0.85rem;
+    }
+
+    .admin-user-feature--wide {
+        grid-column: 1 / -1;
+    }
+
+    .admin-user-feature__label {
+        display: block;
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        margin-bottom: 0.25rem;
+        font-weight: 700;
+    }
+
+    .admin-user-feature strong {
+        color: #0f172a;
+        font-size: 0.96rem;
+        word-break: break-word;
+    }
+
+    .admin-user-card__footer {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+    }
+
+    .admin-user-role-editor {
+        width: 100%;
+    }
+
+    .role-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.38rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+    }
+
+    .role-badge--admin {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .role-badge--registered {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .role-badge--webservice {
+        background: #dbeafe;
+        color: #1d4ed8;
+    }
+
+    .role-badge--default {
+        background: #e2e8f0;
+        color: #334155;
+    }
+
+    .admin-users-btn-primary {
+        background: linear-gradient(135deg, #1d4ed8 0%, #0f172a 100%);
+        color: #fff;
+        border: none;
+        border-radius: 14px;
+        padding: 0.75rem 1rem;
+        font-weight: 700;
+        box-shadow: 0 10px 24px rgba(29, 78, 216, 0.22);
+    }
+
+    .admin-users-btn-primary:hover,
+    .admin-users-btn-primary:focus {
+        color: #fff;
+        background: linear-gradient(135deg, #1e40af 0%, #0b1220 100%);
+    }
+
+    @@media (max-width: 767.98px) {
+        .admin-user-card__body {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
 
 @code {
     private List<AdminUserRowDto>? users;
     private string? errorMessage;
     private string? successMessage;
+    private string? selectedRoleFilter;
+    private string? searchText;
+    private Guid? updatingUserId;
+
+    private List<AdminUserRowDto> FilteredUsers =>
+        (users ?? new())
+            .Where(u => string.IsNullOrWhiteSpace(selectedRoleFilter) || u.Role == selectedRoleFilter)
+            .Where(u =>
+                string.IsNullOrWhiteSpace(searchText) ||
+                GetFullName(u).Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
+                u.UserName.Contains(searchText, StringComparison.OrdinalIgnoreCase) ||
+                u.Email.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+            .ToList();
 
     protected override async Task OnInitializedAsync()
     {
@@ -127,6 +407,7 @@ else
         {
             errorMessage = null;
             successMessage = null;
+            updatingUserId = user.Id;
 
             var token = await JS.InvokeAsync<string>("auth.getToken");
             if (string.IsNullOrWhiteSpace(token))
@@ -159,6 +440,29 @@ else
         {
             errorMessage = $"Error actualizando rol: {ex.Message}";
         }
+        finally
+        {
+            updatingUserId = null;
+        }
+    }
+
+    private bool IsUpdatingUser(Guid userId) => updatingUserId == userId;
+
+    private static string GetFullName(AdminUserDto user)
+    {
+        var fullName = $"{user.FirstName} {user.LastName}".Trim();
+        return string.IsNullOrWhiteSpace(fullName) ? user.UserName : fullName;
+    }
+
+    private static string GetRoleBadgeClass(string role)
+    {
+        return role switch
+        {
+            "ADMIN" => "role-badge role-badge--admin",
+            "REGISTERED" => "role-badge role-badge--registered",
+            "WEBSERVICE" => "role-badge role-badge--webservice",
+            _ => "role-badge role-badge--default"
+        };
     }
 
     private class AdminUserDto

@@ -13,5 +13,11 @@ public class AdminRoomDto
     public string NameOrNumber { get; set; } = string.Empty;
     public int MaxGuests { get; set; }
     public decimal BasePricePerNight { get; set; }
+
+    public string? BedType { get; set; }
+    public decimal? AreaSquareMeters { get; set; }
+    public string? ShortDescription { get; set; }
+    public string? ImageUrl { get; set; }
+
     public bool IsActive { get; set; }
 }

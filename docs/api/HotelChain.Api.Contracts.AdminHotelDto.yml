@@ -1,0 +1,735 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Api.Contracts.AdminHotelDto
+  commentId: T:HotelChain.Api.Contracts.AdminHotelDto
+  id: AdminHotelDto
+  parent: HotelChain.Api.Contracts
+  children:
+  - HotelChain.Api.Contracts.AdminHotelDto.Address
+  - HotelChain.Api.Contracts.AdminHotelDto.Amenities
+  - HotelChain.Api.Contracts.AdminHotelDto.CityId
+  - HotelChain.Api.Contracts.AdminHotelDto.CityName
+  - HotelChain.Api.Contracts.AdminHotelDto.Code
+  - HotelChain.Api.Contracts.AdminHotelDto.Description
+  - HotelChain.Api.Contracts.AdminHotelDto.Id
+  - HotelChain.Api.Contracts.AdminHotelDto.IsActive
+  - HotelChain.Api.Contracts.AdminHotelDto.MainImageUrl
+  - HotelChain.Api.Contracts.AdminHotelDto.Name
+  - HotelChain.Api.Contracts.AdminHotelDto.ZoneInfo
+  langs:
+  - csharp
+  - vb
+  name: AdminHotelDto
+  nameWithType: AdminHotelDto
+  fullName: HotelChain.Api.Contracts.AdminHotelDto
+  type: Class
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminHotelDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: AdminHotelDto
+    path: ../HotelChain.Api/Contracts/AdminHotelDto.cs
+    startLine: 2
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public class AdminHotelDto
+    content.vb: Public Class AdminHotelDto
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: HotelChain.Api.Contracts.AdminHotelDto.Id
+  commentId: P:HotelChain.Api.Contracts.AdminHotelDto.Id
+  id: Id
+  parent: HotelChain.Api.Contracts.AdminHotelDto
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: AdminHotelDto.Id
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.Id
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminHotelDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Id
+    path: ../HotelChain.Api/Contracts/AdminHotelDto.cs
+    startLine: 4
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public int Id { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Id As Integer
+  overload: HotelChain.Api.Contracts.AdminHotelDto.Id*
+- uid: HotelChain.Api.Contracts.AdminHotelDto.Code
+  commentId: P:HotelChain.Api.Contracts.AdminHotelDto.Code
+  id: Code
+  parent: HotelChain.Api.Contracts.AdminHotelDto
+  langs:
+  - csharp
+  - vb
+  name: Code
+  nameWithType: AdminHotelDto.Code
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.Code
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminHotelDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Code
+    path: ../HotelChain.Api/Contracts/AdminHotelDto.cs
+    startLine: 5
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public string Code { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Code As String
+  overload: HotelChain.Api.Contracts.AdminHotelDto.Code*
+- uid: HotelChain.Api.Contracts.AdminHotelDto.Name
+  commentId: P:HotelChain.Api.Contracts.AdminHotelDto.Name
+  id: Name
+  parent: HotelChain.Api.Contracts.AdminHotelDto
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: AdminHotelDto.Name
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.Name
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminHotelDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Name
+    path: ../HotelChain.Api/Contracts/AdminHotelDto.cs
+    startLine: 6
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Name As String
+  overload: HotelChain.Api.Contracts.AdminHotelDto.Name*
+- uid: HotelChain.Api.Contracts.AdminHotelDto.Address
+  commentId: P:HotelChain.Api.Contracts.AdminHotelDto.Address
+  id: Address
+  parent: HotelChain.Api.Contracts.AdminHotelDto
+  langs:
+  - csharp
+  - vb
+  name: Address
+  nameWithType: AdminHotelDto.Address
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.Address
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminHotelDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Address
+    path: ../HotelChain.Api/Contracts/AdminHotelDto.cs
+    startLine: 7
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public string Address { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Address As String
+  overload: HotelChain.Api.Contracts.AdminHotelDto.Address*
+- uid: HotelChain.Api.Contracts.AdminHotelDto.Description
+  commentId: P:HotelChain.Api.Contracts.AdminHotelDto.Description
+  id: Description
+  parent: HotelChain.Api.Contracts.AdminHotelDto
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: AdminHotelDto.Description
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.Description
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminHotelDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Description
+    path: ../HotelChain.Api/Contracts/AdminHotelDto.cs
+    startLine: 8
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public string Description { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Description As String
+  overload: HotelChain.Api.Contracts.AdminHotelDto.Description*
+- uid: HotelChain.Api.Contracts.AdminHotelDto.MainImageUrl
+  commentId: P:HotelChain.Api.Contracts.AdminHotelDto.MainImageUrl
+  id: MainImageUrl
+  parent: HotelChain.Api.Contracts.AdminHotelDto
+  langs:
+  - csharp
+  - vb
+  name: MainImageUrl
+  nameWithType: AdminHotelDto.MainImageUrl
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.MainImageUrl
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminHotelDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: MainImageUrl
+    path: ../HotelChain.Api/Contracts/AdminHotelDto.cs
+    startLine: 9
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public string? MainImageUrl { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property MainImageUrl As String
+  overload: HotelChain.Api.Contracts.AdminHotelDto.MainImageUrl*
+- uid: HotelChain.Api.Contracts.AdminHotelDto.ZoneInfo
+  commentId: P:HotelChain.Api.Contracts.AdminHotelDto.ZoneInfo
+  id: ZoneInfo
+  parent: HotelChain.Api.Contracts.AdminHotelDto
+  langs:
+  - csharp
+  - vb
+  name: ZoneInfo
+  nameWithType: AdminHotelDto.ZoneInfo
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.ZoneInfo
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminHotelDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ZoneInfo
+    path: ../HotelChain.Api/Contracts/AdminHotelDto.cs
+    startLine: 10
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public string? ZoneInfo { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ZoneInfo As String
+  overload: HotelChain.Api.Contracts.AdminHotelDto.ZoneInfo*
+- uid: HotelChain.Api.Contracts.AdminHotelDto.Amenities
+  commentId: P:HotelChain.Api.Contracts.AdminHotelDto.Amenities
+  id: Amenities
+  parent: HotelChain.Api.Contracts.AdminHotelDto
+  langs:
+  - csharp
+  - vb
+  name: Amenities
+  nameWithType: AdminHotelDto.Amenities
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.Amenities
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminHotelDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Amenities
+    path: ../HotelChain.Api/Contracts/AdminHotelDto.cs
+    startLine: 11
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public string? Amenities { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Amenities As String
+  overload: HotelChain.Api.Contracts.AdminHotelDto.Amenities*
+- uid: HotelChain.Api.Contracts.AdminHotelDto.CityId
+  commentId: P:HotelChain.Api.Contracts.AdminHotelDto.CityId
+  id: CityId
+  parent: HotelChain.Api.Contracts.AdminHotelDto
+  langs:
+  - csharp
+  - vb
+  name: CityId
+  nameWithType: AdminHotelDto.CityId
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.CityId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminHotelDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CityId
+    path: ../HotelChain.Api/Contracts/AdminHotelDto.cs
+    startLine: 12
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public int CityId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property CityId As Integer
+  overload: HotelChain.Api.Contracts.AdminHotelDto.CityId*
+- uid: HotelChain.Api.Contracts.AdminHotelDto.CityName
+  commentId: P:HotelChain.Api.Contracts.AdminHotelDto.CityName
+  id: CityName
+  parent: HotelChain.Api.Contracts.AdminHotelDto
+  langs:
+  - csharp
+  - vb
+  name: CityName
+  nameWithType: AdminHotelDto.CityName
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.CityName
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminHotelDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CityName
+    path: ../HotelChain.Api/Contracts/AdminHotelDto.cs
+    startLine: 13
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public string CityName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CityName As String
+  overload: HotelChain.Api.Contracts.AdminHotelDto.CityName*
+- uid: HotelChain.Api.Contracts.AdminHotelDto.IsActive
+  commentId: P:HotelChain.Api.Contracts.AdminHotelDto.IsActive
+  id: IsActive
+  parent: HotelChain.Api.Contracts.AdminHotelDto
+  langs:
+  - csharp
+  - vb
+  name: IsActive
+  nameWithType: AdminHotelDto.IsActive
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.IsActive
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminHotelDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: IsActive
+    path: ../HotelChain.Api/Contracts/AdminHotelDto.cs
+    startLine: 14
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public bool IsActive { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsActive As Boolean
+  overload: HotelChain.Api.Contracts.AdminHotelDto.IsActive*
+references:
+- uid: HotelChain.Api.Contracts
+  commentId: N:HotelChain.Api.Contracts
+  href: HotelChain.html
+  name: HotelChain.Api.Contracts
+  nameWithType: HotelChain.Api.Contracts
+  fullName: HotelChain.Api.Contracts
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Contracts
+    name: Contracts
+    href: HotelChain.Api.Contracts.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Contracts
+    name: Contracts
+    href: HotelChain.Api.Contracts.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Api.Contracts.AdminHotelDto.Id*
+  commentId: Overload:HotelChain.Api.Contracts.AdminHotelDto.Id
+  href: HotelChain.Api.Contracts.AdminHotelDto.html#HotelChain_Api_Contracts_AdminHotelDto_Id
+  name: Id
+  nameWithType: AdminHotelDto.Id
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.Id
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: HotelChain.Api.Contracts.AdminHotelDto.Code*
+  commentId: Overload:HotelChain.Api.Contracts.AdminHotelDto.Code
+  href: HotelChain.Api.Contracts.AdminHotelDto.html#HotelChain_Api_Contracts_AdminHotelDto_Code
+  name: Code
+  nameWithType: AdminHotelDto.Code
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.Code
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: HotelChain.Api.Contracts.AdminHotelDto.Name*
+  commentId: Overload:HotelChain.Api.Contracts.AdminHotelDto.Name
+  href: HotelChain.Api.Contracts.AdminHotelDto.html#HotelChain_Api_Contracts_AdminHotelDto_Name
+  name: Name
+  nameWithType: AdminHotelDto.Name
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.Name
+- uid: HotelChain.Api.Contracts.AdminHotelDto.Address*
+  commentId: Overload:HotelChain.Api.Contracts.AdminHotelDto.Address
+  href: HotelChain.Api.Contracts.AdminHotelDto.html#HotelChain_Api_Contracts_AdminHotelDto_Address
+  name: Address
+  nameWithType: AdminHotelDto.Address
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.Address
+- uid: HotelChain.Api.Contracts.AdminHotelDto.Description*
+  commentId: Overload:HotelChain.Api.Contracts.AdminHotelDto.Description
+  href: HotelChain.Api.Contracts.AdminHotelDto.html#HotelChain_Api_Contracts_AdminHotelDto_Description
+  name: Description
+  nameWithType: AdminHotelDto.Description
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.Description
+- uid: HotelChain.Api.Contracts.AdminHotelDto.MainImageUrl*
+  commentId: Overload:HotelChain.Api.Contracts.AdminHotelDto.MainImageUrl
+  href: HotelChain.Api.Contracts.AdminHotelDto.html#HotelChain_Api_Contracts_AdminHotelDto_MainImageUrl
+  name: MainImageUrl
+  nameWithType: AdminHotelDto.MainImageUrl
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.MainImageUrl
+- uid: HotelChain.Api.Contracts.AdminHotelDto.ZoneInfo*
+  commentId: Overload:HotelChain.Api.Contracts.AdminHotelDto.ZoneInfo
+  href: HotelChain.Api.Contracts.AdminHotelDto.html#HotelChain_Api_Contracts_AdminHotelDto_ZoneInfo
+  name: ZoneInfo
+  nameWithType: AdminHotelDto.ZoneInfo
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.ZoneInfo
+- uid: HotelChain.Api.Contracts.AdminHotelDto.Amenities*
+  commentId: Overload:HotelChain.Api.Contracts.AdminHotelDto.Amenities
+  href: HotelChain.Api.Contracts.AdminHotelDto.html#HotelChain_Api_Contracts_AdminHotelDto_Amenities
+  name: Amenities
+  nameWithType: AdminHotelDto.Amenities
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.Amenities
+- uid: HotelChain.Api.Contracts.AdminHotelDto.CityId*
+  commentId: Overload:HotelChain.Api.Contracts.AdminHotelDto.CityId
+  href: HotelChain.Api.Contracts.AdminHotelDto.html#HotelChain_Api_Contracts_AdminHotelDto_CityId
+  name: CityId
+  nameWithType: AdminHotelDto.CityId
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.CityId
+- uid: HotelChain.Api.Contracts.AdminHotelDto.CityName*
+  commentId: Overload:HotelChain.Api.Contracts.AdminHotelDto.CityName
+  href: HotelChain.Api.Contracts.AdminHotelDto.html#HotelChain_Api_Contracts_AdminHotelDto_CityName
+  name: CityName
+  nameWithType: AdminHotelDto.CityName
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.CityName
+- uid: HotelChain.Api.Contracts.AdminHotelDto.IsActive*
+  commentId: Overload:HotelChain.Api.Contracts.AdminHotelDto.IsActive
+  href: HotelChain.Api.Contracts.AdminHotelDto.html#HotelChain_Api_Contracts_AdminHotelDto_IsActive
+  name: IsActive
+  nameWithType: AdminHotelDto.IsActive
+  fullName: HotelChain.Api.Contracts.AdminHotelDto.IsActive
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean

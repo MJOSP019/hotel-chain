@@ -1,0 +1,487 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Web.Models.CreateHotelReviewRequest
+  commentId: T:HotelChain.Web.Models.CreateHotelReviewRequest
+  id: CreateHotelReviewRequest
+  parent: HotelChain.Web.Models
+  children:
+  - HotelChain.Web.Models.CreateHotelReviewRequest.Comment
+  - HotelChain.Web.Models.CreateHotelReviewRequest.ParentReviewId
+  - HotelChain.Web.Models.CreateHotelReviewRequest.Rating
+  langs:
+  - csharp
+  - vb
+  name: CreateHotelReviewRequest
+  nameWithType: CreateHotelReviewRequest
+  fullName: HotelChain.Web.Models.CreateHotelReviewRequest
+  type: Class
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CreateHotelReviewRequest
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 57
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public class CreateHotelReviewRequest
+    content.vb: Public Class CreateHotelReviewRequest
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: HotelChain.Web.Models.CreateHotelReviewRequest.Rating
+  commentId: P:HotelChain.Web.Models.CreateHotelReviewRequest.Rating
+  id: Rating
+  parent: HotelChain.Web.Models.CreateHotelReviewRequest
+  langs:
+  - csharp
+  - vb
+  name: Rating
+  nameWithType: CreateHotelReviewRequest.Rating
+  fullName: HotelChain.Web.Models.CreateHotelReviewRequest.Rating
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Rating
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 59
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public int Rating { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Rating As Integer
+  overload: HotelChain.Web.Models.CreateHotelReviewRequest.Rating*
+- uid: HotelChain.Web.Models.CreateHotelReviewRequest.Comment
+  commentId: P:HotelChain.Web.Models.CreateHotelReviewRequest.Comment
+  id: Comment
+  parent: HotelChain.Web.Models.CreateHotelReviewRequest
+  langs:
+  - csharp
+  - vb
+  name: Comment
+  nameWithType: CreateHotelReviewRequest.Comment
+  fullName: HotelChain.Web.Models.CreateHotelReviewRequest.Comment
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Comment
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 60
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string? Comment { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Comment As String
+  overload: HotelChain.Web.Models.CreateHotelReviewRequest.Comment*
+- uid: HotelChain.Web.Models.CreateHotelReviewRequest.ParentReviewId
+  commentId: P:HotelChain.Web.Models.CreateHotelReviewRequest.ParentReviewId
+  id: ParentReviewId
+  parent: HotelChain.Web.Models.CreateHotelReviewRequest
+  langs:
+  - csharp
+  - vb
+  name: ParentReviewId
+  nameWithType: CreateHotelReviewRequest.ParentReviewId
+  fullName: HotelChain.Web.Models.CreateHotelReviewRequest.ParentReviewId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ParentReviewId
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 61
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public int? ParentReviewId { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int32}
+    content.vb: Public Property ParentReviewId As Integer?
+  overload: HotelChain.Web.Models.CreateHotelReviewRequest.ParentReviewId*
+references:
+- uid: HotelChain.Web.Models
+  commentId: N:HotelChain.Web.Models
+  href: HotelChain.html
+  name: HotelChain.Web.Models
+  nameWithType: HotelChain.Web.Models
+  fullName: HotelChain.Web.Models
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Web
+    name: Web
+    href: HotelChain.Web.html
+  - name: .
+  - uid: HotelChain.Web.Models
+    name: Models
+    href: HotelChain.Web.Models.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Web
+    name: Web
+    href: HotelChain.Web.html
+  - name: .
+  - uid: HotelChain.Web.Models
+    name: Models
+    href: HotelChain.Web.Models.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Web.Models.CreateHotelReviewRequest.Rating*
+  commentId: Overload:HotelChain.Web.Models.CreateHotelReviewRequest.Rating
+  href: HotelChain.Web.Models.CreateHotelReviewRequest.html#HotelChain_Web_Models_CreateHotelReviewRequest_Rating
+  name: Rating
+  nameWithType: CreateHotelReviewRequest.Rating
+  fullName: HotelChain.Web.Models.CreateHotelReviewRequest.Rating
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: HotelChain.Web.Models.CreateHotelReviewRequest.Comment*
+  commentId: Overload:HotelChain.Web.Models.CreateHotelReviewRequest.Comment
+  href: HotelChain.Web.Models.CreateHotelReviewRequest.html#HotelChain_Web_Models_CreateHotelReviewRequest_Comment
+  name: Comment
+  nameWithType: CreateHotelReviewRequest.Comment
+  fullName: HotelChain.Web.Models.CreateHotelReviewRequest.Comment
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: HotelChain.Web.Models.CreateHotelReviewRequest.ParentReviewId*
+  commentId: Overload:HotelChain.Web.Models.CreateHotelReviewRequest.ParentReviewId
+  href: HotelChain.Web.Models.CreateHotelReviewRequest.html#HotelChain_Web_Models_CreateHotelReviewRequest_ParentReviewId
+  name: ParentReviewId
+  nameWithType: CreateHotelReviewRequest.ParentReviewId
+  fullName: HotelChain.Web.Models.CreateHotelReviewRequest.ParentReviewId
+- uid: System.Nullable{System.Int32}
+  commentId: T:System.Nullable{System.Int32}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int?
+  nameWithType: int?
+  fullName: int?
+  nameWithType.vb: Integer?
+  fullName.vb: Integer?
+  name.vb: Integer?
+  spec.csharp:
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '?'
+  spec.vb:
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

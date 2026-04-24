@@ -24,12 +24,46 @@ public class AdminAnalyticsController : ControllerBase
         [FromQuery] string? source,
         [FromQuery] int? cityId,
         [FromQuery] DateTime? from,
-        [FromQuery] DateTime? to)
+        [FromQuery] DateTime? to,
+        [FromQuery] Guid? userId,
+        [FromQuery] int? guests,
+        [FromQuery] int? roomTypeId,
+        [FromQuery] double? minRating,
+        [FromQuery] decimal? minPrice,
+        [FromQuery] decimal? maxPrice,
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 25)
     {
-        var query = BuildSearchesQuery(source, cityId, from, to);
+        if (page <= 0)
+            page = 1;
+
+        if (pageSize <= 0)
+            pageSize = 25;
+
+        if (pageSize > 100)
+            pageSize = 100;
+
+        var query = BuildSearchesQuery(
+            source,
+            cityId,
+            from,
+            to,
+            userId,
+            guests,
+            roomTypeId,
+            minRating,
+            minPrice,
+            maxPrice);
+
+        var totalItems = await query.CountAsync();
+        var totalPages = totalItems == 0
+            ? 0
+            : (int)Math.Ceiling(totalItems / (double)pageSize);
 
         var searches = await query
             .OrderByDescending(x => x.CreatedAt)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
             .Select(x => new
             {
                 x.Id,
@@ -54,17 +88,107 @@ public class AdminAnalyticsController : ControllerBase
             })
             .ToListAsync();
 
-        return Ok(searches);
+        return Ok(new
+        {
+            page,
+            pageSize,
+            totalItems,
+            totalPages,
+            items = searches
+        });
     }
+    [HttpGet("searches/dashboard")]
+public async Task<IActionResult> GetSearchesDashboard(
+    [FromQuery] string? source,
+    [FromQuery] int? cityId,
+    [FromQuery] DateTime? from,
+    [FromQuery] DateTime? to,
+    [FromQuery] Guid? userId,
+    [FromQuery] int? guests,
+    [FromQuery] int? roomTypeId,
+    [FromQuery] double? minRating,
+    [FromQuery] decimal? minPrice,
+    [FromQuery] decimal? maxPrice)
+{
+    var query = BuildSearchesQuery(
+        source,
+        cityId,
+        from,
+        to,
+        userId,
+        guests,
+        roomTypeId,
+        minRating,
+        minPrice,
+        maxPrice);
+
+    var totalSearches = await query.CountAsync();
+
+    var bySource = await query
+        .GroupBy(x => string.IsNullOrWhiteSpace(x.Source) ? "UNKNOWN" : x.Source)
+        .Select(g => new
+        {
+            Label = g.Key,
+            Count = g.Count()
+        })
+        .OrderByDescending(x => x.Count)
+        .ToListAsync();
+
+    var topCities = await query
+        .GroupBy(x => new { x.CityId, CityName = x.City.Name })
+        .Select(g => new
+        {
+            CityId = g.Key.CityId,
+            Label = g.Key.CityName,
+            Count = g.Count()
+        })
+        .OrderByDescending(x => x.Count)
+        .Take(5)
+        .ToListAsync();
+
+    var byDay = await query
+        .GroupBy(x => x.CreatedAt.Date)
+        .Select(g => new
+        {
+            Date = g.Key,
+            Count = g.Count()
+        })
+        .OrderBy(x => x.Date)
+        .ToListAsync();
+
+    return Ok(new
+    {
+        totalSearches,
+        bySource,
+        topCities,
+        byDay
+    });
+}
 
     [HttpGet("searches/export")]
     public async Task<IActionResult> ExportSearches(
         [FromQuery] string? source,
         [FromQuery] int? cityId,
         [FromQuery] DateTime? from,
-        [FromQuery] DateTime? to)
+        [FromQuery] DateTime? to,
+        [FromQuery] Guid? userId,
+        [FromQuery] int? guests,
+        [FromQuery] int? roomTypeId,
+        [FromQuery] double? minRating,
+        [FromQuery] decimal? minPrice,
+        [FromQuery] decimal? maxPrice)
     {
-        var query = BuildSearchesQuery(source, cityId, from, to);
+        var query = BuildSearchesQuery(
+            source,
+            cityId,
+            from,
+            to,
+            userId,
+            guests,
+            roomTypeId,
+            minRating,
+            minPrice,
+            maxPrice);
 
         var searches = await query
             .OrderByDescending(x => x.CreatedAt)
@@ -123,7 +247,13 @@ public class AdminAnalyticsController : ControllerBase
         string? source,
         int? cityId,
         DateTime? from,
-        DateTime? to)
+        DateTime? to,
+        Guid? userId,
+        int? guests,
+        int? roomTypeId,
+        double? minRating,
+        decimal? minPrice,
+        decimal? maxPrice)
     {
         var query = _db.SearchAudits
             .AsNoTracking()
@@ -151,6 +281,36 @@ public class AdminAnalyticsController : ControllerBase
         {
             var toDateExclusive = to.Value.Date.AddDays(1);
             query = query.Where(x => x.CreatedAt < toDateExclusive);
+        }
+
+        if (userId.HasValue)
+        {
+            query = query.Where(x => x.UserId == userId.Value);
+        }
+
+        if (guests.HasValue && guests.Value > 0)
+        {
+            query = query.Where(x => x.Guests == guests.Value);
+        }
+
+        if (roomTypeId.HasValue && roomTypeId.Value > 0)
+        {
+            query = query.Where(x => x.RoomTypeId == roomTypeId.Value);
+        }
+
+        if (minRating.HasValue)
+        {
+            query = query.Where(x => x.MinRating.HasValue && x.MinRating.Value >= minRating.Value);
+        }
+
+        if (minPrice.HasValue)
+        {
+            query = query.Where(x => x.MinPrice.HasValue && x.MinPrice.Value >= minPrice.Value);
+        }
+
+        if (maxPrice.HasValue)
+        {
+            query = query.Where(x => x.MaxPrice.HasValue && x.MaxPrice.Value <= maxPrice.Value);
         }
 
         return query;

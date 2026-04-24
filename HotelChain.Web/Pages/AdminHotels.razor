@@ -41,6 +41,21 @@
             </div>
 
             <div class="mb-2">
+                <label>Imagen principal (URL)</label>
+                <input class="form-control" @bind="model.MainImageUrl" placeholder="https://..." />
+            </div>
+
+            <div class="mb-2">
+                <label>Información de la zona</label>
+                <textarea class="form-control" rows="3" @bind="model.ZoneInfo" placeholder="Describe la zona, accesos, entorno o puntos de interés cercanos."></textarea>
+            </div>
+
+            <div class="mb-2">
+                <label>Amenidades</label>
+                <textarea class="form-control" rows="3" @bind="model.Amenities" placeholder="Ej. piscina, gimnasio, restaurante, spa, wifi, parqueo..."></textarea>
+            </div>
+
+            <div class="mb-2">
                 <label>Ciudad</label>
                 <select class="form-select" @bind="model.CityId">
                     <option value="0">Seleccione una ciudad</option>
@@ -77,54 +92,83 @@
             }
             else
             {
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Nombre</th>
-                            <th>Ciudad</th>
-                            <th>Estado</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var h in hotels)
-                        {
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
                             <tr>
-                                <td>@h.Code</td>
-                                <td>@h.Name</td>
-                                <td>@h.CityName</td>
-                                <td>@(h.IsActive ? "Activo" : "Inactivo")</td>
-                                <td>
-                                    <div class="d-flex gap-2">
-                                        <button class="btn btn-sm btn-outline-primary"
-                                                disabled="@(!h.IsActive)"
-                                                @onclick="() => EditHotel(h)">
-                                            Editar
-                                        </button>
-
-                                        @if (h.IsActive)
-                                        {
-                                            <button class="btn btn-sm btn-outline-danger"
-                                                    disabled="@(deactivatingHotelId == h.Id || reactivatingHotelId == h.Id)"
-                                                    @onclick="() => DeactivateHotel(h)">
-                                                @(deactivatingHotelId == h.Id ? "Desactivando..." : "Desactivar")
-                                            </button>
-                                        }
-                                        else
-                                        {
-                                            <button class="btn btn-sm btn-outline-success"
-                                                    disabled="@(reactivatingHotelId == h.Id || deactivatingHotelId == h.Id)"
-                                                    @onclick="() => ReactivateHotel(h)">
-                                                @(reactivatingHotelId == h.Id ? "Reactivando..." : "Reactivar")
-                                            </button>
-                                        }
-                                    </div>
-                                </td>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Ciudad</th>
+                                <th>Estado</th>
+                                <th></th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var h in hotels)
+                            {
+                                <tr>
+                                    <td>@h.Code</td>
+                                    <td>@h.Name</td>
+                                    <td>@h.CityName</td>
+                                    <td>@(h.IsActive ? "Activo" : "Inactivo")</td>
+                                    <td>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-sm btn-outline-primary"
+                                                    disabled="@(!h.IsActive)"
+                                                    @onclick="() => EditHotel(h)">
+                                                Editar
+                                            </button>
+
+                                            @if (h.IsActive)
+                                            {
+                                                <button class="btn btn-sm btn-outline-danger"
+                                                        disabled="@(deactivatingHotelId == h.Id || reactivatingHotelId == h.Id)"
+                                                        @onclick="() => DeactivateHotel(h)">
+                                                    @(deactivatingHotelId == h.Id ? "Desactivando..." : "Desactivar")
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button class="btn btn-sm btn-outline-success"
+                                                        disabled="@(reactivatingHotelId == h.Id || deactivatingHotelId == h.Id)"
+                                                        @onclick="() => ReactivateHotel(h)">
+                                                    @(reactivatingHotelId == h.Id ? "Reactivando..." : "Reactivar")
+                                                </button>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                @if (!string.IsNullOrWhiteSpace(h.Description)
+                                    || !string.IsNullOrWhiteSpace(h.MainImageUrl)
+                                    || !string.IsNullOrWhiteSpace(h.ZoneInfo)
+                                    || !string.IsNullOrWhiteSpace(h.Amenities))
+                                {
+                                    <tr class="table-light">
+                                        <td colspan="5">
+                                            @if (!string.IsNullOrWhiteSpace(h.Description))
+                                            {
+                                                <div><strong>Descripción:</strong> @h.Description</div>
+                                            }
+                                            @if (!string.IsNullOrWhiteSpace(h.MainImageUrl))
+                                            {
+                                                <div><strong>Imagen principal:</strong> @h.MainImageUrl</div>
+                                            }
+                                            @if (!string.IsNullOrWhiteSpace(h.ZoneInfo))
+                                            {
+                                                <div><strong>Zona:</strong> @h.ZoneInfo</div>
+                                            }
+                                            @if (!string.IsNullOrWhiteSpace(h.Amenities))
+                                            {
+                                                <div><strong>Amenidades:</strong> @h.Amenities</div>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
             }
         </div>
     </div>
@@ -210,6 +254,9 @@
             Name = hotel.Name,
             Address = hotel.Address,
             Description = hotel.Description,
+            MainImageUrl = hotel.MainImageUrl,
+            ZoneInfo = hotel.ZoneInfo,
+            Amenities = hotel.Amenities,
             CityId = hotel.CityId
         };
     }
@@ -410,6 +457,9 @@
         public string Name { get; set; } = "";
         public string Address { get; set; } = "";
         public string Description { get; set; } = "";
+        public string? MainImageUrl { get; set; }
+        public string? ZoneInfo { get; set; }
+        public string? Amenities { get; set; }
         public int CityId { get; set; }
         public string CityName { get; set; } = "";
         public bool IsActive { get; set; }
@@ -421,6 +471,9 @@
         public string Name { get; set; } = "";
         public string Address { get; set; } = "";
         public string? Description { get; set; }
+        public string? MainImageUrl { get; set; }
+        public string? ZoneInfo { get; set; }
+        public string? Amenities { get; set; }
         public int CityId { get; set; }
     }
 

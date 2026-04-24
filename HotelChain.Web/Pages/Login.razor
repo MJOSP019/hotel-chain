@@ -5,298 +5,392 @@
 
 <PageTitle>Login</PageTitle>
 
-<div class="login-page">
-    <section class="login-hero">
-        <div class="login-hero__content">
-            <div class="login-badge">Acceso</div>
-            <h1>Inicia sesión</h1>
+<div class="auth-page">
+    <section class="auth-hero auth-hero--login">
+        <div class="auth-hero__overlay"></div>
+
+        <div class="auth-hero__content">
+            <div class="auth-eyebrow">Acceso a huéspedes</div>
+            <h1>Inicia sesión en HotelChain Collection</h1>
             <p>
                 Accede al portal para gestionar tus reservaciones, completar el checkout,
-                descargar PDFs y publicar comentarios en hoteles.
+                consultar tus viajes, descargar PDFs y publicar comentarios en hoteles.
             </p>
         </div>
     </section>
 
-    <section class="login-panel">
-        <div class="login-card">
-            <div class="login-card__header">
-                <div>
-                    <h3>Bienvenido de nuevo</h3>
-                    <p>Ingresa tus credenciales para continuar.</p>
-                </div>
+    <section class="auth-layout">
+        <div class="auth-main-card">
+            <div class="auth-main-card__header">
+                <div class="auth-section-badge">Ingreso seguro</div>
+                <h2>Bienvenido de nuevo</h2>
+                <p>Ingresa tus credenciales para continuar dentro del portal.</p>
             </div>
 
             @if (!string.IsNullOrEmpty(error))
             {
-                <div class="alert alert-danger login-alert">@error</div>
+                <div class="alert alert-danger auth-alert">@error</div>
             }
 
-            <div class="mb-3">
-                <label class="login-label">Email</label>
-                <input class="form-control login-input" @bind="email" />
+            <div class="auth-form-grid">
+                <div class="auth-field auth-field--full">
+                    <label class="auth-label">Email</label>
+                    <input class="form-control auth-input" @bind="email" placeholder="correo@ejemplo.com" />
+                </div>
+
+                <div class="auth-field auth-field--full">
+                    <label class="auth-label">Password</label>
+                    <input type="password" class="form-control auth-input" @bind="password" placeholder="Tu contraseña" />
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label class="login-label">Password</label>
-                <input type="password" class="form-control login-input" @bind="password" />
-            </div>
-
-            <div class="login-actions">
-                <button class="btn login-btn-primary" @onclick="DoLogin">
-                    Login
+            <div class="auth-actions">
+                <button class="btn auth-btn-primary" @onclick="DoLogin">
+                    Iniciar sesión
                 </button>
 
-                <a class="btn login-btn-secondary" href="/register">
+                <a class="btn auth-btn-secondary" href="/register">
                     Crear cuenta
                 </a>
             </div>
         </div>
 
-        <div class="login-side-card">
-            <div class="login-side-card__badge">Portal HotelChain</div>
-            <h4>¿Qué puedes hacer al iniciar sesión?</h4>
-
-            <div class="login-feature-list">
-                <div class="login-feature">
-                    <span class="login-feature__title">Reservar habitaciones</span>
-                    <span class="login-feature__text">Confirma disponibilidad y genera tu código de reserva.</span>
-                </div>
-
-                <div class="login-feature">
-                    <span class="login-feature__title">Gestionar checkout</span>
-                    <span class="login-feature__text">Completa el pago demo y revisa el estado de tu reservación.</span>
-                </div>
-
-                <div class="login-feature">
-                    <span class="login-feature__title">Descargar PDF y comentar</span>
-                    <span class="login-feature__text">Consulta comprobantes y publica reviews en hoteles.</span>
-                </div>
+        <aside class="auth-side-panel">
+            <div class="auth-side-panel__intro">
+                <div class="auth-section-badge">Portal HotelChain</div>
+                <h3>Tu cuenta te permite continuar toda la experiencia</h3>
+                <p>
+                    Una vez dentro del sistema podrás seguir con el flujo de reservación
+                    y consultar la información de tus compras dentro del portal.
+                </p>
             </div>
-        </div>
+
+            <div class="auth-feature-list">
+                <article class="auth-feature-card">
+                    <div class="auth-feature-card__icon">⌂</div>
+                    <div>
+                        <h4>Reservar habitaciones</h4>
+                        <p>Confirma disponibilidad y genera tu código de reservación.</p>
+                    </div>
+                </article>
+
+                <article class="auth-feature-card">
+                    <div class="auth-feature-card__icon">✓</div>
+                    <div>
+                        <h4>Gestionar checkout</h4>
+                        <p>Completa el pago demo y revisa el estado actual de tu compra.</p>
+                    </div>
+                </article>
+
+                <article class="auth-feature-card">
+                    <div class="auth-feature-card__icon">★</div>
+                    <div>
+                        <h4>PDF y comentarios</h4>
+                        <p>Abre tu confirmación y comparte tu experiencia en hoteles.</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="auth-side-panel__footer">
+                <span class="auth-side-panel__footer-label">¿Aún no tienes cuenta?</span>
+                <a href="/register" class="auth-inline-link">Regístrate aquí</a>
+            </div>
+        </aside>
     </section>
 </div>
 
 <style>
-    .login-page {
-        padding: 1.5rem 0 2rem 0;
-        color: #0f172a;
+    .auth-page {
+        color: #111827;
     }
 
-    .login-hero {
-        background:
-            radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 28%),
-            linear-gradient(135deg, #0f172a 0%, #162033 45%, #1e293b 100%);
-        color: #fff;
-        border-radius: 28px;
-        padding: 2.2rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
-        overflow: hidden;
+    .auth-hero {
         position: relative;
+        min-height: 320px;
+        border-radius: 30px;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
+        display: flex;
+        align-items: flex-end;
     }
 
-    .login-hero::after {
-        content: "";
+    .auth-hero--login {
+        background:
+            linear-gradient(180deg, rgba(17,24,39,0.12), rgba(17,24,39,0.40)),
+            radial-gradient(circle at top right, rgba(255,255,255,0.14), transparent 24%),
+            linear-gradient(135deg, #b9a68f 0%, #d7c8b8 28%, #aab9c9 58%, #6b8298 100%);
+    }
+
+    .auth-hero__overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent 30%);
+        background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 25%, rgba(17,24,39,0.10) 100%);
         pointer-events: none;
     }
 
-    .login-hero__content {
+    .auth-hero__content {
         position: relative;
         z-index: 1;
         max-width: 760px;
+        padding: 2rem;
+        color: #ffffff;
     }
 
-    .login-badge {
+    .auth-eyebrow,
+    .auth-section-badge {
         display: inline-flex;
         align-items: center;
-        padding: 0.38rem 0.75rem;
+        padding: 0.38rem 0.78rem;
         border-radius: 999px;
-        background: rgba(255,255,255,0.12);
-        color: #dbeafe;
-        font-size: 0.82rem;
-        font-weight: 700;
-        letter-spacing: 0.03em;
-        text-transform: uppercase;
-        margin-bottom: 1rem;
-    }
-
-    .login-hero h1 {
-        font-size: clamp(2rem, 4vw, 3rem);
+        font-size: 0.78rem;
         font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    .auth-eyebrow {
+        background: rgba(255,255,255,0.14);
+        color: rgba(255,255,255,0.94);
+        margin-bottom: 1rem;
+        backdrop-filter: blur(8px);
+    }
+
+    .auth-section-badge {
+        background: #f3f4f6;
+        color: #111827;
         margin-bottom: 0.8rem;
-        line-height: 1.05;
     }
 
-    .login-hero p {
+    .auth-hero__content h1 {
+        margin: 0 0 0.8rem 0;
+        font-size: clamp(2.1rem, 5vw, 3.6rem);
+        line-height: 1.02;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .auth-hero__content p {
         margin: 0;
-        max-width: 720px;
-        color: rgba(255,255,255,0.82);
+        max-width: 700px;
         font-size: 1.02rem;
+        line-height: 1.7;
+        color: rgba(255,255,255,0.88);
     }
 
-    .login-panel {
+    .auth-layout {
         display: grid;
-        grid-template-columns: minmax(320px, 480px) minmax(280px, 1fr);
+        grid-template-columns: minmax(340px, 1.05fr) minmax(280px, 0.95fr);
         gap: 1rem;
         align-items: stretch;
     }
 
-    .login-card,
-    .login-side-card {
+    .auth-main-card,
+    .auth-side-panel {
         background: #ffffff;
-        border: 1px solid #e2e8f0;
+        border: 1px solid #e5e7eb;
         border-radius: 24px;
-        padding: 1.5rem;
-        box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+        box-shadow: 0 14px 35px rgba(15, 23, 42, 0.07);
     }
 
-    .login-card__header {
+    .auth-main-card {
+        padding: 1.5rem;
+    }
+
+    .auth-side-panel {
+        padding: 1.4rem;
+        background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .auth-main-card__header h2,
+    .auth-side-panel__intro h3 {
+        margin: 0 0 0.3rem 0;
+        color: #111827;
+        font-weight: 800;
+    }
+
+    .auth-main-card__header p,
+    .auth-side-panel__intro p {
+        margin: 0;
+        color: #6b7280;
+        line-height: 1.6;
+    }
+
+    .auth-alert {
+        border-radius: 16px;
         margin-bottom: 1rem;
     }
 
-    .login-card__header h3,
-    .login-side-card h4 {
-        margin: 0 0 0.25rem 0;
-        font-weight: 800;
-        color: #0f172a;
+    .auth-form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
     }
 
-    .login-card__header p {
-        margin: 0;
-        color: #64748b;
+    .auth-field--full {
+        grid-column: span 2;
     }
 
-    .login-alert {
-        border-radius: 16px;
-    }
-
-    .login-label {
+    .auth-label {
         display: block;
         margin-bottom: 0.45rem;
         font-size: 0.92rem;
         font-weight: 700;
-        color: #334155;
+        color: #374151;
     }
 
-    .login-input {
-        min-height: 48px;
-        border-radius: 14px;
-        border: 1px solid #cbd5e1;
-        background: #f8fafc;
-        color: #0f172a;
+    .auth-input {
+        min-height: 54px;
+        border-radius: 16px;
+        border: 1px solid #d1d5db;
+        background: #ffffff;
+        color: #111827;
     }
 
-    .login-input:focus {
-        border-color: #3b82f6;
-        background: #fff;
-        box-shadow: 0 0 0 0.18rem rgba(59, 130, 246, 0.18);
+    .auth-input:focus {
+        border-color: #111827;
+        box-shadow: 0 0 0 0.15rem rgba(17, 24, 39, 0.10);
     }
 
-    .login-actions {
+    .auth-actions {
         display: flex;
         flex-wrap: wrap;
         gap: 0.75rem;
         margin-top: 1.25rem;
     }
 
-    .login-btn-primary {
-        background: linear-gradient(135deg, #1d4ed8 0%, #0f172a 100%);
-        color: #fff;
-        border: none;
-        border-radius: 14px;
-        padding: 0.8rem 1.2rem;
+    .auth-btn-primary {
+        background: #111111;
+        color: #ffffff;
+        border: 1px solid #111111;
+        border-radius: 999px;
+        padding: 0.82rem 1.35rem;
         font-weight: 700;
-        box-shadow: 0 10px 24px rgba(29, 78, 216, 0.22);
+        min-height: 50px;
+        box-shadow: 0 12px 24px rgba(17, 17, 17, 0.16);
     }
 
-    .login-btn-primary:hover,
-    .login-btn-primary:focus {
-        color: #fff;
-        background: linear-gradient(135deg, #1e40af 0%, #0b1220 100%);
+    .auth-btn-primary:hover,
+    .auth-btn-primary:focus {
+        background: #000000;
+        color: #ffffff;
+        border-color: #000000;
     }
 
-    .login-btn-secondary {
-        background: #fff;
-        color: #0f172a;
-        border: 1px solid #cbd5e1;
-        border-radius: 14px;
-        padding: 0.8rem 1.2rem;
+    .auth-btn-secondary {
+        background: #ffffff;
+        color: #111827;
+        border: 1px solid #d1d5db;
+        border-radius: 999px;
+        padding: 0.82rem 1.35rem;
         font-weight: 700;
+        min-height: 50px;
         text-decoration: none;
     }
 
-    .login-btn-secondary:hover,
-    .login-btn-secondary:focus {
-        background: #f8fafc;
-        color: #0f172a;
-        border-color: #94a3b8;
+    .auth-btn-secondary:hover,
+    .auth-btn-secondary:focus {
+        background: #f9fafb;
+        color: #111827;
+        border-color: #9ca3af;
     }
 
-    .login-side-card {
-        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-    }
-
-    .login-side-card__badge {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.34rem 0.7rem;
-        border-radius: 999px;
-        background: #eff6ff;
-        color: #1d4ed8;
-        font-size: 0.78rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        margin-bottom: 0.8rem;
-    }
-
-    .login-feature-list {
+    .auth-feature-list {
         display: grid;
         gap: 0.9rem;
-        margin-top: 1rem;
     }
 
-    .login-feature {
-        border: 1px solid #e2e8f0;
+    .auth-feature-card {
+        display: grid;
+        grid-template-columns: 52px 1fr;
+        gap: 0.9rem;
+        align-items: start;
+        padding: 1rem;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.9);
+        border: 1px solid #e5e7eb;
+    }
+
+    .auth-feature-card__icon {
+        width: 52px;
+        height: 52px;
         border-radius: 18px;
-        background: rgba(255,255,255,0.8);
-        padding: 0.95rem 1rem;
-    }
-
-    .login-feature__title {
-        display: block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #f3f4f6;
+        color: #111827;
+        border: 1px solid #e5e7eb;
+        font-size: 1.05rem;
         font-weight: 800;
-        color: #0f172a;
-        margin-bottom: 0.2rem;
     }
 
-    .login-feature__text {
-        display: block;
-        color: #64748b;
+    .auth-feature-card h4 {
+        margin: 0 0 0.2rem 0;
+        font-size: 1rem;
+        color: #111827;
+        font-weight: 800;
+    }
+
+    .auth-feature-card p {
+        margin: 0;
+        color: #6b7280;
         line-height: 1.55;
         font-size: 0.95rem;
     }
 
+    .auth-side-panel__footer {
+        margin-top: auto;
+        padding-top: 0.3rem;
+    }
+
+    .auth-side-panel__footer-label {
+        display: block;
+        color: #6b7280;
+        margin-bottom: 0.25rem;
+        font-size: 0.92rem;
+    }
+
+    .auth-inline-link {
+        color: #111827;
+        font-weight: 700;
+        text-decoration: none;
+        border-bottom: 1px solid #cbd5e1;
+    }
+
+    .auth-inline-link:hover {
+        color: #000000;
+        border-bottom-color: #111827;
+    }
+
     @@media (max-width: 991.98px) {
-        .login-panel {
+        .auth-layout {
             grid-template-columns: 1fr;
+        }
+
+        .auth-hero__content {
+            padding: 1.5rem 1.2rem;
         }
     }
 
     @@media (max-width: 767.98px) {
-        .login-page {
-            padding-top: 0.75rem;
+        .auth-form-grid {
+            grid-template-columns: 1fr;
         }
 
-        .login-hero {
-            padding: 1.5rem 1rem;
+        .auth-field--full {
+            grid-column: span 1;
         }
 
-        .login-card,
-        .login-side-card {
+        .auth-hero__content h1 {
+            font-size: 2.2rem;
+        }
+
+        .auth-main-card,
+        .auth-side-panel {
             padding: 1.1rem;
         }
     }

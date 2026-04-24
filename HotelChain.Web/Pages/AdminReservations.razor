@@ -3,76 +3,537 @@
 @using System.Net.Http.Json
 @inject HttpClient Http
 @inject IJSRuntime JS
+@inject NavigationManager Navigation
 
 <h3>Administración de reservaciones</h3>
 
 @if (!string.IsNullOrWhiteSpace(successMessage))
 {
-    <div class="alert alert-success">@successMessage</div>
+    <div class="alert alert-success admin-res-alert">@successMessage</div>
 }
 
 @if (!string.IsNullOrWhiteSpace(errorMessage))
 {
-    <div class="alert alert-danger">@errorMessage</div>
+    <div class="alert alert-danger admin-res-alert">@errorMessage</div>
 }
-else if (reservations is null)
+
+@if (reservations is null)
 {
-    <p>Cargando reservaciones...</p>
-}
-else if (reservations.Count == 0)
-{
-    <p>No hay reservaciones registradas.</p>
+    <div class="admin-res-loading">
+        <div class="admin-res-loading__card">
+            <h4>Cargando reservaciones...</h4>
+            <p>Estamos obteniendo el historial administrativo desde el backend.</p>
+        </div>
+    </div>
 }
 else
 {
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Código</th>
-                <th>Hotel</th>
-                <th>Check-in</th>
-                <th>Check-out</th>
-                <th>Huéspedes</th>
-                <th>Total</th>
-                <th>Estado</th>
-                <th>Pago</th>
-                <th>Pagada</th>
-                <th>UserId</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var r in reservations)
+    <div class="admin-res-summary-grid mb-4">
+        <div class="admin-res-summary-card">
+            <div class="admin-res-summary-card__label">Total</div>
+            <div class="admin-res-summary-card__value">@reservations.Count</div>
+        </div>
+
+        <div class="admin-res-summary-card">
+            <div class="admin-res-summary-card__label">Pendientes</div>
+            <div class="admin-res-summary-card__value">@reservations.Count(x => x.Status == "PENDING")</div>
+        </div>
+
+        <div class="admin-res-summary-card">
+            <div class="admin-res-summary-card__label">Confirmadas</div>
+            <div class="admin-res-summary-card__value">@reservations.Count(x => x.Status == "CONFIRMED")</div>
+        </div>
+
+        <div class="admin-res-summary-card">
+            <div class="admin-res-summary-card__label">Check-in</div>
+            <div class="admin-res-summary-card__value">@reservations.Count(x => x.Status == "CHECKED_IN")</div>
+        </div>
+
+        <div class="admin-res-summary-card">
+            <div class="admin-res-summary-card__label">Cerradas / no-show</div>
+            <div class="admin-res-summary-card__value">@reservations.Count(x => x.Status == "CHECKED_OUT" || x.Status == "NO_SHOW")</div>
+        </div>
+    </div>
+
+    <div class="card p-3 mb-3">
+        <div class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label">Filtrar por estado</label>
+                <select class="form-select" @bind="selectedStatusFilter">
+                    <option value="">Todos</option>
+                    <option value="PENDING">PENDING</option>
+                    <option value="CONFIRMED">CONFIRMED</option>
+                    <option value="CHECKED_IN">CHECKED_IN</option>
+                    <option value="CHECKED_OUT">CHECKED_OUT</option>
+                    <option value="NO_SHOW">NO_SHOW</option>
+                    <option value="CANCELED">CANCELED</option>
+                    <option value="CANCELLED">CANCELLED</option>
+                    <option value="EXPIRED">EXPIRED</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Buscar por código</label>
+                <input class="form-control" @bind="codeFilter" placeholder="Ej. R-20260420-AB12CD" />
+            </div>
+
+            <div class="col-md-4">
+                <div class="text-muted">Mostrando @FilteredReservations.Count reservación(es).</div>
+            </div>
+        </div>
+    </div>
+
+    @if (FilteredReservations.Count == 0)
+    {
+        <p>No hay reservaciones que coincidan con los filtros actuales.</p>
+    }
+    else
+    {
+        <div class="admin-res-grid">
+            @foreach (var r in FilteredReservations)
             {
-                <tr>
-                    <td>@r.Code</td>
-                    <td>@r.Hotel</td>
-                    <td>@r.CheckIn.ToString("dd/MM/yyyy")</td>
-                    <td>@r.CheckOut.ToString("dd/MM/yyyy")</td>
-                    <td>@r.Guests</td>
-                    <td>@r.TotalAmount.ToString("0.00")</td>
-                    <td>@r.Status</td>
-                    <td>@r.PaymentStatus</td>
-                    <td>@(r.IsPaid ? "Sí" : "No")</td>
-                    <td>@(r.UserId?.ToString() ?? "-")</td>
-                    <td>
-                        <button class="btn btn-sm btn-danger"
-                                disabled="@(r.Status == "CANCELED" || cancelingReservationId == r.Id)"
-                                @onclick="() => CancelReservation(r)">
+                <article class="admin-res-card">
+                    <div class="admin-res-card__top">
+                        <div>
+                            <div class="admin-res-card__eyebrow">Código</div>
+                            <h4>@r.Code</h4>
+                        </div>
+
+                        <div class="@GetStatusBadgeClass(r.Status)">@r.Status</div>
+                    </div>
+
+                    <div class="admin-res-card__hotel">@r.Hotel</div>
+
+                    <div class="admin-res-card__body">
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Check-in</span>
+                            <strong>@r.CheckIn.ToString("dd/MM/yyyy")</strong>
+                        </div>
+
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Check-out</span>
+                            <strong>@r.CheckOut.ToString("dd/MM/yyyy")</strong>
+                        </div>
+
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Noches</span>
+                            <strong>@r.Nights</strong>
+                        </div>
+
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Huéspedes</span>
+                            <strong>@r.Guests</strong>
+                        </div>
+
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Base</span>
+                            <strong>Q @r.BaseAmount.ToString("0.00")</strong>
+                        </div>
+
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Cargos</span>
+                            <strong>Q @r.ChargesTotal.ToString("0.00")</strong>
+                        </div>
+
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Pendiente cuenta</span>
+                            <strong>Q @r.OutstandingChargesTotal.ToString("0.00")</strong>
+                        </div>
+
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Cuenta</span>
+                            <strong>@(r.IsStayAccountSettled ? "Liquidada" : "Pendiente")</strong>
+                        </div>
+
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Total final</span>
+                            <strong>Q @r.GrandTotal.ToString("0.00")</strong>
+                        </div>
+
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Tipo</span>
+                            <strong>@(string.IsNullOrWhiteSpace(r.RoomType) ? "-" : r.RoomType)</strong>
+                        </div>
+
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Habitación asignada</span>
+                            <strong>@(string.IsNullOrWhiteSpace(r.AssignedRoomName) ? "Pendiente" : r.AssignedRoomName)</strong>
+                        </div>
+
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Pago</span>
+                            <strong>@GetPaymentText(r)</strong>
+                        </div>
+
+                        @if (r.IsPaid && !string.IsNullOrWhiteSpace(r.CardLast4))
+                        {
+                            <div class="admin-res-feature">
+                                <span class="admin-res-feature__label">Tarjeta</span>
+                                <strong>**** @r.CardLast4</strong>
+                            </div>
+                        }
+
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">UserId</span>
+                            <strong class="admin-res-feature__small">@(r.UserId?.ToString() ?? "-")</strong>
+                        </div>
+
+                        <div class="admin-res-feature admin-res-feature--wide">
+                            <span class="admin-res-feature__label">Creada</span>
+                            <strong>@r.CreatedAt.ToString("dd/MM/yyyy HH:mm")</strong>
+                        </div>
+                    </div>
+
+                    <div class="admin-res-card__footer">
+                        <button class="btn admin-res-btn-secondary btn-sm" @onclick="() => GoToCheckout(r.Code)">Ver checkout</button>
+                        <button class="btn admin-res-btn-outline btn-sm" @onclick="() => GoToHotel(r.HotelId)">Ver hotel</button>
+                        <button class="btn admin-res-btn-secondary btn-sm" @onclick="() => OpenChargesModal(r)">Cuenta</button>
+                        <button class="btn admin-res-btn-success btn-sm" disabled="@(!CanCheckIn(r))" @onclick="() => CheckInReservation(r)">Check-in</button>
+                        <button class="btn admin-res-btn-success btn-sm" disabled="@(!CanCheckOut(r))" @onclick="() => CheckOutReservation(r)">Check-out</button>
+                        <button class="btn admin-res-btn-warning btn-sm" disabled="@(!CanMarkNoShow(r))" @onclick="() => MarkNoShow(r)">No-show</button>
+                        <button class="btn admin-res-btn-info btn-sm" disabled="@(!CanChangeDates(r))" @onclick="() => OpenChangeDatesModal(r)">Cambiar fecha</button>
+                        <button class="btn admin-res-btn-danger btn-sm" disabled="@(!CanCancel(r) || cancelingReservationId == r.Id)" @onclick="() => CancelReservation(r)">
                             @(cancelingReservationId == r.Id ? "Cancelando..." : "Cancelar")
                         </button>
-                    </td>
-                </tr>
+                    </div>
+                </article>
             }
-        </tbody>
-    </table>
+        </div>
+    }
 }
+
+@if (showChangeDatesModal && selectedReservation is not null)
+{
+    <div class="admin-res-modal-backdrop">
+        <div class="admin-res-modal-card">
+            <div class="admin-res-modal-card__header">
+                <div>
+                    <h4>Cambiar fechas de reservación</h4>
+                    <div class="text-muted">@selectedReservation.Code</div>
+                </div>
+                <button type="button" class="admin-res-modal-close" @onclick="CloseChangeDatesModal">×</button>
+            </div>
+
+            <div class="admin-res-modal-card__body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Nuevo check-in</label>
+                        <InputDate @bind-Value="changeCheckIn" class="form-control" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Nuevo check-out</label>
+                        <InputDate @bind-Value="changeCheckOut" class="form-control" />
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Motivo</label>
+                        <textarea class="form-control" rows="4" @bind="changeReason"></textarea>
+                    </div>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(changeError))
+                {
+                    <div class="alert alert-danger mt-3 mb-0">@changeError</div>
+                }
+            </div>
+
+            <div class="admin-res-modal-card__footer">
+                <button class="btn admin-res-btn-secondary" @onclick="CloseChangeDatesModal">Cerrar</button>
+                <button class="btn admin-res-btn-info" @onclick="ConfirmChangeDates">Confirmar cambio</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+@if (showChargesModal && selectedReservation is not null)
+{
+    <div class="admin-res-modal-backdrop">
+        <div class="admin-res-modal-card">
+            <div class="admin-res-modal-card__header">
+                <div>
+                    <h4>Cuenta de estancia</h4>
+                    <div class="text-muted">@selectedReservation.Code</div>
+                </div>
+                <button type="button" class="admin-res-modal-close" @onclick="CloseChargesModal">×</button>
+            </div>
+
+            <div class="admin-res-modal-card__body">
+                @if (!string.IsNullOrWhiteSpace(chargesError))
+                {
+                    <div class="alert alert-danger">@chargesError</div>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(chargesSuccess))
+                {
+                    <div class="alert alert-success">@chargesSuccess</div>
+                }
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Base</label>
+                        <input class="form-control" value=@($"Q {chargesBaseAmount:0.00}") disabled />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Cargos</label>
+                        <input class="form-control" value=@($"Q {chargesTotal:0.00}") disabled />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Total final</label>
+                        <input class="form-control" value=@($"Q {chargesGrandTotal:0.00}") disabled />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Liquidado</label>
+                        <input class="form-control" value=@($"Q {chargesSettledTotal:0.00}") disabled />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Pendiente por liquidar</label>
+                        <input class="form-control" value=@($"Q {chargesOutstandingTotal:0.00}") disabled />
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        @if (isStayAccountSettled)
+                        {
+                            <div class="alert alert-success mb-0 w-100">Cuenta liquidada.</div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning mb-0 w-100">Cuenta pendiente.</div>
+                        }
+                    </div>
+                </div>
+
+                <div class="card p-3 mb-3">
+                    <h5 class="mb-3">Agregar cargo</h5>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Categoría</label>
+                            <select class="form-select" @bind="newChargeCategory" disabled="@(!CanAddCharges(selectedReservation))">
+                                <option value="ROOM_SERVICE">ROOM_SERVICE</option>
+                                <option value="RESTAURANT">RESTAURANT</option>
+                                <option value="LAUNDRY">LAUNDRY</option>
+                                <option value="MINIBAR">MINIBAR</option>
+                                <option value="OTHER">OTHER</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="form-label">Descripción</label>
+                            <input class="form-control" @bind="newChargeDescription" disabled="@(!CanAddCharges(selectedReservation))" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Monto</label>
+                            <input type="number" step="0.01" class="form-control" @bind="newChargeAmount" disabled="@(!CanAddCharges(selectedReservation))" />
+                        </div>
+                        <div class="col-12">
+                            <button class="btn admin-res-btn-success btn-sm" @onclick="AddCharge" disabled="@(!CanAddCharges(selectedReservation) || isSavingCharge)">
+                                @(isSavingCharge ? "Guardando..." : "Agregar cargo")
+                            </button>
+                        </div>
+                    </div>
+                    @if (!CanAddCharges(selectedReservation))
+                    {
+                        <div class="text-muted mt-2">Solo se pueden agregar cargos a reservas en estado CHECKED_IN.</div>
+                    }
+                </div>
+
+                <h5>Cargos registrados</h5>
+                @if (charges is null || charges.Count == 0)
+                {
+                    <p class="text-muted mb-0">No hay cargos activos para esta reservación.</p>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Categoría</th>
+                                    <th>Descripción</th>
+                                    <th>Monto</th>
+                                    <th>Estado</th>
+                                    <th>Creado</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var charge in charges)
+                                {
+                                    <tr>
+                                        <td>@charge.Category</td>
+                                        <td>@charge.Description</td>
+                                        <td>Q @charge.Amount.ToString("0.00")</td>
+                                        <td>
+                                            @if (charge.IsSettled)
+                                            {
+                                                <span class="badge bg-success">Liquidado</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-warning text-dark">Pendiente</span>
+                                            }
+                                        </td>
+                                        <td>@charge.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-danger"
+                                                    @onclick="() => VoidCharge(charge.Id)"
+                                                    disabled="@(isVoidingChargeId == charge.Id || charge.IsSettled || !CanVoidCharges(selectedReservation))">
+                                                @(isVoidingChargeId == charge.Id ? "Anulando..." : "Anular")
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+
+            @if (CanSettleCharges(selectedReservation) && chargesOutstandingTotal > 0)
+            {
+                <div class="card p-3 mb-3 admin-res-settlement-card">
+                    <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                        <div>
+                            <h5 class="mb-1">Pago de cuenta de estancia</h5>
+                            <p class="text-muted mb-0">Ingresa los datos de cobro para liquidar los cargos pendientes antes del check-out.</p>
+                        </div>
+                        <div class="text-end">
+                            <span class="admin-res-feature__label">Monto a cobrar</span>
+                            <strong>Q @chargesOutstandingTotal.ToString("0.00")</strong>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Número de tarjeta</label>
+                            <input class="form-control" @bind="settlementCardNumber" placeholder="4111111111111111" maxlength="19" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">CVV</label>
+                            <input class="form-control" @bind="settlementCvv" placeholder="123" maxlength="4" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Monto</label>
+                            <input class="form-control" value="@($"Q {chargesOutstandingTotal:0.00}")" disabled />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre en tarjeta</label>
+                            <input class="form-control" @bind="settlementCardHolderName" placeholder="Nombre del huésped" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Dirección de cobro</label>
+                            <input class="form-control" @bind="settlementBillingAddress" placeholder="Dirección de facturación" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="admin-res-modal-card__footer">
+                <button class="btn admin-res-btn-secondary" @onclick="CloseChargesModal">Cerrar</button>
+                <button class="btn admin-res-btn-success"
+                        @onclick="SettleCharges"
+                        disabled="@(!CanSettleCharges(selectedReservation) || chargesOutstandingTotal <= 0 || isSettlingCharges)">
+                    @(isSettlingCharges ? "Procesando pago..." : "Confirmar pago y liquidar")
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .admin-res-alert { border-radius: 16px; }
+    .admin-res-loading__card {
+        background: #ffffff; border: 1px solid #e2e8f0; border-radius: 24px;
+        padding: 2rem; box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+    }
+    .admin-res-loading__card h4 { margin-bottom: 0.5rem; font-weight: 800; }
+    .admin-res-loading__card p { margin: 0; color: #64748b; }
+    .admin-res-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+    .admin-res-summary-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0; border-radius: 22px; padding: 1rem 1.1rem;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+    }
+    .admin-res-summary-card__label { color: #64748b; font-size: 0.82rem; text-transform: uppercase; font-weight: 700; }
+    .admin-res-summary-card__value { color: #0f172a; font-size: 2rem; font-weight: 800; }
+    .admin-res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1rem; }
+    .admin-res-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0; border-radius: 24px; padding: 1.2rem;
+        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07); display: flex; flex-direction: column; gap: 1rem;
+    }
+    .admin-res-card__top { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; }
+    .admin-res-card__eyebrow { font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; margin-bottom: 0.2rem; font-weight: 700; }
+    .admin-res-card__top h4 { margin: 0; color: #0f172a; font-weight: 800; font-size: 1.15rem; }
+    .admin-res-card__hotel { font-size: 1rem; font-weight: 700; color: #1e293b; }
+    .admin-res-card__body { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    .admin-res-feature { background: rgba(255,255,255,0.78); border: 1px solid #e2e8f0; border-radius: 18px; padding: 0.85rem; }
+    .admin-res-feature--wide { grid-column: 1 / -1; }
+    .admin-res-feature__label { display: block; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; margin-bottom: 0.25rem; font-weight: 700; }
+    .admin-res-feature strong { color: #0f172a; font-size: 0.98rem; }
+    .admin-res-feature__small { font-size: 0.85rem; word-break: break-word; }
+    .admin-res-card__footer { margin-top: auto; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .status-badge { display: inline-flex; align-items: center; justify-content: center; padding: 0.38rem 0.75rem; border-radius: 999px; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+    .status-badge--pending { background: #fef3c7; color: #92400e; }
+    .status-badge--confirmed { background: #dcfce7; color: #166534; }
+    .status-badge--cancelled { background: #fee2e2; color: #991b1b; }
+    .status-badge--default { background: #e2e8f0; color: #334155; }
+    .admin-res-btn-secondary, .admin-res-btn-outline, .admin-res-btn-danger, .admin-res-btn-info, .admin-res-btn-success, .admin-res-btn-warning { border-radius: 14px; font-weight: 700; }
+    .admin-res-btn-secondary { background: #fff; border: 1px solid #cbd5e1; color: #0f172a; }
+    .admin-res-btn-outline { background: transparent; border: 1px solid #94a3b8; color: #0f172a; }
+    .admin-res-btn-danger { background: #dc2626; color: #fff; border: none; }
+    .admin-res-btn-info { background: #2563eb; color: #fff; border: none; }
+    .admin-res-btn-success { background: #16a34a; color: #fff; border: none; }
+    .admin-res-btn-warning { background: #f59e0b; color: #fff; border: none; }
+    .admin-res-modal-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.55); display: flex; align-items: center; justify-content: center; padding: 1rem; z-index: 1050; }
+    .admin-res-modal-card { background: #fff; border-radius: 24px; width: min(760px, 100%); box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28); }
+    .admin-res-modal-card__header, .admin-res-modal-card__body, .admin-res-modal-card__footer { padding: 1.2rem 1.3rem; }
+    .admin-res-modal-card__header { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; border-bottom: 1px solid #e2e8f0; }
+    .admin-res-modal-card__header h4 { margin: 0; font-weight: 800; }
+    .admin-res-modal-card__footer { display: flex; justify-content: flex-end; gap: 0.75rem; border-top: 1px solid #e2e8f0; }
+    .admin-res-modal-close { border: none; background: transparent; font-size: 1.7rem; line-height: 1; color: #64748b; }
+</style>
 
 @code {
     private List<AdminReservationDto>? reservations;
     private string? errorMessage;
     private string? successMessage;
     private int? cancelingReservationId;
+    private string? selectedStatusFilter;
+    private string? codeFilter;
+
+    private AdminReservationDto? selectedReservation;
+    private bool showChangeDatesModal;
+    private DateTime? changeCheckIn;
+    private DateTime? changeCheckOut;
+    private string changeReason = "";
+    private string? changeError;
+
+    private bool showChargesModal;
+    private List<ReservationChargeDto> charges = new();
+    private decimal chargesBaseAmount;
+    private decimal chargesTotal;
+    private decimal chargesSettledTotal;
+    private decimal chargesOutstandingTotal;
+    private decimal chargesGrandTotal;
+    private bool isStayAccountSettled;
+    private string newChargeCategory = "ROOM_SERVICE";
+    private string newChargeDescription = "";
+    private decimal? newChargeAmount;
+    private string? chargesError;
+    private string? chargesSuccess;
+    private bool isSavingCharge;
+    private int? isVoidingChargeId;
+    private bool isSettlingCharges;
+    private string settlementCardNumber = "";
+    private string settlementCvv = "";
+    private string settlementCardHolderName = "";
+    private string settlementBillingAddress = "";
+
+    private List<AdminReservationDto> FilteredReservations =>
+        (reservations ?? new())
+            .Where(r => string.IsNullOrWhiteSpace(selectedStatusFilter) || r.Status == selectedStatusFilter)
+            .Where(r => string.IsNullOrWhiteSpace(codeFilter) || r.Code.Contains(codeFilter, StringComparison.OrdinalIgnoreCase))
+            .ToList();
 
     protected override async Task OnInitializedAsync()
     {
@@ -84,7 +545,6 @@ else
         try
         {
             errorMessage = null;
-
             var token = await JS.InvokeAsync<string>("auth.getToken");
             if (string.IsNullOrWhiteSpace(token))
             {
@@ -92,9 +552,7 @@ else
                 return;
             }
 
-            Http.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", token);
-
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             reservations = await Http.GetFromJsonAsync<List<AdminReservationDto>>("/api/admin/reservations");
         }
         catch (Exception ex)
@@ -110,10 +568,7 @@ else
             errorMessage = null;
             successMessage = null;
 
-            var reason = await JS.InvokeAsync<string?>("prompt",
-                $"Motivo de cancelación para la reserva {reservation.Code}:",
-                "Cancelación administrativa");
-
+            var reason = await JS.InvokeAsync<string?>("prompt", $"Motivo de cancelación para la reserva {reservation.Code}:", "Cancelación administrativa");
             if (reason is null)
                 return;
 
@@ -132,12 +587,8 @@ else
                 return;
             }
 
-            Http.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", token);
-
-            var response = await Http.PostAsJsonAsync(
-                $"/api/admin/reservations/{reservation.Id}/cancel",
-                new CancelReservationRequest { Reason = reason });
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await Http.PostAsJsonAsync($"/api/admin/reservations/{reservation.Id}/cancel", new AdminCancelReservationRequest { Reason = reason });
 
             if (!response.IsSuccessStatusCode)
             {
@@ -158,23 +609,474 @@ else
         }
     }
 
-    private class CancelReservationRequest
+    private void OpenChangeDatesModal(AdminReservationDto reservation)
     {
+        selectedReservation = reservation;
+        changeCheckIn = reservation.CheckIn.Date;
+        changeCheckOut = reservation.CheckOut.Date;
+        changeReason = "";
+        changeError = null;
+        showChangeDatesModal = true;
+    }
+
+    private void CloseChangeDatesModal()
+    {
+        showChangeDatesModal = false;
+        selectedReservation = null;
+        changeCheckIn = null;
+        changeCheckOut = null;
+        changeReason = "";
+        changeError = null;
+    }
+
+    private async Task ConfirmChangeDates()
+    {
+        if (!changeCheckIn.HasValue)
+        {
+            changeError = "Ingresa un check-in válido.";
+            return;
+        }
+
+        if (!changeCheckOut.HasValue)
+        {
+            changeError = "Ingresa un check-out válido.";
+            return;
+        }
+
+        var checkIn = changeCheckIn.Value.Date;
+        var checkOut = changeCheckOut.Value.Date;
+
+        if (checkOut <= checkIn)
+        {
+            changeError = "El check-out debe ser mayor al check-in.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(changeReason))
+        {
+            changeError = "Debes ingresar un motivo.";
+            return;
+        }
+
+        try
+        {
+            changeError = null;
+            errorMessage = null;
+            successMessage = null;
+
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                changeError = "No hay token. Inicia sesión como admin.";
+                return;
+            }
+
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await Http.PostAsJsonAsync($"/api/admin/reservations/{selectedReservation!.Id}/change-dates", new AdminChangeReservationDatesRequest
+            {
+                CheckIn = checkIn,
+                CheckOut = checkOut,
+                Reason = changeReason
+            });
+
+            if (!response.IsSuccessStatusCode)
+            {
+                changeError = await response.Content.ReadAsStringAsync();
+                return;
+            }
+
+            var code = selectedReservation.Code;
+            CloseChangeDatesModal();
+            successMessage = $"Fechas actualizadas correctamente para la reserva {code}.";
+            await LoadReservations();
+        }
+        catch (Exception ex)
+        {
+            changeError = $"Error cambiando fechas: {ex.Message}";
+        }
+    }
+
+    private async Task CheckInReservation(AdminReservationDto reservation)
+        => await PostAdminAction($"/api/admin/reservations/{reservation.Id}/check-in", reservation.Code, "Check-in registrado correctamente");
+
+    private async Task CheckOutReservation(AdminReservationDto reservation)
+        => await PostAdminAction($"/api/admin/reservations/{reservation.Id}/check-out", reservation.Code, "Check-out registrado correctamente");
+
+    private async Task MarkNoShow(AdminReservationDto reservation)
+        => await PostAdminAction($"/api/admin/reservations/{reservation.Id}/no-show", reservation.Code, "Reserva marcada como no-show");
+
+    private async Task PostAdminAction(string url, string code, string successText)
+    {
+        try
+        {
+            errorMessage = null;
+            successMessage = null;
+
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                errorMessage = "No hay token. Inicia sesión como admin.";
+                return;
+            }
+
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await Http.PostAsync(url, null);
+            if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = await response.Content.ReadAsStringAsync();
+                return;
+            }
+
+            successMessage = $"{successText} ({code}).";
+            await LoadReservations();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error ejecutando acción administrativa: {ex.Message}";
+        }
+    }
+
+
+    private async Task OpenChargesModal(AdminReservationDto reservation)
+    {
+        selectedReservation = reservation;
+        showChargesModal = true;
+        chargesError = null;
+        chargesSuccess = null;
+        newChargeCategory = "ROOM_SERVICE";
+        newChargeDescription = "";
+        newChargeAmount = null;
+        ResetSettlementForm();
+        await LoadCharges();
+    }
+
+    private void CloseChargesModal()
+    {
+        showChargesModal = false;
+        charges = new();
+        chargesError = null;
+        chargesSuccess = null;
+        newChargeDescription = "";
+        newChargeAmount = null;
+        ResetSettlementForm();
+    }
+
+    private async Task LoadCharges()
+    {
+        if (selectedReservation is null)
+            return;
+
+        try
+        {
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                chargesError = "No hay token. Inicia sesión como admin.";
+                return;
+            }
+
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await Http.GetFromJsonAsync<ReservationChargesResponse>($"/api/admin/reservations/{selectedReservation.Id}/charges");
+            if (response is null)
+            {
+                chargesError = "No se pudo cargar la cuenta de estancia.";
+                return;
+            }
+
+            charges = response.Charges ?? new();
+            chargesBaseAmount = response.BaseAmount;
+            chargesTotal = response.ChargesTotal;
+            chargesSettledTotal = response.SettledChargesTotal;
+            chargesOutstandingTotal = response.OutstandingChargesTotal;
+            chargesGrandTotal = response.GrandTotal;
+            isStayAccountSettled = response.IsStayAccountSettled;
+        }
+        catch (Exception ex)
+        {
+            chargesError = $"Error cargando cargos: {ex.Message}";
+        }
+    }
+
+    private async Task AddCharge()
+    {
+        if (selectedReservation is null)
+            return;
+
+        if (!newChargeAmount.HasValue || newChargeAmount.Value <= 0 || string.IsNullOrWhiteSpace(newChargeDescription))
+        {
+            chargesError = "Ingresa categoría, descripción y monto válidos.";
+            return;
+        }
+
+        try
+        {
+            isSavingCharge = true;
+            chargesError = null;
+            chargesSuccess = null;
+
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await Http.PostAsJsonAsync($"/api/admin/reservations/{selectedReservation.Id}/charges", new
+            {
+                category = newChargeCategory,
+                description = newChargeDescription,
+                amount = newChargeAmount.Value
+            });
+
+            if (!response.IsSuccessStatusCode)
+            {
+                chargesError = await response.Content.ReadAsStringAsync();
+                return;
+            }
+
+            chargesSuccess = "Cargo agregado correctamente.";
+            newChargeDescription = "";
+            newChargeAmount = null;
+            await LoadCharges();
+            await LoadReservations();
+        }
+        catch (Exception ex)
+        {
+            chargesError = $"Error agregando cargo: {ex.Message}";
+        }
+        finally
+        {
+            isSavingCharge = false;
+        }
+    }
+
+    private async Task VoidCharge(int chargeId)
+    {
+        try
+        {
+            isVoidingChargeId = chargeId;
+            chargesError = null;
+            chargesSuccess = null;
+
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await Http.PostAsync($"/api/admin/reservations/charges/{chargeId}/void", null);
+            if (!response.IsSuccessStatusCode)
+            {
+                chargesError = await response.Content.ReadAsStringAsync();
+                return;
+            }
+
+            chargesSuccess = "Cargo anulado correctamente.";
+            await LoadCharges();
+            await LoadReservations();
+        }
+        catch (Exception ex)
+        {
+            chargesError = $"Error anulando cargo: {ex.Message}";
+        }
+        finally
+        {
+            isVoidingChargeId = null;
+        }
+    }
+
+    private async Task SettleCharges()
+    {
+        if (selectedReservation is null)
+            return;
+
+        if (chargesOutstandingTotal <= 0)
+        {
+            chargesError = "La cuenta no tiene cargos pendientes de liquidar.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(settlementCardNumber) || string.IsNullOrWhiteSpace(settlementCvv) ||
+            string.IsNullOrWhiteSpace(settlementCardHolderName) || string.IsNullOrWhiteSpace(settlementBillingAddress))
+        {
+            chargesError = "Completa número de tarjeta, CVV, nombre y dirección de cobro.";
+            return;
+        }
+
+        var cardDigits = new string(settlementCardNumber.Where(char.IsDigit).ToArray());
+        var cvvDigits = new string(settlementCvv.Where(char.IsDigit).ToArray());
+
+        if (cardDigits.Length < 13 || cardDigits.Length > 19)
+        {
+            chargesError = "El número de tarjeta debe tener entre 13 y 19 dígitos.";
+            return;
+        }
+
+        if (cvvDigits.Length < 3 || cvvDigits.Length > 4)
+        {
+            chargesError = "El CVV debe tener 3 o 4 dígitos.";
+            return;
+        }
+
+        try
+        {
+            isSettlingCharges = true;
+            chargesError = null;
+            chargesSuccess = null;
+
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await Http.PostAsJsonAsync($"/api/admin/reservations/{selectedReservation.Id}/charges/settle", new SettleChargesRequest
+            {
+                CardNumber = cardDigits,
+                Cvv = cvvDigits,
+                CardHolderName = settlementCardHolderName.Trim(),
+                BillingAddress = settlementBillingAddress.Trim(),
+                Amount = chargesOutstandingTotal
+            });
+
+            if (!response.IsSuccessStatusCode)
+            {
+                chargesError = await response.Content.ReadAsStringAsync();
+                return;
+            }
+
+            chargesSuccess = "Pago procesado y cuenta liquidada correctamente.";
+            ResetSettlementForm();
+            await LoadCharges();
+            await LoadReservations();
+        }
+        catch (Exception ex)
+        {
+            chargesError = $"Error liquidando cuenta: {ex.Message}";
+        }
+        finally
+        {
+            isSettlingCharges = false;
+        }
+    }
+
+    private void ResetSettlementForm()
+    {
+        settlementCardNumber = "";
+        settlementCvv = "";
+        settlementCardHolderName = "";
+        settlementBillingAddress = "";
+    }
+
+    private static bool CanAddCharges(AdminReservationDto reservation) => reservation.Status == "CHECKED_IN";
+    private static bool CanVoidCharges(AdminReservationDto reservation) => reservation.Status != "CHECKED_OUT" && reservation.Status != "CANCELED" && reservation.Status != "NO_SHOW" && reservation.Status != "EXPIRED";
+
+    private void GoToHotel(int hotelId) => Navigation.NavigateTo($"/hotels/{hotelId}");
+    private void GoToCheckout(string code) => Navigation.NavigateTo($"/checkout?code={code}");
+
+    private static bool CanCheckIn(AdminReservationDto reservation)
+    {
+        var today = DateTime.Now.Date;
+        return reservation.Status == "CONFIRMED"
+               && today >= reservation.CheckIn.Date
+               && today < reservation.CheckOut.Date;
+    }
+
+    private static bool CanCheckOut(AdminReservationDto reservation) => reservation.Status == "CHECKED_IN" && reservation.OutstandingChargesTotal <= 0;
+    private static bool CanSettleCharges(AdminReservationDto reservation) => reservation.Status == "CHECKED_IN";
+
+    private static bool CanMarkNoShow(AdminReservationDto reservation)
+    {
+        var today = DateTime.Now.Date;
+        return reservation.Status == "CONFIRMED"
+               && today >= reservation.CheckIn.Date
+               && today < reservation.CheckOut.Date;
+    }
+
+    private static bool CanChangeDates(AdminReservationDto reservation) => reservation.Status == "PENDING" || reservation.Status == "CONFIRMED";
+    private static bool CanCancel(AdminReservationDto reservation) => reservation.Status == "PENDING" || reservation.Status == "CONFIRMED";
+
+    private static string GetStatusBadgeClass(string status) => status switch
+    {
+        "PENDING" => "status-badge status-badge--pending",
+        "CONFIRMED" => "status-badge status-badge--confirmed",
+        "CHECKED_IN" => "status-badge status-badge--confirmed",
+        "CHECKED_OUT" => "status-badge status-badge--default",
+        "NO_SHOW" => "status-badge status-badge--cancelled",
+        "CANCELED" => "status-badge status-badge--cancelled",
+        "CANCELLED" => "status-badge status-badge--cancelled",
+        "EXPIRED" => "status-badge status-badge--cancelled",
+        _ => "status-badge status-badge--default"
+    };
+
+    private static string GetPaymentText(AdminReservationDto reservation)
+    {
+        if (!reservation.IsPaid)
+            return reservation.PaymentStatus ?? "Pendiente";
+
+        if (!string.IsNullOrWhiteSpace(reservation.PaymentStatus))
+            return reservation.PaymentStatus!;
+
+        return "Pagada";
+    }
+
+    private class AdminCancelReservationRequest
+    {
+        public string Reason { get; set; } = "";
+    }
+
+    private class AdminChangeReservationDatesRequest
+    {
+        public DateTime CheckIn { get; set; }
+        public DateTime CheckOut { get; set; }
         public string Reason { get; set; } = "";
     }
 
     private class AdminReservationDto
     {
         public int Id { get; set; }
+        public int HotelId { get; set; }
         public string Code { get; set; } = "";
         public string Hotel { get; set; } = "";
+        public string? RoomType { get; set; }
+        public string? AssignedRoomName { get; set; }
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }
+        public int Nights { get; set; }
         public int Guests { get; set; }
+        public decimal BaseAmount { get; set; }
+        public decimal ChargesTotal { get; set; }
+        public decimal SettledChargesTotal { get; set; }
+        public decimal OutstandingChargesTotal { get; set; }
+        public decimal GrandTotal { get; set; }
+        public bool IsStayAccountSettled { get; set; }
+        public int ChargeCount { get; set; }
         public decimal TotalAmount { get; set; }
         public string Status { get; set; } = "";
-        public string PaymentStatus { get; set; } = "";
+        public string? PaymentStatus { get; set; }
         public bool IsPaid { get; set; }
+        public string? CardLast4 { get; set; }
         public Guid? UserId { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? ExpiresAt { get; set; }
+    }
+
+    private class SettleChargesRequest
+    {
+        public string CardNumber { get; set; } = "";
+        public string Cvv { get; set; } = "";
+        public string CardHolderName { get; set; } = "";
+        public string BillingAddress { get; set; } = "";
+        public decimal Amount { get; set; }
+    }
+
+    private class ReservationChargeDto
+    {
+        public int Id { get; set; }
+        public string Category { get; set; } = "";
+        public string Description { get; set; } = "";
+        public decimal Amount { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public bool IsSettled { get; set; }
+        public DateTime? SettledAt { get; set; }
+        public string? SettledBy { get; set; }
+    }
+
+    private class ReservationChargesResponse
+    {
+        public decimal BaseAmount { get; set; }
+        public decimal ChargesTotal { get; set; }
+        public decimal SettledChargesTotal { get; set; }
+        public decimal OutstandingChargesTotal { get; set; }
+        public decimal GrandTotal { get; set; }
+        public bool IsStayAccountSettled { get; set; }
+        public List<ReservationChargeDto>? Charges { get; set; }
     }
 }

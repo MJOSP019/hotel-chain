@@ -1,0 +1,77 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Api.Models.Auth
+  commentId: N:HotelChain.Api.Models.Auth
+  id: HotelChain.Api.Models.Auth
+  children:
+  - HotelChain.Api.Models.Auth.AuthResponse
+  - HotelChain.Api.Models.Auth.LoginRequest
+  - HotelChain.Api.Models.Auth.RegisterRequest
+  langs:
+  - csharp
+  - vb
+  name: HotelChain.Api.Models.Auth
+  nameWithType: HotelChain.Api.Models.Auth
+  fullName: HotelChain.Api.Models.Auth
+  type: Namespace
+  assemblies:
+  - HotelChain.Api
+references:
+- uid: HotelChain.Api.Models.Auth.AuthResponse
+  commentId: T:HotelChain.Api.Models.Auth.AuthResponse
+  href: HotelChain.Api.Models.Auth.AuthResponse.html
+  name: AuthResponse
+  nameWithType: AuthResponse
+  fullName: HotelChain.Api.Models.Auth.AuthResponse
+- uid: HotelChain.Api.Models.Auth.LoginRequest
+  commentId: T:HotelChain.Api.Models.Auth.LoginRequest
+  parent: HotelChain.Api.Models.Auth
+  href: HotelChain.Api.Models.Auth.LoginRequest.html
+  name: LoginRequest
+  nameWithType: LoginRequest
+  fullName: HotelChain.Api.Models.Auth.LoginRequest
+- uid: HotelChain.Api.Models.Auth.RegisterRequest
+  commentId: T:HotelChain.Api.Models.Auth.RegisterRequest
+  parent: HotelChain.Api.Models.Auth
+  href: HotelChain.Api.Models.Auth.RegisterRequest.html
+  name: RegisterRequest
+  nameWithType: RegisterRequest
+  fullName: HotelChain.Api.Models.Auth.RegisterRequest
+- uid: HotelChain.Api.Models.Auth
+  commentId: N:HotelChain.Api.Models.Auth
+  href: HotelChain.html
+  name: HotelChain.Api.Models.Auth
+  nameWithType: HotelChain.Api.Models.Auth
+  fullName: HotelChain.Api.Models.Auth
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Models
+    name: Models
+    href: HotelChain.Api.Models.html
+  - name: .
+  - uid: HotelChain.Api.Models.Auth
+    name: Auth
+    href: HotelChain.Api.Models.Auth.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Models
+    name: Models
+    href: HotelChain.Api.Models.html
+  - name: .
+  - uid: HotelChain.Api.Models.Auth
+    name: Auth
+    href: HotelChain.Api.Models.Auth.html

@@ -1,0 +1,142 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Api.Contracts
+  commentId: N:HotelChain.Api.Contracts
+  id: HotelChain.Api.Contracts
+  children:
+  - HotelChain.Api.Contracts.AdminHotelDto
+  - HotelChain.Api.Contracts.AdminReservationDto
+  - HotelChain.Api.Contracts.AdminRoomInventoryDto
+  - HotelChain.Api.Contracts.AdminUserDto
+  - HotelChain.Api.Contracts.CancelReservationRequest
+  - HotelChain.Api.Contracts.CreateHotelReviewRequest
+  - HotelChain.Api.Contracts.HotelDetailDto
+  - HotelChain.Api.Contracts.HotelReviewDto
+  - HotelChain.Api.Contracts.HotelRoomOptionDto
+  - HotelChain.Api.Contracts.RoomTypeDto
+  - HotelChain.Api.Contracts.SaveHotelRequest
+  - HotelChain.Api.Contracts.UpdateUserRoleRequest
+  - HotelChain.Api.Contracts.UpsertRoomInventoryRangeRequest
+  langs:
+  - csharp
+  - vb
+  name: HotelChain.Api.Contracts
+  nameWithType: HotelChain.Api.Contracts
+  fullName: HotelChain.Api.Contracts
+  type: Namespace
+  assemblies:
+  - HotelChain.Api
+references:
+- uid: HotelChain.Api.Contracts.AdminHotelDto
+  commentId: T:HotelChain.Api.Contracts.AdminHotelDto
+  href: HotelChain.Api.Contracts.AdminHotelDto.html
+  name: AdminHotelDto
+  nameWithType: AdminHotelDto
+  fullName: HotelChain.Api.Contracts.AdminHotelDto
+- uid: HotelChain.Api.Contracts.AdminReservationDto
+  commentId: T:HotelChain.Api.Contracts.AdminReservationDto
+  href: HotelChain.Api.Contracts.AdminReservationDto.html
+  name: AdminReservationDto
+  nameWithType: AdminReservationDto
+  fullName: HotelChain.Api.Contracts.AdminReservationDto
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto
+  commentId: T:HotelChain.Api.Contracts.AdminRoomInventoryDto
+  href: HotelChain.Api.Contracts.AdminRoomInventoryDto.html
+  name: AdminRoomInventoryDto
+  nameWithType: AdminRoomInventoryDto
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto
+- uid: HotelChain.Api.Contracts.AdminUserDto
+  commentId: T:HotelChain.Api.Contracts.AdminUserDto
+  href: HotelChain.Api.Contracts.AdminUserDto.html
+  name: AdminUserDto
+  nameWithType: AdminUserDto
+  fullName: HotelChain.Api.Contracts.AdminUserDto
+- uid: HotelChain.Api.Contracts.CancelReservationRequest
+  commentId: T:HotelChain.Api.Contracts.CancelReservationRequest
+  parent: HotelChain.Api.Contracts
+  href: HotelChain.Api.Contracts.CancelReservationRequest.html
+  name: CancelReservationRequest
+  nameWithType: CancelReservationRequest
+  fullName: HotelChain.Api.Contracts.CancelReservationRequest
+- uid: HotelChain.Api.Contracts.CreateHotelReviewRequest
+  commentId: T:HotelChain.Api.Contracts.CreateHotelReviewRequest
+  parent: HotelChain.Api.Contracts
+  href: HotelChain.Api.Contracts.CreateHotelReviewRequest.html
+  name: CreateHotelReviewRequest
+  nameWithType: CreateHotelReviewRequest
+  fullName: HotelChain.Api.Contracts.CreateHotelReviewRequest
+- uid: HotelChain.Api.Contracts.HotelDetailDto
+  commentId: T:HotelChain.Api.Contracts.HotelDetailDto
+  href: HotelChain.Api.Contracts.HotelDetailDto.html
+  name: HotelDetailDto
+  nameWithType: HotelDetailDto
+  fullName: HotelChain.Api.Contracts.HotelDetailDto
+- uid: HotelChain.Api.Contracts.HotelRoomOptionDto
+  commentId: T:HotelChain.Api.Contracts.HotelRoomOptionDto
+  href: HotelChain.Api.Contracts.HotelRoomOptionDto.html
+  name: HotelRoomOptionDto
+  nameWithType: HotelRoomOptionDto
+  fullName: HotelChain.Api.Contracts.HotelRoomOptionDto
+- uid: HotelChain.Api.Contracts.HotelReviewDto
+  commentId: T:HotelChain.Api.Contracts.HotelReviewDto
+  href: HotelChain.Api.Contracts.HotelReviewDto.html
+  name: HotelReviewDto
+  nameWithType: HotelReviewDto
+  fullName: HotelChain.Api.Contracts.HotelReviewDto
+- uid: HotelChain.Api.Contracts.RoomTypeDto
+  commentId: T:HotelChain.Api.Contracts.RoomTypeDto
+  href: HotelChain.Api.Contracts.RoomTypeDto.html
+  name: RoomTypeDto
+  nameWithType: RoomTypeDto
+  fullName: HotelChain.Api.Contracts.RoomTypeDto
+- uid: HotelChain.Api.Contracts.SaveHotelRequest
+  commentId: T:HotelChain.Api.Contracts.SaveHotelRequest
+  parent: HotelChain.Api.Contracts
+  href: HotelChain.Api.Contracts.SaveHotelRequest.html
+  name: SaveHotelRequest
+  nameWithType: SaveHotelRequest
+  fullName: HotelChain.Api.Contracts.SaveHotelRequest
+- uid: HotelChain.Api.Contracts.UpdateUserRoleRequest
+  commentId: T:HotelChain.Api.Contracts.UpdateUserRoleRequest
+  parent: HotelChain.Api.Contracts
+  href: HotelChain.Api.Contracts.UpdateUserRoleRequest.html
+  name: UpdateUserRoleRequest
+  nameWithType: UpdateUserRoleRequest
+  fullName: HotelChain.Api.Contracts.UpdateUserRoleRequest
+- uid: HotelChain.Api.Contracts.UpsertRoomInventoryRangeRequest
+  commentId: T:HotelChain.Api.Contracts.UpsertRoomInventoryRangeRequest
+  parent: HotelChain.Api.Contracts
+  href: HotelChain.Api.Contracts.UpsertRoomInventoryRangeRequest.html
+  name: UpsertRoomInventoryRangeRequest
+  nameWithType: UpsertRoomInventoryRangeRequest
+  fullName: HotelChain.Api.Contracts.UpsertRoomInventoryRangeRequest
+- uid: HotelChain.Api.Contracts
+  commentId: N:HotelChain.Api.Contracts
+  href: HotelChain.html
+  name: HotelChain.Api.Contracts
+  nameWithType: HotelChain.Api.Contracts
+  fullName: HotelChain.Api.Contracts
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Contracts
+    name: Contracts
+    href: HotelChain.Api.Contracts.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Contracts
+    name: Contracts
+    href: HotelChain.Api.Contracts.html

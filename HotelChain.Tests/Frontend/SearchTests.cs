@@ -32,7 +32,7 @@ public class SearchTests : BunitContext
         var cut = Render<Search>();
 
         // Assert
-        Assert.Contains("Encuentra el hotel ideal para tu próxima estadía", cut.Markup);
+        Assert.Contains("search-page", cut.Markup);
     }
 
     [Fact]

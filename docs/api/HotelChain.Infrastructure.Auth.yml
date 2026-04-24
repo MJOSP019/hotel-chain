@@ -1,0 +1,91 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Infrastructure.Auth
+  commentId: N:HotelChain.Infrastructure.Auth
+  id: HotelChain.Infrastructure.Auth
+  children:
+  - HotelChain.Infrastructure.Auth.ApplicationUser
+  - HotelChain.Infrastructure.Auth.ICaptchaService
+  - HotelChain.Infrastructure.Auth.IJwtTokenService
+  - HotelChain.Infrastructure.Auth.JwtTokenService
+  - HotelChain.Infrastructure.Auth.Roles
+  - HotelChain.Infrastructure.Auth.SimpleCaptchaService
+  langs:
+  - csharp
+  - vb
+  name: HotelChain.Infrastructure.Auth
+  nameWithType: HotelChain.Infrastructure.Auth
+  fullName: HotelChain.Infrastructure.Auth
+  type: Namespace
+  assemblies:
+  - HotelChain.Infrastructure
+references:
+- uid: HotelChain.Infrastructure.Auth.ApplicationUser
+  commentId: T:HotelChain.Infrastructure.Auth.ApplicationUser
+  parent: HotelChain.Infrastructure.Auth
+  href: HotelChain.Infrastructure.Auth.ApplicationUser.html
+  name: ApplicationUser
+  nameWithType: ApplicationUser
+  fullName: HotelChain.Infrastructure.Auth.ApplicationUser
+- uid: HotelChain.Infrastructure.Auth.ICaptchaService
+  commentId: T:HotelChain.Infrastructure.Auth.ICaptchaService
+  parent: HotelChain.Infrastructure.Auth
+  href: HotelChain.Infrastructure.Auth.ICaptchaService.html
+  name: ICaptchaService
+  nameWithType: ICaptchaService
+  fullName: HotelChain.Infrastructure.Auth.ICaptchaService
+- uid: HotelChain.Infrastructure.Auth.IJwtTokenService
+  commentId: T:HotelChain.Infrastructure.Auth.IJwtTokenService
+  parent: HotelChain.Infrastructure.Auth
+  href: HotelChain.Infrastructure.Auth.IJwtTokenService.html
+  name: IJwtTokenService
+  nameWithType: IJwtTokenService
+  fullName: HotelChain.Infrastructure.Auth.IJwtTokenService
+- uid: HotelChain.Infrastructure.Auth.JwtTokenService
+  commentId: T:HotelChain.Infrastructure.Auth.JwtTokenService
+  href: HotelChain.Infrastructure.Auth.JwtTokenService.html
+  name: JwtTokenService
+  nameWithType: JwtTokenService
+  fullName: HotelChain.Infrastructure.Auth.JwtTokenService
+- uid: HotelChain.Infrastructure.Auth.Roles
+  commentId: T:HotelChain.Infrastructure.Auth.Roles
+  href: HotelChain.Infrastructure.Auth.Roles.html
+  name: Roles
+  nameWithType: Roles
+  fullName: HotelChain.Infrastructure.Auth.Roles
+- uid: HotelChain.Infrastructure.Auth.SimpleCaptchaService
+  commentId: T:HotelChain.Infrastructure.Auth.SimpleCaptchaService
+  href: HotelChain.Infrastructure.Auth.SimpleCaptchaService.html
+  name: SimpleCaptchaService
+  nameWithType: SimpleCaptchaService
+  fullName: HotelChain.Infrastructure.Auth.SimpleCaptchaService
+- uid: HotelChain.Infrastructure.Auth
+  commentId: N:HotelChain.Infrastructure.Auth
+  href: HotelChain.html
+  name: HotelChain.Infrastructure.Auth
+  nameWithType: HotelChain.Infrastructure.Auth
+  fullName: HotelChain.Infrastructure.Auth
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Infrastructure
+    name: Infrastructure
+    href: HotelChain.Infrastructure.html
+  - name: .
+  - uid: HotelChain.Infrastructure.Auth
+    name: Auth
+    href: HotelChain.Infrastructure.Auth.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Infrastructure
+    name: Infrastructure
+    href: HotelChain.Infrastructure.html
+  - name: .
+  - uid: HotelChain.Infrastructure.Auth
+    name: Auth
+    href: HotelChain.Infrastructure.Auth.html

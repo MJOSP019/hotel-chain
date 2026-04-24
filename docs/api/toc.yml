@@ -1,0 +1,509 @@
+### YamlMime:TableOfContent
+items:
+- uid: HotelChain.Api.Contracts
+  name: HotelChain.Api.Contracts
+  type: Namespace
+  items:
+  - uid: HotelChain.Api.Contracts.AdminHotelDto
+    name: AdminHotelDto
+    type: Class
+  - uid: HotelChain.Api.Contracts.AdminReservationDto
+    name: AdminReservationDto
+    type: Class
+  - uid: HotelChain.Api.Contracts.AdminRoomInventoryDto
+    name: AdminRoomInventoryDto
+    type: Class
+  - uid: HotelChain.Api.Contracts.AdminUserDto
+    name: AdminUserDto
+    type: Class
+  - uid: HotelChain.Api.Contracts.CancelReservationRequest
+    name: CancelReservationRequest
+    type: Class
+  - uid: HotelChain.Api.Contracts.CreateHotelReviewRequest
+    name: CreateHotelReviewRequest
+    type: Class
+  - uid: HotelChain.Api.Contracts.HotelDetailDto
+    name: HotelDetailDto
+    type: Class
+  - uid: HotelChain.Api.Contracts.HotelReviewDto
+    name: HotelReviewDto
+    type: Class
+  - uid: HotelChain.Api.Contracts.HotelRoomOptionDto
+    name: HotelRoomOptionDto
+    type: Class
+  - uid: HotelChain.Api.Contracts.RoomTypeDto
+    name: RoomTypeDto
+    type: Class
+  - uid: HotelChain.Api.Contracts.SaveHotelRequest
+    name: SaveHotelRequest
+    type: Class
+  - uid: HotelChain.Api.Contracts.UpdateUserRoleRequest
+    name: UpdateUserRoleRequest
+    type: Class
+  - uid: HotelChain.Api.Contracts.UpsertRoomInventoryRangeRequest
+    name: UpsertRoomInventoryRangeRequest
+    type: Class
+- uid: HotelChain.Api.Controllers
+  name: HotelChain.Api.Controllers
+  type: Namespace
+  items:
+  - uid: HotelChain.Api.Controllers.AdminAddReservationChargeRequest
+    name: AdminAddReservationChargeRequest
+    type: Class
+  - uid: HotelChain.Api.Controllers.AdminAnalyticsController
+    name: AdminAnalyticsController
+    type: Class
+  - uid: HotelChain.Api.Controllers.AdminCancelReservationRequest
+    name: AdminCancelReservationRequest
+    type: Class
+  - uid: HotelChain.Api.Controllers.AdminChangeReservationDatesRequest
+    name: AdminChangeReservationDatesRequest
+    type: Class
+  - uid: HotelChain.Api.Controllers.AdminHotelsController
+    name: AdminHotelsController
+    type: Class
+  - uid: HotelChain.Api.Controllers.AdminReservationsController
+    name: AdminReservationsController
+    type: Class
+  - uid: HotelChain.Api.Controllers.AdminRoomInventoriesController
+    name: AdminRoomInventoriesController
+    type: Class
+  - uid: HotelChain.Api.Controllers.AdminRoomInventoriesController.GenerateInventoryHorizonRequest
+    name: AdminRoomInventoriesController.GenerateInventoryHorizonRequest
+    type: Class
+  - uid: HotelChain.Api.Controllers.AdminRoomInventoriesController.UpsertCommercialRulesRequest
+    name: AdminRoomInventoriesController.UpsertCommercialRulesRequest
+    type: Class
+  - uid: HotelChain.Api.Controllers.AdminRoomsController
+    name: AdminRoomsController
+    type: Class
+  - uid: HotelChain.Api.Controllers.AdminSettleReservationChargesRequest
+    name: AdminSettleReservationChargesRequest
+    type: Class
+  - uid: HotelChain.Api.Controllers.AdminUsersController
+    name: AdminUsersController
+    type: Class
+  - uid: HotelChain.Api.Controllers.AuthController
+    name: AuthController
+    type: Class
+  - uid: HotelChain.Api.Controllers.CitiesController
+    name: CitiesController
+    type: Class
+  - uid: HotelChain.Api.Controllers.HotelReviewsController
+    name: HotelReviewsController
+    type: Class
+  - uid: HotelChain.Api.Controllers.IntegrationController
+    name: IntegrationController
+    type: Class
+  - uid: HotelChain.Api.Controllers.IntegrationController.IntegrationCreateReservationRequest
+    name: IntegrationController.IntegrationCreateReservationRequest
+    type: Class
+  - uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+    name: IntegrationController.IntegrationSearchRequest
+    type: Class
+  - uid: HotelChain.Api.Controllers.PublicController
+    name: PublicController
+    type: Class
+  - uid: HotelChain.Api.Controllers.PublicHotelsController
+    name: PublicHotelsController
+    type: Class
+  - uid: HotelChain.Api.Controllers.ReservationsController
+    name: ReservationsController
+    type: Class
+  - uid: HotelChain.Api.Controllers.ReservationsController.ChangeReservationDatesRequest
+    name: ReservationsController.ChangeReservationDatesRequest
+    type: Class
+  - uid: HotelChain.Api.Controllers.ReservationsController.CheckoutRequest
+    name: ReservationsController.CheckoutRequest
+    type: Class
+  - uid: HotelChain.Api.Controllers.ReservationsController.CreateReservationRequest
+    name: ReservationsController.CreateReservationRequest
+    type: Class
+  - uid: HotelChain.Api.Controllers.RoomTypesController
+    name: RoomTypesController
+    type: Class
+  - uid: HotelChain.Api.Controllers.SearchController
+    name: SearchController
+    type: Class
+  - uid: HotelChain.Api.Controllers.SearchController.SearchRequest
+    name: SearchController.SearchRequest
+    type: Class
+  - uid: HotelChain.Api.Controllers.SearchController.SearchResponseDto
+    name: SearchController.SearchResponseDto
+    type: Class
+  - uid: HotelChain.Api.Controllers.SearchController.SearchRestrictionMessageDto
+    name: SearchController.SearchRestrictionMessageDto
+    type: Class
+  - uid: HotelChain.Api.Controllers.SearchController.SearchResultDto
+    name: SearchController.SearchResultDto
+    type: Class
+  - uid: HotelChain.Api.Controllers.UserReservationsController
+    name: UserReservationsController
+    type: Class
+  - uid: HotelChain.Api.Controllers.WsReservationsController
+    name: WsReservationsController
+    type: Class
+  - uid: HotelChain.Api.Controllers.WsReservationsController.CreateWsReservationRequest
+    name: WsReservationsController.CreateWsReservationRequest
+    type: Class
+  - uid: HotelChain.Api.Controllers.WsSearchController
+    name: WsSearchController
+    type: Class
+  - uid: HotelChain.Api.Controllers.WsSearchController.SearchRequest
+    name: WsSearchController.SearchRequest
+    type: Class
+- uid: HotelChain.Api.DTOs
+  name: HotelChain.Api.DTOs
+  type: Namespace
+  items:
+  - uid: HotelChain.Api.DTOs.ReservationHistoryDto
+    name: ReservationHistoryDto
+    type: Class
+- uid: HotelChain.Api.DTOs.Admin
+  name: HotelChain.Api.DTOs.Admin
+  type: Namespace
+  items:
+  - uid: HotelChain.Api.DTOs.Admin.AdminRoomDto
+    name: AdminRoomDto
+    type: Class
+  - uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+    name: SaveRoomRequest
+    type: Class
+- uid: HotelChain.Api.Models.Auth
+  name: HotelChain.Api.Models.Auth
+  type: Namespace
+  items:
+  - uid: HotelChain.Api.Models.Auth.AuthResponse
+    name: AuthResponse
+    type: Class
+  - uid: HotelChain.Api.Models.Auth.LoginRequest
+    name: LoginRequest
+    type: Class
+  - uid: HotelChain.Api.Models.Auth.RegisterRequest
+    name: RegisterRequest
+    type: Class
+- uid: HotelChain.Api.Services
+  name: HotelChain.Api.Services
+  type: Namespace
+  items:
+  - uid: HotelChain.Api.Services.EmailSettings
+    name: EmailSettings
+    type: Class
+  - uid: HotelChain.Api.Services.IEmailSender
+    name: IEmailSender
+    type: Interface
+  - uid: HotelChain.Api.Services.ReservationPdfGenerator
+    name: ReservationPdfGenerator
+    type: Class
+  - uid: HotelChain.Api.Services.SmtpEmailSender
+    name: SmtpEmailSender
+    type: Class
+- uid: HotelChain.Domain
+  name: HotelChain.Domain
+  type: Namespace
+  items:
+  - uid: HotelChain.Domain.Class1
+    name: Class1
+    type: Class
+- uid: HotelChain.Domain.Entities
+  name: HotelChain.Domain.Entities
+  type: Namespace
+  items:
+  - uid: HotelChain.Domain.Entities.City
+    name: City
+    type: Class
+  - uid: HotelChain.Domain.Entities.Hotel
+    name: Hotel
+    type: Class
+  - uid: HotelChain.Domain.Entities.HotelReview
+    name: HotelReview
+    type: Class
+  - uid: HotelChain.Domain.Entities.Reservation
+    name: Reservation
+    type: Class
+  - uid: HotelChain.Domain.Entities.ReservationAudit
+    name: ReservationAudit
+    type: Class
+  - uid: HotelChain.Domain.Entities.ReservationCharge
+    name: ReservationCharge
+    type: Class
+  - uid: HotelChain.Domain.Entities.ReservationPayment
+    name: ReservationPayment
+    type: Class
+  - uid: HotelChain.Domain.Entities.ReservationRoom
+    name: ReservationRoom
+    type: Class
+  - uid: HotelChain.Domain.Entities.Room
+    name: Room
+    type: Class
+  - uid: HotelChain.Domain.Entities.RoomInventory
+    name: RoomInventory
+    type: Class
+  - uid: HotelChain.Domain.Entities.RoomType
+    name: RoomType
+    type: Class
+  - uid: HotelChain.Domain.Entities.RoomTypeInventory
+    name: RoomTypeInventory
+    type: Class
+  - uid: HotelChain.Domain.Entities.SearchAudit
+    name: SearchAudit
+    type: Class
+- uid: HotelChain.Infrastructure
+  name: HotelChain.Infrastructure
+  type: Namespace
+  items:
+  - uid: HotelChain.Infrastructure.Class1
+    name: Class1
+    type: Class
+- uid: HotelChain.Infrastructure.Auth
+  name: HotelChain.Infrastructure.Auth
+  type: Namespace
+  items:
+  - uid: HotelChain.Infrastructure.Auth.ApplicationUser
+    name: ApplicationUser
+    type: Class
+  - uid: HotelChain.Infrastructure.Auth.ICaptchaService
+    name: ICaptchaService
+    type: Interface
+  - uid: HotelChain.Infrastructure.Auth.IJwtTokenService
+    name: IJwtTokenService
+    type: Interface
+  - uid: HotelChain.Infrastructure.Auth.JwtTokenService
+    name: JwtTokenService
+    type: Class
+  - uid: HotelChain.Infrastructure.Auth.Roles
+    name: Roles
+    type: Class
+  - uid: HotelChain.Infrastructure.Auth.SimpleCaptchaService
+    name: SimpleCaptchaService
+    type: Class
+- uid: HotelChain.Infrastructure.Data
+  name: HotelChain.Infrastructure.Data
+  type: Namespace
+  items:
+  - uid: HotelChain.Infrastructure.Data.HotelChainDbContext
+    name: HotelChainDbContext
+    type: Class
+- uid: HotelChain.Infrastructure.Data.Migrations
+  name: HotelChain.Infrastructure.Data.Migrations
+  type: Namespace
+  items:
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddCommercialAvailabilityRules
+    name: AddCommercialAvailabilityRules
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddHotelDetailFields
+    name: AddHotelDetailFields
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddHotelPortalFields
+    name: AddHotelPortalFields
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddHotelReviewReplies
+    name: AddHotelReviewReplies
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddHotelReviews
+    name: AddHotelReviews
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddIdentity
+    name: AddIdentity
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddReservationAudits
+    name: AddReservationAudits
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddReservationChargeSettlement
+    name: AddReservationChargeSettlement
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddReservationCharges
+    name: AddReservationCharges
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddReservationExpiration
+    name: AddReservationExpiration
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddReservationExpiresAt
+    name: AddReservationExpiresAt
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddReservationPayments
+    name: AddReservationPayments
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddReservationRoomType
+    name: AddReservationRoomType
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddReservations
+    name: AddReservations
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddRoomDetailFields
+    name: AddRoomDetailFields
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddRoomTypeInventoryAndNullableReservationRoom
+    name: AddRoomTypeInventoryAndNullableReservationRoom
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddRooms
+    name: AddRooms
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddSearchAudits
+    name: AddSearchAudits
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.AddUserIdToReservationsNullable
+    name: AddUserIdToReservationsNullable
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.CreateHotelReviewsTable
+    name: CreateHotelReviewsTable
+    type: Class
+  - uid: HotelChain.Infrastructure.Data.Migrations.InitialCreate
+    name: InitialCreate
+    type: Class
+- uid: HotelChain.Infrastructure.Seeding
+  name: HotelChain.Infrastructure.Seeding
+  type: Namespace
+  items:
+  - uid: HotelChain.Infrastructure.Seeding.AdminSeeder
+    name: AdminSeeder
+    type: Class
+  - uid: HotelChain.Infrastructure.Seeding.RoleSeeder
+    name: RoleSeeder
+    type: Class
+- uid: HotelChain.Web
+  name: HotelChain.Web
+  type: Namespace
+  items:
+  - uid: HotelChain.Web.App
+    name: App
+    type: Class
+  - uid: HotelChain.Web.AuthTokenHandler
+    name: AuthTokenHandler
+    type: Class
+  - uid: HotelChain.Web._Imports
+    name: _Imports
+    type: Class
+- uid: HotelChain.Web.Layout
+  name: HotelChain.Web.Layout
+  type: Namespace
+  items:
+  - uid: HotelChain.Web.Layout.MainLayout
+    name: MainLayout
+    type: Class
+  - uid: HotelChain.Web.Layout.NavMenu
+    name: NavMenu
+    type: Class
+- uid: HotelChain.Web.Models
+  name: HotelChain.Web.Models
+  type: Namespace
+  items:
+  - uid: HotelChain.Web.Models.CreateHotelReviewRequest
+    name: CreateHotelReviewRequest
+    type: Class
+  - uid: HotelChain.Web.Models.HotelDetailDto
+    name: HotelDetailDto
+    type: Class
+  - uid: HotelChain.Web.Models.HotelRestrictionMessageDto
+    name: HotelRestrictionMessageDto
+    type: Class
+  - uid: HotelChain.Web.Models.HotelReviewDto
+    name: HotelReviewDto
+    type: Class
+  - uid: HotelChain.Web.Models.HotelRoomOptionDto
+    name: HotelRoomOptionDto
+    type: Class
+- uid: HotelChain.Web.Pages
+  name: HotelChain.Web.Pages
+  type: Namespace
+  items:
+  - uid: HotelChain.Web.Pages.AdminAnalytics
+    name: AdminAnalytics
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminHotels
+    name: AdminHotels
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminHotels.AdminHotelDto
+    name: AdminHotels.AdminHotelDto
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminHotels.CityDto
+    name: AdminHotels.CityDto
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminHotels.SaveHotelRequest
+    name: AdminHotels.SaveHotelRequest
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminInventories
+    name: AdminInventories
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+    name: AdminInventories.AdminRoomInventoryDto
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminInventories.HotelOption
+    name: AdminInventories.HotelOption
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminInventories.RoomOption
+    name: AdminInventories.RoomOption
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminInventories.UpsertRoomInventoryRangeRequest
+    name: AdminInventories.UpsertRoomInventoryRangeRequest
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminReservations
+    name: AdminReservations
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminRooms
+    name: AdminRooms
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+    name: AdminRooms.AdminRoomDto
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminRooms.HotelOption
+    name: AdminRooms.HotelOption
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminRooms.RoomTypeOption
+    name: AdminRooms.RoomTypeOption
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminRooms.SaveRoomRequest
+    name: AdminRooms.SaveRoomRequest
+    type: Class
+  - uid: HotelChain.Web.Pages.AdminUsers
+    name: AdminUsers
+    type: Class
+  - uid: HotelChain.Web.Pages.Amenities
+    name: Amenities
+    type: Class
+  - uid: HotelChain.Web.Pages.CheckInCheckout
+    name: CheckInCheckout
+    type: Class
+  - uid: HotelChain.Web.Pages.Checkout
+    name: Checkout
+    type: Class
+  - uid: HotelChain.Web.Pages.Counter
+    name: Counter
+    type: Class
+  - uid: HotelChain.Web.Pages.EvacuationInfo
+    name: EvacuationInfo
+    type: Class
+  - uid: HotelChain.Web.Pages.Home
+    name: Home
+    type: Class
+  - uid: HotelChain.Web.Pages.HotelDetail
+    name: HotelDetail
+    type: Class
+  - uid: HotelChain.Web.Pages.HotelRules
+    name: HotelRules
+    type: Class
+  - uid: HotelChain.Web.Pages.Login
+    name: Login
+    type: Class
+  - uid: HotelChain.Web.Pages.MyReservations
+    name: MyReservations
+    type: Class
+  - uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+    name: MyReservations.ReservationHistoryDto
+    type: Class
+  - uid: HotelChain.Web.Pages.Register
+    name: Register
+    type: Class
+  - uid: HotelChain.Web.Pages.RoomTypes
+    name: RoomTypes
+    type: Class
+  - uid: HotelChain.Web.Pages.Search
+    name: Search
+    type: Class
+  - uid: HotelChain.Web.Pages.Weather
+    name: Weather
+    type: Class
+  - uid: HotelChain.Web.Pages.Weather.WeatherForecast
+    name: Weather.WeatherForecast
+    type: Class
+memberLayout: SamePage

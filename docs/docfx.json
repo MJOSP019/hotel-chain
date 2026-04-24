@@ -1,9 +1,25 @@
 {
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "..",
+          "files": [
+            "HotelChain.Api/HotelChain.Api.csproj",
+            "HotelChain.Domain/HotelChain.Domain.csproj",
+            "HotelChain.Infrastructure/HotelChain.Infrastructure.csproj",
+            "HotelChain.Web/HotelChain.Web.csproj"
+          ]
+        }
+      ],
+      "dest": "api"
+    }
+  ],
   "build": {
     "content": [
       {
         "files": [
-          "*.md"
+          "api/**.yml"
         ]
       }
     ],

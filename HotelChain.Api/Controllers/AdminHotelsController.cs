@@ -50,6 +50,9 @@ public class AdminHotelsController : ControllerBase
                 Name = h.Name,
                 Address = h.Address,
                 Description = h.Description ?? "",
+                MainImageUrl = h.MainImageUrl,
+                ZoneInfo = h.ZoneInfo,
+                Amenities = h.Amenities,
                 CityId = h.CityId,
                 CityName = h.City.Name,
                 IsActive = h.IsActive
@@ -79,6 +82,9 @@ public class AdminHotelsController : ControllerBase
                 Name = h.Name,
                 Address = h.Address,
                 Description = h.Description ?? "",
+                MainImageUrl = h.MainImageUrl,
+                ZoneInfo = h.ZoneInfo,
+                Amenities = h.Amenities,
                 CityId = h.CityId,
                 CityName = h.City.Name,
                 IsActive = h.IsActive
@@ -123,6 +129,9 @@ public class AdminHotelsController : ControllerBase
             Name = req.Name.Trim(),
             Address = req.Address.Trim(),
             Description = string.IsNullOrWhiteSpace(req.Description) ? null : req.Description.Trim(),
+            MainImageUrl = string.IsNullOrWhiteSpace(req.MainImageUrl) ? null : req.MainImageUrl.Trim(),
+            ZoneInfo = string.IsNullOrWhiteSpace(req.ZoneInfo) ? null : req.ZoneInfo.Trim(),
+            Amenities = string.IsNullOrWhiteSpace(req.Amenities) ? null : req.Amenities.Trim(),
             CityId = req.CityId,
             IsActive = true
         };
@@ -173,6 +182,9 @@ public class AdminHotelsController : ControllerBase
         hotel.Name = req.Name.Trim();
         hotel.Address = req.Address.Trim();
         hotel.Description = string.IsNullOrWhiteSpace(req.Description) ? null : req.Description.Trim();
+        hotel.MainImageUrl = string.IsNullOrWhiteSpace(req.MainImageUrl) ? null : req.MainImageUrl.Trim();
+        hotel.ZoneInfo = string.IsNullOrWhiteSpace(req.ZoneInfo) ? null : req.ZoneInfo.Trim();
+        hotel.Amenities = string.IsNullOrWhiteSpace(req.Amenities) ? null : req.Amenities.Trim();
         hotel.CityId = req.CityId;
 
         await _db.SaveChangesAsync();

@@ -45,6 +45,10 @@
                         <option value="@room.Id">@($"{room.NameOrNumber} - {room.RoomTypeName}")</option>
                     }
                 </select>
+                @if (selectedHotelId > 0 && !filteredRooms.Any())
+                {
+                    <small class="text-muted">Este hotel no tiene habitaciones activas disponibles para administrar inventario.</small>
+                }
             </div>
 
             <div class="mb-2">
@@ -60,54 +64,125 @@
             <div class="mb-3">
                 <label>Disponibilidad total por día</label>
                 <input type="number" min="0" max="1" class="form-control" @bind="model.QuantityTotal" />
-                <small class="text-muted">Use 1 para disponible y 0 para no disponible.</small>
+                <small class="text-muted">Use 1 para disponible y 0 para bloqueada/no disponible.</small>
             </div>
 
-            <button class="btn btn-primary me-2" @onclick="SaveInventory">
-                Guardar
-            </button>
+            <div class="d-flex gap-2">
+                <button class="btn btn-primary me-2" @onclick="SaveInventory">
+                    Guardar
+                </button>
 
-            <button class="btn btn-secondary" @onclick="ResetForm">
-                Limpiar
-            </button>
+                <button class="btn btn-secondary" @onclick="ResetForm">
+                    Limpiar
+                </button>
+            </div>
         </div>
+
+        @if (selectedRoom is not null)
+        {
+            <div class="card p-3 mt-3">
+                <h5>Resumen de habitación</h5>
+                <div class="mb-2"><strong>Hotel:</strong> @selectedRoom.HotelName</div>
+                <div class="mb-2"><strong>Habitación:</strong> @selectedRoom.NameOrNumber</div>
+                <div class="mb-2"><strong>Tipo:</strong> @selectedRoom.RoomTypeName</div>
+                <div class="mb-2"><strong>Capacidad:</strong> @selectedRoom.MaxGuests huésped(es)</div>
+                <div class="mb-0"><strong>Precio base:</strong> Q @selectedRoom.BasePricePerNight.ToString("0.00")</div>
+            </div>
+        }
     </div>
 
     <div class="col-md-7">
         <div class="card p-3">
-            <h5>Disponibilidad de la habitación</h5>
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <div>
+                    <h5 class="mb-1">Disponibilidad de la habitación</h5>
+                    @if (selectedRoom is not null)
+                    {
+                        <div class="text-muted">
+                            @selectedRoom.NameOrNumber · @selectedRoom.RoomTypeName
+                        </div>
+                    }
+                </div>
 
-            @if (inventoryItems.Count == 0)
+                @if (inventoryItems.Any())
+                {
+                    <div class="text-muted">
+                        Registros: @inventoryItems.Count
+                    </div>
+                }
+            </div>
+
+            @if (model.RoomId <= 0)
             {
-                <p>No hay inventario para mostrar.</p>
+                <p>Selecciona una habitación para ver su inventario.</p>
+            }
+            else if (inventoryItems.Count == 0)
+            {
+                <p>No hay inventario para mostrar para esta habitación.</p>
             }
             else
             {
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Total</th>
-                            <th>Reservadas</th>
-                            <th>Disponibles</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in inventoryItems)
-                        {
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle">
+                        <thead>
                             <tr>
-                                <td>@item.Date.ToString("yyyy-MM-dd")</td>
-                                <td>@item.QuantityTotal</td>
-                                <td>@item.QuantityReserved</td>
-                                <td>@item.QuantityAvailable</td>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                                <th>Reservadas</th>
+                                <th>Disponibles</th>
+                                <th>Estado</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in inventoryItems)
+                            {
+                                <tr>
+                                    <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                                    <td>@item.QuantityTotal</td>
+                                    <td>@item.QuantityReserved</td>
+                                    <td>@item.QuantityAvailable</td>
+                                    <td>
+                                        <span class="@GetAvailabilityBadgeClass(item)">
+                                            @GetAvailabilityText(item)
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             }
         </div>
     </div>
 </div>
+
+<style>
+    .inventory-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+    }
+
+    .inventory-badge--available {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .inventory-badge--blocked {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .inventory-badge--partial {
+        background: #fef3c7;
+        color: #92400e;
+    }
+</style>
 
 @code {
     private List<HotelOption> hotels = new();
@@ -118,11 +193,14 @@
     private UpsertRoomInventoryRangeRequest model = new();
     private int selectedHotelId = 0;
 
-    private DateTime? startDateValue;
-    private DateTime? endDateValue;
+    private DateTime? startDateValue = DateTime.Today;
+    private DateTime? endDateValue = DateTime.Today.AddDays(7);
 
     private string? errorMessage;
     private string? successMessage;
+
+    private RoomOption? selectedRoom =>
+        rooms.FirstOrDefault(x => x.Id == model.RoomId);
 
     protected override async Task OnInitializedAsync()
     {
@@ -167,17 +245,19 @@
     private async Task OnHotelChanged()
     {
         filteredRooms = rooms
-            .Where(x => x.HotelId == selectedHotelId)
+            .Where(x => x.HotelId == selectedHotelId && x.IsActive)
             .OrderBy(x => x.NameOrNumber)
             .ToList();
 
         model.RoomId = 0;
         inventoryItems.Clear();
+        successMessage = null;
         await Task.CompletedTask;
     }
 
     private async Task OnRoomChanged()
     {
+        successMessage = null;
         await LoadInventory();
     }
 
@@ -285,10 +365,35 @@
         model = new UpsertRoomInventoryRangeRequest();
         filteredRooms.Clear();
         inventoryItems.Clear();
-        startDateValue = null;
-        endDateValue = null;
+        startDateValue = DateTime.Today;
+        endDateValue = DateTime.Today.AddDays(7);
         errorMessage = null;
         successMessage = null;
+    }
+
+    private static string GetAvailabilityText(AdminRoomInventoryDto item)
+    {
+        if (item.QuantityTotal <= 0)
+            return "Bloqueada";
+
+        if (item.QuantityAvailable <= 0)
+            return "Sin cupo";
+
+        if (item.QuantityReserved > 0)
+            return "Parcial";
+
+        return "Disponible";
+    }
+
+    private static string GetAvailabilityBadgeClass(AdminRoomInventoryDto item)
+    {
+        if (item.QuantityTotal <= 0 || item.QuantityAvailable <= 0)
+            return "inventory-badge inventory-badge--blocked";
+
+        if (item.QuantityReserved > 0)
+            return "inventory-badge inventory-badge--partial";
+
+        return "inventory-badge inventory-badge--available";
     }
 
     public class HotelOption

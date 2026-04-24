@@ -6,146 +6,282 @@
 
 <div class="home-page">
     <section class="home-hero">
-        <div class="home-hero__content">
-            <div class="home-badge">HotelChain Collection · Cadena hotelera</div>
-            <h1>Hospédate en una cadena, elige el hotel ideal para cada destino</h1>
-            <p>
-                Explora hoteles de nuestra cadena, consulta disponibilidad por ciudad y encuentra una experiencia
-                de hospedaje pensada para viajes de descanso, negocios y estancias familiares.
-            </p>
+        <div class="home-hero__media">
+            <div class="home-hero__overlay"></div>
 
-            <div class="home-hero__actions">
-                <button class="btn home-btn-primary" @onclick="GoSearchDirect">
-                    Buscar hoteles
-                </button>
-
-                <a class="btn home-btn-secondary" href="/search">
-                    Ir a búsqueda avanzada
-                </a>
+            <div class="home-hero__top-copy">
+                <div class="home-hero__eyebrow">HotelChain Collection</div>
+                <h1>Encuentra tu próxima estadía dentro de una sola cadena hotelera</h1>
+                <p>
+                    Consulta hoteles por ciudad, compara opciones disponibles y reserva desde un portal centralizado
+                    pensado para viajes de descanso, negocios y estancias familiares.
+                </p>
             </div>
 
-            <div class="home-hero__highlights">
-                <div class="home-highlight-card">
-                    <span class="home-highlight-card__label">Check-in</span>
-                    <strong>@checkIn.ToString("dd/MM/yyyy")</strong>
+            <div class="home-booking-card">
+                <div class="home-booking-card__tabs">
+                    <button type="button" class="home-booking-card__tab home-booking-card__tab--active">
+                        Propiedades
+                    </button>
+
+                    <a class="home-booking-card__tab-link" href="/check-in-checkout">
+                        Check-in y checkout
+                    </a>
                 </div>
 
-                <div class="home-highlight-card">
-                    <span class="home-highlight-card__label">Check-out</span>
-                    <strong>@checkOut.ToString("dd/MM/yyyy")</strong>
+                <div class="home-booking-card__body">
+                    <div class="home-booking-card__header">
+                        <div>
+                            <div class="home-section-badge">Reserva directa</div>
+                            <h2>Buscar una propiedad</h2>
+                            <p>
+                                Selecciona destino, fechas y huéspedes para consultar disponibilidad real dentro de la cadena.
+                            </p>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(error))
+                    {
+                        <div class="alert alert-danger home-alert">@error</div>
+                    }
+
+                    <div class="home-booking-grid">
+                        <div class="home-field home-field--destination">
+                            <label class="home-label">Destino</label>
+                            <select class="form-select home-input" @bind="selectedCityId">
+                                <option value="0">¿A dónde podemos llevarte?</option>
+                                @foreach (var c in cities)
+                                {
+                                    <option value="@c.id">@c.name (@c.countryCode)</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="home-field">
+                            <label class="home-label">Check-in</label>
+                            <InputDate class="form-control home-input" @bind-Value="checkIn" />
+                        </div>
+
+                        <div class="home-field">
+                            <label class="home-label">Check-out</label>
+                            <InputDate class="form-control home-input" @bind-Value="checkOut" />
+                        </div>
+
+                        <div class="home-field">
+                            <label class="home-label">Huéspedes</label>
+                            <input type="number" min="1" class="form-control home-input" @bind="guests" />
+                        </div>
+                    </div>
+
+                    <div class="home-booking-card__actions">
+                        <button class="btn home-btn-primary" @onclick="GoSearch">
+                            Buscar propiedades
+                        </button>
+
+                        <a class="btn home-btn-secondary" href="/search">
+                            Ver búsqueda avanzada
+                        </a>
+                    </div>
                 </div>
-
-                <div class="home-highlight-card">
-                    <span class="home-highlight-card__label">Huéspedes</span>
-                    <strong>@guests</strong>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="home-search-panel">
-        <div class="home-search-card">
-            <div class="home-search-card__header">
-                <div>
-                    <div class="home-section-badge">Reserva directa</div>
-                    <h3>Encuentra tu próxima estadía</h3>
-                    <p>
-                        Selecciona ciudad, fechas y huéspedes para consultar disponibilidad en los hoteles de nuestra cadena.
-                    </p>
-                </div>
-            </div>
-
-            @if (!string.IsNullOrEmpty(error))
-            {
-                <div class="alert alert-danger home-alert">@error</div>
-            }
-
-            <div class="row g-3">
-                <div class="col-lg-5">
-                    <label class="home-label">Ciudad</label>
-                    <select class="form-select home-input" @bind="selectedCityId">
-                        <option value="0">-- Selecciona --</option>
-                        @foreach (var c in cities)
-                        {
-                            <option value="@c.id">@c.name (@c.countryCode)</option>
-                        }
-                    </select>
-                </div>
-
-                <div class="col-md-4 col-lg-2">
-                    <label class="home-label">Check-in</label>
-                    <InputDate class="form-control home-input" @bind-Value="checkIn" />
-                </div>
-
-                <div class="col-md-4 col-lg-2">
-                    <label class="home-label">Check-out</label>
-                    <InputDate class="form-control home-input" @bind-Value="checkOut" />
-                </div>
-
-                <div class="col-md-4 col-lg-3">
-                    <label class="home-label">Huéspedes</label>
-                    <input type="number" class="form-control home-input" min="1" @bind="guests" />
-                </div>
-            </div>
-
-            <div class="home-search-actions">
-                <button class="btn home-btn-primary" @onclick="GoSearch">
-                    Buscar disponibilidad
-                </button>
-
-                <a class="btn home-btn-secondary" href="/search">
-                    Ver todos los filtros
-                </a>
             </div>
         </div>
     </section>
 
-    <section class="home-brand-section">
+    <section class="home-feature-strip">
+        <article class="home-feature-pill">
+            <span class="home-feature-pill__label">Check-in</span>
+            <strong>@checkIn.ToString("dd/MM/yyyy")</strong>
+        </article>
+
+        <article class="home-feature-pill">
+            <span class="home-feature-pill__label">Check-out</span>
+            <strong>@checkOut.ToString("dd/MM/yyyy")</strong>
+        </article>
+
+        <article class="home-feature-pill">
+            <span class="home-feature-pill__label">Huéspedes</span>
+            <strong>@guests</strong>
+        </article>
+
+        <article class="home-feature-pill">
+            <span class="home-feature-pill__label">Experiencia</span>
+            <strong>Reserva centralizada</strong>
+        </article>
+    </section>
+
+    <section class="home-cards-section">
         <div class="home-section-heading">
             <div>
-                <div class="home-section-badge">Nuestra cadena</div>
-                <h3>Una misma marca, múltiples experiencias de hospedaje</h3>
+                <div class="home-section-badge">Descubre la cadena</div>
+                <h3>Nuevas experiencias listas para darte la bienvenida</h3>
                 <p>
-                    HotelChain Collection reúne distintos hoteles bajo una sola identidad, con un proceso de reserva centralizado
-                    y una experiencia uniforme para nuestros huéspedes.
+                    Explora propiedades, estilos de hospedaje y opciones pensadas para distintos tipos de viaje dentro de HotelChain Collection.
                 </p>
             </div>
         </div>
 
-        <div class="home-info-grid">
-            <article class="home-info-card">
-                <div class="home-info-card__badge">Destinos</div>
-                <h4>Hoteles en diferentes ciudades</h4>
-                <p>
-                    Consulta propiedades de la cadena por ubicación y encuentra la opción que mejor se adapte a tu viaje.
-                </p>
+        <div class="home-showcase-grid">
+            <article class="home-showcase-card home-showcase-card--coast">
+                <div class="home-showcase-card__content">
+                    <span class="home-showcase-card__eyebrow">Destinos de playa</span>
+                    <h4>Propiedades para descanso y experiencias junto al mar</h4>
+                    <p>
+                        Encuentra hoteles ideales para vacaciones, escapadas y estadías memorables en destinos de la cadena.
+                    </p>
+                    <a href="/search" class="home-inline-link">Buscar hoteles</a>
+                </div>
             </article>
 
-            <article class="home-info-card">
-                <div class="home-info-card__badge">Reserva centralizada</div>
-                <h4>Todo en un solo portal</h4>
-                <p>
-                    Desde este sitio puedes buscar, reservar, consultar tu código, revisar tu historial y descargar tu confirmación.
-                </p>
+            <article class="home-showcase-card home-showcase-card--city">
+                <div class="home-showcase-card__content">
+                    <span class="home-showcase-card__eyebrow">Viajes urbanos</span>
+                    <h4>Hospedaje para negocios, eventos y escapadas en ciudad</h4>
+                    <p>
+                        Consulta opciones con acceso práctico a zonas comerciales, centros de negocios y puntos clave del destino.
+                    </p>
+                    <a href="/room-types" class="home-inline-link">Ver tipos de habitación</a>
+                </div>
             </article>
 
-            <article class="home-info-card">
-                <div class="home-info-card__badge">Experiencia confiable</div>
-                <h4>Información clara y opiniones reales</h4>
-                <p>
-                    Explora detalles de cada hotel, revisa comentarios de usuarios y compara opciones antes de reservar.
-                </p>
+            <article class="home-showcase-card home-showcase-card--nature">
+                <div class="home-showcase-card__content">
+                    <span class="home-showcase-card__eyebrow">Bienestar</span>
+                    <h4>Hoteles pensados para relajación, comodidad y estadías prolongadas</h4>
+                    <p>
+                        Conoce amenidades, políticas y detalles de la experiencia antes de completar tu reservación.
+                    </p>
+                    <a href="/amenities" class="home-inline-link">Explorar amenidades</a>
+                </div>
             </article>
         </div>
     </section>
 
-    <section class="home-features-section">
+    <section class="home-infohub-section">
+        <div class="home-section-heading home-section-heading--centered">
+            <div>
+                <div class="home-section-badge">Páginas informativas</div>
+                <h3>Todo lo importante antes, durante y después de tu llegada</h3>
+                <p>
+                    Este bloque cubre el módulo informativo solicitado para la cadena: amenidades, tipos de habitación,
+                    proceso de check-in y checkout, reglas del hotel y evacuación.
+                </p>
+            </div>
+        </div>
+
+        <div class="home-infohub-grid">
+            <article class="home-infohub-card">
+                <span class="home-infohub-card__eyebrow">Amenidades</span>
+                <h4>Áreas comunes, bienestar y servicios</h4>
+                <p>Consulta una guía visual de lobby, alimentos, piscina, gimnasio, spa, salones y otras zonas de apoyo a la estadía.</p>
+                <a href="/amenities" class="home-inline-link">Abrir amenidades</a>
+            </article>
+
+            <article class="home-infohub-card">
+                <span class="home-infohub-card__eyebrow">Alojamiento</span>
+                <h4>Tipos de habitación y perfiles de uso</h4>
+                <p>Revisa categorías, camas, metraje aproximado, capacidad y el tipo de huésped al que mejor se adapta cada opción.</p>
+                <a href="/room-types" class="home-inline-link">Abrir tipos de habitación</a>
+            </article>
+
+            <article class="home-infohub-card">
+                <span class="home-infohub-card__eyebrow">Operación</span>
+                <h4>Check-in, checkout y cargos</h4>
+                <p>Entiende horarios, documentación sugerida, preautorizaciones, cargos incidentales y cierre de cuenta de estancia.</p>
+                <a href="/check-in-checkout" class="home-inline-link">Abrir proceso</a>
+            </article>
+
+            <article class="home-infohub-card">
+                <span class="home-infohub-card__eyebrow">Políticas</span>
+                <h4>Reglas del hotel y convivencia</h4>
+                <p>Conoce políticas de ocupación, visitantes, ruido, fumar, mascotas, daños, objetos olvidados y cancelación.</p>
+                <a href="/hotel-rules" class="home-inline-link">Abrir reglas</a>
+            </article>
+
+            <article class="home-infohub-card">
+                <span class="home-infohub-card__eyebrow">Seguridad</span>
+                <h4>Evacuación y respuesta ante emergencias</h4>
+                <p>Identifica rutas, puntos de reunión, responsabilidades del huésped y acciones básicas ante una emergencia.</p>
+                <a href="/evacuation-info" class="home-inline-link">Abrir evacuación</a>
+            </article>
+
+            <article class="home-infohub-card home-infohub-card--accent">
+                <span class="home-infohub-card__eyebrow">Reserva</span>
+                <h4>Del contenido informativo al flujo de compra</h4>
+                <p>El módulo informativo acompaña la decisión del huésped y se conecta con la búsqueda, detalle del hotel y checkout.</p>
+                <a href="/search" class="home-inline-link">Ir a buscar hoteles</a>
+            </article>
+        </div>
+    </section>
+
+    <section class="home-brands-section">
+        <div class="home-section-heading home-section-heading--centered">
+            <div>
+                <div class="home-section-badge">Nuestra propuesta</div>
+                <h3>Una misma marca, múltiples formas de hospedarte</h3>
+                <p>
+                    El portal reúne búsqueda, detalle de hotel, proceso de reservación, reglas, seguridad y consulta de reservaciones dentro de una sola experiencia.
+                </p>
+            </div>
+        </div>
+
+        <div class="home-brand-columns">
+            <article class="home-brand-card">
+                <h4>Reserva centralizada</h4>
+                <p>
+                    Busca hoteles de la cadena por ciudad, fechas y huéspedes desde un solo sitio, sin cambiar de portal para cada propiedad.
+                </p>
+                <ul>
+                    <li>Búsqueda por destino</li>
+                    <li>Disponibilidad real</li>
+                    <li>Consulta de código de reservación</li>
+                </ul>
+            </article>
+
+            <article class="home-brand-card">
+                <h4>Información clara</h4>
+                <p>
+                    Consulta detalle del hotel, opiniones, tipos de habitación y páginas informativas que apoyan la decisión de compra.
+                </p>
+                <ul>
+                    <li>Opiniones y rating</li>
+                    <li>Tipos de habitación</li>
+                    <li>Proceso de check-in y checkout</li>
+                </ul>
+            </article>
+
+            <article class="home-brand-card">
+                <h4>Experiencia del huésped</h4>
+                <p>
+                    El huésped puede registrarse, reservar, hacer checkout, descargar PDF y revisar sus compras desde su propio historial.
+                </p>
+                <ul>
+                    <li>Registro e inicio de sesión</li>
+                    <li>Checkout y confirmación</li>
+                    <li>Mis reservaciones</li>
+                </ul>
+            </article>
+
+            <article class="home-brand-card">
+                <h4>Operación de cadena</h4>
+                <p>
+                    La plataforma también soporta gestión interna para hoteles, habitaciones, inventario, reservaciones y usuarios.
+                </p>
+                <ul>
+                    <li>Administración de hoteles</li>
+                    <li>Inventario por día</li>
+                    <li>Gestión de usuarios y roles</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <section class="home-benefits-section">
         <div class="home-section-heading">
             <div>
                 <div class="home-section-badge">Beneficios</div>
-                <h3>¿Por qué reservar con HotelChain Collection?</h3>
+                <h3>¿Por qué reservar desde el portal?</h3>
                 <p>
-                    Diseñamos una experiencia de reserva directa para que el huésped encuentre disponibilidad real y complete su proceso de forma sencilla.
+                    El enfoque del sistema busca que el flujo público se sienta como una web real de cadena hotelera, sin perder la funcionalidad académica del proyecto.
                 </p>
             </div>
         </div>
@@ -153,26 +289,26 @@
         <div class="home-benefits-grid">
             <article class="home-benefit-card">
                 <div class="home-benefit-card__icon">⌕</div>
-                <h4>Búsqueda rápida</h4>
-                <p>Consulta disponibilidad por ciudad, fechas, huéspedes, precio, tipo de habitación y rating.</p>
-            </article>
-
-            <article class="home-benefit-card">
-                <div class="home-benefit-card__icon">⌂</div>
-                <h4>Hoteles de la cadena</h4>
-                <p>Descubre diferentes propiedades bajo una misma marca y con una experiencia homogénea.</p>
+                <h4>Búsqueda directa</h4>
+                <p>Consulta hoteles disponibles por ciudad, fechas, tipo de habitación, precio y rating.</p>
             </article>
 
             <article class="home-benefit-card">
                 <div class="home-benefit-card__icon">★</div>
-                <h4>Opiniones de usuarios</h4>
-                <p>Consulta comentarios y calificaciones para conocer mejor cada hotel antes de tu reservación.</p>
+                <h4>Decisión informada</h4>
+                <p>Explora detalles del hotel, comentarios y datos útiles antes de completar tu reservación.</p>
             </article>
 
             <article class="home-benefit-card">
                 <div class="home-benefit-card__icon">✓</div>
-                <h4>Reserva y confirmación</h4>
-                <p>Completa tu reservación, realiza checkout demo y descarga el PDF de confirmación desde el portal.</p>
+                <h4>Proceso completo</h4>
+                <p>Desde la búsqueda hasta el checkout y el PDF, el proceso se mantiene dentro del portal.</p>
+            </article>
+
+            <article class="home-benefit-card">
+                <div class="home-benefit-card__icon">⌂</div>
+                <h4>Cadena unificada</h4>
+                <p>Distintos hoteles, una sola marca y una experiencia uniforme para el huésped.</p>
             </article>
         </div>
     </section>
@@ -180,20 +316,16 @@
     <section class="home-cta-section">
         <div class="home-cta-card">
             <div class="home-cta-card__content">
-                <div class="home-section-badge">Comienza ahora</div>
-                <h3>Explora los hoteles de nuestra cadena</h3>
+                <div class="home-section-badge">Planea mejor tu estadía</div>
+                <h3>Empieza con la información clave y luego reserva</h3>
                 <p>
-                    Inicia tu búsqueda y conoce las propiedades disponibles para tu próximo viaje.
+                    Revisa páginas informativas, conoce las políticas del hotel y, cuando estés listo, continúa al flujo de búsqueda para reservar dentro de la cadena.
                 </p>
             </div>
 
             <div class="home-cta-card__actions">
-                <button class="btn home-btn-primary" @onclick="GoSearch">
-                    Buscar hoteles
-                </button>
-                <a class="btn home-btn-secondary" href="/search">
-                    Ver resultados y filtros
-                </a>
+                <a class="btn home-btn-primary" href="/search">Buscar hoteles</a>
+                <a class="btn home-btn-secondary" href="/amenities">Ver páginas informativas</a>
             </div>
         </div>
     </section>
@@ -201,314 +333,443 @@
 
 <style>
     .home-page {
-        padding: 1.5rem 0 2rem 0;
-        color: #0f172a;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        color: #111827;
     }
 
-    .home-hero {
-        background:
-            radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 28%),
-            linear-gradient(135deg, #0f172a 0%, #162033 45%, #1e293b 100%);
-        color: #fff;
-        border-radius: 28px;
-        padding: 2.6rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
-        overflow: hidden;
+    .home-hero__media {
         position: relative;
+        min-height: 690px;
+        border-radius: 34px;
+        overflow: hidden;
+        background:
+            linear-gradient(180deg, rgba(17, 24, 39, 0.08), rgba(17, 24, 39, 0.26)),
+            linear-gradient(135deg, #d6c3aa 0%, #ebe3d9 28%, #b7c7d4 57%, #748da0 100%);
+        box-shadow: 0 28px 70px rgba(15, 23, 42, 0.14);
     }
 
-    .home-hero::after {
-        content: "";
+    .home-hero__overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent 30%);
-        pointer-events: none;
+        background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0) 38%, rgba(17,24,39,0.12) 100%);
     }
 
-    .home-hero__content {
+    .home-hero__top-copy {
         position: relative;
         z-index: 1;
-        max-width: 940px;
+        padding: 2rem 2rem 0 2rem;
+        max-width: 860px;
+        color: #ffffff;
     }
 
-    .home-badge,
-    .home-section-badge {
+    .home-hero__eyebrow {
+        display: inline-flex;
+        padding: 0.38rem 0.78rem;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.14);
+        color: rgba(255,255,255,0.92);
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 1rem;
+        backdrop-filter: blur(8px);
+    }
+
+    .home-hero__top-copy h1 {
+        margin: 0 0 0.8rem 0;
+        font-size: clamp(2.55rem, 5vw, 4.65rem);
+        line-height: 1;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+    }
+
+    .home-hero__top-copy p {
+        margin: 0;
+        max-width: 720px;
+        color: rgba(255,255,255,0.9);
+        font-size: 1.04rem;
+        line-height: 1.75;
+    }
+
+    .home-booking-card {
+        position: absolute;
+        z-index: 2;
+        left: 2rem;
+        right: 2rem;
+        bottom: 2rem;
+        background: rgba(255,255,255,0.96);
+        border: 1px solid rgba(255,255,255,0.65);
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: 0 28px 64px rgba(15, 23, 42, 0.18);
+        backdrop-filter: blur(14px);
+    }
+
+    .home-booking-card__tabs {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.8rem 1rem;
+        background: rgba(249, 250, 251, 0.9);
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .home-booking-card__tab,
+    .home-booking-card__tab-link {
         display: inline-flex;
         align-items: center;
-        padding: 0.38rem 0.75rem;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0.65rem 1rem;
         border-radius: 999px;
-        font-size: 0.82rem;
+        border: 1px solid transparent;
+        background: transparent;
+        color: #111827;
         font-weight: 700;
-        letter-spacing: 0.03em;
-        text-transform: uppercase;
+        text-decoration: none;
     }
 
-    .home-badge {
-        background: rgba(255,255,255,0.12);
-        color: #dbeafe;
-        margin-bottom: 1rem;
+    .home-booking-card__tab--active {
+        background: #111111;
+        color: #ffffff;
     }
 
-    .home-section-badge {
-        background: #eff6ff;
-        color: #1d4ed8;
-        margin-bottom: 0.8rem;
+    .home-booking-card__tab-link {
+        background: #ffffff;
+        border-color: #e5e7eb;
     }
 
-    .home-hero h1 {
-        font-size: clamp(2rem, 4vw, 3.4rem);
-        font-weight: 800;
-        margin-bottom: 0.9rem;
-        line-height: 1.05;
+    .home-booking-card__body {
+        padding: 1.35rem;
     }
 
-    .home-hero p {
+    .home-booking-card__header h2,
+    .home-section-heading h3,
+    .home-brand-card h4,
+    .home-benefit-card h4,
+    .home-cta-card h3,
+    .home-showcase-card h4,
+    .home-infohub-card h4 {
         margin: 0;
-        max-width: 780px;
-        color: rgba(255,255,255,0.82);
-        font-size: 1.03rem;
+        color: #111827;
+        font-weight: 800;
+    }
+
+    .home-booking-card__header p,
+    .home-section-heading p,
+    .home-brand-card p,
+    .home-benefit-card p,
+    .home-cta-card p,
+    .home-showcase-card p,
+    .home-infohub-card p {
+        margin: 0.45rem 0 0 0;
+        color: #4b5563;
         line-height: 1.7;
     }
 
-    .home-hero__actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-top: 1.4rem;
-    }
-
-    .home-hero__highlights {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.85rem;
-        margin-top: 1.5rem;
-    }
-
-    .home-highlight-card {
-        min-width: 160px;
-        padding: 0.95rem 1rem;
-        border-radius: 18px;
-        background: rgba(255,255,255,0.10);
-        border: 1px solid rgba(255,255,255,0.12);
-        backdrop-filter: blur(6px);
-    }
-
-    .home-highlight-card__label {
-        display: block;
+    .home-section-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        background: #f3f4f6;
+        color: #111827;
         font-size: 0.78rem;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        color: rgba(255,255,255,0.70);
-        margin-bottom: 0.2rem;
-    }
-
-    .home-highlight-card strong {
-        font-size: 1rem;
-        color: #fff;
-    }
-
-    .home-search-card,
-    .home-info-card,
-    .home-benefit-card,
-    .home-cta-card {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 24px;
-        box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
-    }
-
-    .home-search-card {
-        padding: 1.5rem;
-    }
-
-    .home-search-card__header,
-    .home-section-heading {
-        margin-bottom: 1rem;
-    }
-
-    .home-search-card__header h3,
-    .home-section-heading h3,
-    .home-cta-card h3 {
-        margin: 0 0 0.25rem 0;
         font-weight: 800;
-        color: #0f172a;
-    }
-
-    .home-search-card__header p,
-    .home-section-heading p,
-    .home-cta-card p {
-        margin: 0;
-        color: #64748b;
-        line-height: 1.6;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 0.8rem;
     }
 
     .home-alert {
-        border-radius: 16px;
-        margin-bottom: 1rem;
+        margin-top: 1rem;
+        border-radius: 18px;
+    }
+
+    .home-booking-grid,
+    .home-feature-strip,
+    .home-brand-columns,
+    .home-benefits-grid,
+    .home-infohub-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+    }
+
+    .home-infohub-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .home-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
     }
 
     .home-label {
-        display: block;
-        margin-bottom: 0.45rem;
-        font-size: 0.92rem;
+        color: #374151;
         font-weight: 700;
-        color: #334155;
     }
 
     .home-input {
         min-height: 48px;
-        border-radius: 14px;
-        border: 1px solid #cbd5e1;
-        background: #f8fafc;
-        color: #0f172a;
+        border-radius: 16px;
+        border-color: #d1d5db;
+        box-shadow: none;
     }
 
-    .home-input:focus {
-        border-color: #3b82f6;
-        background: #fff;
-        box-shadow: 0 0 0 0.18rem rgba(59, 130, 246, 0.18);
-    }
-
-    .home-search-actions,
+    .home-booking-card__actions,
     .home-cta-card__actions {
         display: flex;
         flex-wrap: wrap;
         gap: 0.75rem;
-        margin-top: 1.25rem;
+        margin-top: 1rem;
     }
 
-    .home-btn-primary {
-        background: linear-gradient(135deg, #1d4ed8 0%, #0f172a 100%);
-        color: #fff;
-        border: none;
-        border-radius: 14px;
-        padding: 0.8rem 1.2rem;
-        font-weight: 700;
-        box-shadow: 0 10px 24px rgba(29, 78, 216, 0.22);
-    }
-
-    .home-btn-primary:hover,
-    .home-btn-primary:focus {
-        color: #fff;
-        background: linear-gradient(135deg, #1e40af 0%, #0b1220 100%);
-    }
-
+    .home-btn-primary,
     .home-btn-secondary {
-        background: #fff;
-        color: #0f172a;
-        border: 1px solid #cbd5e1;
-        border-radius: 14px;
-        padding: 0.8rem 1.2rem;
-        font-weight: 700;
-    }
-
-    .home-btn-secondary:hover,
-    .home-btn-secondary:focus {
-        background: #f8fafc;
-        color: #0f172a;
-        border-color: #94a3b8;
-    }
-
-    .home-brand-section,
-    .home-features-section,
-    .home-cta-section {
-        margin-top: 1.5rem;
-    }
-
-    .home-info-grid,
-    .home-benefits-grid {
-        display: grid;
-        gap: 1rem;
-    }
-
-    .home-info-grid {
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-
-    .home-benefits-grid {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-
-    .home-info-card,
-    .home-benefit-card {
-        padding: 1.25rem;
-    }
-
-    .home-info-card__badge {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.34rem 0.7rem;
-        border-radius: 999px;
-        background: #eff6ff;
-        color: #1d4ed8;
-        font-size: 0.78rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        margin-bottom: 0.8rem;
-    }
-
-    .home-info-card h4,
-    .home-benefit-card h4 {
-        margin: 0 0 0.45rem 0;
-        font-weight: 800;
-        color: #0f172a;
-    }
-
-    .home-info-card p,
-    .home-benefit-card p {
-        margin: 0;
-        color: #475569;
-        line-height: 1.6;
-    }
-
-    .home-benefit-card__icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 16px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 0.9rem;
-        font-size: 1.15rem;
+        min-height: 46px;
+        padding: 0.75rem 1.2rem;
+        border-radius: 999px;
+        font-weight: 700;
+    }
+
+    .home-btn-primary {
+        background: #111111;
+        color: #ffffff;
+        border: 1px solid #111111;
+    }
+
+    .home-btn-secondary {
+        background: #ffffff;
+        color: #111827;
+        border: 1px solid #d1d5db;
+    }
+
+    .home-feature-pill,
+    .home-brand-card,
+    .home-benefit-card,
+    .home-infohub-card {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 24px;
+        padding: 1.15rem;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.07);
+    }
+
+    .home-infohub-card--accent {
+        background: linear-gradient(135deg, #111827 0%, #334155 100%);
+        border-color: #111827;
+    }
+
+    .home-infohub-card--accent h4,
+    .home-infohub-card--accent p,
+    .home-infohub-card--accent .home-inline-link,
+    .home-infohub-card--accent .home-infohub-card__eyebrow {
+        color: #ffffff;
+    }
+
+    .home-infohub-card__eyebrow,
+    .home-feature-pill__label,
+    .home-showcase-card__eyebrow {
+        display: inline-block;
+        font-size: 0.78rem;
         font-weight: 800;
-        color: #1d4ed8;
-        background: #eff6ff;
-        border: 1px solid #dbeafe;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #6b7280;
+        margin-bottom: 0.55rem;
+    }
+
+    .home-feature-pill strong {
+        font-size: 1.02rem;
+        color: #111827;
+    }
+
+    .home-cards-section,
+    .home-brands-section,
+    .home-benefits-section,
+    .home-cta-section,
+    .home-infohub-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .home-section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 1rem;
+    }
+
+    .home-section-heading--centered {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .home-showcase-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+    }
+
+    .home-showcase-card {
+        position: relative;
+        min-height: 420px;
+        border-radius: 28px;
+        overflow: hidden;
+        color: #ffffff;
+        box-shadow: 0 24px 56px rgba(15, 23, 42, 0.16);
+    }
+
+    .home-showcase-card--coast {
+        background: linear-gradient(135deg, #9db9c9 0%, #5e7a8f 45%, #1f3f58 100%);
+    }
+
+    .home-showcase-card--city {
+        background: linear-gradient(135deg, #cab89c 0%, #8a7763 45%, #43372c 100%);
+    }
+
+    .home-showcase-card--nature {
+        background: linear-gradient(135deg, #aebf9c 0%, #67806b 45%, #2d473d 100%);
+    }
+
+    .home-showcase-card__content {
+        position: absolute;
+        inset: auto 0 0 0;
+        padding: 1.4rem;
+        background: linear-gradient(180deg, rgba(17,24,39,0), rgba(17,24,39,0.72));
+    }
+
+    .home-showcase-card h4,
+    .home-showcase-card p,
+    .home-showcase-card .home-inline-link {
+        color: #ffffff;
+    }
+
+    .home-inline-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        margin-top: 0.8rem;
+        color: #111827;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .home-brand-card ul {
+        margin: 0.85rem 0 0 1rem;
+        padding: 0;
+        color: #374151;
+        line-height: 1.8;
+    }
+
+    .home-benefit-card__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+        background: #f3f4f6;
+        margin-bottom: 0.75rem;
+        font-size: 1.25rem;
+        font-weight: 800;
     }
 
     .home-cta-card {
-        padding: 1.4rem;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
         flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 30px;
+        padding: 1.6rem;
+        background: linear-gradient(135deg, #ede6dd 0%, #d8e1e7 100%);
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
     }
 
     .home-cta-card__content {
         flex: 1 1 520px;
     }
 
+    @@media (max-width: 1199.98px) {
+        .home-booking-grid,
+        .home-feature-strip,
+        .home-brand-columns,
+        .home-benefits-grid,
+        .home-infohub-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .home-showcase-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .home-showcase-card {
+            min-height: 360px;
+        }
+    }
+
     @@media (max-width: 991.98px) {
-        .home-hero {
-            padding: 2rem 1.25rem;
+        .home-hero__media {
+            min-height: auto;
+            padding-bottom: 1.5rem;
+        }
+
+        .home-hero__top-copy {
+            padding: 1.5rem 1.2rem 0 1.2rem;
+        }
+
+        .home-booking-card {
+            position: relative;
+            left: auto;
+            right: auto;
+            bottom: auto;
+            margin: 1.2rem;
+        }
+
+        .home-booking-grid,
+        .home-infohub-grid {
+            grid-template-columns: 1fr 1fr;
         }
     }
 
     @@media (max-width: 767.98px) {
-        .home-page {
-            padding-top: 0.75rem;
+        .home-booking-grid,
+        .home-feature-strip,
+        .home-brand-columns,
+        .home-benefits-grid,
+        .home-infohub-grid {
+            grid-template-columns: 1fr;
         }
 
-        .home-search-card,
+        .home-hero__top-copy h1 {
+            font-size: 2.2rem;
+        }
+
+        .home-booking-card__tabs {
+            flex-wrap: wrap;
+        }
+
+        .home-booking-card__body {
+            padding: 1rem;
+        }
+
+        .home-showcase-card {
+            min-height: 320px;
+        }
+
         .home-cta-card {
             padding: 1.1rem;
-        }
-
-        .home-hero {
-            padding: 1.5rem 1rem;
         }
     }
 </style>
@@ -549,11 +810,6 @@
         }
 
         Nav.NavigateTo($"/search?cityId={selectedCityId}&checkIn={checkIn:yyyy-MM-dd}&checkOut={checkOut:yyyy-MM-dd}&guests={guests}");
-    }
-
-    void GoSearchDirect()
-    {
-        Nav.NavigateTo("/search");
     }
 
     class CityDto

@@ -1,3 +1,4 @@
+
 using Bunit;
 using HotelChain.Web.Pages;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +21,7 @@ public class CheckoutTests : BunitContext
         var cut = Render<Checkout>();
 
         // Assert
-        Assert.Contains("Gestiona tu reservación", cut.Markup);
+        Assert.Contains("checkout-premium-page", cut.Markup);
     }
 
     [Fact]

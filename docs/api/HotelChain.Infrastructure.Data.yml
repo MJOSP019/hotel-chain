@@ -1,0 +1,54 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Infrastructure.Data
+  commentId: N:HotelChain.Infrastructure.Data
+  id: HotelChain.Infrastructure.Data
+  children:
+  - HotelChain.Infrastructure.Data.HotelChainDbContext
+  langs:
+  - csharp
+  - vb
+  name: HotelChain.Infrastructure.Data
+  nameWithType: HotelChain.Infrastructure.Data
+  fullName: HotelChain.Infrastructure.Data
+  type: Namespace
+  assemblies:
+  - HotelChain.Infrastructure
+references:
+- uid: HotelChain.Infrastructure.Data.HotelChainDbContext
+  commentId: T:HotelChain.Infrastructure.Data.HotelChainDbContext
+  parent: HotelChain.Infrastructure.Data
+  href: HotelChain.Infrastructure.Data.HotelChainDbContext.html
+  name: HotelChainDbContext
+  nameWithType: HotelChainDbContext
+  fullName: HotelChain.Infrastructure.Data.HotelChainDbContext
+- uid: HotelChain.Infrastructure.Data
+  commentId: N:HotelChain.Infrastructure.Data
+  href: HotelChain.html
+  name: HotelChain.Infrastructure.Data
+  nameWithType: HotelChain.Infrastructure.Data
+  fullName: HotelChain.Infrastructure.Data
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Infrastructure
+    name: Infrastructure
+    href: HotelChain.Infrastructure.html
+  - name: .
+  - uid: HotelChain.Infrastructure.Data
+    name: Data
+    href: HotelChain.Infrastructure.Data.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Infrastructure
+    name: Infrastructure
+    href: HotelChain.Infrastructure.html
+  - name: .
+  - uid: HotelChain.Infrastructure.Data
+    name: Data
+    href: HotelChain.Infrastructure.Data.html

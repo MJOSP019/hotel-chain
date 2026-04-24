@@ -1,0 +1,69 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Api.DTOs.Admin
+  commentId: N:HotelChain.Api.DTOs.Admin
+  id: HotelChain.Api.DTOs.Admin
+  children:
+  - HotelChain.Api.DTOs.Admin.AdminRoomDto
+  - HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  langs:
+  - csharp
+  - vb
+  name: HotelChain.Api.DTOs.Admin
+  nameWithType: HotelChain.Api.DTOs.Admin
+  fullName: HotelChain.Api.DTOs.Admin
+  type: Namespace
+  assemblies:
+  - HotelChain.Api
+references:
+- uid: HotelChain.Api.DTOs.Admin.AdminRoomDto
+  commentId: T:HotelChain.Api.DTOs.Admin.AdminRoomDto
+  href: HotelChain.Api.DTOs.Admin.AdminRoomDto.html
+  name: AdminRoomDto
+  nameWithType: AdminRoomDto
+  fullName: HotelChain.Api.DTOs.Admin.AdminRoomDto
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  commentId: T:HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  parent: HotelChain.Api.DTOs.Admin
+  href: HotelChain.Api.DTOs.Admin.SaveRoomRequest.html
+  name: SaveRoomRequest
+  nameWithType: SaveRoomRequest
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+- uid: HotelChain.Api.DTOs.Admin
+  commentId: N:HotelChain.Api.DTOs.Admin
+  href: HotelChain.html
+  name: HotelChain.Api.DTOs.Admin
+  nameWithType: HotelChain.Api.DTOs.Admin
+  fullName: HotelChain.Api.DTOs.Admin
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.DTOs
+    name: DTOs
+    href: HotelChain.Api.DTOs.html
+  - name: .
+  - uid: HotelChain.Api.DTOs.Admin
+    name: Admin
+    href: HotelChain.Api.DTOs.Admin.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.DTOs
+    name: DTOs
+    href: HotelChain.Api.DTOs.html
+  - name: .
+  - uid: HotelChain.Api.DTOs.Admin
+    name: Admin
+    href: HotelChain.Api.DTOs.Admin.html

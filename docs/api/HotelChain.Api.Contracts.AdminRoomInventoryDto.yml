@@ -1,0 +1,663 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto
+  commentId: T:HotelChain.Api.Contracts.AdminRoomInventoryDto
+  id: AdminRoomInventoryDto
+  parent: HotelChain.Api.Contracts
+  children:
+  - HotelChain.Api.Contracts.AdminRoomInventoryDto.Date
+  - HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelId
+  - HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelName
+  - HotelChain.Api.Contracts.AdminRoomInventoryDto.Id
+  - HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityAvailable
+  - HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityReserved
+  - HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityTotal
+  - HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomId
+  - HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomNameOrNumber
+  langs:
+  - csharp
+  - vb
+  name: AdminRoomInventoryDto
+  nameWithType: AdminRoomInventoryDto
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto
+  type: Class
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: AdminRoomInventoryDto
+    path: ../HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+    startLine: 2
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public class AdminRoomInventoryDto
+    content.vb: Public Class AdminRoomInventoryDto
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.Id
+  commentId: P:HotelChain.Api.Contracts.AdminRoomInventoryDto.Id
+  id: Id
+  parent: HotelChain.Api.Contracts.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: AdminRoomInventoryDto.Id
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.Id
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Id
+    path: ../HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+    startLine: 4
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public int Id { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Id As Integer
+  overload: HotelChain.Api.Contracts.AdminRoomInventoryDto.Id*
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomId
+  commentId: P:HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomId
+  id: RoomId
+  parent: HotelChain.Api.Contracts.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: RoomId
+  nameWithType: AdminRoomInventoryDto.RoomId
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: RoomId
+    path: ../HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+    startLine: 6
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public int RoomId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property RoomId As Integer
+  overload: HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomId*
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomNameOrNumber
+  commentId: P:HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomNameOrNumber
+  id: RoomNameOrNumber
+  parent: HotelChain.Api.Contracts.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: RoomNameOrNumber
+  nameWithType: AdminRoomInventoryDto.RoomNameOrNumber
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomNameOrNumber
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: RoomNameOrNumber
+    path: ../HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+    startLine: 7
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public string RoomNameOrNumber { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RoomNameOrNumber As String
+  overload: HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomNameOrNumber*
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelId
+  commentId: P:HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelId
+  id: HotelId
+  parent: HotelChain.Api.Contracts.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: HotelId
+  nameWithType: AdminRoomInventoryDto.HotelId
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: HotelId
+    path: ../HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+    startLine: 9
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public int HotelId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property HotelId As Integer
+  overload: HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelId*
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelName
+  commentId: P:HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelName
+  id: HotelName
+  parent: HotelChain.Api.Contracts.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: HotelName
+  nameWithType: AdminRoomInventoryDto.HotelName
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelName
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: HotelName
+    path: ../HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+    startLine: 10
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public string HotelName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property HotelName As String
+  overload: HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelName*
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.Date
+  commentId: P:HotelChain.Api.Contracts.AdminRoomInventoryDto.Date
+  id: Date
+  parent: HotelChain.Api.Contracts.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: Date
+  nameWithType: AdminRoomInventoryDto.Date
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.Date
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Date
+    path: ../HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+    startLine: 12
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public DateTime Date { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property [Date] As Date
+  overload: HotelChain.Api.Contracts.AdminRoomInventoryDto.Date*
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityTotal
+  commentId: P:HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityTotal
+  id: QuantityTotal
+  parent: HotelChain.Api.Contracts.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: QuantityTotal
+  nameWithType: AdminRoomInventoryDto.QuantityTotal
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityTotal
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: QuantityTotal
+    path: ../HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+    startLine: 14
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public int QuantityTotal { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property QuantityTotal As Integer
+  overload: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityTotal*
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityReserved
+  commentId: P:HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityReserved
+  id: QuantityReserved
+  parent: HotelChain.Api.Contracts.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: QuantityReserved
+  nameWithType: AdminRoomInventoryDto.QuantityReserved
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityReserved
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: QuantityReserved
+    path: ../HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+    startLine: 15
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public int QuantityReserved { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property QuantityReserved As Integer
+  overload: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityReserved*
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityAvailable
+  commentId: P:HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityAvailable
+  id: QuantityAvailable
+  parent: HotelChain.Api.Contracts.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: QuantityAvailable
+  nameWithType: AdminRoomInventoryDto.QuantityAvailable
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityAvailable
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: QuantityAvailable
+    path: ../HotelChain.Api/Contracts/AdminRoomInventoryDto.cs
+    startLine: 16
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Contracts
+  syntax:
+    content: public int QuantityAvailable { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property QuantityAvailable As Integer
+  overload: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityAvailable*
+references:
+- uid: HotelChain.Api.Contracts
+  commentId: N:HotelChain.Api.Contracts
+  href: HotelChain.html
+  name: HotelChain.Api.Contracts
+  nameWithType: HotelChain.Api.Contracts
+  fullName: HotelChain.Api.Contracts
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Contracts
+    name: Contracts
+    href: HotelChain.Api.Contracts.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Contracts
+    name: Contracts
+    href: HotelChain.Api.Contracts.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.Id*
+  commentId: Overload:HotelChain.Api.Contracts.AdminRoomInventoryDto.Id
+  href: HotelChain.Api.Contracts.AdminRoomInventoryDto.html#HotelChain_Api_Contracts_AdminRoomInventoryDto_Id
+  name: Id
+  nameWithType: AdminRoomInventoryDto.Id
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.Id
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomId*
+  commentId: Overload:HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomId
+  href: HotelChain.Api.Contracts.AdminRoomInventoryDto.html#HotelChain_Api_Contracts_AdminRoomInventoryDto_RoomId
+  name: RoomId
+  nameWithType: AdminRoomInventoryDto.RoomId
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomId
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomNameOrNumber*
+  commentId: Overload:HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomNameOrNumber
+  href: HotelChain.Api.Contracts.AdminRoomInventoryDto.html#HotelChain_Api_Contracts_AdminRoomInventoryDto_RoomNameOrNumber
+  name: RoomNameOrNumber
+  nameWithType: AdminRoomInventoryDto.RoomNameOrNumber
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.RoomNameOrNumber
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelId*
+  commentId: Overload:HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelId
+  href: HotelChain.Api.Contracts.AdminRoomInventoryDto.html#HotelChain_Api_Contracts_AdminRoomInventoryDto_HotelId
+  name: HotelId
+  nameWithType: AdminRoomInventoryDto.HotelId
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelId
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelName*
+  commentId: Overload:HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelName
+  href: HotelChain.Api.Contracts.AdminRoomInventoryDto.html#HotelChain_Api_Contracts_AdminRoomInventoryDto_HotelName
+  name: HotelName
+  nameWithType: AdminRoomInventoryDto.HotelName
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.HotelName
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.Date*
+  commentId: Overload:HotelChain.Api.Contracts.AdminRoomInventoryDto.Date
+  href: HotelChain.Api.Contracts.AdminRoomInventoryDto.html#HotelChain_Api_Contracts_AdminRoomInventoryDto_Date
+  name: Date
+  nameWithType: AdminRoomInventoryDto.Date
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.Date
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+  nameWithType.vb: Date
+  fullName.vb: Date
+  name.vb: Date
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityTotal*
+  commentId: Overload:HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityTotal
+  href: HotelChain.Api.Contracts.AdminRoomInventoryDto.html#HotelChain_Api_Contracts_AdminRoomInventoryDto_QuantityTotal
+  name: QuantityTotal
+  nameWithType: AdminRoomInventoryDto.QuantityTotal
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityTotal
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityReserved*
+  commentId: Overload:HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityReserved
+  href: HotelChain.Api.Contracts.AdminRoomInventoryDto.html#HotelChain_Api_Contracts_AdminRoomInventoryDto_QuantityReserved
+  name: QuantityReserved
+  nameWithType: AdminRoomInventoryDto.QuantityReserved
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityReserved
+- uid: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityAvailable*
+  commentId: Overload:HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityAvailable
+  href: HotelChain.Api.Contracts.AdminRoomInventoryDto.html#HotelChain_Api_Contracts_AdminRoomInventoryDto_QuantityAvailable
+  name: QuantityAvailable
+  nameWithType: AdminRoomInventoryDto.QuantityAvailable
+  fullName: HotelChain.Api.Contracts.AdminRoomInventoryDto.QuantityAvailable

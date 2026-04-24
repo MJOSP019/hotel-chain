@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Infrastructure
+  commentId: N:HotelChain.Infrastructure
+  id: HotelChain.Infrastructure
+  children:
+  - HotelChain.Infrastructure.Class1
+  langs:
+  - csharp
+  - vb
+  name: HotelChain.Infrastructure
+  nameWithType: HotelChain.Infrastructure
+  fullName: HotelChain.Infrastructure
+  type: Namespace
+  assemblies:
+  - HotelChain.Infrastructure
+references:
+- uid: HotelChain.Infrastructure.Class1
+  commentId: T:HotelChain.Infrastructure.Class1
+  href: HotelChain.Infrastructure.Class1.html
+  name: Class1
+  nameWithType: Class1
+  fullName: HotelChain.Infrastructure.Class1

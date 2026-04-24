@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class RoomTypeInventory </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class RoomTypeInventory ">
+    
+    <meta name="description" content="Inventario comercial diario por hotel y tipo de habitaci&#243;n.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="HotelChain.Domain.Entities.RoomTypeInventory">
+
+
+
+  <h1 id="HotelChain_Domain_Entities_RoomTypeInventory" data-uid="HotelChain.Domain.Entities.RoomTypeInventory" class="text-break">Class RoomTypeInventory</h1>
+  <div class="markdown level0 summary"><p>Inventario comercial diario por hotel y tipo de habitación.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">RoomTypeInventory</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="HotelChain.html">HotelChain</a>.<a class="xref" href="HotelChain.Domain.html">Domain</a>.<a class="xref" href="HotelChain.Domain.Entities.html">Entities</a></h6>
+  <h6><strong>Assembly</strong>: HotelChain.Domain.dll</h6>
+  <h5 id="HotelChain_Domain_Entities_RoomTypeInventory_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class RoomTypeInventory</code></pre>
+  </div>
+  <h5 id="HotelChain_Domain_Entities_RoomTypeInventory_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Esta entidad representa la capa comercial del inventario. Permite vender
+por tipo de habitación sin amarrar la reserva desde el inicio a una
+habitación física específica.</p>
+<p>Además de las cantidades base y reservadas, concentra reglas comerciales
+típicas de un motor hotelero real como cierre de ventas, restricciones de
+llegada/salida y longitud mínima o máxima de estancia.</p>
+</div>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MJOSP019/hotel-chain/new/main/apiSpec/new?filename=HotelChain_Domain_Entities_RoomTypeInventory_ClosedToArrival.md&amp;value=---%0Auid%3A%20HotelChain.Domain.Entities.RoomTypeInventory.ClosedToArrival%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MJOSP019/hotel-chain/blob/main/HotelChain.Domain/Entities/RoomTypeInventory.cs/#L45">View Source</a>
+  </span>
+  <a id="HotelChain_Domain_Entities_RoomTypeInventory_ClosedToArrival_" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.ClosedToArrival*"></a>
+  <h4 id="HotelChain_Domain_Entities_RoomTypeInventory_ClosedToArrival" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.ClosedToArrival">ClosedToArrival</h4>
+  <div class="markdown level1 summary"><p>Indica que no se permite llegar en esta fecha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ClosedToArrival { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MJOSP019/hotel-chain/new/main/apiSpec/new?filename=HotelChain_Domain_Entities_RoomTypeInventory_ClosedToDeparture.md&amp;value=---%0Auid%3A%20HotelChain.Domain.Entities.RoomTypeInventory.ClosedToDeparture%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MJOSP019/hotel-chain/blob/main/HotelChain.Domain/Entities/RoomTypeInventory.cs/#L50">View Source</a>
+  </span>
+  <a id="HotelChain_Domain_Entities_RoomTypeInventory_ClosedToDeparture_" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.ClosedToDeparture*"></a>
+  <h4 id="HotelChain_Domain_Entities_RoomTypeInventory_ClosedToDeparture" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.ClosedToDeparture">ClosedToDeparture</h4>
+  <div class="markdown level1 summary"><p>Indica que no se permite salir en esta fecha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ClosedToDeparture { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MJOSP019/hotel-chain/new/main/apiSpec/new?filename=HotelChain_Domain_Entities_RoomTypeInventory_Date.md&amp;value=---%0Auid%3A%20HotelChain.Domain.Entities.RoomTypeInventory.Date%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MJOSP019/hotel-chain/blob/main/HotelChain.Domain/Entities/RoomTypeInventory.cs/#L25">View Source</a>
+  </span>
+  <a id="HotelChain_Domain_Entities_RoomTypeInventory_Date_" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.Date*"></a>
+  <h4 id="HotelChain_Domain_Entities_RoomTypeInventory_Date" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.Date">Date</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateTime Date { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MJOSP019/hotel-chain/new/main/apiSpec/new?filename=HotelChain_Domain_Entities_RoomTypeInventory_Hotel.md&amp;value=---%0Auid%3A%20HotelChain.Domain.Entities.RoomTypeInventory.Hotel%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MJOSP019/hotel-chain/blob/main/HotelChain.Domain/Entities/RoomTypeInventory.cs/#L20">View Source</a>
+  </span>
+  <a id="HotelChain_Domain_Entities_RoomTypeInventory_Hotel_" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.Hotel*"></a>
+  <h4 id="HotelChain_Domain_Entities_RoomTypeInventory_Hotel" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.Hotel">Hotel</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Hotel Hotel { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="HotelChain.Domain.Entities.Hotel.html">Hotel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MJOSP019/hotel-chain/new/main/apiSpec/new?filename=HotelChain_Domain_Entities_RoomTypeInventory_HotelId.md&amp;value=---%0Auid%3A%20HotelChain.Domain.Entities.RoomTypeInventory.HotelId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MJOSP019/hotel-chain/blob/main/HotelChain.Domain/Entities/RoomTypeInventory.cs/#L19">View Source</a>
+  </span>
+  <a id="HotelChain_Domain_Entities_RoomTypeInventory_HotelId_" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.HotelId*"></a>
+  <h4 id="HotelChain_Domain_Entities_RoomTypeInventory_HotelId" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.HotelId">HotelId</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int HotelId { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MJOSP019/hotel-chain/new/main/apiSpec/new?filename=HotelChain_Domain_Entities_RoomTypeInventory_Id.md&amp;value=---%0Auid%3A%20HotelChain.Domain.Entities.RoomTypeInventory.Id%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MJOSP019/hotel-chain/blob/main/HotelChain.Domain/Entities/RoomTypeInventory.cs/#L17">View Source</a>
+  </span>
+  <a id="HotelChain_Domain_Entities_RoomTypeInventory_Id_" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.Id*"></a>
+  <h4 id="HotelChain_Domain_Entities_RoomTypeInventory_Id" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.Id">Id</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Id { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MJOSP019/hotel-chain/new/main/apiSpec/new?filename=HotelChain_Domain_Entities_RoomTypeInventory_IsClosed.md&amp;value=---%0Auid%3A%20HotelChain.Domain.Entities.RoomTypeInventory.IsClosed%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MJOSP019/hotel-chain/blob/main/HotelChain.Domain/Entities/RoomTypeInventory.cs/#L40">View Source</a>
+  </span>
+  <a id="HotelChain_Domain_Entities_RoomTypeInventory_IsClosed_" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.IsClosed*"></a>
+  <h4 id="HotelChain_Domain_Entities_RoomTypeInventory_IsClosed" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.IsClosed">IsClosed</h4>
+  <div class="markdown level1 summary"><p>Cierra por completo la venta comercial del tipo de habitación en la fecha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsClosed { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MJOSP019/hotel-chain/new/main/apiSpec/new?filename=HotelChain_Domain_Entities_RoomTypeInventory_MaxLengthOfStay.md&amp;value=---%0Auid%3A%20HotelChain.Domain.Entities.RoomTypeInventory.MaxLengthOfStay%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MJOSP019/hotel-chain/blob/main/HotelChain.Domain/Entities/RoomTypeInventory.cs/#L60">View Source</a>
+  </span>
+  <a id="HotelChain_Domain_Entities_RoomTypeInventory_MaxLengthOfStay_" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.MaxLengthOfStay*"></a>
+  <h4 id="HotelChain_Domain_Entities_RoomTypeInventory_MaxLengthOfStay" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.MaxLengthOfStay">MaxLengthOfStay</h4>
+  <div class="markdown level1 summary"><p>Máximo de noches permitido para estancias que incluyan esta fecha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxLengthOfStay { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MJOSP019/hotel-chain/new/main/apiSpec/new?filename=HotelChain_Domain_Entities_RoomTypeInventory_MinLengthOfStay.md&amp;value=---%0Auid%3A%20HotelChain.Domain.Entities.RoomTypeInventory.MinLengthOfStay%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MJOSP019/hotel-chain/blob/main/HotelChain.Domain/Entities/RoomTypeInventory.cs/#L55">View Source</a>
+  </span>
+  <a id="HotelChain_Domain_Entities_RoomTypeInventory_MinLengthOfStay_" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.MinLengthOfStay*"></a>
+  <h4 id="HotelChain_Domain_Entities_RoomTypeInventory_MinLengthOfStay" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.MinLengthOfStay">MinLengthOfStay</h4>
+  <div class="markdown level1 summary"><p>Mínimo de noches exigido para estancias que incluyan esta fecha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MinLengthOfStay { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MJOSP019/hotel-chain/new/main/apiSpec/new?filename=HotelChain_Domain_Entities_RoomTypeInventory_QuantityReserved.md&amp;value=---%0Auid%3A%20HotelChain.Domain.Entities.RoomTypeInventory.QuantityReserved%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MJOSP019/hotel-chain/blob/main/HotelChain.Domain/Entities/RoomTypeInventory.cs/#L35">View Source</a>
+  </span>
+  <a id="HotelChain_Domain_Entities_RoomTypeInventory_QuantityReserved_" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.QuantityReserved*"></a>
+  <h4 id="HotelChain_Domain_Entities_RoomTypeInventory_QuantityReserved" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.QuantityReserved">QuantityReserved</h4>
+  <div class="markdown level1 summary"><p>Cantidad ya comprometida por reservas comerciales para ese tipo de habitación.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int QuantityReserved { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MJOSP019/hotel-chain/new/main/apiSpec/new?filename=HotelChain_Domain_Entities_RoomTypeInventory_QuantityTotal.md&amp;value=---%0Auid%3A%20HotelChain.Domain.Entities.RoomTypeInventory.QuantityTotal%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MJOSP019/hotel-chain/blob/main/HotelChain.Domain/Entities/RoomTypeInventory.cs/#L30">View Source</a>
+  </span>
+  <a id="HotelChain_Domain_Entities_RoomTypeInventory_QuantityTotal_" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.QuantityTotal*"></a>
+  <h4 id="HotelChain_Domain_Entities_RoomTypeInventory_QuantityTotal" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.QuantityTotal">QuantityTotal</h4>
+  <div class="markdown level1 summary"><p>Capacidad comercial total disponible para ese tipo de habitación en el hotel y fecha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int QuantityTotal { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MJOSP019/hotel-chain/new/main/apiSpec/new?filename=HotelChain_Domain_Entities_RoomTypeInventory_RoomType.md&amp;value=---%0Auid%3A%20HotelChain.Domain.Entities.RoomTypeInventory.RoomType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MJOSP019/hotel-chain/blob/main/HotelChain.Domain/Entities/RoomTypeInventory.cs/#L23">View Source</a>
+  </span>
+  <a id="HotelChain_Domain_Entities_RoomTypeInventory_RoomType_" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.RoomType*"></a>
+  <h4 id="HotelChain_Domain_Entities_RoomTypeInventory_RoomType" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.RoomType">RoomType</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RoomType RoomType { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="HotelChain.Domain.Entities.RoomType.html">RoomType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MJOSP019/hotel-chain/new/main/apiSpec/new?filename=HotelChain_Domain_Entities_RoomTypeInventory_RoomTypeId.md&amp;value=---%0Auid%3A%20HotelChain.Domain.Entities.RoomTypeInventory.RoomTypeId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MJOSP019/hotel-chain/blob/main/HotelChain.Domain/Entities/RoomTypeInventory.cs/#L22">View Source</a>
+  </span>
+  <a id="HotelChain_Domain_Entities_RoomTypeInventory_RoomTypeId_" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.RoomTypeId*"></a>
+  <h4 id="HotelChain_Domain_Entities_RoomTypeInventory_RoomTypeId" data-uid="HotelChain.Domain.Entities.RoomTypeInventory.RoomTypeId">RoomTypeId</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int RoomTypeId { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MJOSP019/hotel-chain/new/main/apiSpec/new?filename=HotelChain_Domain_Entities_RoomTypeInventory.md&amp;value=---%0Auid%3A%20HotelChain.Domain.Entities.RoomTypeInventory%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/MJOSP019/hotel-chain/blob/main/HotelChain.Domain/Entities/RoomTypeInventory.cs/#L15" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

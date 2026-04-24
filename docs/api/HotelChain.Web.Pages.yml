@@ -1,0 +1,455 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Web.Pages
+  commentId: N:HotelChain.Web.Pages
+  id: HotelChain.Web.Pages
+  children:
+  - HotelChain.Web.Pages.AdminAnalytics
+  - HotelChain.Web.Pages.AdminHotels
+  - HotelChain.Web.Pages.AdminHotels.AdminHotelDto
+  - HotelChain.Web.Pages.AdminHotels.CityDto
+  - HotelChain.Web.Pages.AdminHotels.SaveHotelRequest
+  - HotelChain.Web.Pages.AdminInventories
+  - HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  - HotelChain.Web.Pages.AdminInventories.HotelOption
+  - HotelChain.Web.Pages.AdminInventories.RoomOption
+  - HotelChain.Web.Pages.AdminInventories.UpsertRoomInventoryRangeRequest
+  - HotelChain.Web.Pages.AdminReservations
+  - HotelChain.Web.Pages.AdminRooms
+  - HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  - HotelChain.Web.Pages.AdminRooms.HotelOption
+  - HotelChain.Web.Pages.AdminRooms.RoomTypeOption
+  - HotelChain.Web.Pages.AdminRooms.SaveRoomRequest
+  - HotelChain.Web.Pages.AdminUsers
+  - HotelChain.Web.Pages.Amenities
+  - HotelChain.Web.Pages.CheckInCheckout
+  - HotelChain.Web.Pages.Checkout
+  - HotelChain.Web.Pages.Counter
+  - HotelChain.Web.Pages.EvacuationInfo
+  - HotelChain.Web.Pages.Home
+  - HotelChain.Web.Pages.HotelDetail
+  - HotelChain.Web.Pages.HotelRules
+  - HotelChain.Web.Pages.Login
+  - HotelChain.Web.Pages.MyReservations
+  - HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  - HotelChain.Web.Pages.Register
+  - HotelChain.Web.Pages.RoomTypes
+  - HotelChain.Web.Pages.Search
+  - HotelChain.Web.Pages.Weather
+  - HotelChain.Web.Pages.Weather.WeatherForecast
+  langs:
+  - csharp
+  - vb
+  name: HotelChain.Web.Pages
+  nameWithType: HotelChain.Web.Pages
+  fullName: HotelChain.Web.Pages
+  type: Namespace
+  assemblies:
+  - HotelChain.Web
+references:
+- uid: HotelChain.Web.Pages.CheckInCheckout
+  commentId: T:HotelChain.Web.Pages.CheckInCheckout
+  href: HotelChain.Web.Pages.CheckInCheckout.html
+  name: CheckInCheckout
+  nameWithType: CheckInCheckout
+  fullName: HotelChain.Web.Pages.CheckInCheckout
+- uid: HotelChain.Web.Pages.AdminReservations
+  commentId: T:HotelChain.Web.Pages.AdminReservations
+  href: HotelChain.Web.Pages.AdminReservations.html
+  name: AdminReservations
+  nameWithType: AdminReservations
+  fullName: HotelChain.Web.Pages.AdminReservations
+- uid: HotelChain.Web.Pages.EvacuationInfo
+  commentId: T:HotelChain.Web.Pages.EvacuationInfo
+  href: HotelChain.Web.Pages.EvacuationInfo.html
+  name: EvacuationInfo
+  nameWithType: EvacuationInfo
+  fullName: HotelChain.Web.Pages.EvacuationInfo
+- uid: HotelChain.Web.Pages.Home
+  commentId: T:HotelChain.Web.Pages.Home
+  href: HotelChain.Web.Pages.Home.html
+  name: Home
+  nameWithType: Home
+  fullName: HotelChain.Web.Pages.Home
+- uid: HotelChain.Web.Pages.Register
+  commentId: T:HotelChain.Web.Pages.Register
+  href: HotelChain.Web.Pages.Register.html
+  name: Register
+  nameWithType: Register
+  fullName: HotelChain.Web.Pages.Register
+- uid: HotelChain.Web.Pages.MyReservations
+  commentId: T:HotelChain.Web.Pages.MyReservations
+  href: HotelChain.Web.Pages.MyReservations.html
+  name: MyReservations
+  nameWithType: MyReservations
+  fullName: HotelChain.Web.Pages.MyReservations
+- uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  commentId: T:HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  href: HotelChain.Web.Pages.MyReservations.html
+  name: MyReservations.ReservationHistoryDto
+  nameWithType: MyReservations.ReservationHistoryDto
+  fullName: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+  spec.csharp:
+  - uid: HotelChain.Web.Pages.MyReservations
+    name: MyReservations
+    href: HotelChain.Web.Pages.MyReservations.html
+  - name: .
+  - uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+    name: ReservationHistoryDto
+    href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html
+  spec.vb:
+  - uid: HotelChain.Web.Pages.MyReservations
+    name: MyReservations
+    href: HotelChain.Web.Pages.MyReservations.html
+  - name: .
+  - uid: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto
+    name: ReservationHistoryDto
+    href: HotelChain.Web.Pages.MyReservations.ReservationHistoryDto.html
+- uid: HotelChain.Web.Pages.Amenities
+  commentId: T:HotelChain.Web.Pages.Amenities
+  href: HotelChain.Web.Pages.Amenities.html
+  name: Amenities
+  nameWithType: Amenities
+  fullName: HotelChain.Web.Pages.Amenities
+- uid: HotelChain.Web.Pages.Search
+  commentId: T:HotelChain.Web.Pages.Search
+  href: HotelChain.Web.Pages.Search.html
+  name: Search
+  nameWithType: Search
+  fullName: HotelChain.Web.Pages.Search
+- uid: HotelChain.Web.Pages.HotelDetail
+  commentId: T:HotelChain.Web.Pages.HotelDetail
+  href: HotelChain.Web.Pages.HotelDetail.html
+  name: HotelDetail
+  nameWithType: HotelDetail
+  fullName: HotelChain.Web.Pages.HotelDetail
+- uid: HotelChain.Web.Pages.HotelRules
+  commentId: T:HotelChain.Web.Pages.HotelRules
+  href: HotelChain.Web.Pages.HotelRules.html
+  name: HotelRules
+  nameWithType: HotelRules
+  fullName: HotelChain.Web.Pages.HotelRules
+- uid: HotelChain.Web.Pages.Login
+  commentId: T:HotelChain.Web.Pages.Login
+  href: HotelChain.Web.Pages.Login.html
+  name: Login
+  nameWithType: Login
+  fullName: HotelChain.Web.Pages.Login
+- uid: HotelChain.Web.Pages.Counter
+  commentId: T:HotelChain.Web.Pages.Counter
+  href: HotelChain.Web.Pages.Counter.html
+  name: Counter
+  nameWithType: Counter
+  fullName: HotelChain.Web.Pages.Counter
+- uid: HotelChain.Web.Pages.AdminInventories
+  commentId: T:HotelChain.Web.Pages.AdminInventories
+  href: HotelChain.Web.Pages.AdminInventories.html
+  name: AdminInventories
+  nameWithType: AdminInventories
+  fullName: HotelChain.Web.Pages.AdminInventories
+- uid: HotelChain.Web.Pages.AdminInventories.HotelOption
+  commentId: T:HotelChain.Web.Pages.AdminInventories.HotelOption
+  href: HotelChain.Web.Pages.AdminInventories.html
+  name: AdminInventories.HotelOption
+  nameWithType: AdminInventories.HotelOption
+  fullName: HotelChain.Web.Pages.AdminInventories.HotelOption
+  spec.csharp:
+  - uid: HotelChain.Web.Pages.AdminInventories
+    name: AdminInventories
+    href: HotelChain.Web.Pages.AdminInventories.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminInventories.HotelOption
+    name: HotelOption
+    href: HotelChain.Web.Pages.AdminInventories.HotelOption.html
+  spec.vb:
+  - uid: HotelChain.Web.Pages.AdminInventories
+    name: AdminInventories
+    href: HotelChain.Web.Pages.AdminInventories.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminInventories.HotelOption
+    name: HotelOption
+    href: HotelChain.Web.Pages.AdminInventories.HotelOption.html
+- uid: HotelChain.Web.Pages.AdminInventories.RoomOption
+  commentId: T:HotelChain.Web.Pages.AdminInventories.RoomOption
+  href: HotelChain.Web.Pages.AdminInventories.html
+  name: AdminInventories.RoomOption
+  nameWithType: AdminInventories.RoomOption
+  fullName: HotelChain.Web.Pages.AdminInventories.RoomOption
+  spec.csharp:
+  - uid: HotelChain.Web.Pages.AdminInventories
+    name: AdminInventories
+    href: HotelChain.Web.Pages.AdminInventories.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminInventories.RoomOption
+    name: RoomOption
+    href: HotelChain.Web.Pages.AdminInventories.RoomOption.html
+  spec.vb:
+  - uid: HotelChain.Web.Pages.AdminInventories
+    name: AdminInventories
+    href: HotelChain.Web.Pages.AdminInventories.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminInventories.RoomOption
+    name: RoomOption
+    href: HotelChain.Web.Pages.AdminInventories.RoomOption.html
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  commentId: T:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  href: HotelChain.Web.Pages.AdminInventories.html
+  name: AdminInventories.AdminRoomInventoryDto
+  nameWithType: AdminInventories.AdminRoomInventoryDto
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  spec.csharp:
+  - uid: HotelChain.Web.Pages.AdminInventories
+    name: AdminInventories
+    href: HotelChain.Web.Pages.AdminInventories.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+    name: AdminRoomInventoryDto
+    href: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.html
+  spec.vb:
+  - uid: HotelChain.Web.Pages.AdminInventories
+    name: AdminInventories
+    href: HotelChain.Web.Pages.AdminInventories.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+    name: AdminRoomInventoryDto
+    href: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.html
+- uid: HotelChain.Web.Pages.AdminInventories.UpsertRoomInventoryRangeRequest
+  commentId: T:HotelChain.Web.Pages.AdminInventories.UpsertRoomInventoryRangeRequest
+  href: HotelChain.Web.Pages.AdminInventories.html
+  name: AdminInventories.UpsertRoomInventoryRangeRequest
+  nameWithType: AdminInventories.UpsertRoomInventoryRangeRequest
+  fullName: HotelChain.Web.Pages.AdminInventories.UpsertRoomInventoryRangeRequest
+  spec.csharp:
+  - uid: HotelChain.Web.Pages.AdminInventories
+    name: AdminInventories
+    href: HotelChain.Web.Pages.AdminInventories.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminInventories.UpsertRoomInventoryRangeRequest
+    name: UpsertRoomInventoryRangeRequest
+    href: HotelChain.Web.Pages.AdminInventories.UpsertRoomInventoryRangeRequest.html
+  spec.vb:
+  - uid: HotelChain.Web.Pages.AdminInventories
+    name: AdminInventories
+    href: HotelChain.Web.Pages.AdminInventories.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminInventories.UpsertRoomInventoryRangeRequest
+    name: UpsertRoomInventoryRangeRequest
+    href: HotelChain.Web.Pages.AdminInventories.UpsertRoomInventoryRangeRequest.html
+- uid: HotelChain.Web.Pages.AdminHotels
+  commentId: T:HotelChain.Web.Pages.AdminHotels
+  href: HotelChain.Web.Pages.AdminHotels.html
+  name: AdminHotels
+  nameWithType: AdminHotels
+  fullName: HotelChain.Web.Pages.AdminHotels
+- uid: HotelChain.Web.Pages.AdminHotels.AdminHotelDto
+  commentId: T:HotelChain.Web.Pages.AdminHotels.AdminHotelDto
+  href: HotelChain.Web.Pages.AdminHotels.html
+  name: AdminHotels.AdminHotelDto
+  nameWithType: AdminHotels.AdminHotelDto
+  fullName: HotelChain.Web.Pages.AdminHotels.AdminHotelDto
+  spec.csharp:
+  - uid: HotelChain.Web.Pages.AdminHotels
+    name: AdminHotels
+    href: HotelChain.Web.Pages.AdminHotels.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminHotels.AdminHotelDto
+    name: AdminHotelDto
+    href: HotelChain.Web.Pages.AdminHotels.AdminHotelDto.html
+  spec.vb:
+  - uid: HotelChain.Web.Pages.AdminHotels
+    name: AdminHotels
+    href: HotelChain.Web.Pages.AdminHotels.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminHotels.AdminHotelDto
+    name: AdminHotelDto
+    href: HotelChain.Web.Pages.AdminHotels.AdminHotelDto.html
+- uid: HotelChain.Web.Pages.AdminHotels.SaveHotelRequest
+  commentId: T:HotelChain.Web.Pages.AdminHotels.SaveHotelRequest
+  href: HotelChain.Web.Pages.AdminHotels.html
+  name: AdminHotels.SaveHotelRequest
+  nameWithType: AdminHotels.SaveHotelRequest
+  fullName: HotelChain.Web.Pages.AdminHotels.SaveHotelRequest
+  spec.csharp:
+  - uid: HotelChain.Web.Pages.AdminHotels
+    name: AdminHotels
+    href: HotelChain.Web.Pages.AdminHotels.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminHotels.SaveHotelRequest
+    name: SaveHotelRequest
+    href: HotelChain.Web.Pages.AdminHotels.SaveHotelRequest.html
+  spec.vb:
+  - uid: HotelChain.Web.Pages.AdminHotels
+    name: AdminHotels
+    href: HotelChain.Web.Pages.AdminHotels.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminHotels.SaveHotelRequest
+    name: SaveHotelRequest
+    href: HotelChain.Web.Pages.AdminHotels.SaveHotelRequest.html
+- uid: HotelChain.Web.Pages.AdminHotels.CityDto
+  commentId: T:HotelChain.Web.Pages.AdminHotels.CityDto
+  href: HotelChain.Web.Pages.AdminHotels.html
+  name: AdminHotels.CityDto
+  nameWithType: AdminHotels.CityDto
+  fullName: HotelChain.Web.Pages.AdminHotels.CityDto
+  spec.csharp:
+  - uid: HotelChain.Web.Pages.AdminHotels
+    name: AdminHotels
+    href: HotelChain.Web.Pages.AdminHotels.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminHotels.CityDto
+    name: CityDto
+    href: HotelChain.Web.Pages.AdminHotels.CityDto.html
+  spec.vb:
+  - uid: HotelChain.Web.Pages.AdminHotels
+    name: AdminHotels
+    href: HotelChain.Web.Pages.AdminHotels.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminHotels.CityDto
+    name: CityDto
+    href: HotelChain.Web.Pages.AdminHotels.CityDto.html
+- uid: HotelChain.Web.Pages.AdminUsers
+  commentId: T:HotelChain.Web.Pages.AdminUsers
+  href: HotelChain.Web.Pages.AdminUsers.html
+  name: AdminUsers
+  nameWithType: AdminUsers
+  fullName: HotelChain.Web.Pages.AdminUsers
+- uid: HotelChain.Web.Pages.AdminRooms
+  commentId: T:HotelChain.Web.Pages.AdminRooms
+  href: HotelChain.Web.Pages.AdminRooms.html
+  name: AdminRooms
+  nameWithType: AdminRooms
+  fullName: HotelChain.Web.Pages.AdminRooms
+- uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  commentId: T:HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  href: HotelChain.Web.Pages.AdminRooms.html
+  name: AdminRooms.AdminRoomDto
+  nameWithType: AdminRooms.AdminRoomDto
+  fullName: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+  spec.csharp:
+  - uid: HotelChain.Web.Pages.AdminRooms
+    name: AdminRooms
+    href: HotelChain.Web.Pages.AdminRooms.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+    name: AdminRoomDto
+    href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html
+  spec.vb:
+  - uid: HotelChain.Web.Pages.AdminRooms
+    name: AdminRooms
+    href: HotelChain.Web.Pages.AdminRooms.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminRooms.AdminRoomDto
+    name: AdminRoomDto
+    href: HotelChain.Web.Pages.AdminRooms.AdminRoomDto.html
+- uid: HotelChain.Web.Pages.AdminRooms.SaveRoomRequest
+  commentId: T:HotelChain.Web.Pages.AdminRooms.SaveRoomRequest
+  href: HotelChain.Web.Pages.AdminRooms.html
+  name: AdminRooms.SaveRoomRequest
+  nameWithType: AdminRooms.SaveRoomRequest
+  fullName: HotelChain.Web.Pages.AdminRooms.SaveRoomRequest
+  spec.csharp:
+  - uid: HotelChain.Web.Pages.AdminRooms
+    name: AdminRooms
+    href: HotelChain.Web.Pages.AdminRooms.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminRooms.SaveRoomRequest
+    name: SaveRoomRequest
+    href: HotelChain.Web.Pages.AdminRooms.SaveRoomRequest.html
+  spec.vb:
+  - uid: HotelChain.Web.Pages.AdminRooms
+    name: AdminRooms
+    href: HotelChain.Web.Pages.AdminRooms.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminRooms.SaveRoomRequest
+    name: SaveRoomRequest
+    href: HotelChain.Web.Pages.AdminRooms.SaveRoomRequest.html
+- uid: HotelChain.Web.Pages.AdminRooms.HotelOption
+  commentId: T:HotelChain.Web.Pages.AdminRooms.HotelOption
+  href: HotelChain.Web.Pages.AdminRooms.html
+  name: AdminRooms.HotelOption
+  nameWithType: AdminRooms.HotelOption
+  fullName: HotelChain.Web.Pages.AdminRooms.HotelOption
+  spec.csharp:
+  - uid: HotelChain.Web.Pages.AdminRooms
+    name: AdminRooms
+    href: HotelChain.Web.Pages.AdminRooms.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminRooms.HotelOption
+    name: HotelOption
+    href: HotelChain.Web.Pages.AdminRooms.HotelOption.html
+  spec.vb:
+  - uid: HotelChain.Web.Pages.AdminRooms
+    name: AdminRooms
+    href: HotelChain.Web.Pages.AdminRooms.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminRooms.HotelOption
+    name: HotelOption
+    href: HotelChain.Web.Pages.AdminRooms.HotelOption.html
+- uid: HotelChain.Web.Pages.AdminRooms.RoomTypeOption
+  commentId: T:HotelChain.Web.Pages.AdminRooms.RoomTypeOption
+  href: HotelChain.Web.Pages.AdminRooms.html
+  name: AdminRooms.RoomTypeOption
+  nameWithType: AdminRooms.RoomTypeOption
+  fullName: HotelChain.Web.Pages.AdminRooms.RoomTypeOption
+  spec.csharp:
+  - uid: HotelChain.Web.Pages.AdminRooms
+    name: AdminRooms
+    href: HotelChain.Web.Pages.AdminRooms.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminRooms.RoomTypeOption
+    name: RoomTypeOption
+    href: HotelChain.Web.Pages.AdminRooms.RoomTypeOption.html
+  spec.vb:
+  - uid: HotelChain.Web.Pages.AdminRooms
+    name: AdminRooms
+    href: HotelChain.Web.Pages.AdminRooms.html
+  - name: .
+  - uid: HotelChain.Web.Pages.AdminRooms.RoomTypeOption
+    name: RoomTypeOption
+    href: HotelChain.Web.Pages.AdminRooms.RoomTypeOption.html
+- uid: HotelChain.Web.Pages.Weather
+  commentId: T:HotelChain.Web.Pages.Weather
+  href: HotelChain.Web.Pages.Weather.html
+  name: Weather
+  nameWithType: Weather
+  fullName: HotelChain.Web.Pages.Weather
+- uid: HotelChain.Web.Pages.Weather.WeatherForecast
+  commentId: T:HotelChain.Web.Pages.Weather.WeatherForecast
+  href: HotelChain.Web.Pages.Weather.html
+  name: Weather.WeatherForecast
+  nameWithType: Weather.WeatherForecast
+  fullName: HotelChain.Web.Pages.Weather.WeatherForecast
+  spec.csharp:
+  - uid: HotelChain.Web.Pages.Weather
+    name: Weather
+    href: HotelChain.Web.Pages.Weather.html
+  - name: .
+  - uid: HotelChain.Web.Pages.Weather.WeatherForecast
+    name: WeatherForecast
+    href: HotelChain.Web.Pages.Weather.WeatherForecast.html
+  spec.vb:
+  - uid: HotelChain.Web.Pages.Weather
+    name: Weather
+    href: HotelChain.Web.Pages.Weather.html
+  - name: .
+  - uid: HotelChain.Web.Pages.Weather.WeatherForecast
+    name: WeatherForecast
+    href: HotelChain.Web.Pages.Weather.WeatherForecast.html
+- uid: HotelChain.Web.Pages.Checkout
+  commentId: T:HotelChain.Web.Pages.Checkout
+  href: HotelChain.Web.Pages.Checkout.html
+  name: Checkout
+  nameWithType: Checkout
+  fullName: HotelChain.Web.Pages.Checkout
+- uid: HotelChain.Web.Pages.AdminAnalytics
+  commentId: T:HotelChain.Web.Pages.AdminAnalytics
+  href: HotelChain.Web.Pages.AdminAnalytics.html
+  name: AdminAnalytics
+  nameWithType: AdminAnalytics
+  fullName: HotelChain.Web.Pages.AdminAnalytics
+- uid: HotelChain.Web.Pages.RoomTypes
+  commentId: T:HotelChain.Web.Pages.RoomTypes
+  href: HotelChain.Web.Pages.RoomTypes.html
+  name: RoomTypes
+  nameWithType: RoomTypes
+  fullName: HotelChain.Web.Pages.RoomTypes

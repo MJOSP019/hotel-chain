@@ -1,0 +1,833 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Web.Models.HotelRoomOptionDto
+  commentId: T:HotelChain.Web.Models.HotelRoomOptionDto
+  id: HotelRoomOptionDto
+  parent: HotelChain.Web.Models
+  children:
+  - HotelChain.Web.Models.HotelRoomOptionDto.AreaSquareMeters
+  - HotelChain.Web.Models.HotelRoomOptionDto.AvailableUnits
+  - HotelChain.Web.Models.HotelRoomOptionDto.BasePricePerNight
+  - HotelChain.Web.Models.HotelRoomOptionDto.BedType
+  - HotelChain.Web.Models.HotelRoomOptionDto.ImageUrl
+  - HotelChain.Web.Models.HotelRoomOptionDto.IsBookable
+  - HotelChain.Web.Models.HotelRoomOptionDto.MaxGuests
+  - HotelChain.Web.Models.HotelRoomOptionDto.RestrictionCode
+  - HotelChain.Web.Models.HotelRoomOptionDto.RestrictionMessage
+  - HotelChain.Web.Models.HotelRoomOptionDto.RoomType
+  - HotelChain.Web.Models.HotelRoomOptionDto.RoomTypeId
+  - HotelChain.Web.Models.HotelRoomOptionDto.ShortDescription
+  langs:
+  - csharp
+  - vb
+  name: HotelRoomOptionDto
+  nameWithType: HotelRoomOptionDto
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto
+  type: Class
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: HotelRoomOptionDto
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 28
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public class HotelRoomOptionDto
+    content.vb: Public Class HotelRoomOptionDto
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.RoomTypeId
+  commentId: P:HotelChain.Web.Models.HotelRoomOptionDto.RoomTypeId
+  id: RoomTypeId
+  parent: HotelChain.Web.Models.HotelRoomOptionDto
+  langs:
+  - csharp
+  - vb
+  name: RoomTypeId
+  nameWithType: HotelRoomOptionDto.RoomTypeId
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.RoomTypeId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: RoomTypeId
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 30
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public int RoomTypeId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property RoomTypeId As Integer
+  overload: HotelChain.Web.Models.HotelRoomOptionDto.RoomTypeId*
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.RoomType
+  commentId: P:HotelChain.Web.Models.HotelRoomOptionDto.RoomType
+  id: RoomType
+  parent: HotelChain.Web.Models.HotelRoomOptionDto
+  langs:
+  - csharp
+  - vb
+  name: RoomType
+  nameWithType: HotelRoomOptionDto.RoomType
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.RoomType
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: RoomType
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 31
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string RoomType { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RoomType As String
+  overload: HotelChain.Web.Models.HotelRoomOptionDto.RoomType*
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.MaxGuests
+  commentId: P:HotelChain.Web.Models.HotelRoomOptionDto.MaxGuests
+  id: MaxGuests
+  parent: HotelChain.Web.Models.HotelRoomOptionDto
+  langs:
+  - csharp
+  - vb
+  name: MaxGuests
+  nameWithType: HotelRoomOptionDto.MaxGuests
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.MaxGuests
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: MaxGuests
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 32
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public int MaxGuests { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property MaxGuests As Integer
+  overload: HotelChain.Web.Models.HotelRoomOptionDto.MaxGuests*
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.BasePricePerNight
+  commentId: P:HotelChain.Web.Models.HotelRoomOptionDto.BasePricePerNight
+  id: BasePricePerNight
+  parent: HotelChain.Web.Models.HotelRoomOptionDto
+  langs:
+  - csharp
+  - vb
+  name: BasePricePerNight
+  nameWithType: HotelRoomOptionDto.BasePricePerNight
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.BasePricePerNight
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: BasePricePerNight
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 33
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public decimal BasePricePerNight { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+    content.vb: Public Property BasePricePerNight As Decimal
+  overload: HotelChain.Web.Models.HotelRoomOptionDto.BasePricePerNight*
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.AvailableUnits
+  commentId: P:HotelChain.Web.Models.HotelRoomOptionDto.AvailableUnits
+  id: AvailableUnits
+  parent: HotelChain.Web.Models.HotelRoomOptionDto
+  langs:
+  - csharp
+  - vb
+  name: AvailableUnits
+  nameWithType: HotelRoomOptionDto.AvailableUnits
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.AvailableUnits
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: AvailableUnits
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 34
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public int AvailableUnits { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property AvailableUnits As Integer
+  overload: HotelChain.Web.Models.HotelRoomOptionDto.AvailableUnits*
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.BedType
+  commentId: P:HotelChain.Web.Models.HotelRoomOptionDto.BedType
+  id: BedType
+  parent: HotelChain.Web.Models.HotelRoomOptionDto
+  langs:
+  - csharp
+  - vb
+  name: BedType
+  nameWithType: HotelRoomOptionDto.BedType
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.BedType
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: BedType
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 35
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string? BedType { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property BedType As String
+  overload: HotelChain.Web.Models.HotelRoomOptionDto.BedType*
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.AreaSquareMeters
+  commentId: P:HotelChain.Web.Models.HotelRoomOptionDto.AreaSquareMeters
+  id: AreaSquareMeters
+  parent: HotelChain.Web.Models.HotelRoomOptionDto
+  langs:
+  - csharp
+  - vb
+  name: AreaSquareMeters
+  nameWithType: HotelRoomOptionDto.AreaSquareMeters
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.AreaSquareMeters
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: AreaSquareMeters
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 36
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public decimal? AreaSquareMeters { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Decimal}
+    content.vb: Public Property AreaSquareMeters As Decimal?
+  overload: HotelChain.Web.Models.HotelRoomOptionDto.AreaSquareMeters*
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.ShortDescription
+  commentId: P:HotelChain.Web.Models.HotelRoomOptionDto.ShortDescription
+  id: ShortDescription
+  parent: HotelChain.Web.Models.HotelRoomOptionDto
+  langs:
+  - csharp
+  - vb
+  name: ShortDescription
+  nameWithType: HotelRoomOptionDto.ShortDescription
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.ShortDescription
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ShortDescription
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 37
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string? ShortDescription { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ShortDescription As String
+  overload: HotelChain.Web.Models.HotelRoomOptionDto.ShortDescription*
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.ImageUrl
+  commentId: P:HotelChain.Web.Models.HotelRoomOptionDto.ImageUrl
+  id: ImageUrl
+  parent: HotelChain.Web.Models.HotelRoomOptionDto
+  langs:
+  - csharp
+  - vb
+  name: ImageUrl
+  nameWithType: HotelRoomOptionDto.ImageUrl
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.ImageUrl
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ImageUrl
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 38
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string? ImageUrl { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ImageUrl As String
+  overload: HotelChain.Web.Models.HotelRoomOptionDto.ImageUrl*
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.IsBookable
+  commentId: P:HotelChain.Web.Models.HotelRoomOptionDto.IsBookable
+  id: IsBookable
+  parent: HotelChain.Web.Models.HotelRoomOptionDto
+  langs:
+  - csharp
+  - vb
+  name: IsBookable
+  nameWithType: HotelRoomOptionDto.IsBookable
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.IsBookable
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: IsBookable
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 39
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public bool IsBookable { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsBookable As Boolean
+  overload: HotelChain.Web.Models.HotelRoomOptionDto.IsBookable*
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.RestrictionCode
+  commentId: P:HotelChain.Web.Models.HotelRoomOptionDto.RestrictionCode
+  id: RestrictionCode
+  parent: HotelChain.Web.Models.HotelRoomOptionDto
+  langs:
+  - csharp
+  - vb
+  name: RestrictionCode
+  nameWithType: HotelRoomOptionDto.RestrictionCode
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.RestrictionCode
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: RestrictionCode
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 40
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string? RestrictionCode { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RestrictionCode As String
+  overload: HotelChain.Web.Models.HotelRoomOptionDto.RestrictionCode*
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.RestrictionMessage
+  commentId: P:HotelChain.Web.Models.HotelRoomOptionDto.RestrictionMessage
+  id: RestrictionMessage
+  parent: HotelChain.Web.Models.HotelRoomOptionDto
+  langs:
+  - csharp
+  - vb
+  name: RestrictionMessage
+  nameWithType: HotelRoomOptionDto.RestrictionMessage
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.RestrictionMessage
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: RestrictionMessage
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 41
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string? RestrictionMessage { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RestrictionMessage As String
+  overload: HotelChain.Web.Models.HotelRoomOptionDto.RestrictionMessage*
+references:
+- uid: HotelChain.Web.Models
+  commentId: N:HotelChain.Web.Models
+  href: HotelChain.html
+  name: HotelChain.Web.Models
+  nameWithType: HotelChain.Web.Models
+  fullName: HotelChain.Web.Models
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Web
+    name: Web
+    href: HotelChain.Web.html
+  - name: .
+  - uid: HotelChain.Web.Models
+    name: Models
+    href: HotelChain.Web.Models.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Web
+    name: Web
+    href: HotelChain.Web.html
+  - name: .
+  - uid: HotelChain.Web.Models
+    name: Models
+    href: HotelChain.Web.Models.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.RoomTypeId*
+  commentId: Overload:HotelChain.Web.Models.HotelRoomOptionDto.RoomTypeId
+  href: HotelChain.Web.Models.HotelRoomOptionDto.html#HotelChain_Web_Models_HotelRoomOptionDto_RoomTypeId
+  name: RoomTypeId
+  nameWithType: HotelRoomOptionDto.RoomTypeId
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.RoomTypeId
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.RoomType*
+  commentId: Overload:HotelChain.Web.Models.HotelRoomOptionDto.RoomType
+  href: HotelChain.Web.Models.HotelRoomOptionDto.html#HotelChain_Web_Models_HotelRoomOptionDto_RoomType
+  name: RoomType
+  nameWithType: HotelRoomOptionDto.RoomType
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.RoomType
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.MaxGuests*
+  commentId: Overload:HotelChain.Web.Models.HotelRoomOptionDto.MaxGuests
+  href: HotelChain.Web.Models.HotelRoomOptionDto.html#HotelChain_Web_Models_HotelRoomOptionDto_MaxGuests
+  name: MaxGuests
+  nameWithType: HotelRoomOptionDto.MaxGuests
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.MaxGuests
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.BasePricePerNight*
+  commentId: Overload:HotelChain.Web.Models.HotelRoomOptionDto.BasePricePerNight
+  href: HotelChain.Web.Models.HotelRoomOptionDto.html#HotelChain_Web_Models_HotelRoomOptionDto_BasePricePerNight
+  name: BasePricePerNight
+  nameWithType: HotelRoomOptionDto.BasePricePerNight
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.BasePricePerNight
+- uid: System.Decimal
+  commentId: T:System.Decimal
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.decimal
+  name: decimal
+  nameWithType: decimal
+  fullName: decimal
+  nameWithType.vb: Decimal
+  fullName.vb: Decimal
+  name.vb: Decimal
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.AvailableUnits*
+  commentId: Overload:HotelChain.Web.Models.HotelRoomOptionDto.AvailableUnits
+  href: HotelChain.Web.Models.HotelRoomOptionDto.html#HotelChain_Web_Models_HotelRoomOptionDto_AvailableUnits
+  name: AvailableUnits
+  nameWithType: HotelRoomOptionDto.AvailableUnits
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.AvailableUnits
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.BedType*
+  commentId: Overload:HotelChain.Web.Models.HotelRoomOptionDto.BedType
+  href: HotelChain.Web.Models.HotelRoomOptionDto.html#HotelChain_Web_Models_HotelRoomOptionDto_BedType
+  name: BedType
+  nameWithType: HotelRoomOptionDto.BedType
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.BedType
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.AreaSquareMeters*
+  commentId: Overload:HotelChain.Web.Models.HotelRoomOptionDto.AreaSquareMeters
+  href: HotelChain.Web.Models.HotelRoomOptionDto.html#HotelChain_Web_Models_HotelRoomOptionDto_AreaSquareMeters
+  name: AreaSquareMeters
+  nameWithType: HotelRoomOptionDto.AreaSquareMeters
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.AreaSquareMeters
+- uid: System.Nullable{System.Decimal}
+  commentId: T:System.Nullable{System.Decimal}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.decimal
+  name: decimal?
+  nameWithType: decimal?
+  fullName: decimal?
+  nameWithType.vb: Decimal?
+  fullName.vb: Decimal?
+  name.vb: Decimal?
+  spec.csharp:
+  - uid: System.Decimal
+    name: decimal
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.decimal
+  - name: '?'
+  spec.vb:
+  - uid: System.Decimal
+    name: Decimal
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.decimal
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.ShortDescription*
+  commentId: Overload:HotelChain.Web.Models.HotelRoomOptionDto.ShortDescription
+  href: HotelChain.Web.Models.HotelRoomOptionDto.html#HotelChain_Web_Models_HotelRoomOptionDto_ShortDescription
+  name: ShortDescription
+  nameWithType: HotelRoomOptionDto.ShortDescription
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.ShortDescription
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.ImageUrl*
+  commentId: Overload:HotelChain.Web.Models.HotelRoomOptionDto.ImageUrl
+  href: HotelChain.Web.Models.HotelRoomOptionDto.html#HotelChain_Web_Models_HotelRoomOptionDto_ImageUrl
+  name: ImageUrl
+  nameWithType: HotelRoomOptionDto.ImageUrl
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.ImageUrl
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.IsBookable*
+  commentId: Overload:HotelChain.Web.Models.HotelRoomOptionDto.IsBookable
+  href: HotelChain.Web.Models.HotelRoomOptionDto.html#HotelChain_Web_Models_HotelRoomOptionDto_IsBookable
+  name: IsBookable
+  nameWithType: HotelRoomOptionDto.IsBookable
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.IsBookable
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.RestrictionCode*
+  commentId: Overload:HotelChain.Web.Models.HotelRoomOptionDto.RestrictionCode
+  href: HotelChain.Web.Models.HotelRoomOptionDto.html#HotelChain_Web_Models_HotelRoomOptionDto_RestrictionCode
+  name: RestrictionCode
+  nameWithType: HotelRoomOptionDto.RestrictionCode
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.RestrictionCode
+- uid: HotelChain.Web.Models.HotelRoomOptionDto.RestrictionMessage*
+  commentId: Overload:HotelChain.Web.Models.HotelRoomOptionDto.RestrictionMessage
+  href: HotelChain.Web.Models.HotelRoomOptionDto.html#HotelChain_Web_Models_HotelRoomOptionDto_RestrictionMessage
+  name: RestrictionMessage
+  nameWithType: HotelRoomOptionDto.RestrictionMessage
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto.RestrictionMessage

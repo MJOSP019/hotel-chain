@@ -1,170 +1,365 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="hc-layout">
-    <aside class="hc-layout__sidebar">
-        <NavMenu />
-    </aside>
+<div class="hc-shell">
+    <header class="hc-shell__header">
+        <div class="hc-shell__utilitybar">
+            <div class="hc-shell__utility-inner">
+                <div class="hc-shell__utility-left">
+                    <span class="hc-shell__utility-item">Portal oficial</span>
+                    <span class="hc-shell__utility-separator">•</span>
+                    <span class="hc-shell__utility-item">Cadena hotelera</span>
+                </div>
 
-    <div class="hc-layout__main">
-        <header class="hc-layout__topbar">
-            <div class="hc-layout__topbar-left">
-                <span class="hc-layout__eyebrow">Cadena hotelera · Portal oficial</span>
-                <h2>HotelChain Collection</h2>
-                <p class="hc-layout__subtitle">
-                    Múltiples hoteles, una sola experiencia de hospedaje.
-                </p>
+                <div class="hc-shell__utility-right">
+                    <a class="hc-shell__utility-link" href="/amenities">Amenidades</a>
+                    <a class="hc-shell__utility-link" href="/check-in-checkout">Check-in y checkout</a>
+                    <a class="hc-shell__utility-link" href="/my-reservations">Mis viajes</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="hc-shell__navbar">
+            <div class="hc-shell__navbar-inner">
+                <a class="hc-shell__brand" href="/">
+                    <span class="hc-shell__brand-mark">HC</span>
+
+                    <span class="hc-shell__brand-text">
+                        <strong>HotelChain Collection</strong>
+                        <small>Reservas, estadías y experiencias dentro de la cadena</small>
+                    </span>
+                </a>
+
+                <div class="hc-shell__nav">
+                    <NavMenu />
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="hc-shell__content">
+        @Body
+    </main>
+
+    <footer class="hc-shell__footer">
+        <div class="hc-shell__footer-top">
+            <div class="hc-shell__footer-brand">
+                <div class="hc-shell__footer-logo">
+                    <span class="hc-shell__footer-logo-mark">HC</span>
+                    <div>
+                        <strong>HotelChain Collection</strong>
+                        <p>Una experiencia de cadena hotelera con búsqueda, reserva, operación y seguimiento en un solo portal.</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="hc-layout__topbar-right">
-                <a class="hc-layout__topbar-link" href="/">Inicio</a>
-                <a class="hc-layout__topbar-link hc-layout__topbar-link--primary" href="search">Buscar hoteles</a>
-            </div>
-        </header>
+            <div class="hc-shell__footer-grid">
+                <div class="hc-shell__footer-column">
+                    <h4>Atención al cliente</h4>
+                    <a href="/search">Buscar hoteles</a>
+                    <a href="/check-in-checkout">Proceso de check-in</a>
+                    <a href="/hotel-rules">Políticas de hospedaje</a>
+                    <a href="/evacuation-info">Seguridad y evacuación</a>
+                </div>
 
-        <main class="hc-layout__content">
-            @Body
-        </main>
-    </div>
+                <div class="hc-shell__footer-column">
+                    <h4>Explorar</h4>
+                    <a href="/amenities">Amenidades</a>
+                    <a href="/room-types">Tipos de habitación</a>
+                    <a href="/login">Iniciar sesión</a>
+                    <a href="/register">Crear cuenta</a>
+                </div>
+
+                <div class="hc-shell__footer-column">
+                    <h4>Contacto</h4>
+                    <span>Teléfono: +502 2222-0000</span>
+                    <span>Dirección: Ciudad de Guatemala, Guatemala</span>
+                    <span>Soporte: soporte@hotelchain.com</span>
+                </div>
+
+                <div class="hc-shell__footer-column">
+                    <h4>Información legal</h4>
+                    <a href="/hotel-rules">Términos y condiciones</a>
+                    <a href="/hotel-rules">Políticas generales</a>
+                    <a href="/evacuation-info">Información de seguridad</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="hc-shell__footer-bottom">
+            <span>© @DateTime.Now.Year HotelChain Collection. Todos los derechos reservados.</span>
+        </div>
+    </footer>
 </div>
 
 <style>
-    .hc-layout {
+    .hc-shell {
         min-height: 100vh;
-        display: grid;
-        grid-template-columns: 300px minmax(0, 1fr);
-        background:
-            radial-gradient(circle at top right, rgba(59, 130, 246, 0.10), transparent 22%),
-            linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
-    }
-
-    .hc-layout__sidebar {
-        min-height: 100vh;
-        position: sticky;
-        top: 0;
-        align-self: start;
-        border-right: 1px solid rgba(15, 23, 42, 0.06);
-        box-shadow: 8px 0 30px rgba(15, 23, 42, 0.06);
-        z-index: 20;
-    }
-
-    .hc-layout__main {
-        min-width: 0;
         display: flex;
         flex-direction: column;
+        background: #f3f4f6;
+        color: #111827;
     }
 
-    .hc-layout__topbar {
+    .hc-shell__header {
         position: sticky;
         top: 0;
-        z-index: 10;
+        z-index: 100;
+        background: #ffffff;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .hc-shell__utilitybar {
+        background: #111111;
+        color: rgba(255,255,255,0.86);
+        border-top: 3px solid #2f2f2f;
+    }
+
+    .hc-shell__utility-inner,
+    .hc-shell__navbar-inner,
+    .hc-shell__content,
+    .hc-shell__footer-top,
+    .hc-shell__footer-bottom {
+        width: min(1280px, calc(100% - 2rem));
+        margin: 0 auto;
+    }
+
+    .hc-shell__utility-inner {
+        min-height: 42px;
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        align-items: center;
         gap: 1rem;
-        padding: 1rem 1.5rem;
-        background: rgba(248, 250, 252, 0.88);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+        font-size: 0.9rem;
     }
 
-    .hc-layout__topbar-left {
-        min-width: 0;
-    }
-
-    .hc-layout__eyebrow {
-        display: inline-block;
-        font-size: 0.72rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: #64748b;
-        margin-bottom: 0.2rem;
-    }
-
-    .hc-layout__topbar h2 {
-        margin: 0;
-        color: #0f172a;
-        font-size: 1.35rem;
-        font-weight: 800;
-        line-height: 1.1;
-    }
-
-    .hc-layout__subtitle {
-        margin: 0.22rem 0 0 0;
-        color: #64748b;
-        font-size: 0.95rem;
-        line-height: 1.4;
-    }
-
-    .hc-layout__topbar-right {
+    .hc-shell__utility-left,
+    .hc-shell__utility-right {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.9rem;
         flex-wrap: wrap;
     }
 
-    .hc-layout__topbar-link {
+    .hc-shell__utility-separator {
+        opacity: 0.45;
+    }
+
+    .hc-shell__utility-link {
+        color: rgba(255,255,255,0.86);
         text-decoration: none;
-        color: #0f172a;
-        font-weight: 700;
-        padding: 0.72rem 1rem;
-        border-radius: 14px;
-        border: 1px solid #cbd5e1;
-        background: #fff;
-        transition: all 0.18s ease;
+        font-weight: 500;
     }
 
-    .hc-layout__topbar-link:hover {
-        color: #0f172a;
-        background: #f8fafc;
-        border-color: #94a3b8;
+    .hc-shell__utility-link:hover {
+        color: #ffffff;
     }
 
-    .hc-layout__topbar-link--primary {
-        background: linear-gradient(135deg, #1d4ed8 0%, #0f172a 100%);
-        color: #fff;
-        border: none;
-        box-shadow: 0 10px 24px rgba(29, 78, 216, 0.18);
+    .hc-shell__navbar {
+        background: #ffffff;
+        border-bottom: 1px solid #e5e7eb;
     }
 
-    .hc-layout__topbar-link--primary:hover {
-        color: #fff;
-        background: linear-gradient(135deg, #1e40af 0%, #0b1220 100%);
+    .hc-shell__navbar-inner {
+        min-height: 86px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
     }
 
-    .hc-layout__content {
-        padding: 1.5rem;
+    .hc-shell__brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.95rem;
+        text-decoration: none;
+        color: #111827;
+        min-width: 0;
+        flex-shrink: 0;
+    }
+
+    .hc-shell__brand:hover {
+        color: #111827;
+    }
+
+    .hc-shell__brand-mark {
+        width: 60px;
+        height: 60px;
+        border-radius: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #111111 0%, #2d3748 100%);
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 1.05rem;
+        letter-spacing: 0.08em;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+    }
+
+    .hc-shell__brand-text {
+        display: flex;
+        flex-direction: column;
         min-width: 0;
     }
 
+    .hc-shell__brand-text strong {
+        font-size: 1.2rem;
+        line-height: 1.1;
+        color: #111827;
+    }
+
+    .hc-shell__brand-text small {
+        color: #6b7280;
+        margin-top: 0.2rem;
+        font-size: 0.9rem;
+    }
+
+    .hc-shell__nav {
+        min-width: 0;
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .hc-shell__content {
+        flex: 1;
+        width: min(1280px, calc(100% - 2rem));
+        padding: 1.5rem 0 2rem 0;
+    }
+
+    .hc-shell__footer {
+        background: #ececec;
+        border-top: 1px solid #d6d6d6;
+        margin-top: 2rem;
+    }
+
+    .hc-shell__footer-top {
+        padding: 2rem 0 1.5rem 0;
+        display: grid;
+        grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+        gap: 2rem;
+    }
+
+    .hc-shell__footer-brand {
+        min-width: 0;
+    }
+
+    .hc-shell__footer-logo {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.9rem;
+    }
+
+    .hc-shell__footer-logo-mark {
+        width: 54px;
+        height: 54px;
+        border-radius: 16px;
+        background: #111111;
+        color: #ffffff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        flex-shrink: 0;
+    }
+
+    .hc-shell__footer-logo strong {
+        display: block;
+        font-size: 1.05rem;
+        margin-bottom: 0.45rem;
+        color: #111827;
+    }
+
+    .hc-shell__footer-logo p {
+        margin: 0;
+        color: #4b5563;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+
+    .hc-shell__footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(160px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .hc-shell__footer-column h4 {
+        margin: 0 0 0.9rem 0;
+        font-size: 1rem;
+        font-weight: 800;
+        color: #111827;
+    }
+
+    .hc-shell__footer-column a,
+    .hc-shell__footer-column span {
+        display: block;
+        margin-bottom: 0.7rem;
+        text-decoration: none;
+        color: #374151;
+        line-height: 1.5;
+        font-size: 0.95rem;
+    }
+
+    .hc-shell__footer-column a:hover {
+        color: #111827;
+    }
+
+    .hc-shell__footer-bottom {
+        padding: 1rem 0 1.4rem 0;
+        border-top: 1px solid #d1d5db;
+        color: #6b7280;
+        font-size: 0.92rem;
+    }
+
+    @@media (max-width: 1199.98px) {
+        .hc-shell__footer-grid {
+            grid-template-columns: repeat(2, minmax(180px, 1fr));
+        }
+    }
+
     @@media (max-width: 991.98px) {
-        .hc-layout {
+        .hc-shell__utility-inner,
+        .hc-shell__navbar-inner {
+            align-items: flex-start;
+            padding-top: 0.8rem;
+            padding-bottom: 0.8rem;
+            flex-direction: column;
+        }
+
+        .hc-shell__nav {
+            width: 100%;
+            justify-content: stretch;
+        }
+
+        .hc-shell__footer-top {
             grid-template-columns: 1fr;
-        }
-
-        .hc-layout__sidebar {
-            min-height: auto;
-            position: relative;
-            top: auto;
-        }
-
-        .hc-layout__topbar {
-            padding: 0.95rem 1rem;
-        }
-
-        .hc-layout__content {
-            padding: 1rem;
         }
     }
 
     @@media (max-width: 767.98px) {
-        .hc-layout__topbar {
-            flex-direction: column;
-            align-items: flex-start;
+        .hc-shell__utility-inner,
+        .hc-shell__content,
+        .hc-shell__footer-top,
+        .hc-shell__footer-bottom,
+        .hc-shell__navbar-inner {
+            width: min(100%, calc(100% - 1rem));
         }
 
-        .hc-layout__topbar-right {
-            width: 100%;
+        .hc-shell__content {
+            padding-top: 1rem;
+        }
+
+        .hc-shell__footer-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hc-shell__brand-text strong {
+            font-size: 1.05rem;
+        }
+
+        .hc-shell__brand-text small {
+            font-size: 0.82rem;
         }
     }
 </style>

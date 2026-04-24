@@ -1,0 +1,51 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Web.Models
+  commentId: N:HotelChain.Web.Models
+  id: HotelChain.Web.Models
+  children:
+  - HotelChain.Web.Models.CreateHotelReviewRequest
+  - HotelChain.Web.Models.HotelDetailDto
+  - HotelChain.Web.Models.HotelRestrictionMessageDto
+  - HotelChain.Web.Models.HotelReviewDto
+  - HotelChain.Web.Models.HotelRoomOptionDto
+  langs:
+  - csharp
+  - vb
+  name: HotelChain.Web.Models
+  nameWithType: HotelChain.Web.Models
+  fullName: HotelChain.Web.Models
+  type: Namespace
+  assemblies:
+  - HotelChain.Web
+references:
+- uid: HotelChain.Web.Models.HotelDetailDto
+  commentId: T:HotelChain.Web.Models.HotelDetailDto
+  href: HotelChain.Web.Models.HotelDetailDto.html
+  name: HotelDetailDto
+  nameWithType: HotelDetailDto
+  fullName: HotelChain.Web.Models.HotelDetailDto
+- uid: HotelChain.Web.Models.HotelRestrictionMessageDto
+  commentId: T:HotelChain.Web.Models.HotelRestrictionMessageDto
+  href: HotelChain.Web.Models.HotelRestrictionMessageDto.html
+  name: HotelRestrictionMessageDto
+  nameWithType: HotelRestrictionMessageDto
+  fullName: HotelChain.Web.Models.HotelRestrictionMessageDto
+- uid: HotelChain.Web.Models.HotelRoomOptionDto
+  commentId: T:HotelChain.Web.Models.HotelRoomOptionDto
+  href: HotelChain.Web.Models.HotelRoomOptionDto.html
+  name: HotelRoomOptionDto
+  nameWithType: HotelRoomOptionDto
+  fullName: HotelChain.Web.Models.HotelRoomOptionDto
+- uid: HotelChain.Web.Models.HotelReviewDto
+  commentId: T:HotelChain.Web.Models.HotelReviewDto
+  href: HotelChain.Web.Models.HotelReviewDto.html
+  name: HotelReviewDto
+  nameWithType: HotelReviewDto
+  fullName: HotelChain.Web.Models.HotelReviewDto
+- uid: HotelChain.Web.Models.CreateHotelReviewRequest
+  commentId: T:HotelChain.Web.Models.CreateHotelReviewRequest
+  href: HotelChain.Web.Models.CreateHotelReviewRequest.html
+  name: CreateHotelReviewRequest
+  nameWithType: CreateHotelReviewRequest
+  fullName: HotelChain.Web.Models.CreateHotelReviewRequest

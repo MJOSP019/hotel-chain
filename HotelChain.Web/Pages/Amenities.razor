@@ -3,81 +3,113 @@
 <PageTitle>Amenidades</PageTitle>
 
 <div class="info-page">
-    <section class="info-hero">
+    <section class="info-hero info-hero--amenities">
         <div class="info-hero__content">
             <div class="info-badge">Portal informativo</div>
             <h1>Amenidades del hotel</h1>
             <p>
-                Conoce los espacios, servicios y comodidades que forman parte de la experiencia de hospedaje.
-                Hemos reunido la información más importante en un formato claro, visual y fácil de consultar.
+                Conoce las áreas, servicios y espacios que complementan la experiencia de hospedaje
+                dentro de HotelChain Collection. Esta versión ya deja una estructura visual de galería
+                lista para usar con fotografías reales del hotel.
             </p>
+        </div>
+
+        <div class="hero-mosaic">
+            <div class="hero-mosaic__tile hero-mosaic__tile--lobby">
+                <span>Lobby</span>
+            </div>
+            <div class="hero-mosaic__tile hero-mosaic__tile--pool">
+                <span>Piscina</span>
+            </div>
+            <div class="hero-mosaic__tile hero-mosaic__tile--restaurant">
+                <span>Restaurante</span>
+            </div>
+            <div class="hero-mosaic__tile hero-mosaic__tile--gym">
+                <span>Wellness</span>
+            </div>
         </div>
     </section>
 
     <section class="info-section">
         <div class="info-section__header">
             <div>
-                <div class="info-badge info-badge--light">Servicios principales</div>
-                <h3>Lo que puedes esperar durante tu estadía</h3>
+                <div class="info-badge info-badge--light">Galería sugerida</div>
+                <h3>Amenidades principales con bloques visuales listos para fotografía real</h3>
                 <p>
-                    Estas amenidades están pensadas para ofrecer comodidad, bienestar y una experiencia más completa.
+                    El documento del proyecto pide una presentación más visual de amenidades. Por eso aquí se deja
+                    una estructura tipo galería por categoría, lista para sustituir estos placeholders por fotos reales.
                 </p>
             </div>
         </div>
 
-        <div class="info-grid">
-            <article class="info-card info-card--featured">
-                <div class="info-card__icon">★</div>
-                <h4>Recepción y atención</h4>
-                <p>
-                    Atención al huésped, asistencia general, orientación sobre instalaciones y apoyo ante consultas
-                    relacionadas con la reservación o la estadía.
-                </p>
-            </article>
+        <div class="amenity-stack">
+            @foreach (var amenity in AmenitySections)
+            {
+                <article class="amenity-section-card">
+                    <div class="amenity-section-card__summary">
+                        <div>
+                            <div class="amenity-section-card__eyebrow">@amenity.Label</div>
+                            <h4>@amenity.Title</h4>
+                            <p>@amenity.Description</p>
+                        </div>
 
-            <article class="info-card">
-                <div class="info-card__icon">⌂</div>
-                <h4>Habitaciones confortables</h4>
-                <p>
-                    Espacios diseñados para descanso, privacidad y comodidad, con ambiente agradable para viajes
-                    personales, familiares o de trabajo.
-                </p>
-            </article>
+                        <div class="amenity-section-card__meta">
+                            <div>
+                                <span>Experiencia</span>
+                                <strong>@amenity.Experience</strong>
+                            </div>
+                            <div>
+                                <span>Disponibilidad</span>
+                                <strong>@amenity.Availability</strong>
+                            </div>
+                        </div>
+                    </div>
 
-            <article class="info-card">
-                <div class="info-card__icon">⌘</div>
-                <h4>Wi-Fi en áreas comunes</h4>
-                <p>
-                    Acceso a conexión inalámbrica en zonas habilitadas del hotel para facilitar comunicación,
-                    entretenimiento y trabajo.
-                </p>
-            </article>
+                    <div class="amenity-photo-grid">
+                        @foreach (var photo in amenity.Photos)
+                        {
+                            <div class="amenity-photo-grid__item @photo.CssClass">
+                                <div class="amenity-photo-grid__overlay"></div>
+                                <div class="amenity-photo-grid__caption">
+                                    <span>@photo.Tag</span>
+                                    <strong>@photo.Title</strong>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </article>
+            }
+        </div>
+    </section>
 
-            <article class="info-card">
-                <div class="info-card__icon">☕</div>
-                <h4>Área de alimentos y bebidas</h4>
+    <section class="info-section">
+        <div class="info-section__header">
+            <div>
+                <div class="info-badge info-badge--light">Uso recomendado</div>
+                <h3>Cómo presentar mejor este módulo en tu entrega</h3>
                 <p>
-                    Espacios destinados para desayunos, bebidas o consumo dentro de horarios definidos por la
-                    administración del hotel.
+                    Ya tienes la base visual. Lo ideal es reemplazar gradualmente los paneles por imágenes reales del hotel o
+                    renders representativos, especialmente en amenidades y categorías de habitación.
                 </p>
-            </article>
+            </div>
+        </div>
 
-            <article class="info-card">
-                <div class="info-card__icon">✦</div>
-                <h4>Áreas de descanso</h4>
-                <p>
-                    Zonas comunes para relajación, espera o convivencia, pensadas para brindar una experiencia más
-                    agradable fuera de la habitación.
-                </p>
+        <div class="info-pill-grid">
+            <article class="info-pill-card">
+                <span class="info-pill-card__label">Mínimo útil</span>
+                <strong>1 a 2 fotos por amenidad</strong>
             </article>
-
-            <article class="info-card">
-                <div class="info-card__icon">☼</div>
-                <h4>Ambientes de recreación</h4>
-                <p>
-                    Dependiendo de la sede, pueden existir espacios destinados al entretenimiento, convivencia o
-                    relajación complementaria.
-                </p>
+            <article class="info-pill-card">
+                <span class="info-pill-card__label">Más sólido</span>
+                <strong>Galería por categoría</strong>
+            </article>
+            <article class="info-pill-card">
+                <span class="info-pill-card__label">Ideal según documento</span>
+                <strong>5 imágenes por amenidad</strong>
+            </article>
+            <article class="info-pill-card">
+                <span class="info-pill-card__label">Recomendación</span>
+                <strong>Usar fotos propias del proyecto</strong>
             </article>
         </div>
     </section>
@@ -86,216 +118,162 @@
         <div class="info-highlight__content">
             <div>
                 <div class="info-badge info-badge--light">Importante</div>
-                <h3>Disponibilidad sujeta a sede y temporada</h3>
+                <h3>Disponibilidad sujeta a sede, categoría y temporada</h3>
                 <p>
-                    Algunas amenidades pueden variar según el hotel, el tipo de habitación, la fecha de hospedaje
-                    o las condiciones operativas del establecimiento.
+                    Algunas amenidades pueden variar según el hotel, tipo de habitación, temporada o condiciones operativas.
+                    Esta página comunica experiencia de marca, pero la disponibilidad final debe respetar inventario y operación real.
                 </p>
             </div>
 
             <div class="info-highlight__box">
-                <div class="info-highlight__label">Recomendación</div>
+                <div class="info-highlight__label">Siguiente mejora visual</div>
                 <p>
-                    Revisa también las reglas del hotel y la información de seguridad para tener una experiencia
-                    más clara y organizada durante tu visita.
+                    Reemplaza primero los bloques de lobby, restaurante, piscina, gimnasio y habitaciones; son los que más elevan
+                    la percepción de calidad del portal.
                 </p>
             </div>
         </div>
     </section>
 </div>
 
+@code {
+    private List<AmenitySectionVm> AmenitySections { get; } =
+    [
+        new(
+            "Lobby y recepción",
+            "Recepción y asistencia al huésped",
+            "Presenta las áreas de llegada, atención, espera y apoyo operativo. Es la mejor sección para mostrar orden, hospitalidad y presencia de marca.",
+            "Primer contacto",
+            "Según sede y operación",
+            [
+                new("Lobby principal", "Acceso", "photo-lobby-1"),
+                new("Mostrador", "Atención", "photo-lobby-2"),
+                new("Sala de espera", "Confort", "photo-lobby-3"),
+                new("Ingreso nocturno", "Ambiente", "photo-lobby-4"),
+                new("Detalle de marca", "Identidad", "photo-lobby-5")
+            ]),
+        new(
+            "Alimentos y bebidas",
+            "Restaurante, desayuno y zonas de consumo",
+            "Ayuda a mostrar variedad de servicio y eleva la percepción de experiencia completa. También funciona muy bien en presentación o demo con capturas.",
+            "Consumo y convivencia",
+            "Depende de horarios",
+            [
+                new("Desayuno buffet", "Servicio", "photo-food-1"),
+                new("Restaurante principal", "Comedor", "photo-food-2"),
+                new("Bebidas y café", "Bar", "photo-food-3"),
+                new("Terraza", "Ambiente", "photo-food-4"),
+                new("Servicio a mesa", "Atención", "photo-food-5")
+            ]),
+        new(
+            "Bienestar y recreación",
+            "Piscina, gimnasio y espacios de descanso",
+            "Ideal para comunicar valor agregado del hotel. Si no cuentas con fotos reales de todas, esta estructura te deja el espacio ya armado para agregarlas después.",
+            "Descanso y leisure",
+            "Según categoría del hotel",
+            [
+                new("Piscina exterior", "Relax", "photo-leisure-1"),
+                new("Área lounge", "Descanso", "photo-leisure-2"),
+                new("Gimnasio", "Fitness", "photo-leisure-3"),
+                new("Spa o wellness", "Premium", "photo-leisure-4"),
+                new("Área social", "Convivencia", "photo-leisure-5")
+            ])
+    ];
+
+    private sealed record AmenitySectionVm(
+        string Label,
+        string Title,
+        string Description,
+        string Experience,
+        string Availability,
+        List<GalleryPhotoVm> Photos);
+
+    private sealed record GalleryPhotoVm(string Title, string Tag, string CssClass);
+}
+
 <style>
-    .info-page {
-        padding: 1.5rem 0 2rem 0;
-        color: #0f172a;
-    }
-
+    .info-page { color: #111827; }
     .info-hero {
-        background:
-            radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 28%),
-            linear-gradient(135deg, #0f172a 0%, #162033 45%, #1e293b 100%);
-        color: #fff;
-        border-radius: 28px;
-        padding: 2.2rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
-        overflow: hidden;
-        position: relative;
+        display:grid; grid-template-columns: 1.15fr 0.85fr; gap:1.25rem; align-items:stretch;
+        min-height: 420px; border-radius: 30px; overflow: hidden; margin-bottom: 1.5rem;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
+        background: linear-gradient(135deg, #d9c7ad 0%, #ebe5dc 35%, #b7c6d1 62%, #6b8094 100%);
+        padding: 1.3rem;
     }
-
-    .info-hero::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent 30%);
-        pointer-events: none;
+    .info-hero__content { padding: 1.2rem; color: #fff; display:flex; flex-direction:column; justify-content:flex-end; }
+    .info-hero__content h1 { font-size: clamp(2.2rem, 4vw, 3.6rem); line-height:1; margin:0 0 .8rem; font-weight:900; }
+    .info-hero__content p { max-width: 680px; color: rgba(255,255,255,.92); }
+    .info-badge { display:inline-flex; align-items:center; width:max-content; padding:.38rem .78rem; border-radius:999px; background:rgba(255,255,255,.14); color:#fff; font-size:.78rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
+    .info-badge--light { background:#fff; color:#475569; border:1px solid #e2e8f0; }
+    .hero-mosaic { display:grid; grid-template-columns: 1fr 1fr; gap:.85rem; }
+    .hero-mosaic__tile, .amenity-photo-grid__item {
+        position:relative; border-radius: 24px; overflow:hidden; min-height: 150px;
+        box-shadow: 0 18px 35px rgba(15, 23, 42, 0.12);
+        border:1px solid rgba(255,255,255,.26);
     }
-
-    .info-hero__content {
-        position: relative;
-        z-index: 1;
-        max-width: 820px;
+    .hero-mosaic__tile span { position:absolute; left:1rem; bottom:1rem; z-index:2; color:#fff; font-weight:800; letter-spacing:.03em; }
+    .hero-mosaic__tile::before, .amenity-photo-grid__item::before {
+        content:""; position:absolute; inset:0;
+        background-size: cover; background-position:center;
+        transform: scale(1.02);
     }
-
-    .info-badge {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.38rem 0.75rem;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.12);
-        color: #dbeafe;
-        font-size: 0.82rem;
-        font-weight: 700;
-        letter-spacing: 0.03em;
-        text-transform: uppercase;
-        margin-bottom: 1rem;
+    .hero-mosaic__tile::after, .amenity-photo-grid__overlay {
+        content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,23,42,.04), rgba(15,23,42,.5));
     }
+    .hero-mosaic__tile--lobby::before, .photo-lobby-1::before { background: linear-gradient(135deg, #b99672, #efe4d5 55%, #768fa5); }
+    .hero-mosaic__tile--pool::before, .photo-leisure-1::before { background: linear-gradient(135deg, #9cd3eb, #dceef5 50%, #5f88a3); }
+    .hero-mosaic__tile--restaurant::before, .photo-food-1::before { background: linear-gradient(135deg, #8c5d43, #dfcfbf 50%, #67839a); }
+    .hero-mosaic__tile--gym::before, .photo-leisure-3::before { background: linear-gradient(135deg, #7b8f8a, #dfe7e2 50%, #72879a); }
+    .photo-lobby-2::before { background: linear-gradient(135deg, #af8c6d, #eee4da 52%, #8da2b3); }
+    .photo-lobby-3::before { background: linear-gradient(135deg, #d6c3b0, #faf4ef 54%, #b5c7d4); }
+    .photo-lobby-4::before { background: linear-gradient(135deg, #544c48, #b8b5b3 44%, #76889d); }
+    .photo-lobby-5::before { background: linear-gradient(135deg, #2a3440, #8897a5 48%, #d1d8dd); }
+    .photo-food-2::before { background: linear-gradient(135deg, #b27a59, #f0dfce 52%, #8199ab); }
+    .photo-food-3::before { background: linear-gradient(135deg, #6d4c3b, #d4c5bc 50%, #5f7d95); }
+    .photo-food-4::before { background: linear-gradient(135deg, #9a7b63, #e6d7ca 48%, #91b1b9); }
+    .photo-food-5::before { background: linear-gradient(135deg, #7f5b4e, #ddd1c7 50%, #879ead); }
+    .photo-leisure-2::before { background: linear-gradient(135deg, #91b3b8, #e8f0ee 50%, #8ca2b2); }
+    .photo-leisure-4::before { background: linear-gradient(135deg, #93b0aa, #ecf3ef 52%, #a7b9c4); }
+    .photo-leisure-5::before { background: linear-gradient(135deg, #86a9b0, #e7eef2 48%, #7c94a9); }
 
-    .info-badge--light {
-        background: #eff6ff;
-        color: #1d4ed8;
+    .info-section, .info-highlight { margin-top: 2rem; }
+    .info-section__header h3 { margin:.4rem 0 .35rem; font-size: clamp(1.7rem, 2vw, 2.35rem); font-weight:900; }
+    .info-section__header p { max-width: 900px; color:#475569; }
+    .amenity-stack { display:grid; gap:1.35rem; margin-top:1rem; }
+    .amenity-section-card {
+        border:1px solid #e5e7eb; border-radius:28px; background:#fff; padding:1.15rem;
+        box-shadow: 0 20px 45px rgba(15, 23, 42, .06);
     }
+    .amenity-section-card__summary { display:flex; justify-content:space-between; gap:1rem; margin-bottom: 1rem; }
+    .amenity-section-card__eyebrow { display:inline-flex; padding:.28rem .65rem; border-radius:999px; background:#111827; color:#fff; font-size:.73rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
+    .amenity-section-card h4 { margin:.55rem 0 .45rem; font-size:1.55rem; font-weight:900; }
+    .amenity-section-card p { margin:0; color:#475569; }
+    .amenity-section-card__meta { display:grid; grid-template-columns: 1fr 1fr; gap:.75rem; min-width: 270px; }
+    .amenity-section-card__meta div { border:1px solid #e5e7eb; border-radius:18px; padding:.8rem .95rem; background:#f8fafc; }
+    .amenity-section-card__meta span { display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:#64748b; font-weight:800; margin-bottom:.2rem; }
+    .amenity-photo-grid { display:grid; grid-template-columns: repeat(5, 1fr); gap:.85rem; }
+    .amenity-photo-grid__item { min-height: 190px; }
+    .amenity-photo-grid__caption { position:absolute; left:.9rem; right:.9rem; bottom:.85rem; z-index:2; color:#fff; }
+    .amenity-photo-grid__caption span { display:inline-flex; padding:.22rem .55rem; border-radius:999px; background:rgba(255,255,255,.16); backdrop-filter: blur(8px); font-size:.68rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; }
+    .amenity-photo-grid__caption strong { display:block; margin-top:.45rem; font-size:1rem; line-height:1.1; }
+    .info-pill-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:.9rem; margin-top: 1rem; }
+    .info-pill-card { border:1px solid #e5e7eb; border-radius:22px; background:#fff; padding:1rem; box-shadow: 0 10px 24px rgba(15,23,42,.05); }
+    .info-pill-card__label { display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:#64748b; font-weight:800; margin-bottom:.25rem; }
+    .info-highlight__content { display:grid; grid-template-columns: 1.2fr .8fr; gap:1rem; border:1px solid #dbeafe; background: linear-gradient(180deg, #fff, #f8fbff); border-radius:26px; padding:1.15rem; }
+    .info-highlight__content h3 { margin:.45rem 0; font-size:1.7rem; font-weight:900; }
+    .info-highlight__box { border:1px solid #dbeafe; background:#fff; border-radius:20px; padding:1rem; }
+    .info-highlight__label { display:inline-flex; padding:.25rem .58rem; border-radius:999px; background:#eff6ff; color:#1d4ed8; font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; margin-bottom:.45rem; }
 
-    .info-hero h1 {
-        font-size: clamp(2rem, 4vw, 3rem);
-        font-weight: 800;
-        margin-bottom: 0.8rem;
-        line-height: 1.05;
+    @@media (max-width: 1100px) {
+        .info-hero { grid-template-columns: 1fr; }
+        .amenity-section-card__summary, .info-highlight__content { grid-template-columns:1fr; display:grid; }
+        .amenity-photo-grid { grid-template-columns: repeat(3, 1fr); }
+        .info-pill-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
-    .info-hero p {
-        margin: 0;
-        max-width: 720px;
-        color: rgba(255,255,255,0.82);
-        font-size: 1.02rem;
-    }
-
-    .info-section {
-        margin-top: 1.25rem;
-    }
-
-    .info-section__header {
-        margin-bottom: 1rem;
-    }
-
-    .info-section__header h3 {
-        margin: 0.3rem 0 0.25rem 0;
-        font-weight: 800;
-        color: #0f172a;
-    }
-
-    .info-section__header p {
-        margin: 0;
-        color: #64748b;
-        max-width: 760px;
-    }
-
-    .info-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 1rem;
-    }
-
-    .info-card {
-        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-        border: 1px solid #e2e8f0;
-        border-radius: 24px;
-        padding: 1.2rem;
-        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
-        min-height: 220px;
-    }
-
-    .info-card--featured {
-        grid-column: span 2;
-    }
-
-    .info-card__icon {
-        width: 46px;
-        height: 46px;
-        border-radius: 14px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background: #eff6ff;
-        color: #1d4ed8;
-        font-size: 1.2rem;
-        font-weight: 800;
-        margin-bottom: 1rem;
-    }
-
-    .info-card h4 {
-        margin-bottom: 0.55rem;
-        font-weight: 800;
-        color: #0f172a;
-    }
-
-    .info-card p {
-        margin: 0;
-        color: #64748b;
-        line-height: 1.65;
-    }
-
-    .info-highlight {
-        margin-top: 1.4rem;
-    }
-
-    .info-highlight__content {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 28px;
-        padding: 1.5rem;
-        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
-        display: grid;
-        grid-template-columns: 1.4fr 1fr;
-        gap: 1rem;
-        align-items: stretch;
-    }
-
-    .info-highlight__content h3 {
-        margin: 0.3rem 0 0.45rem 0;
-        font-weight: 800;
-        color: #0f172a;
-    }
-
-    .info-highlight__content p {
-        margin: 0;
-        color: #64748b;
-        line-height: 1.65;
-    }
-
-    .info-highlight__box {
-        background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
-        border: 1px solid #dbeafe;
-        border-radius: 22px;
-        padding: 1.1rem;
-    }
-
-    .info-highlight__label {
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #1d4ed8;
-        font-weight: 800;
-        margin-bottom: 0.45rem;
-    }
-
-    @@media (max-width: 991.98px) {
-        .info-highlight__content {
-            grid-template-columns: 1fr;
-        }
-
-        .info-card--featured {
-            grid-column: span 1;
-        }
-    }
-
-    @@media (max-width: 767.98px) {
-        .info-page {
-            padding-top: 0.75rem;
-        }
-
-        .info-hero {
-            padding: 1.5rem 1rem;
-        }
+    @@media (max-width: 720px) {
+        .hero-mosaic { grid-template-columns:1fr 1fr; }
+        .amenity-photo-grid { grid-template-columns: repeat(2, 1fr); }
+        .info-pill-grid { grid-template-columns: 1fr; }
+        .amenity-section-card__meta { grid-template-columns: 1fr; min-width: 0; }
     }
 </style>

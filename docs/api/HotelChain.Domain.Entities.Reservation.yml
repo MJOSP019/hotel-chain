@@ -1,0 +1,1108 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Domain.Entities.Reservation
+  commentId: T:HotelChain.Domain.Entities.Reservation
+  id: Reservation
+  parent: HotelChain.Domain.Entities
+  children:
+  - HotelChain.Domain.Entities.Reservation.Charges
+  - HotelChain.Domain.Entities.Reservation.CheckIn
+  - HotelChain.Domain.Entities.Reservation.CheckOut
+  - HotelChain.Domain.Entities.Reservation.Code
+  - HotelChain.Domain.Entities.Reservation.CreatedAt
+  - HotelChain.Domain.Entities.Reservation.ExpiresAt
+  - HotelChain.Domain.Entities.Reservation.Guests
+  - HotelChain.Domain.Entities.Reservation.Hotel
+  - HotelChain.Domain.Entities.Reservation.HotelId
+  - HotelChain.Domain.Entities.Reservation.Id
+  - HotelChain.Domain.Entities.Reservation.Payment
+  - HotelChain.Domain.Entities.Reservation.Rooms
+  - HotelChain.Domain.Entities.Reservation.Status
+  - HotelChain.Domain.Entities.Reservation.TotalAmount
+  - HotelChain.Domain.Entities.Reservation.UserId
+  langs:
+  - csharp
+  - vb
+  name: Reservation
+  nameWithType: Reservation
+  fullName: HotelChain.Domain.Entities.Reservation
+  type: Class
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Reservation
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 5
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Representa una reservación realizada por un usuario dentro del sistema.
+  example: []
+  syntax:
+    content: public class Reservation
+    content.vb: Public Class Reservation
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: HotelChain.Domain.Entities.Reservation.Id
+  commentId: P:HotelChain.Domain.Entities.Reservation.Id
+  id: Id
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: Reservation.Id
+  fullName: HotelChain.Domain.Entities.Reservation.Id
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Id
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 7
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public int Id { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Id As Integer
+  overload: HotelChain.Domain.Entities.Reservation.Id*
+- uid: HotelChain.Domain.Entities.Reservation.Code
+  commentId: P:HotelChain.Domain.Entities.Reservation.Code
+  id: Code
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: Code
+  nameWithType: Reservation.Code
+  fullName: HotelChain.Domain.Entities.Reservation.Code
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Code
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 8
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public string Code { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Code As String
+  overload: HotelChain.Domain.Entities.Reservation.Code*
+- uid: HotelChain.Domain.Entities.Reservation.HotelId
+  commentId: P:HotelChain.Domain.Entities.Reservation.HotelId
+  id: HotelId
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: HotelId
+  nameWithType: Reservation.HotelId
+  fullName: HotelChain.Domain.Entities.Reservation.HotelId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: HotelId
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 9
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public int HotelId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property HotelId As Integer
+  overload: HotelChain.Domain.Entities.Reservation.HotelId*
+- uid: HotelChain.Domain.Entities.Reservation.Hotel
+  commentId: P:HotelChain.Domain.Entities.Reservation.Hotel
+  id: Hotel
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: Hotel
+  nameWithType: Reservation.Hotel
+  fullName: HotelChain.Domain.Entities.Reservation.Hotel
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Hotel
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 10
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public Hotel Hotel { get; set; }
+    parameters: []
+    return:
+      type: HotelChain.Domain.Entities.Hotel
+    content.vb: Public Property Hotel As Hotel
+  overload: HotelChain.Domain.Entities.Reservation.Hotel*
+- uid: HotelChain.Domain.Entities.Reservation.UserId
+  commentId: P:HotelChain.Domain.Entities.Reservation.UserId
+  id: UserId
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: UserId
+  nameWithType: Reservation.UserId
+  fullName: HotelChain.Domain.Entities.Reservation.UserId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: UserId
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 11
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public Guid? UserId { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Guid}
+    content.vb: Public Property UserId As Guid?
+  overload: HotelChain.Domain.Entities.Reservation.UserId*
+- uid: HotelChain.Domain.Entities.Reservation.CheckIn
+  commentId: P:HotelChain.Domain.Entities.Reservation.CheckIn
+  id: CheckIn
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: CheckIn
+  nameWithType: Reservation.CheckIn
+  fullName: HotelChain.Domain.Entities.Reservation.CheckIn
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CheckIn
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 12
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public DateTime CheckIn { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CheckIn As Date
+  overload: HotelChain.Domain.Entities.Reservation.CheckIn*
+- uid: HotelChain.Domain.Entities.Reservation.CheckOut
+  commentId: P:HotelChain.Domain.Entities.Reservation.CheckOut
+  id: CheckOut
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: CheckOut
+  nameWithType: Reservation.CheckOut
+  fullName: HotelChain.Domain.Entities.Reservation.CheckOut
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CheckOut
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 13
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public DateTime CheckOut { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CheckOut As Date
+  overload: HotelChain.Domain.Entities.Reservation.CheckOut*
+- uid: HotelChain.Domain.Entities.Reservation.Guests
+  commentId: P:HotelChain.Domain.Entities.Reservation.Guests
+  id: Guests
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: Guests
+  nameWithType: Reservation.Guests
+  fullName: HotelChain.Domain.Entities.Reservation.Guests
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Guests
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 14
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public int Guests { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Guests As Integer
+  overload: HotelChain.Domain.Entities.Reservation.Guests*
+- uid: HotelChain.Domain.Entities.Reservation.TotalAmount
+  commentId: P:HotelChain.Domain.Entities.Reservation.TotalAmount
+  id: TotalAmount
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: TotalAmount
+  nameWithType: Reservation.TotalAmount
+  fullName: HotelChain.Domain.Entities.Reservation.TotalAmount
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: TotalAmount
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 15
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public decimal TotalAmount { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+    content.vb: Public Property TotalAmount As Decimal
+  overload: HotelChain.Domain.Entities.Reservation.TotalAmount*
+- uid: HotelChain.Domain.Entities.Reservation.Status
+  commentId: P:HotelChain.Domain.Entities.Reservation.Status
+  id: Status
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: Status
+  nameWithType: Reservation.Status
+  fullName: HotelChain.Domain.Entities.Reservation.Status
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Status
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 16
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public string Status { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Status As String
+  overload: HotelChain.Domain.Entities.Reservation.Status*
+- uid: HotelChain.Domain.Entities.Reservation.CreatedAt
+  commentId: P:HotelChain.Domain.Entities.Reservation.CreatedAt
+  id: CreatedAt
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: CreatedAt
+  nameWithType: Reservation.CreatedAt
+  fullName: HotelChain.Domain.Entities.Reservation.CreatedAt
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CreatedAt
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 17
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public DateTime CreatedAt { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CreatedAt As Date
+  overload: HotelChain.Domain.Entities.Reservation.CreatedAt*
+- uid: HotelChain.Domain.Entities.Reservation.ExpiresAt
+  commentId: P:HotelChain.Domain.Entities.Reservation.ExpiresAt
+  id: ExpiresAt
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: ExpiresAt
+  nameWithType: Reservation.ExpiresAt
+  fullName: HotelChain.Domain.Entities.Reservation.ExpiresAt
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ExpiresAt
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 18
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public DateTime? ExpiresAt { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.DateTime}
+    content.vb: Public Property ExpiresAt As Date?
+  overload: HotelChain.Domain.Entities.Reservation.ExpiresAt*
+- uid: HotelChain.Domain.Entities.Reservation.Rooms
+  commentId: P:HotelChain.Domain.Entities.Reservation.Rooms
+  id: Rooms
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: Rooms
+  nameWithType: Reservation.Rooms
+  fullName: HotelChain.Domain.Entities.Reservation.Rooms
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Rooms
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 19
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public List<ReservationRoom> Rooms { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{HotelChain.Domain.Entities.ReservationRoom}
+    content.vb: Public Property Rooms As List(Of ReservationRoom)
+  overload: HotelChain.Domain.Entities.Reservation.Rooms*
+- uid: HotelChain.Domain.Entities.Reservation.Payment
+  commentId: P:HotelChain.Domain.Entities.Reservation.Payment
+  id: Payment
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: Payment
+  nameWithType: Reservation.Payment
+  fullName: HotelChain.Domain.Entities.Reservation.Payment
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Payment
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 20
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public ReservationPayment? Payment { get; set; }
+    parameters: []
+    return:
+      type: HotelChain.Domain.Entities.ReservationPayment
+    content.vb: Public Property Payment As ReservationPayment
+  overload: HotelChain.Domain.Entities.Reservation.Payment*
+- uid: HotelChain.Domain.Entities.Reservation.Charges
+  commentId: P:HotelChain.Domain.Entities.Reservation.Charges
+  id: Charges
+  parent: HotelChain.Domain.Entities.Reservation
+  langs:
+  - csharp
+  - vb
+  name: Charges
+  nameWithType: Reservation.Charges
+  fullName: HotelChain.Domain.Entities.Reservation.Charges
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/Reservation.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Charges
+    path: ../HotelChain.Domain/Entities/Reservation.cs
+    startLine: 21
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public List<ReservationCharge> Charges { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{HotelChain.Domain.Entities.ReservationCharge}
+    content.vb: Public Property Charges As List(Of ReservationCharge)
+  overload: HotelChain.Domain.Entities.Reservation.Charges*
+references:
+- uid: HotelChain.Domain.Entities
+  commentId: N:HotelChain.Domain.Entities
+  href: HotelChain.html
+  name: HotelChain.Domain.Entities
+  nameWithType: HotelChain.Domain.Entities
+  fullName: HotelChain.Domain.Entities
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Domain
+    name: Domain
+    href: HotelChain.Domain.html
+  - name: .
+  - uid: HotelChain.Domain.Entities
+    name: Entities
+    href: HotelChain.Domain.Entities.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Domain
+    name: Domain
+    href: HotelChain.Domain.html
+  - name: .
+  - uid: HotelChain.Domain.Entities
+    name: Entities
+    href: HotelChain.Domain.Entities.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Domain.Entities.Reservation.Id*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.Id
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_Id
+  name: Id
+  nameWithType: Reservation.Id
+  fullName: HotelChain.Domain.Entities.Reservation.Id
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: HotelChain.Domain.Entities.Reservation.Code*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.Code
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_Code
+  name: Code
+  nameWithType: Reservation.Code
+  fullName: HotelChain.Domain.Entities.Reservation.Code
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: HotelChain.Domain.Entities.Reservation.HotelId*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.HotelId
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_HotelId
+  name: HotelId
+  nameWithType: Reservation.HotelId
+  fullName: HotelChain.Domain.Entities.Reservation.HotelId
+- uid: HotelChain.Domain.Entities.Reservation.Hotel*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.Hotel
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_Hotel
+  name: Hotel
+  nameWithType: Reservation.Hotel
+  fullName: HotelChain.Domain.Entities.Reservation.Hotel
+- uid: HotelChain.Domain.Entities.Hotel
+  commentId: T:HotelChain.Domain.Entities.Hotel
+  parent: HotelChain.Domain.Entities
+  href: HotelChain.Domain.Entities.Hotel.html
+  name: Hotel
+  nameWithType: Hotel
+  fullName: HotelChain.Domain.Entities.Hotel
+- uid: HotelChain.Domain.Entities.Reservation.UserId*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.UserId
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_UserId
+  name: UserId
+  nameWithType: Reservation.UserId
+  fullName: HotelChain.Domain.Entities.Reservation.UserId
+- uid: System.Nullable{System.Guid}
+  commentId: T:System.Nullable{System.Guid}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.guid
+  name: Guid?
+  nameWithType: Guid?
+  fullName: System.Guid?
+  spec.csharp:
+  - uid: System.Guid
+    name: Guid
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.guid
+  - name: '?'
+  spec.vb:
+  - uid: System.Guid
+    name: Guid
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.guid
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: HotelChain.Domain.Entities.Reservation.CheckIn*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.CheckIn
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_CheckIn
+  name: CheckIn
+  nameWithType: Reservation.CheckIn
+  fullName: HotelChain.Domain.Entities.Reservation.CheckIn
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+  nameWithType.vb: Date
+  fullName.vb: Date
+  name.vb: Date
+- uid: HotelChain.Domain.Entities.Reservation.CheckOut*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.CheckOut
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_CheckOut
+  name: CheckOut
+  nameWithType: Reservation.CheckOut
+  fullName: HotelChain.Domain.Entities.Reservation.CheckOut
+- uid: HotelChain.Domain.Entities.Reservation.Guests*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.Guests
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_Guests
+  name: Guests
+  nameWithType: Reservation.Guests
+  fullName: HotelChain.Domain.Entities.Reservation.Guests
+- uid: HotelChain.Domain.Entities.Reservation.TotalAmount*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.TotalAmount
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_TotalAmount
+  name: TotalAmount
+  nameWithType: Reservation.TotalAmount
+  fullName: HotelChain.Domain.Entities.Reservation.TotalAmount
+- uid: System.Decimal
+  commentId: T:System.Decimal
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.decimal
+  name: decimal
+  nameWithType: decimal
+  fullName: decimal
+  nameWithType.vb: Decimal
+  fullName.vb: Decimal
+  name.vb: Decimal
+- uid: HotelChain.Domain.Entities.Reservation.Status*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.Status
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_Status
+  name: Status
+  nameWithType: Reservation.Status
+  fullName: HotelChain.Domain.Entities.Reservation.Status
+- uid: HotelChain.Domain.Entities.Reservation.CreatedAt*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.CreatedAt
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_CreatedAt
+  name: CreatedAt
+  nameWithType: Reservation.CreatedAt
+  fullName: HotelChain.Domain.Entities.Reservation.CreatedAt
+- uid: HotelChain.Domain.Entities.Reservation.ExpiresAt*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.ExpiresAt
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_ExpiresAt
+  name: ExpiresAt
+  nameWithType: Reservation.ExpiresAt
+  fullName: HotelChain.Domain.Entities.Reservation.ExpiresAt
+- uid: System.Nullable{System.DateTime}
+  commentId: T:System.Nullable{System.DateTime}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime?
+  nameWithType: DateTime?
+  fullName: System.DateTime?
+  nameWithType.vb: Date?
+  fullName.vb: Date?
+  name.vb: Date?
+  spec.csharp:
+  - uid: System.DateTime
+    name: DateTime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: '?'
+  spec.vb:
+  - uid: System.DateTime
+    name: Date
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: '?'
+- uid: HotelChain.Domain.Entities.Reservation.Rooms*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.Rooms
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_Rooms
+  name: Rooms
+  nameWithType: Reservation.Rooms
+  fullName: HotelChain.Domain.Entities.Reservation.Rooms
+- uid: System.Collections.Generic.List{HotelChain.Domain.Entities.ReservationRoom}
+  commentId: T:System.Collections.Generic.List{HotelChain.Domain.Entities.ReservationRoom}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<ReservationRoom>
+  nameWithType: List<ReservationRoom>
+  fullName: System.Collections.Generic.List<HotelChain.Domain.Entities.ReservationRoom>
+  nameWithType.vb: List(Of ReservationRoom)
+  fullName.vb: System.Collections.Generic.List(Of HotelChain.Domain.Entities.ReservationRoom)
+  name.vb: List(Of ReservationRoom)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: HotelChain.Domain.Entities.ReservationRoom
+    name: ReservationRoom
+    href: HotelChain.Domain.Entities.ReservationRoom.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: HotelChain.Domain.Entities.ReservationRoom
+    name: ReservationRoom
+    href: HotelChain.Domain.Entities.ReservationRoom.html
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: HotelChain.Domain.Entities.Reservation.Payment*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.Payment
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_Payment
+  name: Payment
+  nameWithType: Reservation.Payment
+  fullName: HotelChain.Domain.Entities.Reservation.Payment
+- uid: HotelChain.Domain.Entities.ReservationPayment
+  commentId: T:HotelChain.Domain.Entities.ReservationPayment
+  parent: HotelChain.Domain.Entities
+  href: HotelChain.Domain.Entities.ReservationPayment.html
+  name: ReservationPayment
+  nameWithType: ReservationPayment
+  fullName: HotelChain.Domain.Entities.ReservationPayment
+- uid: HotelChain.Domain.Entities.Reservation.Charges*
+  commentId: Overload:HotelChain.Domain.Entities.Reservation.Charges
+  href: HotelChain.Domain.Entities.Reservation.html#HotelChain_Domain_Entities_Reservation_Charges
+  name: Charges
+  nameWithType: Reservation.Charges
+  fullName: HotelChain.Domain.Entities.Reservation.Charges
+- uid: System.Collections.Generic.List{HotelChain.Domain.Entities.ReservationCharge}
+  commentId: T:System.Collections.Generic.List{HotelChain.Domain.Entities.ReservationCharge}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<ReservationCharge>
+  nameWithType: List<ReservationCharge>
+  fullName: System.Collections.Generic.List<HotelChain.Domain.Entities.ReservationCharge>
+  nameWithType.vb: List(Of ReservationCharge)
+  fullName.vb: System.Collections.Generic.List(Of HotelChain.Domain.Entities.ReservationCharge)
+  name.vb: List(Of ReservationCharge)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: HotelChain.Domain.Entities.ReservationCharge
+    name: ReservationCharge
+    href: HotelChain.Domain.Entities.ReservationCharge.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: HotelChain.Domain.Entities.ReservationCharge
+    name: ReservationCharge
+    href: HotelChain.Domain.Entities.ReservationCharge.html
+  - name: )

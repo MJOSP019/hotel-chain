@@ -1,0 +1,513 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Api.Controllers
+  commentId: N:HotelChain.Api.Controllers
+  id: HotelChain.Api.Controllers
+  children:
+  - HotelChain.Api.Controllers.AdminAddReservationChargeRequest
+  - HotelChain.Api.Controllers.AdminAnalyticsController
+  - HotelChain.Api.Controllers.AdminCancelReservationRequest
+  - HotelChain.Api.Controllers.AdminChangeReservationDatesRequest
+  - HotelChain.Api.Controllers.AdminHotelsController
+  - HotelChain.Api.Controllers.AdminReservationsController
+  - HotelChain.Api.Controllers.AdminRoomInventoriesController
+  - HotelChain.Api.Controllers.AdminRoomInventoriesController.GenerateInventoryHorizonRequest
+  - HotelChain.Api.Controllers.AdminRoomInventoriesController.UpsertCommercialRulesRequest
+  - HotelChain.Api.Controllers.AdminRoomsController
+  - HotelChain.Api.Controllers.AdminSettleReservationChargesRequest
+  - HotelChain.Api.Controllers.AdminUsersController
+  - HotelChain.Api.Controllers.AuthController
+  - HotelChain.Api.Controllers.CitiesController
+  - HotelChain.Api.Controllers.HotelReviewsController
+  - HotelChain.Api.Controllers.IntegrationController
+  - HotelChain.Api.Controllers.IntegrationController.IntegrationCreateReservationRequest
+  - HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  - HotelChain.Api.Controllers.PublicController
+  - HotelChain.Api.Controllers.PublicHotelsController
+  - HotelChain.Api.Controllers.ReservationsController
+  - HotelChain.Api.Controllers.ReservationsController.ChangeReservationDatesRequest
+  - HotelChain.Api.Controllers.ReservationsController.CheckoutRequest
+  - HotelChain.Api.Controllers.ReservationsController.CreateReservationRequest
+  - HotelChain.Api.Controllers.RoomTypesController
+  - HotelChain.Api.Controllers.SearchController
+  - HotelChain.Api.Controllers.SearchController.SearchRequest
+  - HotelChain.Api.Controllers.SearchController.SearchResponseDto
+  - HotelChain.Api.Controllers.SearchController.SearchRestrictionMessageDto
+  - HotelChain.Api.Controllers.SearchController.SearchResultDto
+  - HotelChain.Api.Controllers.UserReservationsController
+  - HotelChain.Api.Controllers.WsReservationsController
+  - HotelChain.Api.Controllers.WsReservationsController.CreateWsReservationRequest
+  - HotelChain.Api.Controllers.WsSearchController
+  - HotelChain.Api.Controllers.WsSearchController.SearchRequest
+  langs:
+  - csharp
+  - vb
+  name: HotelChain.Api.Controllers
+  nameWithType: HotelChain.Api.Controllers
+  fullName: HotelChain.Api.Controllers
+  type: Namespace
+  assemblies:
+  - HotelChain.Api
+references:
+- uid: HotelChain.Api.Controllers.AdminAnalyticsController
+  commentId: T:HotelChain.Api.Controllers.AdminAnalyticsController
+  href: HotelChain.Api.Controllers.AdminAnalyticsController.html
+  name: AdminAnalyticsController
+  nameWithType: AdminAnalyticsController
+  fullName: HotelChain.Api.Controllers.AdminAnalyticsController
+- uid: HotelChain.Api.Controllers.AdminHotelsController
+  commentId: T:HotelChain.Api.Controllers.AdminHotelsController
+  href: HotelChain.Api.Controllers.AdminHotelsController.html
+  name: AdminHotelsController
+  nameWithType: AdminHotelsController
+  fullName: HotelChain.Api.Controllers.AdminHotelsController
+- uid: HotelChain.Api.Controllers.AdminCancelReservationRequest
+  commentId: T:HotelChain.Api.Controllers.AdminCancelReservationRequest
+  parent: HotelChain.Api.Controllers
+  href: HotelChain.Api.Controllers.AdminCancelReservationRequest.html
+  name: AdminCancelReservationRequest
+  nameWithType: AdminCancelReservationRequest
+  fullName: HotelChain.Api.Controllers.AdminCancelReservationRequest
+- uid: HotelChain.Api.Controllers.AdminChangeReservationDatesRequest
+  commentId: T:HotelChain.Api.Controllers.AdminChangeReservationDatesRequest
+  parent: HotelChain.Api.Controllers
+  href: HotelChain.Api.Controllers.AdminChangeReservationDatesRequest.html
+  name: AdminChangeReservationDatesRequest
+  nameWithType: AdminChangeReservationDatesRequest
+  fullName: HotelChain.Api.Controllers.AdminChangeReservationDatesRequest
+- uid: HotelChain.Api.Controllers.AdminAddReservationChargeRequest
+  commentId: T:HotelChain.Api.Controllers.AdminAddReservationChargeRequest
+  parent: HotelChain.Api.Controllers
+  href: HotelChain.Api.Controllers.AdminAddReservationChargeRequest.html
+  name: AdminAddReservationChargeRequest
+  nameWithType: AdminAddReservationChargeRequest
+  fullName: HotelChain.Api.Controllers.AdminAddReservationChargeRequest
+- uid: HotelChain.Api.Controllers.AdminSettleReservationChargesRequest
+  commentId: T:HotelChain.Api.Controllers.AdminSettleReservationChargesRequest
+  parent: HotelChain.Api.Controllers
+  href: HotelChain.Api.Controllers.AdminSettleReservationChargesRequest.html
+  name: AdminSettleReservationChargesRequest
+  nameWithType: AdminSettleReservationChargesRequest
+  fullName: HotelChain.Api.Controllers.AdminSettleReservationChargesRequest
+- uid: HotelChain.Api.Controllers.AdminReservationsController
+  commentId: T:HotelChain.Api.Controllers.AdminReservationsController
+  href: HotelChain.Api.Controllers.AdminReservationsController.html
+  name: AdminReservationsController
+  nameWithType: AdminReservationsController
+  fullName: HotelChain.Api.Controllers.AdminReservationsController
+- uid: HotelChain.Api.Controllers.AdminRoomInventoriesController
+  commentId: T:HotelChain.Api.Controllers.AdminRoomInventoriesController
+  href: HotelChain.Api.Controllers.AdminRoomInventoriesController.html
+  name: AdminRoomInventoriesController
+  nameWithType: AdminRoomInventoriesController
+  fullName: HotelChain.Api.Controllers.AdminRoomInventoriesController
+- uid: HotelChain.Api.Controllers.AdminRoomInventoriesController.GenerateInventoryHorizonRequest
+  commentId: T:HotelChain.Api.Controllers.AdminRoomInventoriesController.GenerateInventoryHorizonRequest
+  parent: HotelChain.Api.Controllers
+  href: HotelChain.Api.Controllers.AdminRoomInventoriesController.html
+  name: AdminRoomInventoriesController.GenerateInventoryHorizonRequest
+  nameWithType: AdminRoomInventoriesController.GenerateInventoryHorizonRequest
+  fullName: HotelChain.Api.Controllers.AdminRoomInventoriesController.GenerateInventoryHorizonRequest
+  spec.csharp:
+  - uid: HotelChain.Api.Controllers.AdminRoomInventoriesController
+    name: AdminRoomInventoriesController
+    href: HotelChain.Api.Controllers.AdminRoomInventoriesController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.AdminRoomInventoriesController.GenerateInventoryHorizonRequest
+    name: GenerateInventoryHorizonRequest
+    href: HotelChain.Api.Controllers.AdminRoomInventoriesController.GenerateInventoryHorizonRequest.html
+  spec.vb:
+  - uid: HotelChain.Api.Controllers.AdminRoomInventoriesController
+    name: AdminRoomInventoriesController
+    href: HotelChain.Api.Controllers.AdminRoomInventoriesController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.AdminRoomInventoriesController.GenerateInventoryHorizonRequest
+    name: GenerateInventoryHorizonRequest
+    href: HotelChain.Api.Controllers.AdminRoomInventoriesController.GenerateInventoryHorizonRequest.html
+- uid: HotelChain.Api.Controllers.AdminRoomInventoriesController.UpsertCommercialRulesRequest
+  commentId: T:HotelChain.Api.Controllers.AdminRoomInventoriesController.UpsertCommercialRulesRequest
+  parent: HotelChain.Api.Controllers
+  href: HotelChain.Api.Controllers.AdminRoomInventoriesController.html
+  name: AdminRoomInventoriesController.UpsertCommercialRulesRequest
+  nameWithType: AdminRoomInventoriesController.UpsertCommercialRulesRequest
+  fullName: HotelChain.Api.Controllers.AdminRoomInventoriesController.UpsertCommercialRulesRequest
+  spec.csharp:
+  - uid: HotelChain.Api.Controllers.AdminRoomInventoriesController
+    name: AdminRoomInventoriesController
+    href: HotelChain.Api.Controllers.AdminRoomInventoriesController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.AdminRoomInventoriesController.UpsertCommercialRulesRequest
+    name: UpsertCommercialRulesRequest
+    href: HotelChain.Api.Controllers.AdminRoomInventoriesController.UpsertCommercialRulesRequest.html
+  spec.vb:
+  - uid: HotelChain.Api.Controllers.AdminRoomInventoriesController
+    name: AdminRoomInventoriesController
+    href: HotelChain.Api.Controllers.AdminRoomInventoriesController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.AdminRoomInventoriesController.UpsertCommercialRulesRequest
+    name: UpsertCommercialRulesRequest
+    href: HotelChain.Api.Controllers.AdminRoomInventoriesController.UpsertCommercialRulesRequest.html
+- uid: HotelChain.Api.Controllers.AdminRoomsController
+  commentId: T:HotelChain.Api.Controllers.AdminRoomsController
+  href: HotelChain.Api.Controllers.AdminRoomsController.html
+  name: AdminRoomsController
+  nameWithType: AdminRoomsController
+  fullName: HotelChain.Api.Controllers.AdminRoomsController
+- uid: HotelChain.Api.Controllers.AdminUsersController
+  commentId: T:HotelChain.Api.Controllers.AdminUsersController
+  href: HotelChain.Api.Controllers.AdminUsersController.html
+  name: AdminUsersController
+  nameWithType: AdminUsersController
+  fullName: HotelChain.Api.Controllers.AdminUsersController
+- uid: HotelChain.Api.Controllers.AuthController
+  commentId: T:HotelChain.Api.Controllers.AuthController
+  href: HotelChain.Api.Controllers.AuthController.html
+  name: AuthController
+  nameWithType: AuthController
+  fullName: HotelChain.Api.Controllers.AuthController
+- uid: HotelChain.Api.Controllers.CitiesController
+  commentId: T:HotelChain.Api.Controllers.CitiesController
+  href: HotelChain.Api.Controllers.CitiesController.html
+  name: CitiesController
+  nameWithType: CitiesController
+  fullName: HotelChain.Api.Controllers.CitiesController
+- uid: HotelChain.Api.Controllers.HotelReviewsController
+  commentId: T:HotelChain.Api.Controllers.HotelReviewsController
+  href: HotelChain.Api.Controllers.HotelReviewsController.html
+  name: HotelReviewsController
+  nameWithType: HotelReviewsController
+  fullName: HotelChain.Api.Controllers.HotelReviewsController
+- uid: HotelChain.Api.Controllers.IntegrationController
+  commentId: T:HotelChain.Api.Controllers.IntegrationController
+  href: HotelChain.Api.Controllers.IntegrationController.html
+  name: IntegrationController
+  nameWithType: IntegrationController
+  fullName: HotelChain.Api.Controllers.IntegrationController
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  commentId: T:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  parent: HotelChain.Api.Controllers
+  href: HotelChain.Api.Controllers.IntegrationController.html
+  name: IntegrationController.IntegrationSearchRequest
+  nameWithType: IntegrationController.IntegrationSearchRequest
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  spec.csharp:
+  - uid: HotelChain.Api.Controllers.IntegrationController
+    name: IntegrationController
+    href: HotelChain.Api.Controllers.IntegrationController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+    name: IntegrationSearchRequest
+    href: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.html
+  spec.vb:
+  - uid: HotelChain.Api.Controllers.IntegrationController
+    name: IntegrationController
+    href: HotelChain.Api.Controllers.IntegrationController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+    name: IntegrationSearchRequest
+    href: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.html
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationCreateReservationRequest
+  commentId: T:HotelChain.Api.Controllers.IntegrationController.IntegrationCreateReservationRequest
+  parent: HotelChain.Api.Controllers
+  href: HotelChain.Api.Controllers.IntegrationController.html
+  name: IntegrationController.IntegrationCreateReservationRequest
+  nameWithType: IntegrationController.IntegrationCreateReservationRequest
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationCreateReservationRequest
+  spec.csharp:
+  - uid: HotelChain.Api.Controllers.IntegrationController
+    name: IntegrationController
+    href: HotelChain.Api.Controllers.IntegrationController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.IntegrationController.IntegrationCreateReservationRequest
+    name: IntegrationCreateReservationRequest
+    href: HotelChain.Api.Controllers.IntegrationController.IntegrationCreateReservationRequest.html
+  spec.vb:
+  - uid: HotelChain.Api.Controllers.IntegrationController
+    name: IntegrationController
+    href: HotelChain.Api.Controllers.IntegrationController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.IntegrationController.IntegrationCreateReservationRequest
+    name: IntegrationCreateReservationRequest
+    href: HotelChain.Api.Controllers.IntegrationController.IntegrationCreateReservationRequest.html
+- uid: HotelChain.Api.Controllers.PublicController
+  commentId: T:HotelChain.Api.Controllers.PublicController
+  href: HotelChain.Api.Controllers.PublicController.html
+  name: PublicController
+  nameWithType: PublicController
+  fullName: HotelChain.Api.Controllers.PublicController
+- uid: HotelChain.Api.Controllers.PublicHotelsController
+  commentId: T:HotelChain.Api.Controllers.PublicHotelsController
+  href: HotelChain.Api.Controllers.PublicHotelsController.html
+  name: PublicHotelsController
+  nameWithType: PublicHotelsController
+  fullName: HotelChain.Api.Controllers.PublicHotelsController
+- uid: HotelChain.Api.Controllers.ReservationsController
+  commentId: T:HotelChain.Api.Controllers.ReservationsController
+  href: HotelChain.Api.Controllers.ReservationsController.html
+  name: ReservationsController
+  nameWithType: ReservationsController
+  fullName: HotelChain.Api.Controllers.ReservationsController
+- uid: HotelChain.Api.Controllers.ReservationsController.CreateReservationRequest
+  commentId: T:HotelChain.Api.Controllers.ReservationsController.CreateReservationRequest
+  parent: HotelChain.Api.Controllers
+  href: HotelChain.Api.Controllers.ReservationsController.html
+  name: ReservationsController.CreateReservationRequest
+  nameWithType: ReservationsController.CreateReservationRequest
+  fullName: HotelChain.Api.Controllers.ReservationsController.CreateReservationRequest
+  spec.csharp:
+  - uid: HotelChain.Api.Controllers.ReservationsController
+    name: ReservationsController
+    href: HotelChain.Api.Controllers.ReservationsController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.ReservationsController.CreateReservationRequest
+    name: CreateReservationRequest
+    href: HotelChain.Api.Controllers.ReservationsController.CreateReservationRequest.html
+  spec.vb:
+  - uid: HotelChain.Api.Controllers.ReservationsController
+    name: ReservationsController
+    href: HotelChain.Api.Controllers.ReservationsController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.ReservationsController.CreateReservationRequest
+    name: CreateReservationRequest
+    href: HotelChain.Api.Controllers.ReservationsController.CreateReservationRequest.html
+- uid: HotelChain.Api.Controllers.ReservationsController.CheckoutRequest
+  commentId: T:HotelChain.Api.Controllers.ReservationsController.CheckoutRequest
+  parent: HotelChain.Api.Controllers
+  href: HotelChain.Api.Controllers.ReservationsController.html
+  name: ReservationsController.CheckoutRequest
+  nameWithType: ReservationsController.CheckoutRequest
+  fullName: HotelChain.Api.Controllers.ReservationsController.CheckoutRequest
+  spec.csharp:
+  - uid: HotelChain.Api.Controllers.ReservationsController
+    name: ReservationsController
+    href: HotelChain.Api.Controllers.ReservationsController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.ReservationsController.CheckoutRequest
+    name: CheckoutRequest
+    href: HotelChain.Api.Controllers.ReservationsController.CheckoutRequest.html
+  spec.vb:
+  - uid: HotelChain.Api.Controllers.ReservationsController
+    name: ReservationsController
+    href: HotelChain.Api.Controllers.ReservationsController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.ReservationsController.CheckoutRequest
+    name: CheckoutRequest
+    href: HotelChain.Api.Controllers.ReservationsController.CheckoutRequest.html
+- uid: HotelChain.Api.Controllers.ReservationsController.ChangeReservationDatesRequest
+  commentId: T:HotelChain.Api.Controllers.ReservationsController.ChangeReservationDatesRequest
+  parent: HotelChain.Api.Controllers
+  href: HotelChain.Api.Controllers.ReservationsController.html
+  name: ReservationsController.ChangeReservationDatesRequest
+  nameWithType: ReservationsController.ChangeReservationDatesRequest
+  fullName: HotelChain.Api.Controllers.ReservationsController.ChangeReservationDatesRequest
+  spec.csharp:
+  - uid: HotelChain.Api.Controllers.ReservationsController
+    name: ReservationsController
+    href: HotelChain.Api.Controllers.ReservationsController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.ReservationsController.ChangeReservationDatesRequest
+    name: ChangeReservationDatesRequest
+    href: HotelChain.Api.Controllers.ReservationsController.ChangeReservationDatesRequest.html
+  spec.vb:
+  - uid: HotelChain.Api.Controllers.ReservationsController
+    name: ReservationsController
+    href: HotelChain.Api.Controllers.ReservationsController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.ReservationsController.ChangeReservationDatesRequest
+    name: ChangeReservationDatesRequest
+    href: HotelChain.Api.Controllers.ReservationsController.ChangeReservationDatesRequest.html
+- uid: HotelChain.Api.Controllers.RoomTypesController
+  commentId: T:HotelChain.Api.Controllers.RoomTypesController
+  href: HotelChain.Api.Controllers.RoomTypesController.html
+  name: RoomTypesController
+  nameWithType: RoomTypesController
+  fullName: HotelChain.Api.Controllers.RoomTypesController
+- uid: HotelChain.Api.Controllers.SearchController
+  commentId: T:HotelChain.Api.Controllers.SearchController
+  href: HotelChain.Api.Controllers.SearchController.html
+  name: SearchController
+  nameWithType: SearchController
+  fullName: HotelChain.Api.Controllers.SearchController
+- uid: HotelChain.Api.Controllers.SearchController.SearchRequest
+  commentId: T:HotelChain.Api.Controllers.SearchController.SearchRequest
+  parent: HotelChain.Api.Controllers
+  href: HotelChain.Api.Controllers.SearchController.html
+  name: SearchController.SearchRequest
+  nameWithType: SearchController.SearchRequest
+  fullName: HotelChain.Api.Controllers.SearchController.SearchRequest
+  spec.csharp:
+  - uid: HotelChain.Api.Controllers.SearchController
+    name: SearchController
+    href: HotelChain.Api.Controllers.SearchController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.SearchController.SearchRequest
+    name: SearchRequest
+    href: HotelChain.Api.Controllers.SearchController.SearchRequest.html
+  spec.vb:
+  - uid: HotelChain.Api.Controllers.SearchController
+    name: SearchController
+    href: HotelChain.Api.Controllers.SearchController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.SearchController.SearchRequest
+    name: SearchRequest
+    href: HotelChain.Api.Controllers.SearchController.SearchRequest.html
+- uid: HotelChain.Api.Controllers.SearchController.SearchResultDto
+  commentId: T:HotelChain.Api.Controllers.SearchController.SearchResultDto
+  href: HotelChain.Api.Controllers.SearchController.html
+  name: SearchController.SearchResultDto
+  nameWithType: SearchController.SearchResultDto
+  fullName: HotelChain.Api.Controllers.SearchController.SearchResultDto
+  spec.csharp:
+  - uid: HotelChain.Api.Controllers.SearchController
+    name: SearchController
+    href: HotelChain.Api.Controllers.SearchController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.SearchController.SearchResultDto
+    name: SearchResultDto
+    href: HotelChain.Api.Controllers.SearchController.SearchResultDto.html
+  spec.vb:
+  - uid: HotelChain.Api.Controllers.SearchController
+    name: SearchController
+    href: HotelChain.Api.Controllers.SearchController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.SearchController.SearchResultDto
+    name: SearchResultDto
+    href: HotelChain.Api.Controllers.SearchController.SearchResultDto.html
+- uid: HotelChain.Api.Controllers.SearchController.SearchRestrictionMessageDto
+  commentId: T:HotelChain.Api.Controllers.SearchController.SearchRestrictionMessageDto
+  href: HotelChain.Api.Controllers.SearchController.html
+  name: SearchController.SearchRestrictionMessageDto
+  nameWithType: SearchController.SearchRestrictionMessageDto
+  fullName: HotelChain.Api.Controllers.SearchController.SearchRestrictionMessageDto
+  spec.csharp:
+  - uid: HotelChain.Api.Controllers.SearchController
+    name: SearchController
+    href: HotelChain.Api.Controllers.SearchController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.SearchController.SearchRestrictionMessageDto
+    name: SearchRestrictionMessageDto
+    href: HotelChain.Api.Controllers.SearchController.SearchRestrictionMessageDto.html
+  spec.vb:
+  - uid: HotelChain.Api.Controllers.SearchController
+    name: SearchController
+    href: HotelChain.Api.Controllers.SearchController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.SearchController.SearchRestrictionMessageDto
+    name: SearchRestrictionMessageDto
+    href: HotelChain.Api.Controllers.SearchController.SearchRestrictionMessageDto.html
+- uid: HotelChain.Api.Controllers.SearchController.SearchResponseDto
+  commentId: T:HotelChain.Api.Controllers.SearchController.SearchResponseDto
+  href: HotelChain.Api.Controllers.SearchController.html
+  name: SearchController.SearchResponseDto
+  nameWithType: SearchController.SearchResponseDto
+  fullName: HotelChain.Api.Controllers.SearchController.SearchResponseDto
+  spec.csharp:
+  - uid: HotelChain.Api.Controllers.SearchController
+    name: SearchController
+    href: HotelChain.Api.Controllers.SearchController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.SearchController.SearchResponseDto
+    name: SearchResponseDto
+    href: HotelChain.Api.Controllers.SearchController.SearchResponseDto.html
+  spec.vb:
+  - uid: HotelChain.Api.Controllers.SearchController
+    name: SearchController
+    href: HotelChain.Api.Controllers.SearchController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.SearchController.SearchResponseDto
+    name: SearchResponseDto
+    href: HotelChain.Api.Controllers.SearchController.SearchResponseDto.html
+- uid: HotelChain.Api.Controllers.UserReservationsController
+  commentId: T:HotelChain.Api.Controllers.UserReservationsController
+  href: HotelChain.Api.Controllers.UserReservationsController.html
+  name: UserReservationsController
+  nameWithType: UserReservationsController
+  fullName: HotelChain.Api.Controllers.UserReservationsController
+- uid: HotelChain.Api.Controllers.WsReservationsController
+  commentId: T:HotelChain.Api.Controllers.WsReservationsController
+  href: HotelChain.Api.Controllers.WsReservationsController.html
+  name: WsReservationsController
+  nameWithType: WsReservationsController
+  fullName: HotelChain.Api.Controllers.WsReservationsController
+- uid: HotelChain.Api.Controllers.WsReservationsController.CreateWsReservationRequest
+  commentId: T:HotelChain.Api.Controllers.WsReservationsController.CreateWsReservationRequest
+  parent: HotelChain.Api.Controllers
+  href: HotelChain.Api.Controllers.WsReservationsController.html
+  name: WsReservationsController.CreateWsReservationRequest
+  nameWithType: WsReservationsController.CreateWsReservationRequest
+  fullName: HotelChain.Api.Controllers.WsReservationsController.CreateWsReservationRequest
+  spec.csharp:
+  - uid: HotelChain.Api.Controllers.WsReservationsController
+    name: WsReservationsController
+    href: HotelChain.Api.Controllers.WsReservationsController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.WsReservationsController.CreateWsReservationRequest
+    name: CreateWsReservationRequest
+    href: HotelChain.Api.Controllers.WsReservationsController.CreateWsReservationRequest.html
+  spec.vb:
+  - uid: HotelChain.Api.Controllers.WsReservationsController
+    name: WsReservationsController
+    href: HotelChain.Api.Controllers.WsReservationsController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.WsReservationsController.CreateWsReservationRequest
+    name: CreateWsReservationRequest
+    href: HotelChain.Api.Controllers.WsReservationsController.CreateWsReservationRequest.html
+- uid: HotelChain.Api.Controllers.WsSearchController
+  commentId: T:HotelChain.Api.Controllers.WsSearchController
+  href: HotelChain.Api.Controllers.WsSearchController.html
+  name: WsSearchController
+  nameWithType: WsSearchController
+  fullName: HotelChain.Api.Controllers.WsSearchController
+- uid: HotelChain.Api.Controllers.WsSearchController.SearchRequest
+  commentId: T:HotelChain.Api.Controllers.WsSearchController.SearchRequest
+  parent: HotelChain.Api.Controllers
+  href: HotelChain.Api.Controllers.WsSearchController.html
+  name: WsSearchController.SearchRequest
+  nameWithType: WsSearchController.SearchRequest
+  fullName: HotelChain.Api.Controllers.WsSearchController.SearchRequest
+  spec.csharp:
+  - uid: HotelChain.Api.Controllers.WsSearchController
+    name: WsSearchController
+    href: HotelChain.Api.Controllers.WsSearchController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.WsSearchController.SearchRequest
+    name: SearchRequest
+    href: HotelChain.Api.Controllers.WsSearchController.SearchRequest.html
+  spec.vb:
+  - uid: HotelChain.Api.Controllers.WsSearchController
+    name: WsSearchController
+    href: HotelChain.Api.Controllers.WsSearchController.html
+  - name: .
+  - uid: HotelChain.Api.Controllers.WsSearchController.SearchRequest
+    name: SearchRequest
+    href: HotelChain.Api.Controllers.WsSearchController.SearchRequest.html
+- uid: HotelChain.Api.Controllers
+  commentId: N:HotelChain.Api.Controllers
+  href: HotelChain.html
+  name: HotelChain.Api.Controllers
+  nameWithType: HotelChain.Api.Controllers
+  fullName: HotelChain.Api.Controllers
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Controllers
+    name: Controllers
+    href: HotelChain.Api.Controllers.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Controllers
+    name: Controllers
+    href: HotelChain.Api.Controllers.html

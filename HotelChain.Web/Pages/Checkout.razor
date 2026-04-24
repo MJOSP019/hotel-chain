@@ -5,89 +5,96 @@
 @inject IJSRuntime JS
 @inject NavigationManager Nav
 
-@* 
-   Componente encargado del flujo de checkout y gestión de reservaciones.
-   Permite consultar estado, confirmar pago demo, abrir PDF y cancelar
-   siempre que se cumplan las reglas del negocio.
-*@
-
 <PageTitle>Checkout</PageTitle>
 
-<div class="checkout-page">
-    <section class="checkout-hero">
-        <div class="checkout-hero__content">
-            <div class="checkout-badge">Checkout · Reservación</div>
-            <h1>Gestiona tu reservación</h1>
+<div class="checkout-premium-page">
+    <section class="checkout-premium-hero">
+        <div class="checkout-premium-hero__overlay"></div>
+        <div class="checkout-premium-hero__content">
+            <div class="checkout-premium-hero__eyebrow">Checkout · Reservación</div>
+            <h1>Completa y gestiona tu reservación</h1>
             <p>
-                Consulta el estado actual de tu reservación, realiza el pago demo, descarga el PDF
-                y, si aplica, cancela la reservación según las reglas ya implementadas en el sistema.
+                Consulta el estado actual de tu reserva, revisa la cuenta de estancia, confirma el pago demo
+                y descarga tu comprobante en PDF desde una experiencia más clara y orientada a operación hotelera.
             </p>
 
-            <div class="checkout-hero__actions">
-                <a class="btn checkout-btn-secondary" href="/my-reservations">Mis reservaciones</a>
-                <a class="btn checkout-btn-outline" href="/search">Buscar habitaciones</a>
+            <div class="checkout-premium-hero__actions">
+                <a class="btn checkout-premium-btn checkout-premium-btn--light" href="/my-reservations">Mis reservaciones</a>
+                <a class="btn checkout-premium-btn checkout-premium-btn--ghost" href="/search">Buscar habitaciones</a>
             </div>
         </div>
     </section>
 
     @if (!string.IsNullOrWhiteSpace(error))
     {
-        <div class="alert alert-danger checkout-alert">@error</div>
+        <div class="alert alert-danger checkout-premium-alert">@error</div>
     }
 
     @if (!string.IsNullOrWhiteSpace(success))
     {
-        <div class="alert alert-success checkout-alert">@success</div>
+        <div class="alert alert-success checkout-premium-alert">@success</div>
     }
 
-    <div class="checkout-grid">
-        <section class="checkout-card">
-            <div class="checkout-card__header">
-                <div>
-                    <h3>Reservación</h3>
-                    <p>Ingresa el código y consulta el estado actual.</p>
+    <div class="checkout-premium-shell">
+        <section class="checkout-premium-main">
+            <article class="checkout-panel">
+                <div class="checkout-panel__header">
+                    <div>
+                        <div class="checkout-panel__eyebrow">Consulta de reservación</div>
+                        <h2>Encuentra tu reserva</h2>
+                        <p>Ingresa el código generado al momento de reservar para ver el estado actualizado.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="mb-3">
-                <label class="checkout-label">Código de reservación</label>
-                <input class="form-control checkout-input" @bind="code" placeholder="R-20260305-XXXXXX" />
-                <small class="text-muted">Este código se genera al reservar.</small>
-            </div>
+                <div class="checkout-lookup-grid">
+                    <div class="checkout-field checkout-field--wide">
+                        <label class="checkout-label">Código de reservación</label>
+                        <input class="form-control checkout-input" @bind="code" placeholder="R-20260305-XXXXXX" />
+                        <small class="text-muted">Este código se genera automáticamente al confirmar la reserva.</small>
+                    </div>
+                </div>
 
-            <div class="checkout-actions">
-                <button type="button" class="btn checkout-btn-secondary" @onclick="LoadReservation">
-                    @(isLoadingStatus ? "Cargando..." : "Cargar estado")
-                </button>
+                <div class="checkout-inline-actions">
+                    <button type="button" class="btn checkout-premium-btn checkout-premium-btn--primary" @onclick="LoadReservation">
+                        @(isLoadingStatus ? "Cargando..." : "Cargar estado")
+                    </button>
 
-                <button type="button" class="btn checkout-btn-outline" @onclick="OpenPdf">
-                    @(isDownloadingPdf ? "Abriendo..." : "Ver PDF")
-                </button>
-            </div>
+                    <button type="button" class="btn checkout-premium-btn checkout-premium-btn--secondary" @onclick="OpenPdf" disabled="@isDownloadingPdf">
+                        @(isDownloadingPdf ? "Abriendo..." : "Ver PDF")
+                    </button>
+                </div>
+            </article>
 
-            @if (reservation != null)
+            @if (reservation is not null)
             {
-                <div class="reservation-status-card mt-4">
-                    <div class="reservation-status-card__top">
+                <article class="checkout-panel reservation-overview-panel">
+                    <div class="reservation-overview__top">
                         <div>
-                            <div class="reservation-status-card__eyebrow">Resumen</div>
-                            <h4>@reservation.Code</h4>
+                            <div class="checkout-panel__eyebrow">Resumen actual</div>
+                            <h2>@reservation.Code</h2>
+                            <p>
+                                Consulta el estado, los importes de la reserva y la cuenta acumulada de la estancia.
+                            </p>
                         </div>
-
-                        <div class="@GetStatusBadgeClass(reservation.Status)">
-                            @reservation.Status
-                        </div>
+                        <div class="@GetStatusBadgeClass(reservation.Status)">@reservation.Status</div>
                     </div>
 
-                    <div class="reservation-status-card__body">
-                        <div class="status-feature">
-                            <span class="status-feature__label">Estado</span>
+                    <div class="reservation-overview__grid">
+                        <div class="reservation-kpi">
+                            <span>Estado</span>
                             <strong>@reservation.Status</strong>
                         </div>
-
-                        <div class="status-feature">
-                            <span class="status-feature__label">Total</span>
-                            <strong>Q @reservation.TotalAmount.ToString("0.00")</strong>
+                        <div class="reservation-kpi">
+                            <span>Base</span>
+                            <strong>Q @reservation.BaseAmount.ToString("0.00")</strong>
+                        </div>
+                        <div class="reservation-kpi">
+                            <span>Cargos</span>
+                            <strong>Q @reservation.ChargesTotal.ToString("0.00")</strong>
+                        </div>
+                        <div class="reservation-kpi reservation-kpi--accent">
+                            <span>Total final</span>
+                            <strong>Q @reservation.GrandTotal.ToString("0.00")</strong>
                         </div>
                     </div>
 
@@ -98,188 +105,581 @@
                         </div>
                     }
 
-                    @if (IsPendingOrConfirmed(reservation.Status))
+                    @if (reservation.Charges is not null && reservation.Charges.Count > 0)
                     {
-                        <div class="reservation-status-card__footer">
-                            <button type="button"
-                                    class="btn checkout-btn-danger"
-                                    @onclick="ToggleCancelSection"
-                                    disabled="@(!CanExecuteTimeRestrictedAction(reservation) || isCancelling)"
-                                    title="@GetTimeRestrictedActionTitle(reservation)">
-                                @(isCancelling ? "Cancelando..." : "Cancelar reservación")
-                            </button>
+                        <div class="stay-account mt-4">
+                            <div class="stay-account__header">
+                                <div>
+                                    <div class="checkout-panel__eyebrow">Cuenta de estancia</div>
+                                    <h3>Cargos registrados</h3>
+                                </div>
+                                <div class="stay-account__total">Q @reservation.ChargesTotal.ToString("0.00")</div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table checkout-premium-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Categoría</th>
+                                            <th>Descripción</th>
+                                            <th>Monto</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var charge in reservation.Charges)
+                                        {
+                                            <tr>
+                                                <td>@charge.Category</td>
+                                                <td>@charge.Description</td>
+                                                <td>Q @charge.Amount.ToString("0.00")</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     }
-                </div>
+                </article>
             }
 
             @if (showCancelSection)
             {
-                <div class="cancel-card mt-4">
-                    <h5>Cancelar reservación</h5>
+                <article class="checkout-panel cancel-panel">
+                    <div class="checkout-panel__header">
+                        <div>
+                            <div class="checkout-panel__eyebrow">Cancelación</div>
+                            <h2>Cancelar reservación</h2>
+                            <p>Ingresa un motivo para registrar correctamente la solicitud.</p>
+                        </div>
+                    </div>
 
-                    <div class="mb-3">
-                        <label class="checkout-label">Razón</label>
+                    <div class="checkout-field">
+                        <label class="checkout-label">Motivo</label>
                         <textarea class="form-control checkout-input" rows="4" @bind="cancelReason"></textarea>
                     </div>
 
-                    <div class="checkout-actions">
+                    <div class="checkout-inline-actions mt-4">
                         <button type="button"
-                                class="btn checkout-btn-danger"
+                                class="btn checkout-premium-btn checkout-premium-btn--danger"
                                 @onclick="CancelReservation"
                                 disabled="@isCancelling">
                             @(isCancelling ? "Cancelando..." : "Confirmar cancelación")
                         </button>
 
                         <button type="button"
-                                class="btn checkout-btn-secondary"
+                                class="btn checkout-premium-btn checkout-premium-btn--secondary"
                                 @onclick="CloseCancelSection"
                                 disabled="@isCancelling">
                             Cerrar
                         </button>
                     </div>
-                </div>
+                </article>
             }
         </section>
 
-        <section class="checkout-card">
-            <div class="checkout-card__header">
-                <div>
-                    <h3>Pago demo</h3>
-                    <p>Completa los datos simulados para confirmar la reservación.</p>
-                </div>
-            </div>
+        <aside class="checkout-premium-sidebar">
+            <article class="checkout-sidebar-card checkout-sidebar-card--summary">
+                <div class="checkout-panel__eyebrow">Estado de la reserva</div>
+                <h3>@(string.IsNullOrWhiteSpace(code) ? "Sin código cargado" : code)</h3>
 
-            <div class="row g-3">
-                <div class="col-12">
-                    <label class="checkout-label">Número de tarjeta</label>
-                    <input class="form-control checkout-input" @bind="cardNumber" placeholder="4111111111111111" />
-                </div>
-
-                <div class="col-md-4">
-                    <label class="checkout-label">CVV</label>
-                    <input class="form-control checkout-input" @bind="cvv" placeholder="123" />
-                </div>
-
-                <div class="col-md-8">
-                    <label class="checkout-label">Nombre en tarjeta</label>
-                    <input class="form-control checkout-input" @bind="cardHolder" placeholder="Josue Pineda" />
+                <div class="sidebar-summary-grid">
+                    <div>
+                        <span>Base</span>
+                        <strong>Q @(reservation?.BaseAmount.ToString("0.00") ?? "0.00")</strong>
+                    </div>
+                    <div>
+                        <span>Cargos</span>
+                        <strong>Q @(reservation?.ChargesTotal.ToString("0.00") ?? "0.00")</strong>
+                    </div>
+                    <div class="sidebar-summary-grid__wide">
+                        <span>Total final</span>
+                        <strong>Q @(reservation?.GrandTotal.ToString("0.00") ?? "0.00")</strong>
+                    </div>
                 </div>
 
-                <div class="col-12">
-                    <label class="checkout-label">Dirección de cobro</label>
-                    <input class="form-control checkout-input" @bind="billingAddress" placeholder="Ciudad de Guatemala" />
+                <div class="checkout-sidebar-card__status">
+                    Estado actual: <strong>@(reservation?.Status ?? "Sin consultar")</strong>
                 </div>
-            </div>
+            </article>
 
-            <div class="checkout-actions mt-4">
-                <button type="button"
-                        class="btn checkout-btn-primary"
-                        @onclick="DoCheckout"
-                        disabled="@(isPaying || IsCanceled(reservation?.Status) || isPaid)">
-                    @(isPaying ? "Procesando..." : (isPaid ? "Pagado" : "Pagar y confirmar"))
-                </button>
+            <article class="checkout-sidebar-card">
+                <div class="checkout-panel__eyebrow">Pago demo</div>
+                <h3>Información de pago</h3>
 
-                @if (isPaid)
+                @if (CanShowPaymentSection(reservation))
                 {
-                    <button class="btn checkout-btn-outline" @onclick="OpenPdf" disabled="@isDownloadingPdf">
-                        @(isDownloadingPdf ? "Abriendo..." : "Descargar PDF")
-                    </button>
+                    <p>Completa los datos simulados para confirmar una reserva PENDING.</p>
 
-                    <a class="btn checkout-btn-secondary" href="/my-reservations">Mis reservaciones</a>
+                    <div class="checkout-payment-grid">
+                        <div class="checkout-field checkout-field--wide">
+                            <label class="checkout-label">Número de tarjeta</label>
+                            <input class="form-control checkout-input" @bind="cardNumber" placeholder="4111111111111111" />
+                        </div>
+
+                        <div class="checkout-field">
+                            <label class="checkout-label">CVV</label>
+                            <input class="form-control checkout-input" @bind="cvv" placeholder="123" />
+                        </div>
+
+                        <div class="checkout-field checkout-field--wide">
+                            <label class="checkout-label">Nombre en tarjeta</label>
+                            <input class="form-control checkout-input" @bind="cardHolder" placeholder="Josue Pineda" />
+                        </div>
+
+                        <div class="checkout-field checkout-field--wide">
+                            <label class="checkout-label">Dirección de cobro</label>
+                            <input class="form-control checkout-input" @bind="billingAddress" placeholder="Ciudad de Guatemala" />
+                        </div>
+                    </div>
+
+                    <div class="checkout-sidebar-actions">
+                        <button type="button"
+                                class="btn checkout-premium-btn checkout-premium-btn--primary"
+                                @onclick="DoCheckout"
+                                disabled="@(isPaying || !CanPayReservation(reservation) || isPaid)">
+                            @(isPaying ? "Procesando..." : (isPaid ? "Pagado" : "Pagar y confirmar"))
+                        </button>
+
+                        @if (isPaid)
+                        {
+                            <button class="btn checkout-premium-btn checkout-premium-btn--secondary" @onclick="OpenPdf" disabled="@isDownloadingPdf">
+                                @(isDownloadingPdf ? "Abriendo..." : "Descargar PDF")
+                            </button>
+                        }
+                    </div>
                 }
-            </div>
+                else if (reservation is not null && IsExpired(reservation.Status))
+                {
+                    <p class="checkout-state-message">Esta reservación expiró por inactividad y ya no puede pagarse. Debes crear una nueva reservación.</p>
+                }
+                else if (reservation is not null && IsCanceled(reservation.Status))
+                {
+                    <p class="checkout-state-message">Esta reservación fue cancelada y ya no admite pago.</p>
+                }
+                else if (reservation is not null)
+                {
+                    <p class="checkout-state-message">El pago ya no está disponible para el estado actual de esta reservación.</p>
+                }
+                else
+                {
+                    <p class="checkout-state-message">Carga una reservación para ver si el pago está disponible.</p>
+                }
+            </article>
 
-            <div class="checkout-note mt-4">
-                <div class="checkout-note__label">Nota</div>
-                <p>
-                    Este formulario usa el flujo demo ya existente. La confirmación real depende del estado
-                    actual de la reservación y de que el backend acepte el checkout.
-                </p>
-            </div>
-        </section>
+            <article class="checkout-sidebar-card">
+                <div class="checkout-panel__eyebrow">Política operativa</div>
+                <h3>Notas importantes</h3>
+                <ul class="checkout-notes-list">
+                    <li>Las reservas pendientes se confirman mediante el flujo demo de pago existente.</li>
+                    <li>La cancelación pública solo aplica si faltan más de 24 horas para el check-in.</li>
+                    <li>Los cargos de estancia reflejan consumos registrados durante la operación hotelera.</li>
+                    <li>Después del check-out, el PDF sigue disponible como comprobante de la reservación.</li>
+                </ul>
+
+                @if (reservation is not null && IsPendingOrConfirmed(reservation.Status))
+                {
+                    <button type="button"
+                            class="btn checkout-premium-btn checkout-premium-btn--danger checkout-sidebar-card__danger"
+                            @onclick="ToggleCancelSection"
+                            disabled="@(!CanExecuteTimeRestrictedAction(reservation) || isCancelling)"
+                            title="@GetTimeRestrictedActionTitle(reservation)">
+                        @(isCancelling ? "Cancelando..." : "Cancelar reservación")
+                    </button>
+                }
+            </article>
+        </aside>
     </div>
 </div>
 
+<style>
+    .checkout-premium-page {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem 3rem;
+    }
+
+    .checkout-premium-hero {
+        position: relative;
+        overflow: hidden;
+        border-radius: 30px;
+        min-height: 320px;
+        background:
+            linear-gradient(110deg, rgba(9, 18, 36, 0.92) 0%, rgba(9, 18, 36, 0.76) 42%, rgba(9, 18, 36, 0.35) 100%),
+            url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
+        margin-bottom: 1.5rem;
+    }
+
+    .checkout-premium-hero__content {
+        position: relative;
+        z-index: 1;
+        max-width: 720px;
+        padding: 2.6rem 2.4rem 2.8rem;
+        color: #fff;
+    }
+
+    .checkout-premium-hero__eyebrow,
+    .checkout-panel__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.16);
+        color: #fff;
+        padding: 0.35rem 0.7rem;
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 0.85rem;
+    }
+
+    .checkout-panel__eyebrow {
+        background: #eef2ff;
+        color: #1e3a8a;
+    }
+
+    .checkout-premium-hero h1 {
+        font-size: clamp(2.3rem, 5vw, 4rem);
+        line-height: 0.98;
+        font-weight: 900;
+        margin: 0 0 1rem;
+        letter-spacing: -0.03em;
+    }
+
+    .checkout-premium-hero p {
+        font-size: 1.04rem;
+        line-height: 1.8;
+        max-width: 650px;
+        color: rgba(255,255,255,0.92);
+        margin-bottom: 1.5rem;
+    }
+
+    .checkout-premium-hero__actions,
+    .checkout-inline-actions,
+    .checkout-sidebar-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .checkout-premium-btn {
+        border-radius: 999px;
+        padding: 0.82rem 1.2rem;
+        font-weight: 700;
+        border: none;
+        box-shadow: none;
+    }
+
+    .checkout-premium-btn--primary {
+        background: #0f172a;
+        color: #fff;
+    }
+
+    .checkout-premium-btn--primary:hover,
+    .checkout-premium-btn--danger:hover {
+        color: #fff;
+        opacity: .96;
+    }
+
+    .checkout-premium-btn--secondary {
+        background: #fff;
+        color: #0f172a;
+        border: 1px solid #cbd5e1;
+    }
+
+    .checkout-premium-btn--light {
+        background: #fff;
+        color: #0f172a;
+        border: 1px solid transparent;
+    }
+
+    .checkout-premium-btn--ghost {
+        background: transparent;
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.36);
+    }
+
+    .checkout-premium-btn--danger {
+        background: #b91c1c;
+        color: #fff;
+    }
+
+    .checkout-premium-alert {
+        border-radius: 18px;
+        margin-bottom: 1rem;
+    }
+
+    .checkout-premium-shell {
+        display: grid;
+        grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.95fr);
+        gap: 1.25rem;
+        align-items: start;
+    }
+
+    .checkout-premium-main,
+    .checkout-premium-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .checkout-panel,
+    .checkout-sidebar-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 28px;
+        padding: 1.5rem;
+        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.06);
+    }
+
+    .checkout-panel__header {
+        margin-bottom: 1.1rem;
+    }
+
+    .checkout-panel__header h2,
+    .reservation-overview__top h2,
+    .checkout-sidebar-card h3 {
+        margin: 0;
+        color: #0f172a;
+        font-weight: 800;
+    }
+
+    .checkout-panel__header p,
+    .reservation-overview__top p,
+    .checkout-sidebar-card p {
+        margin: 0.45rem 0 0;
+        color: #64748b;
+        line-height: 1.7;
+    }
+
+    .checkout-lookup-grid,
+    .checkout-payment-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+
+    .checkout-state-message {
+        margin: 0;
+        padding: 1rem 1.1rem;
+        border-radius: 16px;
+        background: rgba(15, 23, 42, 0.05);
+        color: #334155;
+        line-height: 1.6;
+    }
+
+    .checkout-field--wide { grid-column: 1 / -1; }
+
+    .checkout-label {
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #475569;
+        margin-bottom: 0.45rem;
+    }
+
+    .checkout-input {
+        min-height: 52px;
+        border-radius: 16px;
+        border: 1px solid #cbd5e1;
+        background: rgba(255,255,255,0.96);
+    }
+
+    .reservation-overview__top {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .reservation-overview__grid,
+    .sidebar-summary-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.9rem;
+        margin-top: 1.15rem;
+    }
+
+    .reservation-kpi,
+    .sidebar-summary-grid > div {
+        background: rgba(255,255,255,0.88);
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 0.95rem 1rem;
+    }
+
+    .reservation-kpi span,
+    .sidebar-summary-grid span,
+    .checkout-sidebar-card__status {
+        display: block;
+        color: #64748b;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 700;
+        margin-bottom: 0.28rem;
+    }
+
+    .reservation-kpi strong,
+    .sidebar-summary-grid strong {
+        font-size: 1.1rem;
+        color: #0f172a;
+    }
+
+    .reservation-kpi--accent,
+    .sidebar-summary-grid__wide {
+        grid-column: 1 / -1;
+        background: linear-gradient(180deg, #eff6ff 0%, #e0ecff 100%);
+        border-color: #bfdbfe;
+    }
+
+    .stay-account__header {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: center;
+        margin-bottom: 0.9rem;
+    }
+
+    .stay-account__header h3 {
+        margin: 0;
+        color: #0f172a;
+        font-weight: 800;
+    }
+
+    .stay-account__total {
+        font-size: 1.25rem;
+        font-weight: 900;
+        color: #0f172a;
+    }
+
+    .checkout-premium-table {
+        margin-bottom: 0;
+    }
+
+    .checkout-premium-table thead th {
+        border-bottom: 1px solid #cbd5e1;
+        color: #475569;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .checkout-premium-table tbody td {
+        vertical-align: middle;
+    }
+
+    .checkout-sidebar-card--summary {
+        background: linear-gradient(180deg, #0f172a 0%, #172554 100%);
+        color: #fff;
+        border: none;
+    }
+
+    .checkout-sidebar-card--summary .checkout-panel__eyebrow {
+        background: rgba(255,255,255,0.14);
+        color: #fff;
+    }
+
+    .checkout-sidebar-card--summary h3,
+    .checkout-sidebar-card--summary strong,
+    .checkout-sidebar-card__status strong {
+        color: #fff;
+    }
+
+    .checkout-sidebar-card--summary p,
+    .checkout-sidebar-card--summary span,
+    .checkout-sidebar-card__status {
+        color: rgba(255,255,255,0.8);
+    }
+
+    .checkout-sidebar-card__status {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .checkout-notes-list {
+        margin: 0;
+        padding-left: 1.1rem;
+        color: #334155;
+    }
+
+    .checkout-notes-list li {
+        margin-bottom: 0.7rem;
+        line-height: 1.65;
+    }
+
+    .checkout-sidebar-card__danger {
+        margin-top: 0.4rem;
+        width: 100%;
+    }
+
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.48rem 0.82rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.03em;
+    }
+
+    .status-badge--pending { background: #fef3c7; color: #92400e; }
+    .status-badge--confirmed { background: #dcfce7; color: #166534; }
+    .status-badge--cancelled { background: #fee2e2; color: #991b1b; }
+    .status-badge--default { background: #e2e8f0; color: #334155; }
+
+    @@media (max-width: 1100px) {
+        .checkout-premium-shell {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .checkout-premium-page {
+            padding: 1rem 0.85rem 2rem;
+        }
+
+        .checkout-premium-hero__content {
+            padding: 2rem 1.25rem 2.2rem;
+        }
+
+        .checkout-lookup-grid,
+        .checkout-payment-grid,
+        .reservation-overview__grid,
+        .sidebar-summary-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .reservation-overview__top,
+        .stay-account__header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>
+
 @code {
-    /// <summary>
-    /// Indica si la reservación actual ya se encuentra pagada.
-    /// </summary>
     bool isPaid;
-
-    /// <summary>
-    /// Indica si se está consultando el estado de la reservación.
-    /// </summary>
     bool isLoadingStatus;
-
-    /// <summary>
-    /// Indica si el checkout está en proceso.
-    /// </summary>
     bool isPaying;
-
-    /// <summary>
-    /// Indica si se está generando o abriendo el PDF.
-    /// </summary>
     bool isDownloadingPdf;
-
-    /// <summary>
-    /// Código de reservación ingresado por el usuario.
-    /// </summary>
     string code = "";
-
-    /// <summary>
-    /// Número de tarjeta usado en el flujo demo de pago.
-    /// </summary>
     string cardNumber = "4111111111111111";
-
-    /// <summary>
-    /// CVV usado en el flujo demo de pago.
-    /// </summary>
     string cvv = "123";
-
-    /// <summary>
-    /// Nombre del titular de la tarjeta.
-    /// </summary>
     string cardHolder = "";
-
-    /// <summary>
-    /// Dirección de cobro registrada durante el checkout.
-    /// </summary>
     string billingAddress = "";
-
-    /// <summary>
-    /// Mensaje de error mostrado en pantalla.
-    /// </summary>
     string? error;
-
-    /// <summary>
-    /// Mensaje de éxito mostrado en pantalla.
-    /// </summary>
     string? success;
-
-    /// <summary>
-    /// Indica si la sección de cancelación está visible.
-    /// </summary>
     bool showCancelSection;
-
-    /// <summary>
-    /// Razón de cancelación ingresada por el usuario.
-    /// </summary>
     string cancelReason = "";
-
-    /// <summary>
-    /// Indica si la cancelación está en proceso.
-    /// </summary>
     bool isCancelling;
-
-    /// <summary>
-    /// Reservación actualmente cargada en pantalla.
-    /// </summary>
     ReservationDto? reservation;
 
-    /// <summary>
-    /// Inicializa el componente leyendo el código desde el query string si existe.
-    /// </summary>
     protected override async Task OnInitializedAsync()
     {
         var uri = Nav.ToAbsoluteUri(Nav.Uri);
@@ -291,9 +691,6 @@
             await LoadReservation();
     }
 
-    /// <summary>
-    /// Consulta el estado actual de una reservación usando su código.
-    /// </summary>
     async Task LoadReservation()
     {
         error = null;
@@ -331,6 +728,21 @@
                     isPaid = true;
                     success = "✅ Esta reservación ya está confirmada.";
                 }
+                else if (status == "CHECKED_IN")
+                {
+                    isPaid = true;
+                    success = "🏨 El huésped ya realizó check-in.";
+                }
+                else if (status == "CHECKED_OUT")
+                {
+                    isPaid = true;
+                    success = "✅ La estancia ya fue cerrada con check-out.";
+                }
+                else if (status == "NO_SHOW")
+                {
+                    isPaid = true;
+                    success = "ℹ️ Esta reservación fue marcada como no-show.";
+                }
                 else if (status == "CANCELED" || status == "CANCELLED")
                 {
                     isPaid = false;
@@ -356,9 +768,6 @@
         }
     }
 
-    /// <summary>
-    /// Ejecuta el flujo demo de checkout para confirmar una reservación pendiente.
-    /// </summary>
     async Task DoCheckout()
     {
         error = null;
@@ -426,9 +835,6 @@
         }
     }
 
-    /// <summary>
-    /// Solicita el PDF de la reservación y lo abre en el navegador.
-    /// </summary>
     async Task OpenPdf()
     {
         error = null;
@@ -464,7 +870,6 @@
 
             var bytes = await resp.Content.ReadAsByteArrayAsync();
             var base64 = Convert.ToBase64String(bytes);
-
             await JS.InvokeVoidAsync("openPdfBase64", base64);
         }
         catch (Exception ex)
@@ -477,9 +882,6 @@
         }
     }
 
-    /// <summary>
-    /// Muestra u oculta la sección de cancelación si la reservación todavía lo permite.
-    /// </summary>
     void ToggleCancelSection()
     {
         if (reservation is null || !CanExecuteTimeRestrictedAction(reservation))
@@ -490,18 +892,12 @@
             cancelReason = "";
     }
 
-    /// <summary>
-    /// Cierra la sección de cancelación y limpia el motivo ingresado.
-    /// </summary>
     void CloseCancelSection()
     {
         showCancelSection = false;
         cancelReason = "";
     }
 
-    /// <summary>
-    /// Cancela la reservación actual si todavía cumple la regla de tiempo.
-    /// </summary>
     async Task CancelReservation()
     {
         error = null;
@@ -562,56 +958,66 @@
         }
     }
 
-    /// <summary>
-    /// DTO local con la información mínima de una reservación para el checkout.
-    /// </summary>
     private class ReservationDto
     {
         public string? Code { get; set; }
         public string? Status { get; set; }
+        public decimal BaseAmount { get; set; }
+        public decimal ChargesTotal { get; set; }
+        public decimal GrandTotal { get; set; }
         public decimal TotalAmount { get; set; }
         public DateTime CheckIn { get; set; }
+        public List<ReservationChargeDto> Charges { get; set; } = new();
     }
 
-    /// <summary>
-    /// Determina si una reservación está en estado pendiente o confirmado.
-    /// </summary>
+    private class ReservationChargeDto
+    {
+        public int Id { get; set; }
+        public string Category { get; set; } = "";
+        public string Description { get; set; } = "";
+        public decimal Amount { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public string? CreatedBy { get; set; }
+    }
+
     private static bool IsPendingOrConfirmed(string? status)
     {
         var normalized = (status ?? "").ToUpperInvariant();
         return normalized == "PENDING" || normalized == "CONFIRMED";
     }
 
-    /// <summary>
-    /// Determina si una reservación está cancelada.
-    /// </summary>
     private static bool IsCanceled(string? status)
     {
         var normalized = (status ?? "").ToUpperInvariant();
         return normalized == "CANCELED" || normalized == "CANCELLED";
     }
 
-    /// <summary>
-    /// Valida si una acción restringida por tiempo todavía puede ejecutarse
-    /// según la regla de 24 horas antes del check-in.
-    /// </summary>
-    private static bool CanExecuteTimeRestrictedAction(ReservationDto reservation)
+    private static bool IsExpired(string? status)
     {
-        return DateTime.UtcNow <= reservation.CheckIn.AddHours(-24);
+        return (status ?? "").ToUpperInvariant() == "EXPIRED";
     }
 
-    /// <summary>
-    /// Determina si se debe mostrar una advertencia de tiempo en la vista.
-    /// </summary>
+    private static bool CanPayReservation(ReservationDto? reservation)
+    {
+        return reservation is not null && (reservation.Status ?? "").ToUpperInvariant() == "PENDING";
+    }
+
+    private static bool CanShowPaymentSection(ReservationDto? reservation)
+    {
+        return reservation is null || CanPayReservation(reservation);
+    }
+
+    private static bool CanExecuteTimeRestrictedAction(ReservationDto reservation)
+    {
+        return DateTime.Now <= reservation.CheckIn.AddHours(-24);
+    }
+
     private static bool ShowTimingWarning(ReservationDto reservation)
     {
         return IsPendingOrConfirmed(reservation.Status)
                && !CanExecuteTimeRestrictedAction(reservation);
     }
 
-    /// <summary>
-    /// Devuelve el texto descriptivo para el tooltip de acciones restringidas por tiempo.
-    /// </summary>
     private static string GetTimeRestrictedActionTitle(ReservationDto reservation)
     {
         if (CanExecuteTimeRestrictedAction(reservation))
@@ -620,24 +1026,22 @@
         return "Esta acción solo está disponible si faltan más de 24 horas para el check-in.";
     }
 
-    /// <summary>
-    /// Devuelve la clase CSS correspondiente al estado de la reservación.
-    /// </summary>
     private static string GetStatusBadgeClass(string? status)
     {
         return (status ?? "").ToUpperInvariant() switch
         {
             "PENDING" => "status-badge status-badge--pending",
             "CONFIRMED" => "status-badge status-badge--confirmed",
+            "CHECKED_IN" => "status-badge status-badge--confirmed",
+            "CHECKED_OUT" => "status-badge status-badge--default",
+            "NO_SHOW" => "status-badge status-badge--cancelled",
+            "EXPIRED" => "status-badge status-badge--cancelled",
             "CANCELED" => "status-badge status-badge--cancelled",
             "CANCELLED" => "status-badge status-badge--cancelled",
             _ => "status-badge status-badge--default"
         };
     }
 
-    /// <summary>
-    /// Analiza manualmente un query string y lo convierte en un diccionario clave-valor.
-    /// </summary>
     private static Dictionary<string, string> ParseQuery(string query)
     {
         var dict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);

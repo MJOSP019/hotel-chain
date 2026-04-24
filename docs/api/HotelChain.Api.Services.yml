@@ -1,0 +1,75 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Api.Services
+  commentId: N:HotelChain.Api.Services
+  id: HotelChain.Api.Services
+  children:
+  - HotelChain.Api.Services.EmailSettings
+  - HotelChain.Api.Services.IEmailSender
+  - HotelChain.Api.Services.ReservationPdfGenerator
+  - HotelChain.Api.Services.SmtpEmailSender
+  langs:
+  - csharp
+  - vb
+  name: HotelChain.Api.Services
+  nameWithType: HotelChain.Api.Services
+  fullName: HotelChain.Api.Services
+  type: Namespace
+  assemblies:
+  - HotelChain.Api
+references:
+- uid: HotelChain.Api.Services.EmailSettings
+  commentId: T:HotelChain.Api.Services.EmailSettings
+  href: HotelChain.Api.Services.EmailSettings.html
+  name: EmailSettings
+  nameWithType: EmailSettings
+  fullName: HotelChain.Api.Services.EmailSettings
+- uid: HotelChain.Api.Services.IEmailSender
+  commentId: T:HotelChain.Api.Services.IEmailSender
+  parent: HotelChain.Api.Services
+  href: HotelChain.Api.Services.IEmailSender.html
+  name: IEmailSender
+  nameWithType: IEmailSender
+  fullName: HotelChain.Api.Services.IEmailSender
+- uid: HotelChain.Api.Services.ReservationPdfGenerator
+  commentId: T:HotelChain.Api.Services.ReservationPdfGenerator
+  href: HotelChain.Api.Services.ReservationPdfGenerator.html
+  name: ReservationPdfGenerator
+  nameWithType: ReservationPdfGenerator
+  fullName: HotelChain.Api.Services.ReservationPdfGenerator
+- uid: HotelChain.Api.Services.SmtpEmailSender
+  commentId: T:HotelChain.Api.Services.SmtpEmailSender
+  href: HotelChain.Api.Services.SmtpEmailSender.html
+  name: SmtpEmailSender
+  nameWithType: SmtpEmailSender
+  fullName: HotelChain.Api.Services.SmtpEmailSender
+- uid: HotelChain.Api.Services
+  commentId: N:HotelChain.Api.Services
+  href: HotelChain.html
+  name: HotelChain.Api.Services
+  nameWithType: HotelChain.Api.Services
+  fullName: HotelChain.Api.Services
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Services
+    name: Services
+    href: HotelChain.Api.Services.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Services
+    name: Services
+    href: HotelChain.Api.Services.html

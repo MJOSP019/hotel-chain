@@ -1,0 +1,877 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  commentId: T:HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  id: SaveRoomRequest
+  parent: HotelChain.Api.DTOs.Admin
+  children:
+  - HotelChain.Api.DTOs.Admin.SaveRoomRequest.AreaSquareMeters
+  - HotelChain.Api.DTOs.Admin.SaveRoomRequest.BasePricePerNight
+  - HotelChain.Api.DTOs.Admin.SaveRoomRequest.BedType
+  - HotelChain.Api.DTOs.Admin.SaveRoomRequest.HotelId
+  - HotelChain.Api.DTOs.Admin.SaveRoomRequest.ImageUrl
+  - HotelChain.Api.DTOs.Admin.SaveRoomRequest.IsActive
+  - HotelChain.Api.DTOs.Admin.SaveRoomRequest.MaxGuests
+  - HotelChain.Api.DTOs.Admin.SaveRoomRequest.NameOrNumber
+  - HotelChain.Api.DTOs.Admin.SaveRoomRequest.RoomTypeId
+  - HotelChain.Api.DTOs.Admin.SaveRoomRequest.ShortDescription
+  langs:
+  - csharp
+  - vb
+  name: SaveRoomRequest
+  nameWithType: SaveRoomRequest
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  type: Class
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: SaveRoomRequest
+    path: ../HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+    startLine: 4
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs.Admin
+  syntax:
+    content: public class SaveRoomRequest
+    content.vb: Public Class SaveRoomRequest
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.HotelId
+  commentId: P:HotelChain.Api.DTOs.Admin.SaveRoomRequest.HotelId
+  id: HotelId
+  parent: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  langs:
+  - csharp
+  - vb
+  name: HotelId
+  nameWithType: SaveRoomRequest.HotelId
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.HotelId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: HotelId
+    path: ../HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+    startLine: 6
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs.Admin
+  syntax:
+    content: >-
+      [Required]
+
+      public int HotelId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: >-
+      <Required>
+
+      Public Property HotelId As Integer
+  overload: HotelChain.Api.DTOs.Admin.SaveRoomRequest.HotelId*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.RequiredAttribute
+    ctor: System.ComponentModel.DataAnnotations.RequiredAttribute.#ctor
+    arguments: []
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.RoomTypeId
+  commentId: P:HotelChain.Api.DTOs.Admin.SaveRoomRequest.RoomTypeId
+  id: RoomTypeId
+  parent: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  langs:
+  - csharp
+  - vb
+  name: RoomTypeId
+  nameWithType: SaveRoomRequest.RoomTypeId
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.RoomTypeId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: RoomTypeId
+    path: ../HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+    startLine: 9
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs.Admin
+  syntax:
+    content: >-
+      [Required]
+
+      public int RoomTypeId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: >-
+      <Required>
+
+      Public Property RoomTypeId As Integer
+  overload: HotelChain.Api.DTOs.Admin.SaveRoomRequest.RoomTypeId*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.RequiredAttribute
+    ctor: System.ComponentModel.DataAnnotations.RequiredAttribute.#ctor
+    arguments: []
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.NameOrNumber
+  commentId: P:HotelChain.Api.DTOs.Admin.SaveRoomRequest.NameOrNumber
+  id: NameOrNumber
+  parent: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  langs:
+  - csharp
+  - vb
+  name: NameOrNumber
+  nameWithType: SaveRoomRequest.NameOrNumber
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.NameOrNumber
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: NameOrNumber
+    path: ../HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+    startLine: 12
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs.Admin
+  syntax:
+    content: >-
+      [Required]
+
+      public string NameOrNumber { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <Required>
+
+      Public Property NameOrNumber As String
+  overload: HotelChain.Api.DTOs.Admin.SaveRoomRequest.NameOrNumber*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.RequiredAttribute
+    ctor: System.ComponentModel.DataAnnotations.RequiredAttribute.#ctor
+    arguments: []
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.MaxGuests
+  commentId: P:HotelChain.Api.DTOs.Admin.SaveRoomRequest.MaxGuests
+  id: MaxGuests
+  parent: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  langs:
+  - csharp
+  - vb
+  name: MaxGuests
+  nameWithType: SaveRoomRequest.MaxGuests
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.MaxGuests
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: MaxGuests
+    path: ../HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+    startLine: 15
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs.Admin
+  syntax:
+    content: >-
+      [Range(1, 20)]
+
+      public int MaxGuests { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: >-
+      <Range(1, 20)>
+
+      Public Property MaxGuests As Integer
+  overload: HotelChain.Api.DTOs.Admin.SaveRoomRequest.MaxGuests*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.RangeAttribute
+    ctor: System.ComponentModel.DataAnnotations.RangeAttribute.#ctor(System.Int32,System.Int32)
+    arguments:
+    - type: System.Int32
+      value: 1
+    - type: System.Int32
+      value: 20
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.BasePricePerNight
+  commentId: P:HotelChain.Api.DTOs.Admin.SaveRoomRequest.BasePricePerNight
+  id: BasePricePerNight
+  parent: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  langs:
+  - csharp
+  - vb
+  name: BasePricePerNight
+  nameWithType: SaveRoomRequest.BasePricePerNight
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.BasePricePerNight
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: BasePricePerNight
+    path: ../HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+    startLine: 18
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs.Admin
+  syntax:
+    content: >-
+      [Range(0.01, 999999)]
+
+      public decimal BasePricePerNight { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+    content.vb: >-
+      <Range(0.01, 999999)>
+
+      Public Property BasePricePerNight As Decimal
+  overload: HotelChain.Api.DTOs.Admin.SaveRoomRequest.BasePricePerNight*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.RangeAttribute
+    ctor: System.ComponentModel.DataAnnotations.RangeAttribute.#ctor(System.Double,System.Double)
+    arguments:
+    - type: System.Double
+      value: 0.01
+    - type: System.Double
+      value: 999999
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.BedType
+  commentId: P:HotelChain.Api.DTOs.Admin.SaveRoomRequest.BedType
+  id: BedType
+  parent: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  langs:
+  - csharp
+  - vb
+  name: BedType
+  nameWithType: SaveRoomRequest.BedType
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.BedType
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: BedType
+    path: ../HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+    startLine: 21
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs.Admin
+  syntax:
+    content: >-
+      [MaxLength(100)]
+
+      public string? BedType { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <MaxLength(100)>
+
+      Public Property BedType As String
+  overload: HotelChain.Api.DTOs.Admin.SaveRoomRequest.BedType*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.MaxLengthAttribute
+    ctor: System.ComponentModel.DataAnnotations.MaxLengthAttribute.#ctor(System.Int32)
+    arguments:
+    - type: System.Int32
+      value: 100
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.AreaSquareMeters
+  commentId: P:HotelChain.Api.DTOs.Admin.SaveRoomRequest.AreaSquareMeters
+  id: AreaSquareMeters
+  parent: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  langs:
+  - csharp
+  - vb
+  name: AreaSquareMeters
+  nameWithType: SaveRoomRequest.AreaSquareMeters
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.AreaSquareMeters
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: AreaSquareMeters
+    path: ../HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+    startLine: 24
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs.Admin
+  syntax:
+    content: >-
+      [Range(0.01, 9999)]
+
+      public decimal? AreaSquareMeters { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Decimal}
+    content.vb: >-
+      <Range(0.01, 9999)>
+
+      Public Property AreaSquareMeters As Decimal?
+  overload: HotelChain.Api.DTOs.Admin.SaveRoomRequest.AreaSquareMeters*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.RangeAttribute
+    ctor: System.ComponentModel.DataAnnotations.RangeAttribute.#ctor(System.Double,System.Double)
+    arguments:
+    - type: System.Double
+      value: 0.01
+    - type: System.Double
+      value: 9999
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.ShortDescription
+  commentId: P:HotelChain.Api.DTOs.Admin.SaveRoomRequest.ShortDescription
+  id: ShortDescription
+  parent: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  langs:
+  - csharp
+  - vb
+  name: ShortDescription
+  nameWithType: SaveRoomRequest.ShortDescription
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.ShortDescription
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ShortDescription
+    path: ../HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+    startLine: 27
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs.Admin
+  syntax:
+    content: >-
+      [MaxLength(500)]
+
+      public string? ShortDescription { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <MaxLength(500)>
+
+      Public Property ShortDescription As String
+  overload: HotelChain.Api.DTOs.Admin.SaveRoomRequest.ShortDescription*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.MaxLengthAttribute
+    ctor: System.ComponentModel.DataAnnotations.MaxLengthAttribute.#ctor(System.Int32)
+    arguments:
+    - type: System.Int32
+      value: 500
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.ImageUrl
+  commentId: P:HotelChain.Api.DTOs.Admin.SaveRoomRequest.ImageUrl
+  id: ImageUrl
+  parent: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  langs:
+  - csharp
+  - vb
+  name: ImageUrl
+  nameWithType: SaveRoomRequest.ImageUrl
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.ImageUrl
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ImageUrl
+    path: ../HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+    startLine: 30
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs.Admin
+  syntax:
+    content: >-
+      [MaxLength(1000)]
+
+      public string? ImageUrl { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <MaxLength(1000)>
+
+      Public Property ImageUrl As String
+  overload: HotelChain.Api.DTOs.Admin.SaveRoomRequest.ImageUrl*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.MaxLengthAttribute
+    ctor: System.ComponentModel.DataAnnotations.MaxLengthAttribute.#ctor(System.Int32)
+    arguments:
+    - type: System.Int32
+      value: 1000
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.IsActive
+  commentId: P:HotelChain.Api.DTOs.Admin.SaveRoomRequest.IsActive
+  id: IsActive
+  parent: HotelChain.Api.DTOs.Admin.SaveRoomRequest
+  langs:
+  - csharp
+  - vb
+  name: IsActive
+  nameWithType: SaveRoomRequest.IsActive
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.IsActive
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: IsActive
+    path: ../HotelChain.Api/DTOs/Admin/SaveRoomRequest.cs
+    startLine: 33
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.DTOs.Admin
+  syntax:
+    content: public bool IsActive { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsActive As Boolean
+  overload: HotelChain.Api.DTOs.Admin.SaveRoomRequest.IsActive*
+references:
+- uid: HotelChain.Api.DTOs.Admin
+  commentId: N:HotelChain.Api.DTOs.Admin
+  href: HotelChain.html
+  name: HotelChain.Api.DTOs.Admin
+  nameWithType: HotelChain.Api.DTOs.Admin
+  fullName: HotelChain.Api.DTOs.Admin
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.DTOs
+    name: DTOs
+    href: HotelChain.Api.DTOs.html
+  - name: .
+  - uid: HotelChain.Api.DTOs.Admin
+    name: Admin
+    href: HotelChain.Api.DTOs.Admin.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.DTOs
+    name: DTOs
+    href: HotelChain.Api.DTOs.html
+  - name: .
+  - uid: HotelChain.Api.DTOs.Admin
+    name: Admin
+    href: HotelChain.Api.DTOs.Admin.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.HotelId*
+  commentId: Overload:HotelChain.Api.DTOs.Admin.SaveRoomRequest.HotelId
+  href: HotelChain.Api.DTOs.Admin.SaveRoomRequest.html#HotelChain_Api_DTOs_Admin_SaveRoomRequest_HotelId
+  name: HotelId
+  nameWithType: SaveRoomRequest.HotelId
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.HotelId
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.RoomTypeId*
+  commentId: Overload:HotelChain.Api.DTOs.Admin.SaveRoomRequest.RoomTypeId
+  href: HotelChain.Api.DTOs.Admin.SaveRoomRequest.html#HotelChain_Api_DTOs_Admin_SaveRoomRequest_RoomTypeId
+  name: RoomTypeId
+  nameWithType: SaveRoomRequest.RoomTypeId
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.RoomTypeId
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.NameOrNumber*
+  commentId: Overload:HotelChain.Api.DTOs.Admin.SaveRoomRequest.NameOrNumber
+  href: HotelChain.Api.DTOs.Admin.SaveRoomRequest.html#HotelChain_Api_DTOs_Admin_SaveRoomRequest_NameOrNumber
+  name: NameOrNumber
+  nameWithType: SaveRoomRequest.NameOrNumber
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.NameOrNumber
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.MaxGuests*
+  commentId: Overload:HotelChain.Api.DTOs.Admin.SaveRoomRequest.MaxGuests
+  href: HotelChain.Api.DTOs.Admin.SaveRoomRequest.html#HotelChain_Api_DTOs_Admin_SaveRoomRequest_MaxGuests
+  name: MaxGuests
+  nameWithType: SaveRoomRequest.MaxGuests
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.MaxGuests
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.BasePricePerNight*
+  commentId: Overload:HotelChain.Api.DTOs.Admin.SaveRoomRequest.BasePricePerNight
+  href: HotelChain.Api.DTOs.Admin.SaveRoomRequest.html#HotelChain_Api_DTOs_Admin_SaveRoomRequest_BasePricePerNight
+  name: BasePricePerNight
+  nameWithType: SaveRoomRequest.BasePricePerNight
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.BasePricePerNight
+- uid: System.Decimal
+  commentId: T:System.Decimal
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.decimal
+  name: decimal
+  nameWithType: decimal
+  fullName: decimal
+  nameWithType.vb: Decimal
+  fullName.vb: Decimal
+  name.vb: Decimal
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.BedType*
+  commentId: Overload:HotelChain.Api.DTOs.Admin.SaveRoomRequest.BedType
+  href: HotelChain.Api.DTOs.Admin.SaveRoomRequest.html#HotelChain_Api_DTOs_Admin_SaveRoomRequest_BedType
+  name: BedType
+  nameWithType: SaveRoomRequest.BedType
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.BedType
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.AreaSquareMeters*
+  commentId: Overload:HotelChain.Api.DTOs.Admin.SaveRoomRequest.AreaSquareMeters
+  href: HotelChain.Api.DTOs.Admin.SaveRoomRequest.html#HotelChain_Api_DTOs_Admin_SaveRoomRequest_AreaSquareMeters
+  name: AreaSquareMeters
+  nameWithType: SaveRoomRequest.AreaSquareMeters
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.AreaSquareMeters
+- uid: System.Nullable{System.Decimal}
+  commentId: T:System.Nullable{System.Decimal}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.decimal
+  name: decimal?
+  nameWithType: decimal?
+  fullName: decimal?
+  nameWithType.vb: Decimal?
+  fullName.vb: Decimal?
+  name.vb: Decimal?
+  spec.csharp:
+  - uid: System.Decimal
+    name: decimal
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.decimal
+  - name: '?'
+  spec.vb:
+  - uid: System.Decimal
+    name: Decimal
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.decimal
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.ShortDescription*
+  commentId: Overload:HotelChain.Api.DTOs.Admin.SaveRoomRequest.ShortDescription
+  href: HotelChain.Api.DTOs.Admin.SaveRoomRequest.html#HotelChain_Api_DTOs_Admin_SaveRoomRequest_ShortDescription
+  name: ShortDescription
+  nameWithType: SaveRoomRequest.ShortDescription
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.ShortDescription
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.ImageUrl*
+  commentId: Overload:HotelChain.Api.DTOs.Admin.SaveRoomRequest.ImageUrl
+  href: HotelChain.Api.DTOs.Admin.SaveRoomRequest.html#HotelChain_Api_DTOs_Admin_SaveRoomRequest_ImageUrl
+  name: ImageUrl
+  nameWithType: SaveRoomRequest.ImageUrl
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.ImageUrl
+- uid: HotelChain.Api.DTOs.Admin.SaveRoomRequest.IsActive*
+  commentId: Overload:HotelChain.Api.DTOs.Admin.SaveRoomRequest.IsActive
+  href: HotelChain.Api.DTOs.Admin.SaveRoomRequest.html#HotelChain_Api_DTOs_Admin_SaveRoomRequest_IsActive
+  name: IsActive
+  nameWithType: SaveRoomRequest.IsActive
+  fullName: HotelChain.Api.DTOs.Admin.SaveRoomRequest.IsActive
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean

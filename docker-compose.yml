@@ -1,0 +1,50 @@
+services:
+  api-a:
+    build:
+      context: .
+      dockerfile: HotelChain.Api/Dockerfile
+    container_name: hotelchain-api-a
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      Cors__AllowedOrigins__0: http://localhost:8080
+      ConnectionStrings__DefaultConnection: "Server=host.docker.internal,1433;Database=HotelChainDb_A;User Id=hoteladmin;Password=HotelChain#123;TrustServerCertificate=True;"
+    ports:
+      - "8081:8080"
+
+  web-a:
+    build:
+      context: .
+      dockerfile: HotelChain.Web/Dockerfile
+      args:
+        API_BASE_URL: http://localhost:8081
+    container_name: hotelchain-web-a
+    depends_on:
+      - api-a
+    ports:
+      - "8080:80"
+
+  api-b:
+    build:
+      context: .
+      dockerfile: HotelChain.Api/Dockerfile
+    container_name: hotelchain-api-b
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      Cors__AllowedOrigins__0: http://localhost:8090
+      ConnectionStrings__DefaultConnection: "Server=host.docker.internal,1433;Database=HotelChainDb_B;User Id=hoteladmin;Password=HotelChain#123;TrustServerCertificate=True;"
+    ports:
+      - "8091:8080"
+
+  web-b:
+    build:
+      context: .
+      dockerfile: HotelChain.Web/Dockerfile
+      args:
+        API_BASE_URL: http://localhost:8091
+    container_name: hotelchain-web-b
+    depends_on:
+      - api-b
+    ports:
+      - "8090:80"

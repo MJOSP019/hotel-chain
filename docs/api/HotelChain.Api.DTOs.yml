@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Api.DTOs
+  commentId: N:HotelChain.Api.DTOs
+  id: HotelChain.Api.DTOs
+  children:
+  - HotelChain.Api.DTOs.ReservationHistoryDto
+  langs:
+  - csharp
+  - vb
+  name: HotelChain.Api.DTOs
+  nameWithType: HotelChain.Api.DTOs
+  fullName: HotelChain.Api.DTOs
+  type: Namespace
+  assemblies:
+  - HotelChain.Api
+references:
+- uid: HotelChain.Api.DTOs.ReservationHistoryDto
+  commentId: T:HotelChain.Api.DTOs.ReservationHistoryDto
+  href: HotelChain.Api.DTOs.ReservationHistoryDto.html
+  name: ReservationHistoryDto
+  nameWithType: ReservationHistoryDto
+  fullName: HotelChain.Api.DTOs.ReservationHistoryDto

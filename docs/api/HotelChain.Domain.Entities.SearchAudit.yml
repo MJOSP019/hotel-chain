@@ -1,0 +1,966 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Domain.Entities.SearchAudit
+  commentId: T:HotelChain.Domain.Entities.SearchAudit
+  id: SearchAudit
+  parent: HotelChain.Domain.Entities
+  children:
+  - HotelChain.Domain.Entities.SearchAudit.CheckIn
+  - HotelChain.Domain.Entities.SearchAudit.CheckOut
+  - HotelChain.Domain.Entities.SearchAudit.City
+  - HotelChain.Domain.Entities.SearchAudit.CityId
+  - HotelChain.Domain.Entities.SearchAudit.CreatedAt
+  - HotelChain.Domain.Entities.SearchAudit.Guests
+  - HotelChain.Domain.Entities.SearchAudit.Id
+  - HotelChain.Domain.Entities.SearchAudit.MaxPrice
+  - HotelChain.Domain.Entities.SearchAudit.MinPrice
+  - HotelChain.Domain.Entities.SearchAudit.MinRating
+  - HotelChain.Domain.Entities.SearchAudit.RoomTypeId
+  - HotelChain.Domain.Entities.SearchAudit.Source
+  - HotelChain.Domain.Entities.SearchAudit.UserId
+  langs:
+  - csharp
+  - vb
+  name: SearchAudit
+  nameWithType: SearchAudit
+  fullName: HotelChain.Domain.Entities.SearchAudit
+  type: Class
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/SearchAudit.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: SearchAudit
+    path: ../HotelChain.Domain/Entities/SearchAudit.cs
+    startLine: 10
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Representa el registro de auditoría de una búsqueda realizada en el sistema.
+  remarks: >-
+    Guarda los parámetros principales de búsqueda de hoteles o habitaciones,
+
+    incluyendo ciudad, fechas, huéspedes, filtros aplicados, origen de la búsqueda
+
+    y fecha de creación del registro.
+  example: []
+  syntax:
+    content: public class SearchAudit
+    content.vb: Public Class SearchAudit
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: HotelChain.Domain.Entities.SearchAudit.Id
+  commentId: P:HotelChain.Domain.Entities.SearchAudit.Id
+  id: Id
+  parent: HotelChain.Domain.Entities.SearchAudit
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: SearchAudit.Id
+  fullName: HotelChain.Domain.Entities.SearchAudit.Id
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/SearchAudit.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Id
+    path: ../HotelChain.Domain/Entities/SearchAudit.cs
+    startLine: 15
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Identificador interno del registro de auditoría.
+  example: []
+  syntax:
+    content: public int Id { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Id As Integer
+  overload: HotelChain.Domain.Entities.SearchAudit.Id*
+- uid: HotelChain.Domain.Entities.SearchAudit.CityId
+  commentId: P:HotelChain.Domain.Entities.SearchAudit.CityId
+  id: CityId
+  parent: HotelChain.Domain.Entities.SearchAudit
+  langs:
+  - csharp
+  - vb
+  name: CityId
+  nameWithType: SearchAudit.CityId
+  fullName: HotelChain.Domain.Entities.SearchAudit.CityId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/SearchAudit.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CityId
+    path: ../HotelChain.Domain/Entities/SearchAudit.cs
+    startLine: 20
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Identificador de la ciudad consultada.
+  example: []
+  syntax:
+    content: public int CityId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property CityId As Integer
+  overload: HotelChain.Domain.Entities.SearchAudit.CityId*
+- uid: HotelChain.Domain.Entities.SearchAudit.City
+  commentId: P:HotelChain.Domain.Entities.SearchAudit.City
+  id: City
+  parent: HotelChain.Domain.Entities.SearchAudit
+  langs:
+  - csharp
+  - vb
+  name: City
+  nameWithType: SearchAudit.City
+  fullName: HotelChain.Domain.Entities.SearchAudit.City
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/SearchAudit.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: City
+    path: ../HotelChain.Domain/Entities/SearchAudit.cs
+    startLine: 25
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Ciudad asociada a la búsqueda.
+  example: []
+  syntax:
+    content: public City City { get; set; }
+    parameters: []
+    return:
+      type: HotelChain.Domain.Entities.City
+    content.vb: Public Property City As City
+  overload: HotelChain.Domain.Entities.SearchAudit.City*
+- uid: HotelChain.Domain.Entities.SearchAudit.UserId
+  commentId: P:HotelChain.Domain.Entities.SearchAudit.UserId
+  id: UserId
+  parent: HotelChain.Domain.Entities.SearchAudit
+  langs:
+  - csharp
+  - vb
+  name: UserId
+  nameWithType: SearchAudit.UserId
+  fullName: HotelChain.Domain.Entities.SearchAudit.UserId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/SearchAudit.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: UserId
+    path: ../HotelChain.Domain/Entities/SearchAudit.cs
+    startLine: 30
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Identificador del usuario que realizó la búsqueda, si existe.
+  example: []
+  syntax:
+    content: public Guid? UserId { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Guid}
+    content.vb: Public Property UserId As Guid?
+  overload: HotelChain.Domain.Entities.SearchAudit.UserId*
+- uid: HotelChain.Domain.Entities.SearchAudit.CheckIn
+  commentId: P:HotelChain.Domain.Entities.SearchAudit.CheckIn
+  id: CheckIn
+  parent: HotelChain.Domain.Entities.SearchAudit
+  langs:
+  - csharp
+  - vb
+  name: CheckIn
+  nameWithType: SearchAudit.CheckIn
+  fullName: HotelChain.Domain.Entities.SearchAudit.CheckIn
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/SearchAudit.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CheckIn
+    path: ../HotelChain.Domain/Entities/SearchAudit.cs
+    startLine: 35
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Fecha de check-in utilizada en la búsqueda.
+  example: []
+  syntax:
+    content: public DateTime CheckIn { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CheckIn As Date
+  overload: HotelChain.Domain.Entities.SearchAudit.CheckIn*
+- uid: HotelChain.Domain.Entities.SearchAudit.CheckOut
+  commentId: P:HotelChain.Domain.Entities.SearchAudit.CheckOut
+  id: CheckOut
+  parent: HotelChain.Domain.Entities.SearchAudit
+  langs:
+  - csharp
+  - vb
+  name: CheckOut
+  nameWithType: SearchAudit.CheckOut
+  fullName: HotelChain.Domain.Entities.SearchAudit.CheckOut
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/SearchAudit.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CheckOut
+    path: ../HotelChain.Domain/Entities/SearchAudit.cs
+    startLine: 40
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Fecha de check-out utilizada en la búsqueda.
+  example: []
+  syntax:
+    content: public DateTime CheckOut { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CheckOut As Date
+  overload: HotelChain.Domain.Entities.SearchAudit.CheckOut*
+- uid: HotelChain.Domain.Entities.SearchAudit.Guests
+  commentId: P:HotelChain.Domain.Entities.SearchAudit.Guests
+  id: Guests
+  parent: HotelChain.Domain.Entities.SearchAudit
+  langs:
+  - csharp
+  - vb
+  name: Guests
+  nameWithType: SearchAudit.Guests
+  fullName: HotelChain.Domain.Entities.SearchAudit.Guests
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/SearchAudit.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Guests
+    path: ../HotelChain.Domain/Entities/SearchAudit.cs
+    startLine: 45
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Cantidad de huéspedes solicitados.
+  example: []
+  syntax:
+    content: public int Guests { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Guests As Integer
+  overload: HotelChain.Domain.Entities.SearchAudit.Guests*
+- uid: HotelChain.Domain.Entities.SearchAudit.MinPrice
+  commentId: P:HotelChain.Domain.Entities.SearchAudit.MinPrice
+  id: MinPrice
+  parent: HotelChain.Domain.Entities.SearchAudit
+  langs:
+  - csharp
+  - vb
+  name: MinPrice
+  nameWithType: SearchAudit.MinPrice
+  fullName: HotelChain.Domain.Entities.SearchAudit.MinPrice
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/SearchAudit.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: MinPrice
+    path: ../HotelChain.Domain/Entities/SearchAudit.cs
+    startLine: 50
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Precio mínimo utilizado como filtro, si aplica.
+  example: []
+  syntax:
+    content: public decimal? MinPrice { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Decimal}
+    content.vb: Public Property MinPrice As Decimal?
+  overload: HotelChain.Domain.Entities.SearchAudit.MinPrice*
+- uid: HotelChain.Domain.Entities.SearchAudit.MaxPrice
+  commentId: P:HotelChain.Domain.Entities.SearchAudit.MaxPrice
+  id: MaxPrice
+  parent: HotelChain.Domain.Entities.SearchAudit
+  langs:
+  - csharp
+  - vb
+  name: MaxPrice
+  nameWithType: SearchAudit.MaxPrice
+  fullName: HotelChain.Domain.Entities.SearchAudit.MaxPrice
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/SearchAudit.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: MaxPrice
+    path: ../HotelChain.Domain/Entities/SearchAudit.cs
+    startLine: 55
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Precio máximo utilizado como filtro, si aplica.
+  example: []
+  syntax:
+    content: public decimal? MaxPrice { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Decimal}
+    content.vb: Public Property MaxPrice As Decimal?
+  overload: HotelChain.Domain.Entities.SearchAudit.MaxPrice*
+- uid: HotelChain.Domain.Entities.SearchAudit.RoomTypeId
+  commentId: P:HotelChain.Domain.Entities.SearchAudit.RoomTypeId
+  id: RoomTypeId
+  parent: HotelChain.Domain.Entities.SearchAudit
+  langs:
+  - csharp
+  - vb
+  name: RoomTypeId
+  nameWithType: SearchAudit.RoomTypeId
+  fullName: HotelChain.Domain.Entities.SearchAudit.RoomTypeId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/SearchAudit.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: RoomTypeId
+    path: ../HotelChain.Domain/Entities/SearchAudit.cs
+    startLine: 60
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Tipo de habitación filtrado, si aplica.
+  example: []
+  syntax:
+    content: public int? RoomTypeId { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int32}
+    content.vb: Public Property RoomTypeId As Integer?
+  overload: HotelChain.Domain.Entities.SearchAudit.RoomTypeId*
+- uid: HotelChain.Domain.Entities.SearchAudit.MinRating
+  commentId: P:HotelChain.Domain.Entities.SearchAudit.MinRating
+  id: MinRating
+  parent: HotelChain.Domain.Entities.SearchAudit
+  langs:
+  - csharp
+  - vb
+  name: MinRating
+  nameWithType: SearchAudit.MinRating
+  fullName: HotelChain.Domain.Entities.SearchAudit.MinRating
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/SearchAudit.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: MinRating
+    path: ../HotelChain.Domain/Entities/SearchAudit.cs
+    startLine: 65
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Rating mínimo utilizado como filtro, si aplica.
+  example: []
+  syntax:
+    content: public double? MinRating { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Double}
+    content.vb: Public Property MinRating As Double?
+  overload: HotelChain.Domain.Entities.SearchAudit.MinRating*
+- uid: HotelChain.Domain.Entities.SearchAudit.Source
+  commentId: P:HotelChain.Domain.Entities.SearchAudit.Source
+  id: Source
+  parent: HotelChain.Domain.Entities.SearchAudit
+  langs:
+  - csharp
+  - vb
+  name: Source
+  nameWithType: SearchAudit.Source
+  fullName: HotelChain.Domain.Entities.SearchAudit.Source
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/SearchAudit.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Source
+    path: ../HotelChain.Domain/Entities/SearchAudit.cs
+    startLine: 73
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Origen de la búsqueda.
+  remarks: 'Valores comunes: WEB o INTEGRATION.'
+  example: []
+  syntax:
+    content: public string Source { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Source As String
+  overload: HotelChain.Domain.Entities.SearchAudit.Source*
+- uid: HotelChain.Domain.Entities.SearchAudit.CreatedAt
+  commentId: P:HotelChain.Domain.Entities.SearchAudit.CreatedAt
+  id: CreatedAt
+  parent: HotelChain.Domain.Entities.SearchAudit
+  langs:
+  - csharp
+  - vb
+  name: CreatedAt
+  nameWithType: SearchAudit.CreatedAt
+  fullName: HotelChain.Domain.Entities.SearchAudit.CreatedAt
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/SearchAudit.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CreatedAt
+    path: ../HotelChain.Domain/Entities/SearchAudit.cs
+    startLine: 78
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Fecha y hora de creación del registro de auditoría.
+  example: []
+  syntax:
+    content: public DateTime CreatedAt { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CreatedAt As Date
+  overload: HotelChain.Domain.Entities.SearchAudit.CreatedAt*
+references:
+- uid: HotelChain.Domain.Entities
+  commentId: N:HotelChain.Domain.Entities
+  href: HotelChain.html
+  name: HotelChain.Domain.Entities
+  nameWithType: HotelChain.Domain.Entities
+  fullName: HotelChain.Domain.Entities
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Domain
+    name: Domain
+    href: HotelChain.Domain.html
+  - name: .
+  - uid: HotelChain.Domain.Entities
+    name: Entities
+    href: HotelChain.Domain.Entities.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Domain
+    name: Domain
+    href: HotelChain.Domain.html
+  - name: .
+  - uid: HotelChain.Domain.Entities
+    name: Entities
+    href: HotelChain.Domain.Entities.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Domain.Entities.SearchAudit.Id*
+  commentId: Overload:HotelChain.Domain.Entities.SearchAudit.Id
+  href: HotelChain.Domain.Entities.SearchAudit.html#HotelChain_Domain_Entities_SearchAudit_Id
+  name: Id
+  nameWithType: SearchAudit.Id
+  fullName: HotelChain.Domain.Entities.SearchAudit.Id
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: HotelChain.Domain.Entities.SearchAudit.CityId*
+  commentId: Overload:HotelChain.Domain.Entities.SearchAudit.CityId
+  href: HotelChain.Domain.Entities.SearchAudit.html#HotelChain_Domain_Entities_SearchAudit_CityId
+  name: CityId
+  nameWithType: SearchAudit.CityId
+  fullName: HotelChain.Domain.Entities.SearchAudit.CityId
+- uid: HotelChain.Domain.Entities.SearchAudit.City*
+  commentId: Overload:HotelChain.Domain.Entities.SearchAudit.City
+  href: HotelChain.Domain.Entities.SearchAudit.html#HotelChain_Domain_Entities_SearchAudit_City
+  name: City
+  nameWithType: SearchAudit.City
+  fullName: HotelChain.Domain.Entities.SearchAudit.City
+- uid: HotelChain.Domain.Entities.City
+  commentId: T:HotelChain.Domain.Entities.City
+  parent: HotelChain.Domain.Entities
+  href: HotelChain.Domain.Entities.City.html
+  name: City
+  nameWithType: City
+  fullName: HotelChain.Domain.Entities.City
+- uid: HotelChain.Domain.Entities.SearchAudit.UserId*
+  commentId: Overload:HotelChain.Domain.Entities.SearchAudit.UserId
+  href: HotelChain.Domain.Entities.SearchAudit.html#HotelChain_Domain_Entities_SearchAudit_UserId
+  name: UserId
+  nameWithType: SearchAudit.UserId
+  fullName: HotelChain.Domain.Entities.SearchAudit.UserId
+- uid: System.Nullable{System.Guid}
+  commentId: T:System.Nullable{System.Guid}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.guid
+  name: Guid?
+  nameWithType: Guid?
+  fullName: System.Guid?
+  spec.csharp:
+  - uid: System.Guid
+    name: Guid
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.guid
+  - name: '?'
+  spec.vb:
+  - uid: System.Guid
+    name: Guid
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.guid
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: HotelChain.Domain.Entities.SearchAudit.CheckIn*
+  commentId: Overload:HotelChain.Domain.Entities.SearchAudit.CheckIn
+  href: HotelChain.Domain.Entities.SearchAudit.html#HotelChain_Domain_Entities_SearchAudit_CheckIn
+  name: CheckIn
+  nameWithType: SearchAudit.CheckIn
+  fullName: HotelChain.Domain.Entities.SearchAudit.CheckIn
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+  nameWithType.vb: Date
+  fullName.vb: Date
+  name.vb: Date
+- uid: HotelChain.Domain.Entities.SearchAudit.CheckOut*
+  commentId: Overload:HotelChain.Domain.Entities.SearchAudit.CheckOut
+  href: HotelChain.Domain.Entities.SearchAudit.html#HotelChain_Domain_Entities_SearchAudit_CheckOut
+  name: CheckOut
+  nameWithType: SearchAudit.CheckOut
+  fullName: HotelChain.Domain.Entities.SearchAudit.CheckOut
+- uid: HotelChain.Domain.Entities.SearchAudit.Guests*
+  commentId: Overload:HotelChain.Domain.Entities.SearchAudit.Guests
+  href: HotelChain.Domain.Entities.SearchAudit.html#HotelChain_Domain_Entities_SearchAudit_Guests
+  name: Guests
+  nameWithType: SearchAudit.Guests
+  fullName: HotelChain.Domain.Entities.SearchAudit.Guests
+- uid: HotelChain.Domain.Entities.SearchAudit.MinPrice*
+  commentId: Overload:HotelChain.Domain.Entities.SearchAudit.MinPrice
+  href: HotelChain.Domain.Entities.SearchAudit.html#HotelChain_Domain_Entities_SearchAudit_MinPrice
+  name: MinPrice
+  nameWithType: SearchAudit.MinPrice
+  fullName: HotelChain.Domain.Entities.SearchAudit.MinPrice
+- uid: System.Nullable{System.Decimal}
+  commentId: T:System.Nullable{System.Decimal}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.decimal
+  name: decimal?
+  nameWithType: decimal?
+  fullName: decimal?
+  nameWithType.vb: Decimal?
+  fullName.vb: Decimal?
+  name.vb: Decimal?
+  spec.csharp:
+  - uid: System.Decimal
+    name: decimal
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.decimal
+  - name: '?'
+  spec.vb:
+  - uid: System.Decimal
+    name: Decimal
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.decimal
+  - name: '?'
+- uid: HotelChain.Domain.Entities.SearchAudit.MaxPrice*
+  commentId: Overload:HotelChain.Domain.Entities.SearchAudit.MaxPrice
+  href: HotelChain.Domain.Entities.SearchAudit.html#HotelChain_Domain_Entities_SearchAudit_MaxPrice
+  name: MaxPrice
+  nameWithType: SearchAudit.MaxPrice
+  fullName: HotelChain.Domain.Entities.SearchAudit.MaxPrice
+- uid: HotelChain.Domain.Entities.SearchAudit.RoomTypeId*
+  commentId: Overload:HotelChain.Domain.Entities.SearchAudit.RoomTypeId
+  href: HotelChain.Domain.Entities.SearchAudit.html#HotelChain_Domain_Entities_SearchAudit_RoomTypeId
+  name: RoomTypeId
+  nameWithType: SearchAudit.RoomTypeId
+  fullName: HotelChain.Domain.Entities.SearchAudit.RoomTypeId
+- uid: System.Nullable{System.Int32}
+  commentId: T:System.Nullable{System.Int32}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int?
+  nameWithType: int?
+  fullName: int?
+  nameWithType.vb: Integer?
+  fullName.vb: Integer?
+  name.vb: Integer?
+  spec.csharp:
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '?'
+  spec.vb:
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '?'
+- uid: HotelChain.Domain.Entities.SearchAudit.MinRating*
+  commentId: Overload:HotelChain.Domain.Entities.SearchAudit.MinRating
+  href: HotelChain.Domain.Entities.SearchAudit.html#HotelChain_Domain_Entities_SearchAudit_MinRating
+  name: MinRating
+  nameWithType: SearchAudit.MinRating
+  fullName: HotelChain.Domain.Entities.SearchAudit.MinRating
+- uid: System.Nullable{System.Double}
+  commentId: T:System.Nullable{System.Double}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double?
+  nameWithType: double?
+  fullName: double?
+  nameWithType.vb: Double?
+  fullName.vb: Double?
+  name.vb: Double?
+  spec.csharp:
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '?'
+  spec.vb:
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '?'
+- uid: HotelChain.Domain.Entities.SearchAudit.Source*
+  commentId: Overload:HotelChain.Domain.Entities.SearchAudit.Source
+  href: HotelChain.Domain.Entities.SearchAudit.html#HotelChain_Domain_Entities_SearchAudit_Source
+  name: Source
+  nameWithType: SearchAudit.Source
+  fullName: HotelChain.Domain.Entities.SearchAudit.Source
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: HotelChain.Domain.Entities.SearchAudit.CreatedAt*
+  commentId: Overload:HotelChain.Domain.Entities.SearchAudit.CreatedAt
+  href: HotelChain.Domain.Entities.SearchAudit.html#HotelChain_Domain_Entities_SearchAudit_CreatedAt
+  name: CreatedAt
+  nameWithType: SearchAudit.CreatedAt
+  fullName: HotelChain.Domain.Entities.SearchAudit.CreatedAt

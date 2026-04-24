@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
+
 namespace HotelChain.Tests.Controllers;
 
 public class AdminRoomInventoriesControllerTests

@@ -1,0 +1,144 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Domain.Entities
+  commentId: N:HotelChain.Domain.Entities
+  id: HotelChain.Domain.Entities
+  children:
+  - HotelChain.Domain.Entities.City
+  - HotelChain.Domain.Entities.Hotel
+  - HotelChain.Domain.Entities.HotelReview
+  - HotelChain.Domain.Entities.Reservation
+  - HotelChain.Domain.Entities.ReservationAudit
+  - HotelChain.Domain.Entities.ReservationCharge
+  - HotelChain.Domain.Entities.ReservationPayment
+  - HotelChain.Domain.Entities.ReservationRoom
+  - HotelChain.Domain.Entities.Room
+  - HotelChain.Domain.Entities.RoomInventory
+  - HotelChain.Domain.Entities.RoomType
+  - HotelChain.Domain.Entities.RoomTypeInventory
+  - HotelChain.Domain.Entities.SearchAudit
+  langs:
+  - csharp
+  - vb
+  name: HotelChain.Domain.Entities
+  nameWithType: HotelChain.Domain.Entities
+  fullName: HotelChain.Domain.Entities
+  type: Namespace
+  assemblies:
+  - HotelChain.Domain
+references:
+- uid: HotelChain.Domain.Entities.City
+  commentId: T:HotelChain.Domain.Entities.City
+  parent: HotelChain.Domain.Entities
+  href: HotelChain.Domain.Entities.City.html
+  name: City
+  nameWithType: City
+  fullName: HotelChain.Domain.Entities.City
+- uid: HotelChain.Domain.Entities.Hotel
+  commentId: T:HotelChain.Domain.Entities.Hotel
+  parent: HotelChain.Domain.Entities
+  href: HotelChain.Domain.Entities.Hotel.html
+  name: Hotel
+  nameWithType: Hotel
+  fullName: HotelChain.Domain.Entities.Hotel
+- uid: HotelChain.Domain.Entities.HotelReview
+  commentId: T:HotelChain.Domain.Entities.HotelReview
+  parent: HotelChain.Domain.Entities
+  href: HotelChain.Domain.Entities.HotelReview.html
+  name: HotelReview
+  nameWithType: HotelReview
+  fullName: HotelChain.Domain.Entities.HotelReview
+- uid: HotelChain.Domain.Entities.Reservation
+  commentId: T:HotelChain.Domain.Entities.Reservation
+  parent: HotelChain.Domain.Entities
+  href: HotelChain.Domain.Entities.Reservation.html
+  name: Reservation
+  nameWithType: Reservation
+  fullName: HotelChain.Domain.Entities.Reservation
+- uid: HotelChain.Domain.Entities.ReservationAudit
+  commentId: T:HotelChain.Domain.Entities.ReservationAudit
+  href: HotelChain.Domain.Entities.ReservationAudit.html
+  name: ReservationAudit
+  nameWithType: ReservationAudit
+  fullName: HotelChain.Domain.Entities.ReservationAudit
+- uid: HotelChain.Domain.Entities.ReservationCharge
+  commentId: T:HotelChain.Domain.Entities.ReservationCharge
+  href: HotelChain.Domain.Entities.ReservationCharge.html
+  name: ReservationCharge
+  nameWithType: ReservationCharge
+  fullName: HotelChain.Domain.Entities.ReservationCharge
+- uid: HotelChain.Domain.Entities.ReservationPayment
+  commentId: T:HotelChain.Domain.Entities.ReservationPayment
+  parent: HotelChain.Domain.Entities
+  href: HotelChain.Domain.Entities.ReservationPayment.html
+  name: ReservationPayment
+  nameWithType: ReservationPayment
+  fullName: HotelChain.Domain.Entities.ReservationPayment
+- uid: HotelChain.Domain.Entities.ReservationRoom
+  commentId: T:HotelChain.Domain.Entities.ReservationRoom
+  href: HotelChain.Domain.Entities.ReservationRoom.html
+  name: ReservationRoom
+  nameWithType: ReservationRoom
+  fullName: HotelChain.Domain.Entities.ReservationRoom
+- uid: HotelChain.Domain.Entities.Room
+  commentId: T:HotelChain.Domain.Entities.Room
+  parent: HotelChain.Domain.Entities
+  href: HotelChain.Domain.Entities.Room.html
+  name: Room
+  nameWithType: Room
+  fullName: HotelChain.Domain.Entities.Room
+- uid: HotelChain.Domain.Entities.RoomInventory
+  commentId: T:HotelChain.Domain.Entities.RoomInventory
+  href: HotelChain.Domain.Entities.RoomInventory.html
+  name: RoomInventory
+  nameWithType: RoomInventory
+  fullName: HotelChain.Domain.Entities.RoomInventory
+- uid: HotelChain.Domain.Entities.RoomType
+  commentId: T:HotelChain.Domain.Entities.RoomType
+  parent: HotelChain.Domain.Entities
+  href: HotelChain.Domain.Entities.RoomType.html
+  name: RoomType
+  nameWithType: RoomType
+  fullName: HotelChain.Domain.Entities.RoomType
+- uid: HotelChain.Domain.Entities.RoomTypeInventory
+  commentId: T:HotelChain.Domain.Entities.RoomTypeInventory
+  href: HotelChain.Domain.Entities.RoomTypeInventory.html
+  name: RoomTypeInventory
+  nameWithType: RoomTypeInventory
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory
+- uid: HotelChain.Domain.Entities.SearchAudit
+  commentId: T:HotelChain.Domain.Entities.SearchAudit
+  href: HotelChain.Domain.Entities.SearchAudit.html
+  name: SearchAudit
+  nameWithType: SearchAudit
+  fullName: HotelChain.Domain.Entities.SearchAudit
+- uid: HotelChain.Domain.Entities
+  commentId: N:HotelChain.Domain.Entities
+  href: HotelChain.html
+  name: HotelChain.Domain.Entities
+  nameWithType: HotelChain.Domain.Entities
+  fullName: HotelChain.Domain.Entities
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Domain
+    name: Domain
+    href: HotelChain.Domain.html
+  - name: .
+  - uid: HotelChain.Domain.Entities
+    name: Entities
+    href: HotelChain.Domain.Entities.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Domain
+    name: Domain
+    href: HotelChain.Domain.html
+  - name: .
+  - uid: HotelChain.Domain.Entities
+    name: Entities
+    href: HotelChain.Domain.Entities.html

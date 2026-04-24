@@ -1,0 +1,901 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Domain.Entities.RoomTypeInventory
+  commentId: T:HotelChain.Domain.Entities.RoomTypeInventory
+  id: RoomTypeInventory
+  parent: HotelChain.Domain.Entities
+  children:
+  - HotelChain.Domain.Entities.RoomTypeInventory.ClosedToArrival
+  - HotelChain.Domain.Entities.RoomTypeInventory.ClosedToDeparture
+  - HotelChain.Domain.Entities.RoomTypeInventory.Date
+  - HotelChain.Domain.Entities.RoomTypeInventory.Hotel
+  - HotelChain.Domain.Entities.RoomTypeInventory.HotelId
+  - HotelChain.Domain.Entities.RoomTypeInventory.Id
+  - HotelChain.Domain.Entities.RoomTypeInventory.IsClosed
+  - HotelChain.Domain.Entities.RoomTypeInventory.MaxLengthOfStay
+  - HotelChain.Domain.Entities.RoomTypeInventory.MinLengthOfStay
+  - HotelChain.Domain.Entities.RoomTypeInventory.QuantityReserved
+  - HotelChain.Domain.Entities.RoomTypeInventory.QuantityTotal
+  - HotelChain.Domain.Entities.RoomTypeInventory.RoomType
+  - HotelChain.Domain.Entities.RoomTypeInventory.RoomTypeId
+  langs:
+  - csharp
+  - vb
+  name: RoomTypeInventory
+  nameWithType: RoomTypeInventory
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory
+  type: Class
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/RoomTypeInventory.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: RoomTypeInventory
+    path: ../HotelChain.Domain/Entities/RoomTypeInventory.cs
+    startLine: 14
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Inventario comercial diario por hotel y tipo de habitación.
+  remarks: >-
+    Esta entidad representa la capa comercial del inventario. Permite vender
+
+    por tipo de habitación sin amarrar la reserva desde el inicio a una
+
+    habitación física específica.
+
+
+    Además de las cantidades base y reservadas, concentra reglas comerciales
+
+    típicas de un motor hotelero real como cierre de ventas, restricciones de
+
+    llegada/salida y longitud mínima o máxima de estancia.
+  example: []
+  syntax:
+    content: public class RoomTypeInventory
+    content.vb: Public Class RoomTypeInventory
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.Id
+  commentId: P:HotelChain.Domain.Entities.RoomTypeInventory.Id
+  id: Id
+  parent: HotelChain.Domain.Entities.RoomTypeInventory
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: RoomTypeInventory.Id
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.Id
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/RoomTypeInventory.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Id
+    path: ../HotelChain.Domain/Entities/RoomTypeInventory.cs
+    startLine: 16
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public int Id { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Id As Integer
+  overload: HotelChain.Domain.Entities.RoomTypeInventory.Id*
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.HotelId
+  commentId: P:HotelChain.Domain.Entities.RoomTypeInventory.HotelId
+  id: HotelId
+  parent: HotelChain.Domain.Entities.RoomTypeInventory
+  langs:
+  - csharp
+  - vb
+  name: HotelId
+  nameWithType: RoomTypeInventory.HotelId
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.HotelId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/RoomTypeInventory.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: HotelId
+    path: ../HotelChain.Domain/Entities/RoomTypeInventory.cs
+    startLine: 18
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public int HotelId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property HotelId As Integer
+  overload: HotelChain.Domain.Entities.RoomTypeInventory.HotelId*
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.Hotel
+  commentId: P:HotelChain.Domain.Entities.RoomTypeInventory.Hotel
+  id: Hotel
+  parent: HotelChain.Domain.Entities.RoomTypeInventory
+  langs:
+  - csharp
+  - vb
+  name: Hotel
+  nameWithType: RoomTypeInventory.Hotel
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.Hotel
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/RoomTypeInventory.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Hotel
+    path: ../HotelChain.Domain/Entities/RoomTypeInventory.cs
+    startLine: 19
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public Hotel Hotel { get; set; }
+    parameters: []
+    return:
+      type: HotelChain.Domain.Entities.Hotel
+    content.vb: Public Property Hotel As Hotel
+  overload: HotelChain.Domain.Entities.RoomTypeInventory.Hotel*
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.RoomTypeId
+  commentId: P:HotelChain.Domain.Entities.RoomTypeInventory.RoomTypeId
+  id: RoomTypeId
+  parent: HotelChain.Domain.Entities.RoomTypeInventory
+  langs:
+  - csharp
+  - vb
+  name: RoomTypeId
+  nameWithType: RoomTypeInventory.RoomTypeId
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.RoomTypeId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/RoomTypeInventory.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: RoomTypeId
+    path: ../HotelChain.Domain/Entities/RoomTypeInventory.cs
+    startLine: 21
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public int RoomTypeId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property RoomTypeId As Integer
+  overload: HotelChain.Domain.Entities.RoomTypeInventory.RoomTypeId*
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.RoomType
+  commentId: P:HotelChain.Domain.Entities.RoomTypeInventory.RoomType
+  id: RoomType
+  parent: HotelChain.Domain.Entities.RoomTypeInventory
+  langs:
+  - csharp
+  - vb
+  name: RoomType
+  nameWithType: RoomTypeInventory.RoomType
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.RoomType
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/RoomTypeInventory.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: RoomType
+    path: ../HotelChain.Domain/Entities/RoomTypeInventory.cs
+    startLine: 22
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public RoomType RoomType { get; set; }
+    parameters: []
+    return:
+      type: HotelChain.Domain.Entities.RoomType
+    content.vb: Public Property RoomType As RoomType
+  overload: HotelChain.Domain.Entities.RoomTypeInventory.RoomType*
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.Date
+  commentId: P:HotelChain.Domain.Entities.RoomTypeInventory.Date
+  id: Date
+  parent: HotelChain.Domain.Entities.RoomTypeInventory
+  langs:
+  - csharp
+  - vb
+  name: Date
+  nameWithType: RoomTypeInventory.Date
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.Date
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/RoomTypeInventory.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Date
+    path: ../HotelChain.Domain/Entities/RoomTypeInventory.cs
+    startLine: 24
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  syntax:
+    content: public DateTime Date { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property [Date] As Date
+  overload: HotelChain.Domain.Entities.RoomTypeInventory.Date*
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.QuantityTotal
+  commentId: P:HotelChain.Domain.Entities.RoomTypeInventory.QuantityTotal
+  id: QuantityTotal
+  parent: HotelChain.Domain.Entities.RoomTypeInventory
+  langs:
+  - csharp
+  - vb
+  name: QuantityTotal
+  nameWithType: RoomTypeInventory.QuantityTotal
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.QuantityTotal
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/RoomTypeInventory.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: QuantityTotal
+    path: ../HotelChain.Domain/Entities/RoomTypeInventory.cs
+    startLine: 29
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Capacidad comercial total disponible para ese tipo de habitación en el hotel y fecha.
+  example: []
+  syntax:
+    content: public int QuantityTotal { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property QuantityTotal As Integer
+  overload: HotelChain.Domain.Entities.RoomTypeInventory.QuantityTotal*
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.QuantityReserved
+  commentId: P:HotelChain.Domain.Entities.RoomTypeInventory.QuantityReserved
+  id: QuantityReserved
+  parent: HotelChain.Domain.Entities.RoomTypeInventory
+  langs:
+  - csharp
+  - vb
+  name: QuantityReserved
+  nameWithType: RoomTypeInventory.QuantityReserved
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.QuantityReserved
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/RoomTypeInventory.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: QuantityReserved
+    path: ../HotelChain.Domain/Entities/RoomTypeInventory.cs
+    startLine: 34
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Cantidad ya comprometida por reservas comerciales para ese tipo de habitación.
+  example: []
+  syntax:
+    content: public int QuantityReserved { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property QuantityReserved As Integer
+  overload: HotelChain.Domain.Entities.RoomTypeInventory.QuantityReserved*
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.IsClosed
+  commentId: P:HotelChain.Domain.Entities.RoomTypeInventory.IsClosed
+  id: IsClosed
+  parent: HotelChain.Domain.Entities.RoomTypeInventory
+  langs:
+  - csharp
+  - vb
+  name: IsClosed
+  nameWithType: RoomTypeInventory.IsClosed
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.IsClosed
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/RoomTypeInventory.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: IsClosed
+    path: ../HotelChain.Domain/Entities/RoomTypeInventory.cs
+    startLine: 39
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Cierra por completo la venta comercial del tipo de habitación en la fecha.
+  example: []
+  syntax:
+    content: public bool IsClosed { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsClosed As Boolean
+  overload: HotelChain.Domain.Entities.RoomTypeInventory.IsClosed*
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.ClosedToArrival
+  commentId: P:HotelChain.Domain.Entities.RoomTypeInventory.ClosedToArrival
+  id: ClosedToArrival
+  parent: HotelChain.Domain.Entities.RoomTypeInventory
+  langs:
+  - csharp
+  - vb
+  name: ClosedToArrival
+  nameWithType: RoomTypeInventory.ClosedToArrival
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.ClosedToArrival
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/RoomTypeInventory.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ClosedToArrival
+    path: ../HotelChain.Domain/Entities/RoomTypeInventory.cs
+    startLine: 44
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Indica que no se permite llegar en esta fecha.
+  example: []
+  syntax:
+    content: public bool ClosedToArrival { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property ClosedToArrival As Boolean
+  overload: HotelChain.Domain.Entities.RoomTypeInventory.ClosedToArrival*
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.ClosedToDeparture
+  commentId: P:HotelChain.Domain.Entities.RoomTypeInventory.ClosedToDeparture
+  id: ClosedToDeparture
+  parent: HotelChain.Domain.Entities.RoomTypeInventory
+  langs:
+  - csharp
+  - vb
+  name: ClosedToDeparture
+  nameWithType: RoomTypeInventory.ClosedToDeparture
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.ClosedToDeparture
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/RoomTypeInventory.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ClosedToDeparture
+    path: ../HotelChain.Domain/Entities/RoomTypeInventory.cs
+    startLine: 49
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Indica que no se permite salir en esta fecha.
+  example: []
+  syntax:
+    content: public bool ClosedToDeparture { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property ClosedToDeparture As Boolean
+  overload: HotelChain.Domain.Entities.RoomTypeInventory.ClosedToDeparture*
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.MinLengthOfStay
+  commentId: P:HotelChain.Domain.Entities.RoomTypeInventory.MinLengthOfStay
+  id: MinLengthOfStay
+  parent: HotelChain.Domain.Entities.RoomTypeInventory
+  langs:
+  - csharp
+  - vb
+  name: MinLengthOfStay
+  nameWithType: RoomTypeInventory.MinLengthOfStay
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.MinLengthOfStay
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/RoomTypeInventory.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: MinLengthOfStay
+    path: ../HotelChain.Domain/Entities/RoomTypeInventory.cs
+    startLine: 54
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Mínimo de noches exigido para estancias que incluyan esta fecha.
+  example: []
+  syntax:
+    content: public int? MinLengthOfStay { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int32}
+    content.vb: Public Property MinLengthOfStay As Integer?
+  overload: HotelChain.Domain.Entities.RoomTypeInventory.MinLengthOfStay*
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.MaxLengthOfStay
+  commentId: P:HotelChain.Domain.Entities.RoomTypeInventory.MaxLengthOfStay
+  id: MaxLengthOfStay
+  parent: HotelChain.Domain.Entities.RoomTypeInventory
+  langs:
+  - csharp
+  - vb
+  name: MaxLengthOfStay
+  nameWithType: RoomTypeInventory.MaxLengthOfStay
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.MaxLengthOfStay
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Domain/Entities/RoomTypeInventory.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: MaxLengthOfStay
+    path: ../HotelChain.Domain/Entities/RoomTypeInventory.cs
+    startLine: 59
+  assemblies:
+  - HotelChain.Domain
+  namespace: HotelChain.Domain.Entities
+  summary: Máximo de noches permitido para estancias que incluyan esta fecha.
+  example: []
+  syntax:
+    content: public int? MaxLengthOfStay { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int32}
+    content.vb: Public Property MaxLengthOfStay As Integer?
+  overload: HotelChain.Domain.Entities.RoomTypeInventory.MaxLengthOfStay*
+references:
+- uid: HotelChain.Domain.Entities
+  commentId: N:HotelChain.Domain.Entities
+  href: HotelChain.html
+  name: HotelChain.Domain.Entities
+  nameWithType: HotelChain.Domain.Entities
+  fullName: HotelChain.Domain.Entities
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Domain
+    name: Domain
+    href: HotelChain.Domain.html
+  - name: .
+  - uid: HotelChain.Domain.Entities
+    name: Entities
+    href: HotelChain.Domain.Entities.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Domain
+    name: Domain
+    href: HotelChain.Domain.html
+  - name: .
+  - uid: HotelChain.Domain.Entities
+    name: Entities
+    href: HotelChain.Domain.Entities.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.Id*
+  commentId: Overload:HotelChain.Domain.Entities.RoomTypeInventory.Id
+  href: HotelChain.Domain.Entities.RoomTypeInventory.html#HotelChain_Domain_Entities_RoomTypeInventory_Id
+  name: Id
+  nameWithType: RoomTypeInventory.Id
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.Id
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.HotelId*
+  commentId: Overload:HotelChain.Domain.Entities.RoomTypeInventory.HotelId
+  href: HotelChain.Domain.Entities.RoomTypeInventory.html#HotelChain_Domain_Entities_RoomTypeInventory_HotelId
+  name: HotelId
+  nameWithType: RoomTypeInventory.HotelId
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.HotelId
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.Hotel*
+  commentId: Overload:HotelChain.Domain.Entities.RoomTypeInventory.Hotel
+  href: HotelChain.Domain.Entities.RoomTypeInventory.html#HotelChain_Domain_Entities_RoomTypeInventory_Hotel
+  name: Hotel
+  nameWithType: RoomTypeInventory.Hotel
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.Hotel
+- uid: HotelChain.Domain.Entities.Hotel
+  commentId: T:HotelChain.Domain.Entities.Hotel
+  parent: HotelChain.Domain.Entities
+  href: HotelChain.Domain.Entities.Hotel.html
+  name: Hotel
+  nameWithType: Hotel
+  fullName: HotelChain.Domain.Entities.Hotel
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.RoomTypeId*
+  commentId: Overload:HotelChain.Domain.Entities.RoomTypeInventory.RoomTypeId
+  href: HotelChain.Domain.Entities.RoomTypeInventory.html#HotelChain_Domain_Entities_RoomTypeInventory_RoomTypeId
+  name: RoomTypeId
+  nameWithType: RoomTypeInventory.RoomTypeId
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.RoomTypeId
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.RoomType*
+  commentId: Overload:HotelChain.Domain.Entities.RoomTypeInventory.RoomType
+  href: HotelChain.Domain.Entities.RoomTypeInventory.html#HotelChain_Domain_Entities_RoomTypeInventory_RoomType
+  name: RoomType
+  nameWithType: RoomTypeInventory.RoomType
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.RoomType
+- uid: HotelChain.Domain.Entities.RoomType
+  commentId: T:HotelChain.Domain.Entities.RoomType
+  parent: HotelChain.Domain.Entities
+  href: HotelChain.Domain.Entities.RoomType.html
+  name: RoomType
+  nameWithType: RoomType
+  fullName: HotelChain.Domain.Entities.RoomType
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.Date*
+  commentId: Overload:HotelChain.Domain.Entities.RoomTypeInventory.Date
+  href: HotelChain.Domain.Entities.RoomTypeInventory.html#HotelChain_Domain_Entities_RoomTypeInventory_Date
+  name: Date
+  nameWithType: RoomTypeInventory.Date
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.Date
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+  nameWithType.vb: Date
+  fullName.vb: Date
+  name.vb: Date
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.QuantityTotal*
+  commentId: Overload:HotelChain.Domain.Entities.RoomTypeInventory.QuantityTotal
+  href: HotelChain.Domain.Entities.RoomTypeInventory.html#HotelChain_Domain_Entities_RoomTypeInventory_QuantityTotal
+  name: QuantityTotal
+  nameWithType: RoomTypeInventory.QuantityTotal
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.QuantityTotal
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.QuantityReserved*
+  commentId: Overload:HotelChain.Domain.Entities.RoomTypeInventory.QuantityReserved
+  href: HotelChain.Domain.Entities.RoomTypeInventory.html#HotelChain_Domain_Entities_RoomTypeInventory_QuantityReserved
+  name: QuantityReserved
+  nameWithType: RoomTypeInventory.QuantityReserved
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.QuantityReserved
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.IsClosed*
+  commentId: Overload:HotelChain.Domain.Entities.RoomTypeInventory.IsClosed
+  href: HotelChain.Domain.Entities.RoomTypeInventory.html#HotelChain_Domain_Entities_RoomTypeInventory_IsClosed
+  name: IsClosed
+  nameWithType: RoomTypeInventory.IsClosed
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.IsClosed
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.ClosedToArrival*
+  commentId: Overload:HotelChain.Domain.Entities.RoomTypeInventory.ClosedToArrival
+  href: HotelChain.Domain.Entities.RoomTypeInventory.html#HotelChain_Domain_Entities_RoomTypeInventory_ClosedToArrival
+  name: ClosedToArrival
+  nameWithType: RoomTypeInventory.ClosedToArrival
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.ClosedToArrival
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.ClosedToDeparture*
+  commentId: Overload:HotelChain.Domain.Entities.RoomTypeInventory.ClosedToDeparture
+  href: HotelChain.Domain.Entities.RoomTypeInventory.html#HotelChain_Domain_Entities_RoomTypeInventory_ClosedToDeparture
+  name: ClosedToDeparture
+  nameWithType: RoomTypeInventory.ClosedToDeparture
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.ClosedToDeparture
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.MinLengthOfStay*
+  commentId: Overload:HotelChain.Domain.Entities.RoomTypeInventory.MinLengthOfStay
+  href: HotelChain.Domain.Entities.RoomTypeInventory.html#HotelChain_Domain_Entities_RoomTypeInventory_MinLengthOfStay
+  name: MinLengthOfStay
+  nameWithType: RoomTypeInventory.MinLengthOfStay
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.MinLengthOfStay
+- uid: System.Nullable{System.Int32}
+  commentId: T:System.Nullable{System.Int32}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int?
+  nameWithType: int?
+  fullName: int?
+  nameWithType.vb: Integer?
+  fullName.vb: Integer?
+  name.vb: Integer?
+  spec.csharp:
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '?'
+  spec.vb:
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: HotelChain.Domain.Entities.RoomTypeInventory.MaxLengthOfStay*
+  commentId: Overload:HotelChain.Domain.Entities.RoomTypeInventory.MaxLengthOfStay
+  href: HotelChain.Domain.Entities.RoomTypeInventory.html#HotelChain_Domain_Entities_RoomTypeInventory_MaxLengthOfStay
+  name: MaxLengthOfStay
+  nameWithType: RoomTypeInventory.MaxLengthOfStay
+  fullName: HotelChain.Domain.Entities.RoomTypeInventory.MaxLengthOfStay

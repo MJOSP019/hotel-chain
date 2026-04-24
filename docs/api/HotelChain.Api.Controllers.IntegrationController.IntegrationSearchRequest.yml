@@ -1,0 +1,713 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  commentId: T:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  id: IntegrationController.IntegrationSearchRequest
+  parent: HotelChain.Api.Controllers
+  children:
+  - HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckIn
+  - HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckOut
+  - HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CityId
+  - HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.Guests
+  - HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MaxPrice
+  - HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinPrice
+  - HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinRating
+  - HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.RoomTypeId
+  langs:
+  - csharp
+  - vb
+  name: IntegrationController.IntegrationSearchRequest
+  nameWithType: IntegrationController.IntegrationSearchRequest
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  type: Class
+  source:
+    remote:
+      path: HotelChain.Api/Controllers/IntegrationController.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: IntegrationSearchRequest
+    path: ../HotelChain.Api/Controllers/IntegrationController.cs
+    startLine: 21
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Controllers
+  syntax:
+    content: public class IntegrationController.IntegrationSearchRequest
+    content.vb: Public Class IntegrationController.IntegrationSearchRequest
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CityId
+  commentId: P:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CityId
+  id: CityId
+  parent: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  langs:
+  - csharp
+  - vb
+  name: CityId
+  nameWithType: IntegrationController.IntegrationSearchRequest.CityId
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CityId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Controllers/IntegrationController.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CityId
+    path: ../HotelChain.Api/Controllers/IntegrationController.cs
+    startLine: 23
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Controllers
+  syntax:
+    content: public int CityId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property CityId As Integer
+  overload: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CityId*
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckIn
+  commentId: P:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckIn
+  id: CheckIn
+  parent: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  langs:
+  - csharp
+  - vb
+  name: CheckIn
+  nameWithType: IntegrationController.IntegrationSearchRequest.CheckIn
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckIn
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Controllers/IntegrationController.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CheckIn
+    path: ../HotelChain.Api/Controllers/IntegrationController.cs
+    startLine: 24
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Controllers
+  syntax:
+    content: public DateTime CheckIn { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CheckIn As Date
+  overload: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckIn*
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckOut
+  commentId: P:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckOut
+  id: CheckOut
+  parent: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  langs:
+  - csharp
+  - vb
+  name: CheckOut
+  nameWithType: IntegrationController.IntegrationSearchRequest.CheckOut
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckOut
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Controllers/IntegrationController.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CheckOut
+    path: ../HotelChain.Api/Controllers/IntegrationController.cs
+    startLine: 25
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Controllers
+  syntax:
+    content: public DateTime CheckOut { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property CheckOut As Date
+  overload: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckOut*
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.Guests
+  commentId: P:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.Guests
+  id: Guests
+  parent: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  langs:
+  - csharp
+  - vb
+  name: Guests
+  nameWithType: IntegrationController.IntegrationSearchRequest.Guests
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.Guests
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Controllers/IntegrationController.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Guests
+    path: ../HotelChain.Api/Controllers/IntegrationController.cs
+    startLine: 26
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Controllers
+  syntax:
+    content: public int Guests { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Guests As Integer
+  overload: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.Guests*
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinPrice
+  commentId: P:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinPrice
+  id: MinPrice
+  parent: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  langs:
+  - csharp
+  - vb
+  name: MinPrice
+  nameWithType: IntegrationController.IntegrationSearchRequest.MinPrice
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinPrice
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Controllers/IntegrationController.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: MinPrice
+    path: ../HotelChain.Api/Controllers/IntegrationController.cs
+    startLine: 27
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Controllers
+  syntax:
+    content: public decimal? MinPrice { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Decimal}
+    content.vb: Public Property MinPrice As Decimal?
+  overload: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinPrice*
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MaxPrice
+  commentId: P:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MaxPrice
+  id: MaxPrice
+  parent: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  langs:
+  - csharp
+  - vb
+  name: MaxPrice
+  nameWithType: IntegrationController.IntegrationSearchRequest.MaxPrice
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MaxPrice
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Controllers/IntegrationController.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: MaxPrice
+    path: ../HotelChain.Api/Controllers/IntegrationController.cs
+    startLine: 28
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Controllers
+  syntax:
+    content: public decimal? MaxPrice { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Decimal}
+    content.vb: Public Property MaxPrice As Decimal?
+  overload: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MaxPrice*
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.RoomTypeId
+  commentId: P:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.RoomTypeId
+  id: RoomTypeId
+  parent: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  langs:
+  - csharp
+  - vb
+  name: RoomTypeId
+  nameWithType: IntegrationController.IntegrationSearchRequest.RoomTypeId
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.RoomTypeId
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Controllers/IntegrationController.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: RoomTypeId
+    path: ../HotelChain.Api/Controllers/IntegrationController.cs
+    startLine: 29
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Controllers
+  syntax:
+    content: public int? RoomTypeId { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int32}
+    content.vb: Public Property RoomTypeId As Integer?
+  overload: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.RoomTypeId*
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinRating
+  commentId: P:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinRating
+  id: MinRating
+  parent: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest
+  langs:
+  - csharp
+  - vb
+  name: MinRating
+  nameWithType: IntegrationController.IntegrationSearchRequest.MinRating
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinRating
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Api/Controllers/IntegrationController.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: MinRating
+    path: ../HotelChain.Api/Controllers/IntegrationController.cs
+    startLine: 30
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Controllers
+  syntax:
+    content: public double? MinRating { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Double}
+    content.vb: Public Property MinRating As Double?
+  overload: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinRating*
+references:
+- uid: HotelChain.Api.Controllers
+  commentId: N:HotelChain.Api.Controllers
+  href: HotelChain.html
+  name: HotelChain.Api.Controllers
+  nameWithType: HotelChain.Api.Controllers
+  fullName: HotelChain.Api.Controllers
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Controllers
+    name: Controllers
+    href: HotelChain.Api.Controllers.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Controllers
+    name: Controllers
+    href: HotelChain.Api.Controllers.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CityId*
+  commentId: Overload:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CityId
+  href: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.html#HotelChain_Api_Controllers_IntegrationController_IntegrationSearchRequest_CityId
+  name: CityId
+  nameWithType: IntegrationController.IntegrationSearchRequest.CityId
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CityId
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckIn*
+  commentId: Overload:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckIn
+  href: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.html#HotelChain_Api_Controllers_IntegrationController_IntegrationSearchRequest_CheckIn
+  name: CheckIn
+  nameWithType: IntegrationController.IntegrationSearchRequest.CheckIn
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckIn
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+  nameWithType.vb: Date
+  fullName.vb: Date
+  name.vb: Date
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckOut*
+  commentId: Overload:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckOut
+  href: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.html#HotelChain_Api_Controllers_IntegrationController_IntegrationSearchRequest_CheckOut
+  name: CheckOut
+  nameWithType: IntegrationController.IntegrationSearchRequest.CheckOut
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.CheckOut
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.Guests*
+  commentId: Overload:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.Guests
+  href: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.html#HotelChain_Api_Controllers_IntegrationController_IntegrationSearchRequest_Guests
+  name: Guests
+  nameWithType: IntegrationController.IntegrationSearchRequest.Guests
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.Guests
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinPrice*
+  commentId: Overload:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinPrice
+  href: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.html#HotelChain_Api_Controllers_IntegrationController_IntegrationSearchRequest_MinPrice
+  name: MinPrice
+  nameWithType: IntegrationController.IntegrationSearchRequest.MinPrice
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinPrice
+- uid: System.Nullable{System.Decimal}
+  commentId: T:System.Nullable{System.Decimal}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.decimal
+  name: decimal?
+  nameWithType: decimal?
+  fullName: decimal?
+  nameWithType.vb: Decimal?
+  fullName.vb: Decimal?
+  name.vb: Decimal?
+  spec.csharp:
+  - uid: System.Decimal
+    name: decimal
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.decimal
+  - name: '?'
+  spec.vb:
+  - uid: System.Decimal
+    name: Decimal
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.decimal
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MaxPrice*
+  commentId: Overload:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MaxPrice
+  href: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.html#HotelChain_Api_Controllers_IntegrationController_IntegrationSearchRequest_MaxPrice
+  name: MaxPrice
+  nameWithType: IntegrationController.IntegrationSearchRequest.MaxPrice
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MaxPrice
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.RoomTypeId*
+  commentId: Overload:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.RoomTypeId
+  href: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.html#HotelChain_Api_Controllers_IntegrationController_IntegrationSearchRequest_RoomTypeId
+  name: RoomTypeId
+  nameWithType: IntegrationController.IntegrationSearchRequest.RoomTypeId
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.RoomTypeId
+- uid: System.Nullable{System.Int32}
+  commentId: T:System.Nullable{System.Int32}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int?
+  nameWithType: int?
+  fullName: int?
+  nameWithType.vb: Integer?
+  fullName.vb: Integer?
+  name.vb: Integer?
+  spec.csharp:
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '?'
+  spec.vb:
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '?'
+- uid: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinRating*
+  commentId: Overload:HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinRating
+  href: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.html#HotelChain_Api_Controllers_IntegrationController_IntegrationSearchRequest_MinRating
+  name: MinRating
+  nameWithType: IntegrationController.IntegrationSearchRequest.MinRating
+  fullName: HotelChain.Api.Controllers.IntegrationController.IntegrationSearchRequest.MinRating
+- uid: System.Nullable{System.Double}
+  commentId: T:System.Nullable{System.Double}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double?
+  nameWithType: double?
+  fullName: double?
+  nameWithType.vb: Double?
+  fullName.vb: Double?
+  name.vb: Double?
+  spec.csharp:
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '?'
+  spec.vb:
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '?'

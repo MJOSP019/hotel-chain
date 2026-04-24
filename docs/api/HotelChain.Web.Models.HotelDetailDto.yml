@@ -1,0 +1,1007 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Web.Models.HotelDetailDto
+  commentId: T:HotelChain.Web.Models.HotelDetailDto
+  id: HotelDetailDto
+  parent: HotelChain.Web.Models
+  children:
+  - HotelChain.Web.Models.HotelDetailDto.Address
+  - HotelChain.Web.Models.HotelDetailDto.Amenities
+  - HotelChain.Web.Models.HotelDetailDto.AverageRating
+  - HotelChain.Web.Models.HotelDetailDto.City
+  - HotelChain.Web.Models.HotelDetailDto.Code
+  - HotelChain.Web.Models.HotelDetailDto.Description
+  - HotelChain.Web.Models.HotelDetailDto.Id
+  - HotelChain.Web.Models.HotelDetailDto.MainImageUrl
+  - HotelChain.Web.Models.HotelDetailDto.Name
+  - HotelChain.Web.Models.HotelDetailDto.RestrictionMessages
+  - HotelChain.Web.Models.HotelDetailDto.Reviews
+  - HotelChain.Web.Models.HotelDetailDto.ReviewsCount
+  - HotelChain.Web.Models.HotelDetailDto.RoomOptions
+  - HotelChain.Web.Models.HotelDetailDto.ZoneInfo
+  langs:
+  - csharp
+  - vb
+  name: HotelDetailDto
+  nameWithType: HotelDetailDto
+  fullName: HotelChain.Web.Models.HotelDetailDto
+  type: Class
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: HotelDetailDto
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 2
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public class HotelDetailDto
+    content.vb: Public Class HotelDetailDto
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: HotelChain.Web.Models.HotelDetailDto.Id
+  commentId: P:HotelChain.Web.Models.HotelDetailDto.Id
+  id: Id
+  parent: HotelChain.Web.Models.HotelDetailDto
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: HotelDetailDto.Id
+  fullName: HotelChain.Web.Models.HotelDetailDto.Id
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Id
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 4
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public int Id { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Id As Integer
+  overload: HotelChain.Web.Models.HotelDetailDto.Id*
+- uid: HotelChain.Web.Models.HotelDetailDto.Code
+  commentId: P:HotelChain.Web.Models.HotelDetailDto.Code
+  id: Code
+  parent: HotelChain.Web.Models.HotelDetailDto
+  langs:
+  - csharp
+  - vb
+  name: Code
+  nameWithType: HotelDetailDto.Code
+  fullName: HotelChain.Web.Models.HotelDetailDto.Code
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Code
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 5
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string Code { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Code As String
+  overload: HotelChain.Web.Models.HotelDetailDto.Code*
+- uid: HotelChain.Web.Models.HotelDetailDto.Name
+  commentId: P:HotelChain.Web.Models.HotelDetailDto.Name
+  id: Name
+  parent: HotelChain.Web.Models.HotelDetailDto
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: HotelDetailDto.Name
+  fullName: HotelChain.Web.Models.HotelDetailDto.Name
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Name
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 6
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Name As String
+  overload: HotelChain.Web.Models.HotelDetailDto.Name*
+- uid: HotelChain.Web.Models.HotelDetailDto.Address
+  commentId: P:HotelChain.Web.Models.HotelDetailDto.Address
+  id: Address
+  parent: HotelChain.Web.Models.HotelDetailDto
+  langs:
+  - csharp
+  - vb
+  name: Address
+  nameWithType: HotelDetailDto.Address
+  fullName: HotelChain.Web.Models.HotelDetailDto.Address
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Address
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 7
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string Address { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Address As String
+  overload: HotelChain.Web.Models.HotelDetailDto.Address*
+- uid: HotelChain.Web.Models.HotelDetailDto.Description
+  commentId: P:HotelChain.Web.Models.HotelDetailDto.Description
+  id: Description
+  parent: HotelChain.Web.Models.HotelDetailDto
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: HotelDetailDto.Description
+  fullName: HotelChain.Web.Models.HotelDetailDto.Description
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Description
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 8
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string? Description { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Description As String
+  overload: HotelChain.Web.Models.HotelDetailDto.Description*
+- uid: HotelChain.Web.Models.HotelDetailDto.MainImageUrl
+  commentId: P:HotelChain.Web.Models.HotelDetailDto.MainImageUrl
+  id: MainImageUrl
+  parent: HotelChain.Web.Models.HotelDetailDto
+  langs:
+  - csharp
+  - vb
+  name: MainImageUrl
+  nameWithType: HotelDetailDto.MainImageUrl
+  fullName: HotelChain.Web.Models.HotelDetailDto.MainImageUrl
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: MainImageUrl
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 9
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string? MainImageUrl { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property MainImageUrl As String
+  overload: HotelChain.Web.Models.HotelDetailDto.MainImageUrl*
+- uid: HotelChain.Web.Models.HotelDetailDto.ZoneInfo
+  commentId: P:HotelChain.Web.Models.HotelDetailDto.ZoneInfo
+  id: ZoneInfo
+  parent: HotelChain.Web.Models.HotelDetailDto
+  langs:
+  - csharp
+  - vb
+  name: ZoneInfo
+  nameWithType: HotelDetailDto.ZoneInfo
+  fullName: HotelChain.Web.Models.HotelDetailDto.ZoneInfo
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ZoneInfo
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 10
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string? ZoneInfo { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ZoneInfo As String
+  overload: HotelChain.Web.Models.HotelDetailDto.ZoneInfo*
+- uid: HotelChain.Web.Models.HotelDetailDto.Amenities
+  commentId: P:HotelChain.Web.Models.HotelDetailDto.Amenities
+  id: Amenities
+  parent: HotelChain.Web.Models.HotelDetailDto
+  langs:
+  - csharp
+  - vb
+  name: Amenities
+  nameWithType: HotelDetailDto.Amenities
+  fullName: HotelChain.Web.Models.HotelDetailDto.Amenities
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Amenities
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 11
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string? Amenities { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Amenities As String
+  overload: HotelChain.Web.Models.HotelDetailDto.Amenities*
+- uid: HotelChain.Web.Models.HotelDetailDto.City
+  commentId: P:HotelChain.Web.Models.HotelDetailDto.City
+  id: City
+  parent: HotelChain.Web.Models.HotelDetailDto
+  langs:
+  - csharp
+  - vb
+  name: City
+  nameWithType: HotelDetailDto.City
+  fullName: HotelChain.Web.Models.HotelDetailDto.City
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: City
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 12
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public string City { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property City As String
+  overload: HotelChain.Web.Models.HotelDetailDto.City*
+- uid: HotelChain.Web.Models.HotelDetailDto.AverageRating
+  commentId: P:HotelChain.Web.Models.HotelDetailDto.AverageRating
+  id: AverageRating
+  parent: HotelChain.Web.Models.HotelDetailDto
+  langs:
+  - csharp
+  - vb
+  name: AverageRating
+  nameWithType: HotelDetailDto.AverageRating
+  fullName: HotelChain.Web.Models.HotelDetailDto.AverageRating
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: AverageRating
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 13
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public decimal AverageRating { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+    content.vb: Public Property AverageRating As Decimal
+  overload: HotelChain.Web.Models.HotelDetailDto.AverageRating*
+- uid: HotelChain.Web.Models.HotelDetailDto.ReviewsCount
+  commentId: P:HotelChain.Web.Models.HotelDetailDto.ReviewsCount
+  id: ReviewsCount
+  parent: HotelChain.Web.Models.HotelDetailDto
+  langs:
+  - csharp
+  - vb
+  name: ReviewsCount
+  nameWithType: HotelDetailDto.ReviewsCount
+  fullName: HotelChain.Web.Models.HotelDetailDto.ReviewsCount
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ReviewsCount
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 14
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public int ReviewsCount { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property ReviewsCount As Integer
+  overload: HotelChain.Web.Models.HotelDetailDto.ReviewsCount*
+- uid: HotelChain.Web.Models.HotelDetailDto.RoomOptions
+  commentId: P:HotelChain.Web.Models.HotelDetailDto.RoomOptions
+  id: RoomOptions
+  parent: HotelChain.Web.Models.HotelDetailDto
+  langs:
+  - csharp
+  - vb
+  name: RoomOptions
+  nameWithType: HotelDetailDto.RoomOptions
+  fullName: HotelChain.Web.Models.HotelDetailDto.RoomOptions
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: RoomOptions
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 15
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public List<HotelRoomOptionDto> RoomOptions { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{HotelChain.Web.Models.HotelRoomOptionDto}
+    content.vb: Public Property RoomOptions As List(Of HotelRoomOptionDto)
+  overload: HotelChain.Web.Models.HotelDetailDto.RoomOptions*
+- uid: HotelChain.Web.Models.HotelDetailDto.RestrictionMessages
+  commentId: P:HotelChain.Web.Models.HotelDetailDto.RestrictionMessages
+  id: RestrictionMessages
+  parent: HotelChain.Web.Models.HotelDetailDto
+  langs:
+  - csharp
+  - vb
+  name: RestrictionMessages
+  nameWithType: HotelDetailDto.RestrictionMessages
+  fullName: HotelChain.Web.Models.HotelDetailDto.RestrictionMessages
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: RestrictionMessages
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 16
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public List<HotelRestrictionMessageDto> RestrictionMessages { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{HotelChain.Web.Models.HotelRestrictionMessageDto}
+    content.vb: Public Property RestrictionMessages As List(Of HotelRestrictionMessageDto)
+  overload: HotelChain.Web.Models.HotelDetailDto.RestrictionMessages*
+- uid: HotelChain.Web.Models.HotelDetailDto.Reviews
+  commentId: P:HotelChain.Web.Models.HotelDetailDto.Reviews
+  id: Reviews
+  parent: HotelChain.Web.Models.HotelDetailDto
+  langs:
+  - csharp
+  - vb
+  name: Reviews
+  nameWithType: HotelDetailDto.Reviews
+  fullName: HotelChain.Web.Models.HotelDetailDto.Reviews
+  type: Property
+  source:
+    remote:
+      path: HotelChain.Web/Models/HotelDetailModels.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Reviews
+    path: ../HotelChain.Web/Models/HotelDetailModels.cs
+    startLine: 17
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Models
+  syntax:
+    content: public List<HotelReviewDto> Reviews { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{HotelChain.Web.Models.HotelReviewDto}
+    content.vb: Public Property Reviews As List(Of HotelReviewDto)
+  overload: HotelChain.Web.Models.HotelDetailDto.Reviews*
+references:
+- uid: HotelChain.Web.Models
+  commentId: N:HotelChain.Web.Models
+  href: HotelChain.html
+  name: HotelChain.Web.Models
+  nameWithType: HotelChain.Web.Models
+  fullName: HotelChain.Web.Models
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Web
+    name: Web
+    href: HotelChain.Web.html
+  - name: .
+  - uid: HotelChain.Web.Models
+    name: Models
+    href: HotelChain.Web.Models.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Web
+    name: Web
+    href: HotelChain.Web.html
+  - name: .
+  - uid: HotelChain.Web.Models
+    name: Models
+    href: HotelChain.Web.Models.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Web.Models.HotelDetailDto.Id*
+  commentId: Overload:HotelChain.Web.Models.HotelDetailDto.Id
+  href: HotelChain.Web.Models.HotelDetailDto.html#HotelChain_Web_Models_HotelDetailDto_Id
+  name: Id
+  nameWithType: HotelDetailDto.Id
+  fullName: HotelChain.Web.Models.HotelDetailDto.Id
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: HotelChain.Web.Models.HotelDetailDto.Code*
+  commentId: Overload:HotelChain.Web.Models.HotelDetailDto.Code
+  href: HotelChain.Web.Models.HotelDetailDto.html#HotelChain_Web_Models_HotelDetailDto_Code
+  name: Code
+  nameWithType: HotelDetailDto.Code
+  fullName: HotelChain.Web.Models.HotelDetailDto.Code
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: HotelChain.Web.Models.HotelDetailDto.Name*
+  commentId: Overload:HotelChain.Web.Models.HotelDetailDto.Name
+  href: HotelChain.Web.Models.HotelDetailDto.html#HotelChain_Web_Models_HotelDetailDto_Name
+  name: Name
+  nameWithType: HotelDetailDto.Name
+  fullName: HotelChain.Web.Models.HotelDetailDto.Name
+- uid: HotelChain.Web.Models.HotelDetailDto.Address*
+  commentId: Overload:HotelChain.Web.Models.HotelDetailDto.Address
+  href: HotelChain.Web.Models.HotelDetailDto.html#HotelChain_Web_Models_HotelDetailDto_Address
+  name: Address
+  nameWithType: HotelDetailDto.Address
+  fullName: HotelChain.Web.Models.HotelDetailDto.Address
+- uid: HotelChain.Web.Models.HotelDetailDto.Description*
+  commentId: Overload:HotelChain.Web.Models.HotelDetailDto.Description
+  href: HotelChain.Web.Models.HotelDetailDto.html#HotelChain_Web_Models_HotelDetailDto_Description
+  name: Description
+  nameWithType: HotelDetailDto.Description
+  fullName: HotelChain.Web.Models.HotelDetailDto.Description
+- uid: HotelChain.Web.Models.HotelDetailDto.MainImageUrl*
+  commentId: Overload:HotelChain.Web.Models.HotelDetailDto.MainImageUrl
+  href: HotelChain.Web.Models.HotelDetailDto.html#HotelChain_Web_Models_HotelDetailDto_MainImageUrl
+  name: MainImageUrl
+  nameWithType: HotelDetailDto.MainImageUrl
+  fullName: HotelChain.Web.Models.HotelDetailDto.MainImageUrl
+- uid: HotelChain.Web.Models.HotelDetailDto.ZoneInfo*
+  commentId: Overload:HotelChain.Web.Models.HotelDetailDto.ZoneInfo
+  href: HotelChain.Web.Models.HotelDetailDto.html#HotelChain_Web_Models_HotelDetailDto_ZoneInfo
+  name: ZoneInfo
+  nameWithType: HotelDetailDto.ZoneInfo
+  fullName: HotelChain.Web.Models.HotelDetailDto.ZoneInfo
+- uid: HotelChain.Web.Models.HotelDetailDto.Amenities*
+  commentId: Overload:HotelChain.Web.Models.HotelDetailDto.Amenities
+  href: HotelChain.Web.Models.HotelDetailDto.html#HotelChain_Web_Models_HotelDetailDto_Amenities
+  name: Amenities
+  nameWithType: HotelDetailDto.Amenities
+  fullName: HotelChain.Web.Models.HotelDetailDto.Amenities
+- uid: HotelChain.Web.Models.HotelDetailDto.City*
+  commentId: Overload:HotelChain.Web.Models.HotelDetailDto.City
+  href: HotelChain.Web.Models.HotelDetailDto.html#HotelChain_Web_Models_HotelDetailDto_City
+  name: City
+  nameWithType: HotelDetailDto.City
+  fullName: HotelChain.Web.Models.HotelDetailDto.City
+- uid: HotelChain.Web.Models.HotelDetailDto.AverageRating*
+  commentId: Overload:HotelChain.Web.Models.HotelDetailDto.AverageRating
+  href: HotelChain.Web.Models.HotelDetailDto.html#HotelChain_Web_Models_HotelDetailDto_AverageRating
+  name: AverageRating
+  nameWithType: HotelDetailDto.AverageRating
+  fullName: HotelChain.Web.Models.HotelDetailDto.AverageRating
+- uid: System.Decimal
+  commentId: T:System.Decimal
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.decimal
+  name: decimal
+  nameWithType: decimal
+  fullName: decimal
+  nameWithType.vb: Decimal
+  fullName.vb: Decimal
+  name.vb: Decimal
+- uid: HotelChain.Web.Models.HotelDetailDto.ReviewsCount*
+  commentId: Overload:HotelChain.Web.Models.HotelDetailDto.ReviewsCount
+  href: HotelChain.Web.Models.HotelDetailDto.html#HotelChain_Web_Models_HotelDetailDto_ReviewsCount
+  name: ReviewsCount
+  nameWithType: HotelDetailDto.ReviewsCount
+  fullName: HotelChain.Web.Models.HotelDetailDto.ReviewsCount
+- uid: HotelChain.Web.Models.HotelDetailDto.RoomOptions*
+  commentId: Overload:HotelChain.Web.Models.HotelDetailDto.RoomOptions
+  href: HotelChain.Web.Models.HotelDetailDto.html#HotelChain_Web_Models_HotelDetailDto_RoomOptions
+  name: RoomOptions
+  nameWithType: HotelDetailDto.RoomOptions
+  fullName: HotelChain.Web.Models.HotelDetailDto.RoomOptions
+- uid: System.Collections.Generic.List{HotelChain.Web.Models.HotelRoomOptionDto}
+  commentId: T:System.Collections.Generic.List{HotelChain.Web.Models.HotelRoomOptionDto}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<HotelRoomOptionDto>
+  nameWithType: List<HotelRoomOptionDto>
+  fullName: System.Collections.Generic.List<HotelChain.Web.Models.HotelRoomOptionDto>
+  nameWithType.vb: List(Of HotelRoomOptionDto)
+  fullName.vb: System.Collections.Generic.List(Of HotelChain.Web.Models.HotelRoomOptionDto)
+  name.vb: List(Of HotelRoomOptionDto)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: HotelChain.Web.Models.HotelRoomOptionDto
+    name: HotelRoomOptionDto
+    href: HotelChain.Web.Models.HotelRoomOptionDto.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: HotelChain.Web.Models.HotelRoomOptionDto
+    name: HotelRoomOptionDto
+    href: HotelChain.Web.Models.HotelRoomOptionDto.html
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: HotelChain.Web.Models.HotelDetailDto.RestrictionMessages*
+  commentId: Overload:HotelChain.Web.Models.HotelDetailDto.RestrictionMessages
+  href: HotelChain.Web.Models.HotelDetailDto.html#HotelChain_Web_Models_HotelDetailDto_RestrictionMessages
+  name: RestrictionMessages
+  nameWithType: HotelDetailDto.RestrictionMessages
+  fullName: HotelChain.Web.Models.HotelDetailDto.RestrictionMessages
+- uid: System.Collections.Generic.List{HotelChain.Web.Models.HotelRestrictionMessageDto}
+  commentId: T:System.Collections.Generic.List{HotelChain.Web.Models.HotelRestrictionMessageDto}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<HotelRestrictionMessageDto>
+  nameWithType: List<HotelRestrictionMessageDto>
+  fullName: System.Collections.Generic.List<HotelChain.Web.Models.HotelRestrictionMessageDto>
+  nameWithType.vb: List(Of HotelRestrictionMessageDto)
+  fullName.vb: System.Collections.Generic.List(Of HotelChain.Web.Models.HotelRestrictionMessageDto)
+  name.vb: List(Of HotelRestrictionMessageDto)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: HotelChain.Web.Models.HotelRestrictionMessageDto
+    name: HotelRestrictionMessageDto
+    href: HotelChain.Web.Models.HotelRestrictionMessageDto.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: HotelChain.Web.Models.HotelRestrictionMessageDto
+    name: HotelRestrictionMessageDto
+    href: HotelChain.Web.Models.HotelRestrictionMessageDto.html
+  - name: )
+- uid: HotelChain.Web.Models.HotelDetailDto.Reviews*
+  commentId: Overload:HotelChain.Web.Models.HotelDetailDto.Reviews
+  href: HotelChain.Web.Models.HotelDetailDto.html#HotelChain_Web_Models_HotelDetailDto_Reviews
+  name: Reviews
+  nameWithType: HotelDetailDto.Reviews
+  fullName: HotelChain.Web.Models.HotelDetailDto.Reviews
+- uid: System.Collections.Generic.List{HotelChain.Web.Models.HotelReviewDto}
+  commentId: T:System.Collections.Generic.List{HotelChain.Web.Models.HotelReviewDto}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<HotelReviewDto>
+  nameWithType: List<HotelReviewDto>
+  fullName: System.Collections.Generic.List<HotelChain.Web.Models.HotelReviewDto>
+  nameWithType.vb: List(Of HotelReviewDto)
+  fullName.vb: System.Collections.Generic.List(Of HotelChain.Web.Models.HotelReviewDto)
+  name.vb: List(Of HotelReviewDto)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: HotelChain.Web.Models.HotelReviewDto
+    name: HotelReviewDto
+    href: HotelChain.Web.Models.HotelReviewDto.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: HotelChain.Web.Models.HotelReviewDto
+    name: HotelReviewDto
+    href: HotelChain.Web.Models.HotelReviewDto.html
+  - name: )

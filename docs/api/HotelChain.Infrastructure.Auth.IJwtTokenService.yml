@@ -1,0 +1,206 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Infrastructure.Auth.IJwtTokenService
+  commentId: T:HotelChain.Infrastructure.Auth.IJwtTokenService
+  id: IJwtTokenService
+  parent: HotelChain.Infrastructure.Auth
+  children:
+  - HotelChain.Infrastructure.Auth.IJwtTokenService.CreateTokenAsync(HotelChain.Infrastructure.Auth.ApplicationUser)
+  langs:
+  - csharp
+  - vb
+  name: IJwtTokenService
+  nameWithType: IJwtTokenService
+  fullName: HotelChain.Infrastructure.Auth.IJwtTokenService
+  type: Interface
+  source:
+    remote:
+      path: HotelChain.Infrastructure/Auth/IJwtTokenService.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: IJwtTokenService
+    path: ../HotelChain.Infrastructure/Auth/IJwtTokenService.cs
+    startLine: 2
+  assemblies:
+  - HotelChain.Infrastructure
+  namespace: HotelChain.Infrastructure.Auth
+  syntax:
+    content: public interface IJwtTokenService
+    content.vb: Public Interface IJwtTokenService
+  derivedClasses:
+  - HotelChain.Infrastructure.Auth.JwtTokenService
+- uid: HotelChain.Infrastructure.Auth.IJwtTokenService.CreateTokenAsync(HotelChain.Infrastructure.Auth.ApplicationUser)
+  commentId: M:HotelChain.Infrastructure.Auth.IJwtTokenService.CreateTokenAsync(HotelChain.Infrastructure.Auth.ApplicationUser)
+  id: CreateTokenAsync(HotelChain.Infrastructure.Auth.ApplicationUser)
+  parent: HotelChain.Infrastructure.Auth.IJwtTokenService
+  langs:
+  - csharp
+  - vb
+  name: CreateTokenAsync(ApplicationUser)
+  nameWithType: IJwtTokenService.CreateTokenAsync(ApplicationUser)
+  fullName: HotelChain.Infrastructure.Auth.IJwtTokenService.CreateTokenAsync(HotelChain.Infrastructure.Auth.ApplicationUser)
+  type: Method
+  source:
+    remote:
+      path: HotelChain.Infrastructure/Auth/IJwtTokenService.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: CreateTokenAsync
+    path: ../HotelChain.Infrastructure/Auth/IJwtTokenService.cs
+    startLine: 4
+  assemblies:
+  - HotelChain.Infrastructure
+  namespace: HotelChain.Infrastructure.Auth
+  syntax:
+    content: Task<string> CreateTokenAsync(ApplicationUser user)
+    parameters:
+    - id: user
+      type: HotelChain.Infrastructure.Auth.ApplicationUser
+    return:
+      type: System.Threading.Tasks.Task{System.String}
+    content.vb: Function CreateTokenAsync(user As ApplicationUser) As Task(Of String)
+  overload: HotelChain.Infrastructure.Auth.IJwtTokenService.CreateTokenAsync*
+references:
+- uid: HotelChain.Infrastructure.Auth
+  commentId: N:HotelChain.Infrastructure.Auth
+  href: HotelChain.html
+  name: HotelChain.Infrastructure.Auth
+  nameWithType: HotelChain.Infrastructure.Auth
+  fullName: HotelChain.Infrastructure.Auth
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Infrastructure
+    name: Infrastructure
+    href: HotelChain.Infrastructure.html
+  - name: .
+  - uid: HotelChain.Infrastructure.Auth
+    name: Auth
+    href: HotelChain.Infrastructure.Auth.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Infrastructure
+    name: Infrastructure
+    href: HotelChain.Infrastructure.html
+  - name: .
+  - uid: HotelChain.Infrastructure.Auth
+    name: Auth
+    href: HotelChain.Infrastructure.Auth.html
+- uid: HotelChain.Infrastructure.Auth.IJwtTokenService.CreateTokenAsync*
+  commentId: Overload:HotelChain.Infrastructure.Auth.IJwtTokenService.CreateTokenAsync
+  href: HotelChain.Infrastructure.Auth.IJwtTokenService.html#HotelChain_Infrastructure_Auth_IJwtTokenService_CreateTokenAsync_HotelChain_Infrastructure_Auth_ApplicationUser_
+  name: CreateTokenAsync
+  nameWithType: IJwtTokenService.CreateTokenAsync
+  fullName: HotelChain.Infrastructure.Auth.IJwtTokenService.CreateTokenAsync
+- uid: HotelChain.Infrastructure.Auth.ApplicationUser
+  commentId: T:HotelChain.Infrastructure.Auth.ApplicationUser
+  parent: HotelChain.Infrastructure.Auth
+  href: HotelChain.Infrastructure.Auth.ApplicationUser.html
+  name: ApplicationUser
+  nameWithType: ApplicationUser
+  fullName: HotelChain.Infrastructure.Auth.ApplicationUser
+- uid: System.Threading.Tasks.Task{System.String}
+  commentId: T:System.Threading.Tasks.Task{System.String}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<string>
+  nameWithType: Task<string>
+  fullName: System.Threading.Tasks.Task<string>
+  nameWithType.vb: Task(Of String)
+  fullName.vb: System.Threading.Tasks.Task(Of String)
+  name.vb: Task(Of String)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

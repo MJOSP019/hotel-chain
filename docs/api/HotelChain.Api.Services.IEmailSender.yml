@@ -1,0 +1,169 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Api.Services.IEmailSender
+  commentId: T:HotelChain.Api.Services.IEmailSender
+  id: IEmailSender
+  parent: HotelChain.Api.Services
+  children:
+  - HotelChain.Api.Services.IEmailSender.SendAsync(System.String,System.String,System.String)
+  langs:
+  - csharp
+  - vb
+  name: IEmailSender
+  nameWithType: IEmailSender
+  fullName: HotelChain.Api.Services.IEmailSender
+  type: Interface
+  source:
+    remote:
+      path: HotelChain.Api/Services/IEmailSender.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: IEmailSender
+    path: ../HotelChain.Api/Services/IEmailSender.cs
+    startLine: 2
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Services
+  syntax:
+    content: public interface IEmailSender
+    content.vb: Public Interface IEmailSender
+  derivedClasses:
+  - HotelChain.Api.Services.SmtpEmailSender
+- uid: HotelChain.Api.Services.IEmailSender.SendAsync(System.String,System.String,System.String)
+  commentId: M:HotelChain.Api.Services.IEmailSender.SendAsync(System.String,System.String,System.String)
+  id: SendAsync(System.String,System.String,System.String)
+  parent: HotelChain.Api.Services.IEmailSender
+  langs:
+  - csharp
+  - vb
+  name: SendAsync(string, string, string)
+  nameWithType: IEmailSender.SendAsync(string, string, string)
+  fullName: HotelChain.Api.Services.IEmailSender.SendAsync(string, string, string)
+  type: Method
+  source:
+    remote:
+      path: HotelChain.Api/Services/IEmailSender.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: SendAsync
+    path: ../HotelChain.Api/Services/IEmailSender.cs
+    startLine: 4
+  assemblies:
+  - HotelChain.Api
+  namespace: HotelChain.Api.Services
+  syntax:
+    content: Task SendAsync(string toEmail, string subject, string htmlBody)
+    parameters:
+    - id: toEmail
+      type: System.String
+    - id: subject
+      type: System.String
+    - id: htmlBody
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Function SendAsync(toEmail As String, subject As String, htmlBody As String) As Task
+  overload: HotelChain.Api.Services.IEmailSender.SendAsync*
+  nameWithType.vb: IEmailSender.SendAsync(String, String, String)
+  fullName.vb: HotelChain.Api.Services.IEmailSender.SendAsync(String, String, String)
+  name.vb: SendAsync(String, String, String)
+references:
+- uid: HotelChain.Api.Services
+  commentId: N:HotelChain.Api.Services
+  href: HotelChain.html
+  name: HotelChain.Api.Services
+  nameWithType: HotelChain.Api.Services
+  fullName: HotelChain.Api.Services
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Services
+    name: Services
+    href: HotelChain.Api.Services.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Api
+    name: Api
+    href: HotelChain.Api.html
+  - name: .
+  - uid: HotelChain.Api.Services
+    name: Services
+    href: HotelChain.Api.Services.html
+- uid: HotelChain.Api.Services.IEmailSender.SendAsync*
+  commentId: Overload:HotelChain.Api.Services.IEmailSender.SendAsync
+  href: HotelChain.Api.Services.IEmailSender.html#HotelChain_Api_Services_IEmailSender_SendAsync_System_String_System_String_System_String_
+  name: SendAsync
+  nameWithType: IEmailSender.SendAsync
+  fullName: HotelChain.Api.Services.IEmailSender.SendAsync
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Threading.Tasks.Task
+  commentId: T:System.Threading.Tasks.Task
+  parent: System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+  name: Task
+  nameWithType: Task
+  fullName: System.Threading.Tasks.Task
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

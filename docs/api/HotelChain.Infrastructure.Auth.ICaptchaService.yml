@@ -1,0 +1,244 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Infrastructure.Auth.ICaptchaService
+  commentId: T:HotelChain.Infrastructure.Auth.ICaptchaService
+  id: ICaptchaService
+  parent: HotelChain.Infrastructure.Auth
+  children:
+  - HotelChain.Infrastructure.Auth.ICaptchaService.Create
+  - HotelChain.Infrastructure.Auth.ICaptchaService.Validate(System.String,System.String)
+  langs:
+  - csharp
+  - vb
+  name: ICaptchaService
+  nameWithType: ICaptchaService
+  fullName: HotelChain.Infrastructure.Auth.ICaptchaService
+  type: Interface
+  source:
+    remote:
+      path: HotelChain.Infrastructure/Auth/ICaptchaService.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: ICaptchaService
+    path: ../HotelChain.Infrastructure/Auth/ICaptchaService.cs
+    startLine: 2
+  assemblies:
+  - HotelChain.Infrastructure
+  namespace: HotelChain.Infrastructure.Auth
+  syntax:
+    content: public interface ICaptchaService
+    content.vb: Public Interface ICaptchaService
+  derivedClasses:
+  - HotelChain.Infrastructure.Auth.SimpleCaptchaService
+- uid: HotelChain.Infrastructure.Auth.ICaptchaService.Create
+  commentId: M:HotelChain.Infrastructure.Auth.ICaptchaService.Create
+  id: Create
+  parent: HotelChain.Infrastructure.Auth.ICaptchaService
+  langs:
+  - csharp
+  - vb
+  name: Create()
+  nameWithType: ICaptchaService.Create()
+  fullName: HotelChain.Infrastructure.Auth.ICaptchaService.Create()
+  type: Method
+  source:
+    remote:
+      path: HotelChain.Infrastructure/Auth/ICaptchaService.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Create
+    path: ../HotelChain.Infrastructure/Auth/ICaptchaService.cs
+    startLine: 4
+  assemblies:
+  - HotelChain.Infrastructure
+  namespace: HotelChain.Infrastructure.Auth
+  syntax:
+    content: (string captchaId, string question) Create()
+    return:
+      type: System.ValueTuple{System.String,System.String}
+    content.vb: Function Create() As (captchaId As String, question As String)
+  overload: HotelChain.Infrastructure.Auth.ICaptchaService.Create*
+- uid: HotelChain.Infrastructure.Auth.ICaptchaService.Validate(System.String,System.String)
+  commentId: M:HotelChain.Infrastructure.Auth.ICaptchaService.Validate(System.String,System.String)
+  id: Validate(System.String,System.String)
+  parent: HotelChain.Infrastructure.Auth.ICaptchaService
+  langs:
+  - csharp
+  - vb
+  name: Validate(string, string)
+  nameWithType: ICaptchaService.Validate(string, string)
+  fullName: HotelChain.Infrastructure.Auth.ICaptchaService.Validate(string, string)
+  type: Method
+  source:
+    remote:
+      path: HotelChain.Infrastructure/Auth/ICaptchaService.cs
+      branch: main
+      repo: https://github.com/MJOSP019/hotel-chain.git
+    id: Validate
+    path: ../HotelChain.Infrastructure/Auth/ICaptchaService.cs
+    startLine: 5
+  assemblies:
+  - HotelChain.Infrastructure
+  namespace: HotelChain.Infrastructure.Auth
+  syntax:
+    content: bool Validate(string captchaId, string answer)
+    parameters:
+    - id: captchaId
+      type: System.String
+    - id: answer
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Function Validate(captchaId As String, answer As String) As Boolean
+  overload: HotelChain.Infrastructure.Auth.ICaptchaService.Validate*
+  nameWithType.vb: ICaptchaService.Validate(String, String)
+  fullName.vb: HotelChain.Infrastructure.Auth.ICaptchaService.Validate(String, String)
+  name.vb: Validate(String, String)
+references:
+- uid: HotelChain.Infrastructure.Auth
+  commentId: N:HotelChain.Infrastructure.Auth
+  href: HotelChain.html
+  name: HotelChain.Infrastructure.Auth
+  nameWithType: HotelChain.Infrastructure.Auth
+  fullName: HotelChain.Infrastructure.Auth
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Infrastructure
+    name: Infrastructure
+    href: HotelChain.Infrastructure.html
+  - name: .
+  - uid: HotelChain.Infrastructure.Auth
+    name: Auth
+    href: HotelChain.Infrastructure.Auth.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Infrastructure
+    name: Infrastructure
+    href: HotelChain.Infrastructure.html
+  - name: .
+  - uid: HotelChain.Infrastructure.Auth
+    name: Auth
+    href: HotelChain.Infrastructure.Auth.html
+- uid: HotelChain.Infrastructure.Auth.ICaptchaService.Create*
+  commentId: Overload:HotelChain.Infrastructure.Auth.ICaptchaService.Create
+  href: HotelChain.Infrastructure.Auth.ICaptchaService.html#HotelChain_Infrastructure_Auth_ICaptchaService_Create
+  name: Create
+  nameWithType: ICaptchaService.Create
+  fullName: HotelChain.Infrastructure.Auth.ICaptchaService.Create
+- uid: System.ValueTuple{System.String,System.String}
+  commentId: T:System.ValueTuple{System.String,System.String}
+  parent: System
+  definition: System.ValueTuple`2
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: (string captchaId, string question)
+  nameWithType: (string captchaId, string question)
+  fullName: (string captchaId, string question)
+  nameWithType.vb: (captchaId As String, question As String)
+  fullName.vb: (captchaId As String, question As String)
+  name.vb: (captchaId As String, question As String)
+  spec.csharp:
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: " "
+  - uid: System.ValueTuple{System.String,System.String}.captchaId
+    name: captchaId
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.string,system.string-.captchaid
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: " "
+  - uid: System.ValueTuple{System.String,System.String}.question
+    name: question
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.string,system.string-.question
+  - name: )
+  spec.vb:
+  - name: (
+  - uid: System.ValueTuple{System.String,System.String}.captchaId
+    name: captchaId
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.string,system.string-.captchaid
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.ValueTuple{System.String,System.String}.question
+    name: question
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.string,system.string-.question
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.ValueTuple`2
+  commentId: T:System.ValueTuple`2
+  name: (T1, T2)
+  nameWithType: (T1, T2)
+  fullName: (T1, T2)
+  spec.csharp:
+  - name: (
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )
+  spec.vb:
+  - name: (
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Infrastructure.Auth.ICaptchaService.Validate*
+  commentId: Overload:HotelChain.Infrastructure.Auth.ICaptchaService.Validate
+  href: HotelChain.Infrastructure.Auth.ICaptchaService.html#HotelChain_Infrastructure_Auth_ICaptchaService_Validate_System_String_System_String_
+  name: Validate
+  nameWithType: ICaptchaService.Validate
+  fullName: HotelChain.Infrastructure.Auth.ICaptchaService.Validate
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean

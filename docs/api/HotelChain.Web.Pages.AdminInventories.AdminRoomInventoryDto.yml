@@ -1,0 +1,623 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  commentId: T:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  id: AdminInventories.AdminRoomInventoryDto
+  parent: HotelChain.Web.Pages
+  children:
+  - HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Date
+  - HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelId
+  - HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelName
+  - HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Id
+  - HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityAvailable
+  - HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityReserved
+  - HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityTotal
+  - HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomId
+  - HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomNameOrNumber
+  langs:
+  - csharp
+  - vb
+  name: AdminInventories.AdminRoomInventoryDto
+  nameWithType: AdminInventories.AdminRoomInventoryDto
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  type: Class
+  source:
+    id: AdminRoomInventoryDto
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminInventories_razor.g.cs
+    startLine: 980
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public class AdminInventories.AdminRoomInventoryDto
+    content.vb: Public Class AdminInventories.AdminRoomInventoryDto
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Id
+  commentId: P:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Id
+  id: Id
+  parent: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: AdminInventories.AdminRoomInventoryDto.Id
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Id
+  type: Property
+  source:
+    id: Id
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminInventories_razor.g.cs
+    startLine: 982
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public int Id { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Id As Integer
+  overload: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Id*
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomId
+  commentId: P:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomId
+  id: RoomId
+  parent: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: RoomId
+  nameWithType: AdminInventories.AdminRoomInventoryDto.RoomId
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomId
+  type: Property
+  source:
+    id: RoomId
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminInventories_razor.g.cs
+    startLine: 983
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public int RoomId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property RoomId As Integer
+  overload: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomId*
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomNameOrNumber
+  commentId: P:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomNameOrNumber
+  id: RoomNameOrNumber
+  parent: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: RoomNameOrNumber
+  nameWithType: AdminInventories.AdminRoomInventoryDto.RoomNameOrNumber
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomNameOrNumber
+  type: Property
+  source:
+    id: RoomNameOrNumber
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminInventories_razor.g.cs
+    startLine: 984
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public string RoomNameOrNumber { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RoomNameOrNumber As String
+  overload: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomNameOrNumber*
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelId
+  commentId: P:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelId
+  id: HotelId
+  parent: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: HotelId
+  nameWithType: AdminInventories.AdminRoomInventoryDto.HotelId
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelId
+  type: Property
+  source:
+    id: HotelId
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminInventories_razor.g.cs
+    startLine: 985
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public int HotelId { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property HotelId As Integer
+  overload: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelId*
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelName
+  commentId: P:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelName
+  id: HotelName
+  parent: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: HotelName
+  nameWithType: AdminInventories.AdminRoomInventoryDto.HotelName
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelName
+  type: Property
+  source:
+    id: HotelName
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminInventories_razor.g.cs
+    startLine: 986
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public string HotelName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property HotelName As String
+  overload: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelName*
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Date
+  commentId: P:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Date
+  id: Date
+  parent: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: Date
+  nameWithType: AdminInventories.AdminRoomInventoryDto.Date
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Date
+  type: Property
+  source:
+    id: Date
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminInventories_razor.g.cs
+    startLine: 987
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public DateTime Date { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property [Date] As Date
+  overload: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Date*
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityTotal
+  commentId: P:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityTotal
+  id: QuantityTotal
+  parent: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: QuantityTotal
+  nameWithType: AdminInventories.AdminRoomInventoryDto.QuantityTotal
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityTotal
+  type: Property
+  source:
+    id: QuantityTotal
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminInventories_razor.g.cs
+    startLine: 988
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public int QuantityTotal { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property QuantityTotal As Integer
+  overload: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityTotal*
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityReserved
+  commentId: P:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityReserved
+  id: QuantityReserved
+  parent: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: QuantityReserved
+  nameWithType: AdminInventories.AdminRoomInventoryDto.QuantityReserved
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityReserved
+  type: Property
+  source:
+    id: QuantityReserved
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminInventories_razor.g.cs
+    startLine: 989
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public int QuantityReserved { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property QuantityReserved As Integer
+  overload: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityReserved*
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityAvailable
+  commentId: P:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityAvailable
+  id: QuantityAvailable
+  parent: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto
+  langs:
+  - csharp
+  - vb
+  name: QuantityAvailable
+  nameWithType: AdminInventories.AdminRoomInventoryDto.QuantityAvailable
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityAvailable
+  type: Property
+  source:
+    id: QuantityAvailable
+    path: C:\Users\josue\OneDrive\Documentos\hotel-chain\HotelChain.Web\obj\Release\net8.0\Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_AdminInventories_razor.g.cs
+    startLine: 990
+  assemblies:
+  - HotelChain.Web
+  namespace: HotelChain.Web.Pages
+  syntax:
+    content: public int QuantityAvailable { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property QuantityAvailable As Integer
+  overload: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityAvailable*
+references:
+- uid: HotelChain.Web.Pages
+  commentId: N:HotelChain.Web.Pages
+  href: HotelChain.html
+  name: HotelChain.Web.Pages
+  nameWithType: HotelChain.Web.Pages
+  fullName: HotelChain.Web.Pages
+  spec.csharp:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Web
+    name: Web
+    href: HotelChain.Web.html
+  - name: .
+  - uid: HotelChain.Web.Pages
+    name: Pages
+    href: HotelChain.Web.Pages.html
+  spec.vb:
+  - uid: HotelChain
+    name: HotelChain
+    href: HotelChain.html
+  - name: .
+  - uid: HotelChain.Web
+    name: Web
+    href: HotelChain.Web.html
+  - name: .
+  - uid: HotelChain.Web.Pages
+    name: Pages
+    href: HotelChain.Web.Pages.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Id*
+  commentId: Overload:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Id
+  href: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.html#HotelChain_Web_Pages_AdminInventories_AdminRoomInventoryDto_Id
+  name: Id
+  nameWithType: AdminInventories.AdminRoomInventoryDto.Id
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Id
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomId*
+  commentId: Overload:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomId
+  href: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.html#HotelChain_Web_Pages_AdminInventories_AdminRoomInventoryDto_RoomId
+  name: RoomId
+  nameWithType: AdminInventories.AdminRoomInventoryDto.RoomId
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomId
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomNameOrNumber*
+  commentId: Overload:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomNameOrNumber
+  href: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.html#HotelChain_Web_Pages_AdminInventories_AdminRoomInventoryDto_RoomNameOrNumber
+  name: RoomNameOrNumber
+  nameWithType: AdminInventories.AdminRoomInventoryDto.RoomNameOrNumber
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.RoomNameOrNumber
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelId*
+  commentId: Overload:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelId
+  href: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.html#HotelChain_Web_Pages_AdminInventories_AdminRoomInventoryDto_HotelId
+  name: HotelId
+  nameWithType: AdminInventories.AdminRoomInventoryDto.HotelId
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelId
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelName*
+  commentId: Overload:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelName
+  href: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.html#HotelChain_Web_Pages_AdminInventories_AdminRoomInventoryDto_HotelName
+  name: HotelName
+  nameWithType: AdminInventories.AdminRoomInventoryDto.HotelName
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.HotelName
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Date*
+  commentId: Overload:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Date
+  href: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.html#HotelChain_Web_Pages_AdminInventories_AdminRoomInventoryDto_Date
+  name: Date
+  nameWithType: AdminInventories.AdminRoomInventoryDto.Date
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.Date
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+  nameWithType.vb: Date
+  fullName.vb: Date
+  name.vb: Date
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityTotal*
+  commentId: Overload:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityTotal
+  href: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.html#HotelChain_Web_Pages_AdminInventories_AdminRoomInventoryDto_QuantityTotal
+  name: QuantityTotal
+  nameWithType: AdminInventories.AdminRoomInventoryDto.QuantityTotal
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityTotal
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityReserved*
+  commentId: Overload:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityReserved
+  href: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.html#HotelChain_Web_Pages_AdminInventories_AdminRoomInventoryDto_QuantityReserved
+  name: QuantityReserved
+  nameWithType: AdminInventories.AdminRoomInventoryDto.QuantityReserved
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityReserved
+- uid: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityAvailable*
+  commentId: Overload:HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityAvailable
+  href: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.html#HotelChain_Web_Pages_AdminInventories_AdminRoomInventoryDto_QuantityAvailable
+  name: QuantityAvailable
+  nameWithType: AdminInventories.AdminRoomInventoryDto.QuantityAvailable
+  fullName: HotelChain.Web.Pages.AdminInventories.AdminRoomInventoryDto.QuantityAvailable

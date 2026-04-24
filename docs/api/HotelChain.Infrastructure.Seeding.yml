@@ -1,0 +1,30 @@
+### YamlMime:ManagedReference
+items:
+- uid: HotelChain.Infrastructure.Seeding
+  commentId: N:HotelChain.Infrastructure.Seeding
+  id: HotelChain.Infrastructure.Seeding
+  children:
+  - HotelChain.Infrastructure.Seeding.AdminSeeder
+  - HotelChain.Infrastructure.Seeding.RoleSeeder
+  langs:
+  - csharp
+  - vb
+  name: HotelChain.Infrastructure.Seeding
+  nameWithType: HotelChain.Infrastructure.Seeding
+  fullName: HotelChain.Infrastructure.Seeding
+  type: Namespace
+  assemblies:
+  - HotelChain.Infrastructure
+references:
+- uid: HotelChain.Infrastructure.Seeding.AdminSeeder
+  commentId: T:HotelChain.Infrastructure.Seeding.AdminSeeder
+  href: HotelChain.Infrastructure.Seeding.AdminSeeder.html
+  name: AdminSeeder
+  nameWithType: AdminSeeder
+  fullName: HotelChain.Infrastructure.Seeding.AdminSeeder
+- uid: HotelChain.Infrastructure.Seeding.RoleSeeder
+  commentId: T:HotelChain.Infrastructure.Seeding.RoleSeeder
+  href: HotelChain.Infrastructure.Seeding.RoleSeeder.html
+  name: RoleSeeder
+  nameWithType: RoleSeeder
+  fullName: HotelChain.Infrastructure.Seeding.RoleSeeder
