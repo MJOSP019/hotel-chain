@@ -23,15 +23,15 @@ references:
   name: AuthTokenHandler
   nameWithType: AuthTokenHandler
   fullName: HotelChain.Web.AuthTokenHandler
-- uid: HotelChain.Web._Imports
-  commentId: T:HotelChain.Web._Imports
-  href: HotelChain.Web._Imports.html
-  name: _Imports
-  nameWithType: _Imports
-  fullName: HotelChain.Web._Imports
 - uid: HotelChain.Web.App
   commentId: T:HotelChain.Web.App
   href: HotelChain.Web.App.html
   name: App
   nameWithType: App
   fullName: HotelChain.Web.App
+- uid: HotelChain.Web._Imports
+  commentId: T:HotelChain.Web._Imports
+  href: HotelChain.Web._Imports.html
+  name: _Imports
+  nameWithType: _Imports
+  fullName: HotelChain.Web._Imports

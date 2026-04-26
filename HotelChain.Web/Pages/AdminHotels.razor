@@ -5,6 +5,9 @@
 @inject IJSRuntime JS
 
 <h3>Administración de hoteles</h3>
+<p class="text-muted mb-3">
+    Administra propiedades de la cadena. En operación hotelera real, primero se registra el destino/ciudad y luego se abre el hotel asociado a ese destino.
+</p>
 
 @if (!string.IsNullOrWhiteSpace(errorMessage))
 {
@@ -15,60 +18,112 @@
     <div class="alert alert-success">@successMessage</div>
 }
 
-<div class="row">
-    <div class="col-md-5">
-        <div class="card p-3">
-            <h5>@(isEditMode ? "Editar hotel" : "Crear hotel")</h5>
+<div class="row g-3">
+    <div class="col-lg-5">
+        <div class="card p-3 mb-3">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+                <div>
+                    <h5 class="mb-1">@(isEditMode ? "Editar hotel" : "Alta de hotel")</h5>
+                    <p class="text-muted small mb-0">Datos maestros de la propiedad.</p>
+                </div>
+                @if (isEditMode)
+                {
+                    <span class="badge bg-primary">Edición</span>
+                }
+                else
+                {
+                    <span class="badge bg-success">Nuevo</span>
+                }
+            </div>
+
+            <hr />
 
             <div class="mb-2">
-                <label>Código</label>
-                <input class="form-control" @bind="model.Code" />
+                <label class="form-label">Código interno</label>
+                <input class="form-control" @bind="model.Code" placeholder="Opcional al crear: se genera como H-GT-001" />
+                <div class="form-text">Si lo dejas vacío al crear, el sistema genera un código según el país del destino.</div>
             </div>
 
             <div class="mb-2">
-                <label>Nombre</label>
-                <input class="form-control" @bind="model.Name" />
+                <label class="form-label">Nombre comercial</label>
+                <input class="form-control" @bind="model.Name" placeholder="Ej. HotelChain Collection Antigua" />
             </div>
 
             <div class="mb-2">
-                <label>Dirección</label>
-                <input class="form-control" @bind="model.Address" />
+                <label class="form-label">Dirección física</label>
+                <input class="form-control" @bind="model.Address" placeholder="Dirección del hotel" />
             </div>
 
             <div class="mb-2">
-                <label>Descripción</label>
-                <textarea class="form-control" rows="3" @bind="model.Description"></textarea>
+                <label class="form-label">Descripción</label>
+                <textarea class="form-control" rows="3" @bind="model.Description" placeholder="Resumen comercial del hotel."></textarea>
             </div>
 
             <div class="mb-2">
-                <label>Imagen principal (URL)</label>
+                <label class="form-label">Imagen principal (URL)</label>
                 <input class="form-control" @bind="model.MainImageUrl" placeholder="https://..." />
             </div>
 
             <div class="mb-2">
-                <label>Información de la zona</label>
-                <textarea class="form-control" rows="3" @bind="model.ZoneInfo" placeholder="Describe la zona, accesos, entorno o puntos de interés cercanos."></textarea>
+                <label class="form-label">Información de la zona</label>
+                <textarea class="form-control" rows="3" @bind="model.ZoneInfo" placeholder="Accesos, puntos de interés, entorno, transporte cercano."></textarea>
             </div>
 
             <div class="mb-2">
-                <label>Amenidades</label>
-                <textarea class="form-control" rows="3" @bind="model.Amenities" placeholder="Ej. piscina, gimnasio, restaurante, spa, wifi, parqueo..."></textarea>
+                <label class="form-label">Amenidades</label>
+                <textarea class="form-control" rows="3" @bind="model.Amenities" placeholder="Ej. piscina, gimnasio, restaurante, spa, wifi, parqueo."></textarea>
+            </div>
+        </div>
+
+        <div class="card p-3 mb-3">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+                <div>
+                    <h5 class="mb-1">Destino / ciudad</h5>
+                    <p class="text-muted small mb-0">Usa un destino existente o registra uno nuevo antes de guardar el hotel.</p>
+                </div>
+                <span class="badge bg-secondary">Catálogo</span>
             </div>
 
-            <div class="mb-2">
-                <label>Ciudad</label>
-                <select class="form-select" @bind="model.CityId">
+            <hr />
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="cityMode" id="existingCityMode" checked="@(!useNewCity)" @onchange="() => SetCityMode(false)" />
+                <label class="form-check-label" for="existingCityMode">Usar ciudad existente</label>
+            </div>
+
+            <div class="mb-3">
+                <select class="form-select" @bind="model.CityId" disabled="@useNewCity">
                     <option value="0">Seleccione una ciudad</option>
                     @foreach (var city in cities)
                     {
-                        <option value="@city.Id">@city.Name</option>
+                        <option value="@city.Id">@city.DisplayName</option>
                     }
                 </select>
+                <div class="form-text">El portal público solo mostrará destinos con hoteles activos.</div>
             </div>
 
-            <div class="d-flex gap-2 mt-3">
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="cityMode" id="newCityMode" checked="@useNewCity" @onchange="() => SetCityMode(true)" />
+                <label class="form-check-label" for="newCityMode">Registrar nueva ciudad/destino</label>
+            </div>
+
+            <div class="row g-2">
+                <div class="col-8">
+                    <label class="form-label">Nombre de ciudad</label>
+                    <input class="form-control" @bind="newCity.Name" disabled="@(!useNewCity)" placeholder="Ej. Antigua Guatemala" />
+                </div>
+                <div class="col-4">
+                    <label class="form-label">País</label>
+                    <input class="form-control text-uppercase" @bind="newCity.CountryCode" disabled="@(!useNewCity)" maxlength="5" placeholder="GT" />
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-3">
+            <h5 class="mb-2">Acciones</h5>
+            <div class="d-flex flex-wrap gap-2">
                 <button class="btn btn-primary" @onclick="SaveHotel" disabled="@isSaving">
-                    @(isSaving ? "Guardando..." : (isEditMode ? "Actualizar" : "Crear"))
+                    @(isSaving ? "Guardando..." : (isEditMode ? "Actualizar hotel" : "Crear hotel"))
                 </button>
 
                 <button class="btn btn-outline-secondary" @onclick="ResetForm" disabled="@isSaving">
@@ -78,9 +133,17 @@
         </div>
     </div>
 
-    <div class="col-md-7">
-        <div class="card p-3">
-            <h5>Hoteles</h5>
+    <div class="col-lg-7">
+        <div class="card p-3 mb-3">
+            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                <div>
+                    <h5 class="mb-1">Hoteles de la cadena</h5>
+                    <p class="text-muted small mb-0">Propiedades activas e históricas. Desactivar no borra información ni reservaciones pasadas.</p>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary" @onclick="RefreshAll" disabled="@(isLoading || isSaving)">
+                    Actualizar
+                </button>
+            </div>
 
             @if (isLoading)
             {
@@ -93,12 +156,12 @@
             else
             {
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-sm align-middle">
                         <thead>
                             <tr>
                                 <th>Código</th>
-                                <th>Nombre</th>
-                                <th>Ciudad</th>
+                                <th>Hotel</th>
+                                <th>Destino</th>
                                 <th>Estado</th>
                                 <th></th>
                             </tr>
@@ -107,12 +170,24 @@
                             @foreach (var h in hotels)
                             {
                                 <tr>
-                                    <td>@h.Code</td>
-                                    <td>@h.Name</td>
-                                    <td>@h.CityName</td>
-                                    <td>@(h.IsActive ? "Activo" : "Inactivo")</td>
+                                    <td><span class="fw-semibold">@h.Code</span></td>
                                     <td>
-                                        <div class="d-flex gap-2">
+                                        <div class="fw-semibold">@h.Name</div>
+                                        <div class="text-muted small">@h.Address</div>
+                                    </td>
+                                    <td>@h.CityDisplayName</td>
+                                    <td>
+                                        @if (h.IsActive)
+                                        {
+                                            <span class="badge bg-success">Activo</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">Inactivo</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-2 justify-content-end">
                                             <button class="btn btn-sm btn-outline-primary"
                                                     disabled="@(!h.IsActive)"
                                                     @onclick="() => EditHotel(h)">
@@ -139,32 +214,69 @@
                                     </td>
                                 </tr>
 
-                                @if (!string.IsNullOrWhiteSpace(h.Description)
-                                    || !string.IsNullOrWhiteSpace(h.MainImageUrl)
-                                    || !string.IsNullOrWhiteSpace(h.ZoneInfo)
-                                    || !string.IsNullOrWhiteSpace(h.Amenities))
+                                @if (HasHotelExtraInfo(h))
                                 {
                                     <tr class="table-light">
                                         <td colspan="5">
-                                            @if (!string.IsNullOrWhiteSpace(h.Description))
-                                            {
-                                                <div><strong>Descripción:</strong> @h.Description</div>
-                                            }
-                                            @if (!string.IsNullOrWhiteSpace(h.MainImageUrl))
-                                            {
-                                                <div><strong>Imagen principal:</strong> @h.MainImageUrl</div>
-                                            }
-                                            @if (!string.IsNullOrWhiteSpace(h.ZoneInfo))
-                                            {
-                                                <div><strong>Zona:</strong> @h.ZoneInfo</div>
-                                            }
-                                            @if (!string.IsNullOrWhiteSpace(h.Amenities))
-                                            {
-                                                <div><strong>Amenidades:</strong> @h.Amenities</div>
-                                            }
+                                            <div class="row g-2">
+                                                @if (!string.IsNullOrWhiteSpace(h.MainImageUrl))
+                                                {
+                                                    <div class="col-md-3">
+                                                        <img src="@h.MainImageUrl" alt="@h.Name" style="width: 100%; max-height: 90px; object-fit: cover; border-radius: 8px;" />
+                                                    </div>
+                                                }
+                                                <div class="col">
+                                                    @if (!string.IsNullOrWhiteSpace(h.Description))
+                                                    {
+                                                        <div><strong>Descripción:</strong> @h.Description</div>
+                                                    }
+                                                    @if (!string.IsNullOrWhiteSpace(h.ZoneInfo))
+                                                    {
+                                                        <div><strong>Zona:</strong> @h.ZoneInfo</div>
+                                                    }
+                                                    @if (!string.IsNullOrWhiteSpace(h.Amenities))
+                                                    {
+                                                        <div><strong>Amenidades:</strong> @h.Amenities</div>
+                                                    }
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+
+        <div class="card p-3">
+            <h5 class="mb-2">Destinos configurados</h5>
+            @if (!cities.Any())
+            {
+                <p class="text-muted mb-0">No hay ciudades registradas.</p>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-sm mb-0">
+                        <thead>
+                            <tr>
+                                <th>Destino</th>
+                                <th>País</th>
+                                <th>Hoteles activos</th>
+                                <th>Total hoteles</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var city in cities)
+                            {
+                                <tr>
+                                    <td>@city.Name</td>
+                                    <td>@city.CountryCode</td>
+                                    <td>@city.ActiveHotelsCount</td>
+                                    <td>@city.HotelsCount</td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -179,6 +291,8 @@
     private List<CityDto> cities = new();
 
     private SaveHotelRequest model = new();
+    private SaveCityRequest newCity = new() { CountryCode = "GT" };
+    private bool useNewCity;
     private bool isLoading;
     private bool isSaving;
     private bool isEditMode;
@@ -190,15 +304,32 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await RefreshAll();
+    }
+
+    private async Task RefreshAll()
+    {
+        await EnsureAdminToken();
         await LoadCities();
         await LoadHotels();
+    }
+
+    private async Task EnsureAdminToken()
+    {
+        var token = await JS.InvokeAsync<string>("auth.getToken");
+
+        if (!string.IsNullOrWhiteSpace(token))
+        {
+            Http.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+        }
     }
 
     private async Task LoadCities()
     {
         try
         {
-            var result = await Http.GetFromJsonAsync<List<CityDto>>("api/public/cities");
+            var result = await Http.GetFromJsonAsync<List<CityDto>>("api/admin/cities");
             cities = result ?? new List<CityDto>();
         }
         catch (Exception ex)
@@ -214,16 +345,13 @@
 
         try
         {
-            var token = await JS.InvokeAsync<string>("auth.getToken");
+            await EnsureAdminToken();
 
-            if (string.IsNullOrWhiteSpace(token))
+            if (Http.DefaultRequestHeaders.Authorization == null)
             {
                 errorMessage = "Debes iniciar sesión como administrador.";
                 return;
             }
-
-            Http.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", token);
 
             var result = await Http.GetFromJsonAsync<List<AdminHotelDto>>("api/admin/hotels");
             hotels = result ?? new List<AdminHotelDto>();
@@ -238,6 +366,18 @@
         }
     }
 
+    private void SetCityMode(bool value)
+    {
+        useNewCity = value;
+
+        if (useNewCity)
+        {
+            model.CityId = 0;
+            if (string.IsNullOrWhiteSpace(newCity.CountryCode))
+                newCity.CountryCode = "GT";
+        }
+    }
+
     private void EditHotel(AdminHotelDto hotel)
     {
         if (!hotel.IsActive)
@@ -245,6 +385,7 @@
 
         editingHotelId = hotel.Id;
         isEditMode = true;
+        useNewCity = false;
         successMessage = null;
         errorMessage = null;
 
@@ -264,6 +405,8 @@
     private void ResetForm()
     {
         model = new SaveHotelRequest();
+        newCity = new SaveCityRequest { CountryCode = "GT" };
+        useNewCity = false;
         isEditMode = false;
         editingHotelId = 0;
         errorMessage = null;
@@ -275,9 +418,9 @@
         errorMessage = null;
         successMessage = null;
 
-        if (string.IsNullOrWhiteSpace(model.Code))
+        if (isEditMode && string.IsNullOrWhiteSpace(model.Code))
         {
-            errorMessage = "El código es obligatorio.";
+            errorMessage = "El código es obligatorio al editar un hotel existente.";
             return;
         }
 
@@ -293,26 +436,23 @@
             return;
         }
 
-        if (model.CityId <= 0)
-        {
-            errorMessage = "Debes seleccionar una ciudad.";
-            return;
-        }
-
         isSaving = true;
 
         try
         {
-            var token = await JS.InvokeAsync<string>("auth.getToken");
+            await EnsureAdminToken();
 
-            if (string.IsNullOrWhiteSpace(token))
+            if (Http.DefaultRequestHeaders.Authorization == null)
             {
                 errorMessage = "Debes iniciar sesión como administrador.";
                 return;
             }
 
-            Http.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", token);
+            var resolvedCityId = await ResolveCityId();
+            if (!resolvedCityId.HasValue)
+                return;
+
+            model.CityId = resolvedCityId.Value;
 
             HttpResponseMessage response;
 
@@ -327,7 +467,7 @@
 
             if (!response.IsSuccessStatusCode)
             {
-                errorMessage = "No se pudo guardar el hotel. Verifica que todos los campos requeridos estén completos y que el código no esté repetido.";
+                errorMessage = await ReadError(response, "No se pudo guardar el hotel. Verifica los datos obligatorios y que el código no esté repetido.");
                 return;
             }
 
@@ -336,16 +476,59 @@
                 : "Hotel creado correctamente.";
 
             ResetForm();
-            await LoadHotels();
+            await RefreshAll();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            errorMessage = "Ocurrió un error al guardar el hotel. Verifica que todos los campos requeridos estén completos.";
+            errorMessage = $"Ocurrió un error al guardar el hotel: {ex.Message}";
         }
         finally
         {
             isSaving = false;
         }
+    }
+
+    private async Task<int?> ResolveCityId()
+    {
+        if (!useNewCity)
+        {
+            if (model.CityId <= 0)
+            {
+                errorMessage = "Debes seleccionar una ciudad o registrar una nueva.";
+                return null;
+            }
+
+            return model.CityId;
+        }
+
+        if (string.IsNullOrWhiteSpace(newCity.Name))
+        {
+            errorMessage = "El nombre de la nueva ciudad es obligatorio.";
+            return null;
+        }
+
+        if (string.IsNullOrWhiteSpace(newCity.CountryCode))
+        {
+            errorMessage = "El código de país de la nueva ciudad es obligatorio.";
+            return null;
+        }
+
+        var response = await Http.PostAsJsonAsync("api/admin/cities", newCity);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            errorMessage = await ReadError(response, "No se pudo registrar la ciudad.");
+            return null;
+        }
+
+        var createdCity = await response.Content.ReadFromJsonAsync<CityDto>();
+        if (createdCity == null || createdCity.Id <= 0)
+        {
+            errorMessage = "La ciudad fue creada, pero no se pudo leer su identificador.";
+            return null;
+        }
+
+        return createdCity.Id;
     }
 
     private async Task DeactivateHotel(AdminHotelDto hotel)
@@ -358,13 +541,13 @@
 
         try
         {
-            var confirm = await JS.InvokeAsync<bool>("confirm", $"¿Deseas desactivar el hotel {hotel.Name}?");
+            var confirm = await JS.InvokeAsync<bool>("confirm", $"¿Deseas desactivar el hotel {hotel.Name}? No se borrará historial, pero dejará de aparecer en búsquedas públicas.");
             if (!confirm)
                 return;
 
-            var token = await JS.InvokeAsync<string>("auth.getToken");
+            await EnsureAdminToken();
 
-            if (string.IsNullOrWhiteSpace(token))
+            if (Http.DefaultRequestHeaders.Authorization == null)
             {
                 errorMessage = "Debes iniciar sesión como administrador.";
                 return;
@@ -372,14 +555,11 @@
 
             deactivatingHotelId = hotel.Id;
 
-            Http.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", token);
-
             var response = await Http.PostAsync($"api/admin/hotels/{hotel.Id}/deactivate", null);
 
             if (!response.IsSuccessStatusCode)
             {
-                errorMessage = await response.Content.ReadAsStringAsync();
+                errorMessage = await ReadError(response, "No se pudo desactivar el hotel.");
                 return;
             }
 
@@ -390,7 +570,7 @@
                 ResetForm();
             }
 
-            await LoadHotels();
+            await RefreshAll();
         }
         catch (Exception ex)
         {
@@ -412,13 +592,13 @@
 
         try
         {
-            var confirm = await JS.InvokeAsync<bool>("confirm", $"¿Deseas reactivar el hotel {hotel.Name}?");
+            var confirm = await JS.InvokeAsync<bool>("confirm", $"¿Deseas reactivar el hotel {hotel.Name}? Volverá a estar disponible para búsquedas si tiene habitaciones activas e inventario.");
             if (!confirm)
                 return;
 
-            var token = await JS.InvokeAsync<string>("auth.getToken");
+            await EnsureAdminToken();
 
-            if (string.IsNullOrWhiteSpace(token))
+            if (Http.DefaultRequestHeaders.Authorization == null)
             {
                 errorMessage = "Debes iniciar sesión como administrador.";
                 return;
@@ -426,19 +606,16 @@
 
             reactivatingHotelId = hotel.Id;
 
-            Http.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", token);
-
             var response = await Http.PostAsync($"api/admin/hotels/{hotel.Id}/reactivate", null);
 
             if (!response.IsSuccessStatusCode)
             {
-                errorMessage = await response.Content.ReadAsStringAsync();
+                errorMessage = await ReadError(response, "No se pudo reactivar el hotel.");
                 return;
             }
 
             successMessage = $"Hotel {hotel.Name} reactivado correctamente.";
-            await LoadHotels();
+            await RefreshAll();
         }
         catch (Exception ex)
         {
@@ -448,6 +625,20 @@
         {
             reactivatingHotelId = null;
         }
+    }
+
+    private static bool HasHotelExtraInfo(AdminHotelDto hotel)
+    {
+        return !string.IsNullOrWhiteSpace(hotel.Description)
+            || !string.IsNullOrWhiteSpace(hotel.MainImageUrl)
+            || !string.IsNullOrWhiteSpace(hotel.ZoneInfo)
+            || !string.IsNullOrWhiteSpace(hotel.Amenities);
+    }
+
+    private static async Task<string> ReadError(HttpResponseMessage response, string fallback)
+    {
+        var content = await response.Content.ReadAsStringAsync();
+        return string.IsNullOrWhiteSpace(content) ? fallback : content;
     }
 
     public class AdminHotelDto
@@ -462,7 +653,11 @@
         public string? Amenities { get; set; }
         public int CityId { get; set; }
         public string CityName { get; set; } = "";
+        public string CityCountryCode { get; set; } = "";
         public bool IsActive { get; set; }
+        public string CityDisplayName => string.IsNullOrWhiteSpace(CityCountryCode)
+            ? CityName
+            : $"{CityName} ({CityCountryCode})";
     }
 
     public class SaveHotelRequest
@@ -477,9 +672,21 @@
         public int CityId { get; set; }
     }
 
+    public class SaveCityRequest
+    {
+        public string Name { get; set; } = "";
+        public string CountryCode { get; set; } = "GT";
+    }
+
     public class CityDto
     {
         public int Id { get; set; }
         public string Name { get; set; } = "";
+        public string CountryCode { get; set; } = "";
+        public int HotelsCount { get; set; }
+        public int ActiveHotelsCount { get; set; }
+        public string DisplayName => string.IsNullOrWhiteSpace(CountryCode)
+            ? Name
+            : $"{Name} ({CountryCode})";
     }
 }

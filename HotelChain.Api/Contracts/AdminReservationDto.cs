@@ -25,6 +25,11 @@ public class AdminReservationDto
     public bool IsPaid { get; set; }
     public string? CardLast4 { get; set; }
     public Guid? UserId { get; set; }
+    public string? GuestFirstName { get; set; }
+    public string? GuestLastName { get; set; }
+    public string? GuestEmail { get; set; }
+    public string? GuestCountry { get; set; }
+    public string? GuestPassportNumber { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? ExpiresAt { get; set; }
 }

@@ -38,6 +38,11 @@ public class AdminSettleReservationChargesRequest
     public decimal Amount { get; set; }
 }
 
+public class AdminCheckInRequest
+{
+    public int? RoomId { get; set; }
+}
+
 [ApiController]
 [Route("api/admin/reservations")]
 [Authorize(Roles = Roles.ADMIN)]
@@ -59,10 +64,12 @@ public class AdminReservationsController : ControllerBase
     {
         await ExpirePendingReservationsAsync();
 
-        var reservations = await _db.Reservations
-            .AsNoTracking()
-            .OrderByDescending(r => r.CreatedAt)
-            .Select(r => new AdminReservationDto
+        var reservations = await (
+            from r in _db.Reservations.AsNoTracking()
+            join u in _db.Users.AsNoTracking() on r.UserId equals (Guid?)u.Id into userJoin
+            from u in userJoin.DefaultIfEmpty()
+            orderby r.CreatedAt descending
+            select new AdminReservationDto
             {
                 Id = r.Id,
                 HotelId = r.HotelId,
@@ -87,6 +94,11 @@ public class AdminReservationsController : ControllerBase
                 IsPaid = r.Payment != null && r.Payment.Status == "APPROVED",
                 CardLast4 = r.Payment != null ? r.Payment.Last4 : null,
                 UserId = r.UserId,
+                GuestFirstName = u != null ? u.FirstName : null,
+                GuestLastName = u != null ? u.LastName : null,
+                GuestEmail = u != null ? u.Email : null,
+                GuestCountry = u != null ? u.Country : null,
+                GuestPassportNumber = u != null ? u.PassportNumber : null,
                 CreatedAt = r.CreatedAt,
                 ExpiresAt = r.ExpiresAt
             })
@@ -95,8 +107,103 @@ public class AdminReservationsController : ControllerBase
         return Ok(reservations);
     }
 
+    [HttpGet("{id:int}/audits")]
+    public async Task<IActionResult> GetAudits(int id)
+    {
+        var exists = await _db.Reservations.AsNoTracking().AnyAsync(r => r.Id == id);
+        if (!exists)
+            return NotFound("Reserva no existe.");
+
+        var audits = await _db.ReservationAudits
+            .AsNoTracking()
+            .Where(a => a.ReservationId == id)
+            .OrderByDescending(a => a.CreatedAt)
+            .Select(a => new
+            {
+                a.Id,
+                a.Action,
+                a.OldStatus,
+                a.NewStatus,
+                a.Reason,
+                a.Actor,
+                a.CreatedAt
+            })
+            .ToListAsync();
+
+        return Ok(audits);
+    }
+
+    [HttpGet("{id:int}/available-rooms")]
+    public async Task<IActionResult> GetAvailableRoomsForCheckIn(int id)
+    {
+        var res = await _db.Reservations
+            .AsNoTracking()
+            .Include(r => r.Rooms)
+                .ThenInclude(rr => rr.RoomType)
+            .FirstOrDefaultAsync(r => r.Id == id);
+
+        if (res == null)
+            return NotFound("Reserva no existe.");
+
+        if (res.Status != "CONFIRMED")
+            return BadRequest("Solo se pueden consultar habitaciones para check-in de reservas CONFIRMED.");
+
+        var today = DateTime.Now.Date;
+        if (today < res.CheckIn.Date || today >= res.CheckOut.Date)
+            return BadRequest("La reserva no está dentro de una ventana válida para check-in.");
+
+        var pendingRoom = res.Rooms.OrderBy(x => x.Id).FirstOrDefault(x => !x.RoomId.HasValue);
+        if (pendingRoom == null)
+            return Ok(Array.Empty<object>());
+
+        var assignStart = today > res.CheckIn.Date ? today : res.CheckIn.Date;
+        var assignNights = (res.CheckOut.Date - assignStart).Days;
+        if (assignNights <= 0)
+            return BadRequest("No queda estancia pendiente para asignar habitación.");
+
+        var candidateRooms = await _db.Rooms
+            .AsNoTracking()
+            .Where(r => r.IsActive)
+            .Where(r => r.HotelId == res.HotelId)
+            .Where(r => r.RoomTypeId == pendingRoom.RoomTypeId)
+            .Where(r => r.MaxGuests >= res.Guests)
+            .OrderBy(r => r.NameOrNumber)
+            .Select(r => new
+            {
+                r.Id,
+                r.NameOrNumber,
+                RoomType = r.RoomType.Name,
+                r.MaxGuests,
+                r.BedType,
+                r.AreaSquareMeters,
+                r.BasePricePerNight
+            })
+            .ToListAsync();
+
+        var availableRooms = new List<object>();
+
+        foreach (var room in candidateRooms)
+        {
+            var inventoryRows = await _db.RoomInventories
+                .AsNoTracking()
+                .Where(x => x.RoomId == room.Id && x.Date >= assignStart && x.Date < res.CheckOut)
+                .OrderBy(x => x.Date)
+                .ToListAsync();
+
+            if (inventoryRows.Count != assignNights)
+                continue;
+
+            if (inventoryRows.Any(x => (x.QuantityTotal - x.QuantityReserved) <= 0))
+                continue;
+
+            availableRooms.Add(room);
+        }
+
+        return Ok(availableRooms);
+    }
+
     [HttpPost("{id:int}/check-in")]
-    public async Task<IActionResult> CheckIn(int id)
+    public async Task<IActionResult> CheckIn(int id, [FromBody] AdminCheckInRequest? request)
     {
         var res = await _db.Reservations
             .Include(r => r.Rooms)
@@ -126,27 +233,39 @@ public class AdminReservationsController : ControllerBase
         if (assignNights <= 0)
             return BadRequest("No queda estancia pendiente para asignar habitación.");
 
+        var requestedRoomId = request?.RoomId;
+        var requestedRoomAlreadyUsed = false;
+
         await using var tx = await _db.Database.BeginTransactionAsync();
 
-        foreach (var rr in res.Rooms)
+        foreach (var rr in res.Rooms.OrderBy(x => x.Id))
         {
             if (rr.RoomId.HasValue)
                 continue;
 
-            var candidateRooms = await _db.Rooms
+            var candidateQuery = _db.Rooms
                 .Where(r => r.IsActive)
                 .Where(r => r.HotelId == res.HotelId)
                 .Where(r => r.RoomTypeId == rr.RoomTypeId)
-                .Where(r => r.MaxGuests >= res.Guests)
+                .Where(r => r.MaxGuests >= res.Guests);
+
+            if (requestedRoomId.HasValue && !requestedRoomAlreadyUsed)
+                candidateQuery = candidateQuery.Where(r => r.Id == requestedRoomId.Value);
+
+            var candidateRooms = await candidateQuery
                 .OrderBy(r => r.BasePricePerNight)
-                .ThenBy(r => r.Id)
-                .Select(r => new { r.Id })
+                .ThenBy(r => r.NameOrNumber)
+                .Select(r => new { r.Id, r.NameOrNumber })
                 .ToListAsync();
+
+            if (requestedRoomId.HasValue && !requestedRoomAlreadyUsed && candidateRooms.Count == 0)
+                return BadRequest("La habitación física seleccionada no pertenece al hotel/tipo reservado, no está activa o no cumple la capacidad.");
 
             if (candidateRooms.Count == 0)
                 return BadRequest("No existe una habitación física elegible para el tipo reservado.");
 
             int? selectedRoomId = null;
+            string? selectedRoomName = null;
             List<RoomInventory>? selectedInventory = null;
 
             foreach (var room in candidateRooms)
@@ -163,17 +282,37 @@ public class AdminReservationsController : ControllerBase
                     continue;
 
                 selectedRoomId = room.Id;
+                selectedRoomName = room.NameOrNumber;
                 selectedInventory = inventoryRows;
                 break;
             }
 
             if (!selectedRoomId.HasValue || selectedInventory == null)
+            {
+                if (requestedRoomId.HasValue && !requestedRoomAlreadyUsed)
+                    return BadRequest("La habitación física seleccionada no está disponible para toda la estancia.");
+
                 return BadRequest("No hay habitación física disponible para realizar el check-in.");
+            }
 
             foreach (var row in selectedInventory)
                 row.QuantityReserved += 1;
 
             rr.RoomId = selectedRoomId.Value;
+
+            if (requestedRoomId.HasValue && !requestedRoomAlreadyUsed)
+                requestedRoomAlreadyUsed = true;
+
+            _db.ReservationAudits.Add(new ReservationAudit
+            {
+                ReservationId = res.Id,
+                Action = "ASSIGN_ROOM",
+                OldStatus = res.Status,
+                NewStatus = res.Status,
+                Reason = $"Habitación física asignada: {selectedRoomName ?? selectedRoomId.Value.ToString()}",
+                Actor = "ADMIN",
+                CreatedAt = DateTime.UtcNow
+            });
         }
 
         var oldStatus = res.Status;
@@ -185,7 +324,9 @@ public class AdminReservationsController : ControllerBase
             Action = "CHECK_IN",
             OldStatus = oldStatus,
             NewStatus = res.Status,
-            Reason = "Check-in administrativo",
+            Reason = requestedRoomId.HasValue
+                ? "Check-in administrativo con habitación física seleccionada manualmente"
+                : "Check-in administrativo con asignación automática de habitación física",
             Actor = "ADMIN",
             CreatedAt = DateTime.UtcNow
         });
@@ -624,6 +765,18 @@ public class AdminReservationsController : ControllerBase
         };
 
         _db.ReservationCharges.Add(charge);
+
+        _db.ReservationAudits.Add(new ReservationAudit
+        {
+            ReservationId = reservation.Id,
+            Action = "ADD_CHARGE",
+            OldStatus = reservation.Status,
+            NewStatus = reservation.Status,
+            Reason = $"{charge.Category}: {charge.Description} por Q {charge.Amount:0.00}",
+            Actor = "ADMIN",
+            CreatedAt = charge.CreatedAt
+        });
+
         await _db.SaveChangesAsync();
 
         var chargesTotal = await _db.ReservationCharges
@@ -751,6 +904,18 @@ public class AdminReservationsController : ControllerBase
             return BadRequest("No se puede anular un cargo de una reservación cerrada.");
 
         charge.IsVoided = true;
+
+        _db.ReservationAudits.Add(new ReservationAudit
+        {
+            ReservationId = charge.ReservationId,
+            Action = "VOID_CHARGE",
+            OldStatus = charge.Reservation.Status,
+            NewStatus = charge.Reservation.Status,
+            Reason = $"Cargo anulado: {charge.Category} - {charge.Description} por Q {charge.Amount:0.00}",
+            Actor = "ADMIN",
+            CreatedAt = DateTime.UtcNow
+        });
+
         await _db.SaveChangesAsync();
 
         return Ok(new { charge.Id, charge.IsVoided });

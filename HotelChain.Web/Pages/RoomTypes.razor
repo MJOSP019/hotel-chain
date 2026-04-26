@@ -8,9 +8,8 @@
             <div class="info-badge">Portal informativo</div>
             <h1>Tipos de habitación</h1>
             <p>
-                Conoce de forma general las categorías de hospedaje disponibles dentro de la cadena.
-                Esta versión agrega una estructura visual más fuerte para que cada categoría tenga un
-                bloque tipo galería y se sienta más cercana a un hotel real.
+                Elige entre habitaciones dobles, junior suites, suites y gran suites según el nivel de comodidad,
+                amplitud y experiencia que buscas para tu estadía dentro de HotelChain Collection.
             </p>
         </div>
 
@@ -25,11 +24,11 @@
     <section class="info-section">
         <div class="info-section__header">
             <div>
-                <div class="info-badge info-badge--light">Categorías visuales</div>
-                <h3>Tipos de habitación con galería orientativa</h3>
+                <div class="info-badge info-badge--light">Opciones de hospedaje</div>
+                <h3>Opciones de hospedaje para cada tipo de viaje</h3>
                 <p>
-                    Estas fichas no reemplazan la disponibilidad real del motor de búsqueda, pero sí ayudan a que el huésped entienda
-                    mejor qué puede esperar en cada categoría antes de reservar.
+                    Cada categoría ofrece una experiencia distinta. Revisa capacidad, configuración de cama, tamaño aproximado
+                    y características generales antes de consultar disponibilidad.
                 </p>
             </div>
         </div>
@@ -51,7 +50,7 @@
                                 <strong>@room.Capacity</strong>
                             </div>
                             <div>
-                                <span>Cama sugerida</span>
+                                <span>Configuración de cama</span>
                                 <strong>@room.Bed</strong>
                             </div>
                             <div>
@@ -86,9 +85,9 @@
         <div class="info-section__header">
             <div>
                 <div class="info-badge info-badge--light">Comparación general</div>
-                <h3>Qué cambia de una categoría a otra</h3>
+                <h3>Diferencias principales entre categorías</h3>
                 <p>
-                    A mayor categoría normalmente aumenta la sensación de amplitud, privacidad, zonas de descanso y presencia visual.
+                    A medida que sube la categoría, también aumentan la amplitud, privacidad, configuración de descanso y nivel de experiencia.
                 </p>
             </div>
         </div>
@@ -105,18 +104,17 @@
         <div class="info-highlight__content">
             <div>
                 <div class="info-badge info-badge--light">Importante</div>
-                <h3>La asignación final depende de disponibilidad, reglas e inventario real</h3>
+                <h3>La disponibilidad final depende del hotel, fechas e inventario</h3>
                 <p>
-                    Estas fichas son informativas. La búsqueda y la reservación siguen siendo la fuente de verdad para precio,
-                    capacidad, restricciones comerciales y opción exacta disponible.
+                    Las categorías muestran características generales. Para reservar, utiliza la búsqueda de disponibilidad; allí verás precios, fechas, capacidad y opciones realmente disponibles para tu estadía.
                 </p>
             </div>
             <div class="info-highlight__box">
-                <div class="info-highlight__label">Sugerencia visual</div>
+                <div class="info-highlight__label">Consulta disponibilidad real</div>
                 <p>
-                    Si luego tomas fotos propias del proyecto, reemplaza primero la imagen principal de cada categoría y después los
-                    detalles de cama, baño y sala; eso te dará el mayor impacto visual con menos esfuerzo.
+                    Las fotografías son representativas de cada categoría. La asignación final puede variar según hotel, inventario, fechas seleccionadas y reglas comerciales activas.
                 </p>
+                <a class="info-cta" href="/search">Buscar habitaciones disponibles</a>
             </div>
         </div>
     </section>
@@ -128,11 +126,11 @@
         new(
             "Estándar",
             "Habitación doble",
-            "Una categoría funcional y cómoda para viajes cortos, escapadas en pareja o estadías donde se prioriza practicidad y descanso.",
+            "Una opción práctica y cómoda para viajes cortos, estancias de negocio o escapadas en pareja. Ofrece lo esencial para descansar con buena relación entre comodidad y precio.",
             "2 huéspedes",
             "1 cama doble o 2 camas",
             "22–28 m²",
-            "Funcional y cómoda",
+            "Estancias prácticas",
             [
                 new("Vista general", "Habitación", "room-double-1"),
                 new("Zona de cama", "Descanso", "room-double-2"),
@@ -141,7 +139,7 @@
         new(
             "Mayor amplitud",
             "Junior suite",
-            "Pensada para quien quiere un poco más de espacio, mejor distribución y una experiencia superior frente a la categoría estándar.",
+            "Una alternativa con mayor amplitud y mejor distribución, pensada para huéspedes que buscan más comodidad sin pasar a una categoría premium.",
             "2 a 3 huéspedes",
             "King o doble amplia",
             "30–38 m²",
@@ -154,7 +152,7 @@
         new(
             "Experiencia superior",
             "Suite",
-            "Una alternativa con mayor sensación de privacidad, amplitud y confort, ideal para estadías más completas o viajes especiales.",
+            "Una categoría superior con espacios más amplios, mayor privacidad y zonas de descanso integradas. Ideal para estadías más largas o viajes especiales.",
             "2 a 4 huéspedes",
             "King size",
             "40–52 m²",
@@ -167,7 +165,7 @@
         new(
             "Categoría premium",
             "Gran suite",
-            "La opción más amplia del catálogo, ideal para huéspedes que priorizan una experiencia premium, mayor distribución y sensación de exclusividad.",
+            "La categoría más amplia y exclusiva, diseñada para huéspedes que buscan una experiencia premium, mayor distribución y un ambiente más privado.",
             "4 huéspedes o más",
             "King premium + apoyo",
             "55–80 m²",
@@ -218,18 +216,18 @@
     .room-hero-stack__card::after, .room-gallery-grid__overlay {
         content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,23,42,.04), rgba(15,23,42,.5));
     }
-    .room-hero-stack__card--double::before, .room-double-1::before { background: linear-gradient(135deg, #d8d3cc, #f8f7f5 52%, #bcccdc); }
-    .room-hero-stack__card--junior::before, .room-junior-1::before { background: linear-gradient(135deg, #d1c0a7, #f3ebe0 50%, #a0b4c4); }
-    .room-hero-stack__card--suite::before, .room-suite-1::before { background: linear-gradient(135deg, #becad5, #ecf2f6 48%, #879db1); }
-    .room-hero-stack__card--grand::before, .room-grand-1::before { background: linear-gradient(135deg, #98aeb6, #e6eff1 50%, #6d8498); }
-    .room-double-2::before { background: linear-gradient(135deg, #e3ddd6, #ffffff 50%, #cad7e2); }
-    .room-double-3::before { background: linear-gradient(135deg, #d4cec8, #f7f5f1 50%, #aebeca); }
-    .room-junior-2::before { background: linear-gradient(135deg, #d3c1b0, #faf4ee 50%, #b6c7d2); }
-    .room-junior-3::before { background: linear-gradient(135deg, #c4b4a7, #efe5dc 50%, #a8bac8); }
-    .room-suite-2::before { background: linear-gradient(135deg, #cad8e2, #f2f7fa 50%, #9fb4c3); }
-    .room-suite-3::before { background: linear-gradient(135deg, #b9c9d4, #eef4f8 50%, #879db0); }
-    .room-grand-2::before { background: linear-gradient(135deg, #9eb3ba, #edf3f4 50%, #7d93a7); }
-    .room-grand-3::before { background: linear-gradient(135deg, #a5b7bf, #eef4f6 50%, #7e94a7); }
+    .room-hero-stack__card--double::before, .room-double-1::before { background-image: url('https://res.cloudinary.com/ds7fyjtcc/image/upload/f_auto,q_auto,c_fill,g_auto,w_1200,h_800/v1777223027/DOUBLE_wnzkli.jpg'); }
+    .room-hero-stack__card--junior::before, .room-junior-1::before { background-image: url('https://res.cloudinary.com/ds7fyjtcc/image/upload/f_auto,q_auto,c_fill,g_auto,w_1200,h_800/v1777223029/JUNIORSUITE_tijbm7.jpg'); }
+    .room-hero-stack__card--suite::before, .room-suite-1::before { background-image: url('https://res.cloudinary.com/ds7fyjtcc/image/upload/f_auto,q_auto,c_fill,g_auto,w_1200,h_800/v1777223034/SUITE_clunx9.jpg'); }
+    .room-hero-stack__card--grand::before, .room-grand-1::before { background-image: url('https://res.cloudinary.com/ds7fyjtcc/image/upload/f_auto,q_auto,c_fill,g_auto,w_1200,h_800/v1777223028/GRANSUITE_mt0tyt.jpg'); }
+    .room-double-2::before { background-image: url('https://res.cloudinary.com/ds7fyjtcc/image/upload/f_auto,q_auto,c_fill,g_auto,w_1200,h_800/v1777223027/DOBLEZONADECAMA_hh1l73.jpg'); }
+    .room-double-3::before { background-image: url('https://res.cloudinary.com/ds7fyjtcc/image/upload/f_auto,q_auto,c_fill,g_auto,w_1200,h_800/v1777223025/DOBLEESCRITORIO_tndyqd.jpg'); }
+    .room-junior-2::before { background-image: url('https://res.cloudinary.com/ds7fyjtcc/image/upload/f_auto,q_auto,c_fill,g_auto,w_1200,h_800/v1777223032/JUNIORSUITELOUNGE_tbheng.jpg'); }
+    .room-junior-3::before { background-image: url('https://res.cloudinary.com/ds7fyjtcc/image/upload/f_auto,q_auto,c_fill,g_auto,w_1200,h_800/v1777223032/JUNIORSUITEDETALLEPREMIUM_g2npab.jpg'); }
+    .room-suite-2::before { background-image: url('https://res.cloudinary.com/ds7fyjtcc/image/upload/f_auto,q_auto,c_fill,g_auto,w_1200,h_800/v1777223034/SUITESALAINTEGRADA_flx6ef.jpg'); }
+    .room-suite-3::before { background-image: url('https://res.cloudinary.com/ds7fyjtcc/image/upload/f_auto,q_auto,c_fill,g_auto,w_1200,h_800/v1777223033/SUITEBA%C3%91O_tpykpb.jpg'); }
+    .room-grand-2::before { background-image: url('https://res.cloudinary.com/ds7fyjtcc/image/upload/f_auto,q_auto,c_fill,g_auto,w_1200,h_800/v1777223027/GRANDSUITESALAESTANCIA_ahjuvk.jpg'); }
+    .room-grand-3::before { background-image: url('https://res.cloudinary.com/ds7fyjtcc/image/upload/f_auto,q_auto,c_fill,g_auto,w_1200,h_800/v1777223030/GRANSUITEBA%C3%91O_jweerv.jpg'); }
 
     .info-section, .info-highlight { margin-top:2rem; }
     .info-section__header h3 { margin:.4rem 0 .35rem; font-size: clamp(1.7rem, 2vw, 2.35rem); font-weight:900; }

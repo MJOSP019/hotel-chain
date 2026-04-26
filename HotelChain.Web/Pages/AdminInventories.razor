@@ -7,6 +7,12 @@
 
 <h3>Administración de inventario</h3>
 
+<p class="text-muted">
+    El inventario se maneja como en un hotel real: las habitaciones físicas se administran en
+    <strong>Habitaciones</strong>, la disponibilidad comercial se vende por <strong>tipo de habitación</strong>,
+    y aquí solo se preparan horizontes de venta, reglas comerciales y bloqueos operativos.
+</p>
+
 @if (!string.IsNullOrWhiteSpace(errorMessage))
 {
     <div class="alert alert-danger">@errorMessage</div>
@@ -16,17 +22,37 @@
     <div class="alert alert-success">@successMessage</div>
 }
 
-<div class="row">
-    <div class="col-md-5">
-        <div class="card p-3">
-            <h5>Actualizar disponibilidad por rango</h5>
-            <p class="text-muted mb-3">
-                Este módulo administra la disponibilidad diaria de una habitación individual.
-                Para una habitación física, la cantidad total permitida por fecha es 0 o 1.
-            </p>
+<div class="row g-3 mb-3">
+    <div class="col-md-4">
+        <div class="card p-3 inventory-kpi">
+            <span class="text-muted">Habitaciones del hotel</span>
+            <strong>@HotelRoomCount</strong>
+            <small>Físicas registradas</small>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3 inventory-kpi">
+            <span class="text-muted">Habitaciones activas</span>
+            <strong>@ActiveHotelRoomCount</strong>
+            <small>Entrarán al inventario comercial</small>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3 inventory-kpi">
+            <span class="text-muted">Tipos vendibles</span>
+            <strong>@RoomTypesForSelectedHotel.Count</strong>
+            <small>Disponibles para venta por categoría</small>
+        </div>
+    </div>
+</div>
 
-            <div class="mb-2">
-                <label>Hotel</label>
+<div class="row g-3">
+    <div class="col-lg-4">
+        <div class="card p-3 mb-3">
+            <h5>1. Selección del hotel</h5>
+
+            <div class="mb-3">
+                <label class="form-label">Hotel</label>
                 <select class="form-select" @bind="selectedHotelId" @bind:after="OnHotelChanged">
                     <option value="0">Seleccione un hotel</option>
                     @foreach (var hotel in hotels)
@@ -36,116 +62,277 @@
                 </select>
             </div>
 
-            <div class="mb-2">
-                <label>Habitación</label>
-                <select class="form-select" @bind="model.RoomId" @bind:after="OnRoomChanged">
-                    <option value="0">Seleccione una habitación</option>
-                    @foreach (var room in filteredRooms)
-                    {
-                        <option value="@room.Id">@($"{room.NameOrNumber} - {room.RoomTypeName}")</option>
-                    }
-                </select>
-                @if (selectedHotelId > 0 && !filteredRooms.Any())
-                {
-                    <small class="text-muted">Este hotel no tiene habitaciones activas disponibles para administrar inventario.</small>
-                }
-            </div>
-
-            <div class="mb-2">
-                <label>Fecha inicio</label>
-                <InputDate @bind-Value="startDateValue" class="form-control" />
-            </div>
-
-            <div class="mb-2">
-                <label>Fecha fin</label>
-                <InputDate @bind-Value="endDateValue" class="form-control" />
-            </div>
-
-            <div class="mb-3">
-                <label>Disponibilidad total por día</label>
-                <input type="number" min="0" max="1" class="form-control" @bind="model.QuantityTotal" />
-                <small class="text-muted">Use 1 para disponible y 0 para bloqueada/no disponible.</small>
-            </div>
-
-            <div class="d-flex gap-2">
-                <button class="btn btn-primary me-2" @onclick="SaveInventory">
-                    Guardar
-                </button>
-
-                <button class="btn btn-secondary" @onclick="ResetForm">
-                    Limpiar
-                </button>
+            <div class="alert alert-info mb-0">
+                La disponibilidad base ya no se crea manualmente día por día.
+                Se prepara automáticamente desde las habitaciones activas del hotel.
             </div>
         </div>
 
-        @if (selectedRoom is not null)
-        {
-            <div class="card p-3 mt-3">
-                <h5>Resumen de habitación</h5>
-                <div class="mb-2"><strong>Hotel:</strong> @selectedRoom.HotelName</div>
-                <div class="mb-2"><strong>Habitación:</strong> @selectedRoom.NameOrNumber</div>
-                <div class="mb-2"><strong>Tipo:</strong> @selectedRoom.RoomTypeName</div>
-                <div class="mb-2"><strong>Capacidad:</strong> @selectedRoom.MaxGuests huésped(es)</div>
-                <div class="mb-0"><strong>Precio base:</strong> Q @selectedRoom.BasePricePerNight.ToString("0.00")</div>
+        <div class="card p-3 mb-3">
+            <h5>2. Preparar calendario de venta</h5>
+            <p class="text-muted">
+                Crea o completa el inventario futuro sin mostrar miles de filas en pantalla.
+                Úsalo cuando agregues habitaciones nuevas o antes de abrir ventas de una temporada.
+            </p>
+
+            <div class="mb-3">
+                <label class="form-label">Meses a preparar</label>
+                <select class="form-select" @bind="horizonMonths">
+                    <option value="3">3 meses</option>
+                    <option value="6">6 meses</option>
+                    <option value="12">12 meses</option>
+                    <option value="18">18 meses</option>
+                </select>
             </div>
-        }
+
+            <button class="btn btn-primary w-100"
+                    disabled="@(selectedHotelId <= 0 || isGeneratingHorizon)"
+                    @onclick="GenerateHorizon">
+                @(isGeneratingHorizon ? "Preparando..." : "Preparar / sincronizar inventario")
+            </button>
+        </div>
+
+        <div class="card p-3">
+            <h5>3. Bloqueo operativo de habitación</h5>
+            <p class="text-muted">
+                Esto se usa para mantenimiento, limpieza profunda o habitaciones fuera de servicio.
+                No se usa para “crear disponibilidad”; la disponibilidad sale de las habitaciones activas.
+            </p>
+
+            <div class="mb-2">
+                <label class="form-label">Habitación física</label>
+                <select class="form-select" @bind="selectedRoomId" @bind:after="OnRoomChanged">
+                    <option value="0">Seleccione una habitación</option>
+                    @foreach (var room in RoomsForSelectedHotel)
+                    {
+                        <option value="@room.Id">@GetRoomOptionText(room)</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Fecha operativa</label>
+                <InputDate @bind-Value="operationDate" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Estado operativo</label>
+                <select class="form-select" @bind="roomOperationalStatus">
+                    <option value="1">Disponible operativamente</option>
+                    <option value="0">Fuera de servicio / mantenimiento</option>
+                </select>
+            </div>
+
+            <button class="btn btn-outline-primary w-100"
+                    disabled="@(selectedRoomId <= 0 || isSavingRoomStatus)"
+                    @onclick="SaveRoomOperationalStatus">
+                @(isSavingRoomStatus ? "Guardando..." : "Guardar estado del día")
+            </button>
+
+            @if (selectedRoom is not null)
+            {
+                <hr />
+                <div class="small">
+                    <div><strong>Hotel:</strong> @selectedRoom.HotelName</div>
+                    <div><strong>Habitación:</strong> @selectedRoom.NameOrNumber</div>
+                    <div><strong>Tipo:</strong> @selectedRoom.RoomTypeName</div>
+                    <div><strong>Estado global:</strong> @(selectedRoom.IsActive ? "Activa" : "Inactiva")</div>
+                </div>
+            }
+        </div>
     </div>
 
-    <div class="col-md-7">
-        <div class="card p-3">
-            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <div class="col-lg-8">
+        <div class="card p-3 mb-3">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
                 <div>
-                    <h5 class="mb-1">Disponibilidad de la habitación</h5>
-                    @if (selectedRoom is not null)
-                    {
-                        <div class="text-muted">
-                            @selectedRoom.NameOrNumber · @selectedRoom.RoomTypeName
-                        </div>
-                    }
+                    <h5 class="mb-1">Calendario comercial por tipo de habitación</h5>
+                    <div class="text-muted">
+                        Muestra solo el rango que estás revisando; no carga todo el inventario histórico.
+                    </div>
                 </div>
 
-                @if (inventoryItems.Any())
-                {
-                    <div class="text-muted">
-                        Registros: @inventoryItems.Count
-                    </div>
-                }
+                <button class="btn btn-outline-secondary"
+                        disabled="@(selectedHotelId <= 0 || selectedRoomTypeId <= 0 || isLoadingCommercial)"
+                        @onclick="LoadCommercialCalendar">
+                    @(isLoadingCommercial ? "Cargando..." : "Actualizar vista")
+                </button>
             </div>
 
-            @if (model.RoomId <= 0)
+            <div class="row g-2 mb-3">
+                <div class="col-md-5">
+                    <label class="form-label">Tipo de habitación</label>
+                    <select class="form-select" @bind="selectedRoomTypeId" @bind:after="OnRoomTypeChanged">
+                        <option value="0">Seleccione un tipo</option>
+                        @foreach (var roomType in RoomTypesForSelectedHotel)
+                        {
+                            <option value="@roomType.Id">@roomType.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Desde</label>
+                    <InputDate @bind-Value="calendarStartDate" class="form-control" />
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Días a mostrar</label>
+                    <select class="form-select" @bind="calendarDays">
+                        <option value="7">7 días</option>
+                        <option value="14">14 días</option>
+                        <option value="30">30 días</option>
+                        <option value="60">60 días</option>
+                    </select>
+                </div>
+            </div>
+
+            @if (selectedHotelId <= 0)
             {
-                <p>Selecciona una habitación para ver su inventario.</p>
+                <p>Selecciona un hotel para revisar el calendario comercial.</p>
             }
-            else if (inventoryItems.Count == 0)
+            else if (selectedRoomTypeId <= 0)
             {
-                <p>No hay inventario para mostrar para esta habitación.</p>
+                <p>Selecciona un tipo de habitación.</p>
+            }
+            else if (commercialRows.Count == 0)
+            {
+                <div class="alert alert-warning mb-0">
+                    No hay calendario comercial para este rango. Usa
+                    <strong>Preparar / sincronizar inventario</strong> para abrir el horizonte de venta.
+                </div>
             }
             else
             {
-                <div class="table-responsive">
+                <div class="table-responsive inventory-table">
                     <table class="table table-striped align-middle">
                         <thead>
                             <tr>
                                 <th>Fecha</th>
-                                <th>Total</th>
+                                <th>Total vendible</th>
                                 <th>Reservadas</th>
                                 <th>Disponibles</th>
+                                <th>Reglas</th>
                                 <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in inventoryItems)
+                            @foreach (var item in commercialRows)
                             {
                                 <tr>
                                     <td>@item.Date.ToString("yyyy-MM-dd")</td>
                                     <td>@item.QuantityTotal</td>
                                     <td>@item.QuantityReserved</td>
                                     <td>@item.QuantityAvailable</td>
+                                    <td>@GetRulesText(item)</td>
                                     <td>
-                                        <span class="@GetAvailabilityBadgeClass(item)">
-                                            @GetAvailabilityText(item)
+                                        <span class="@GetCommercialBadgeClass(item)">
+                                            @GetCommercialStatusText(item)
                                         </span>
                                     </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+
+        <div class="card p-3 mb-3">
+            <h5>Reglas comerciales del tipo de habitación</h5>
+            <p class="text-muted">
+                Estas reglas controlan cómo se vende el inventario, sin tocar físicamente las habitaciones.
+            </p>
+
+            <div class="row g-2">
+                <div class="col-md-6">
+                    <label class="form-label">Desde</label>
+                    <InputDate @bind-Value="rulesStartDate" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Hasta</label>
+                    <InputDate @bind-Value="rulesEndDate" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row g-2 mt-2">
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" @bind="ruleIsClosed" />
+                        <label class="form-check-label">Cerrar venta</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" @bind="ruleClosedToArrival" />
+                        <label class="form-check-label">Cerrar llegada</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" @bind="ruleClosedToDeparture" />
+                        <label class="form-check-label">Cerrar salida</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 mt-2">
+                <div class="col-md-6">
+                    <label class="form-label">Mínimo de noches</label>
+                    <input type="number" min="1" class="form-control" @bind="ruleMinLengthOfStay" placeholder="Sin mínimo" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Máximo de noches</label>
+                    <input type="number" min="1" class="form-control" @bind="ruleMaxLengthOfStay" placeholder="Sin máximo" />
+                </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-3">
+                <button class="btn btn-primary"
+                        disabled="@(selectedHotelId <= 0 || selectedRoomTypeId <= 0 || isSavingRules)"
+                        @onclick="SaveCommercialRules">
+                    @(isSavingRules ? "Guardando..." : "Guardar reglas")
+                </button>
+
+                <button class="btn btn-outline-secondary" @onclick="ClearRulesForm" disabled="@isSavingRules">
+                    Limpiar reglas
+                </button>
+            </div>
+        </div>
+
+        <div class="card p-3">
+            <h5>Vista operativa de habitación</h5>
+
+            @if (selectedRoomId <= 0)
+            {
+                <p>Selecciona una habitación para ver su estado operativo cercano.</p>
+            }
+            else if (physicalRows.Count == 0)
+            {
+                <p>No hay registros operativos para el rango seleccionado.</p>
+            }
+            else
+            {
+                <div class="table-responsive inventory-table inventory-table--small">
+                    <table class="table table-striped align-middle">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Estado operativo</th>
+                                <th>Reservada</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in physicalRows)
+                            {
+                                <tr>
+                                    <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                                    <td>
+                                        <span class="@GetPhysicalBadgeClass(item)">
+                                            @GetPhysicalStatusText(item)
+                                        </span>
+                                    </td>
+                                    <td>@(item.QuantityReserved > 0 ? "Sí" : "No")</td>
                                 </tr>
                             }
                         </tbody>
@@ -157,6 +344,25 @@
 </div>
 
 <style>
+    .inventory-kpi {
+        min-height: 105px;
+    }
+
+    .inventory-kpi strong {
+        display: block;
+        font-size: 2rem;
+        line-height: 1.1;
+    }
+
+    .inventory-table {
+        max-height: 520px;
+        overflow: auto;
+    }
+
+    .inventory-table--small {
+        max-height: 260px;
+    }
+
     .inventory-badge {
         display: inline-flex;
         align-items: center;
@@ -166,6 +372,7 @@
         font-size: 0.82rem;
         font-weight: 700;
         letter-spacing: 0.02em;
+        white-space: nowrap;
     }
 
     .inventory-badge--available {
@@ -182,31 +389,76 @@
         background: #fef3c7;
         color: #92400e;
     }
+
+    .inventory-badge--rule {
+        background: #dbeafe;
+        color: #1e40af;
+    }
 </style>
 
 @code {
     private List<HotelOption> hotels = new();
     private List<RoomOption> rooms = new();
-    private List<RoomOption> filteredRooms = new();
-    private List<AdminRoomInventoryDto> inventoryItems = new();
+    private List<RoomTypeOption> roomTypes = new();
+    private List<CommercialInventoryCalendarDto> commercialRows = new();
+    private List<AdminRoomInventoryDto> physicalRows = new();
 
-    private UpsertRoomInventoryRangeRequest model = new();
-    private int selectedHotelId = 0;
+    private int selectedHotelId;
+    private int selectedRoomTypeId;
+    private int selectedRoomId;
+    private int horizonMonths = 12;
+    private int calendarDays = 30;
+    private int roomOperationalStatus = 1;
 
-    private DateTime? startDateValue = DateTime.Today;
-    private DateTime? endDateValue = DateTime.Today.AddDays(7);
+    private DateTime? calendarStartDate = DateTime.Today;
+    private DateTime? operationDate = DateTime.Today;
+    private DateTime? rulesStartDate = DateTime.Today;
+    private DateTime? rulesEndDate = DateTime.Today.AddDays(7);
+
+    private bool ruleIsClosed;
+    private bool ruleClosedToArrival;
+    private bool ruleClosedToDeparture;
+    private int? ruleMinLengthOfStay;
+    private int? ruleMaxLengthOfStay;
+
+    private bool isGeneratingHorizon;
+    private bool isLoadingCommercial;
+    private bool isSavingRules;
+    private bool isSavingRoomStatus;
 
     private string? errorMessage;
     private string? successMessage;
 
+    private List<RoomOption> RoomsForSelectedHotel =>
+        rooms
+            .Where(x => x.HotelId == selectedHotelId)
+            .OrderBy(x => x.RoomTypeName)
+            .ThenBy(x => x.NameOrNumber)
+            .ToList();
+
+    private List<RoomTypeOption> RoomTypesForSelectedHotel =>
+        rooms
+            .Where(x => x.HotelId == selectedHotelId && x.IsActive)
+            .GroupBy(x => new { x.RoomTypeId, x.RoomTypeName })
+            .Select(g => new RoomTypeOption { Id = g.Key.RoomTypeId, Name = g.Key.RoomTypeName })
+            .OrderBy(x => x.Name)
+            .ToList();
+
     private RoomOption? selectedRoom =>
-        rooms.FirstOrDefault(x => x.Id == model.RoomId);
+        rooms.FirstOrDefault(x => x.Id == selectedRoomId);
+
+    private int HotelRoomCount =>
+        rooms.Count(x => x.HotelId == selectedHotelId);
+
+    private int ActiveHotelRoomCount =>
+        rooms.Count(x => x.HotelId == selectedHotelId && x.IsActive);
 
     protected override async Task OnInitializedAsync()
     {
         await SetToken();
         await LoadHotels();
         await LoadRooms();
+        await LoadRoomTypes();
     }
 
     private async Task SetToken()
@@ -220,7 +472,6 @@
     {
         try
         {
-            errorMessage = null;
             hotels = await Http.GetFromJsonAsync<List<HotelOption>>("api/admin/hotels") ?? new();
         }
         catch
@@ -233,7 +484,6 @@
     {
         try
         {
-            errorMessage = null;
             rooms = await Http.GetFromJsonAsync<List<RoomOption>>("api/admin/rooms") ?? new();
         }
         catch
@@ -242,47 +492,47 @@
         }
     }
 
+    private async Task LoadRoomTypes()
+    {
+        try
+        {
+            roomTypes = await Http.GetFromJsonAsync<List<RoomTypeOption>>("api/public/room-types") ?? new();
+        }
+        catch
+        {
+            errorMessage = "No se pudieron cargar los tipos de habitación.";
+        }
+    }
+
     private async Task OnHotelChanged()
     {
-        filteredRooms = rooms
-            .Where(x => x.HotelId == selectedHotelId && x.IsActive)
-            .OrderBy(x => x.NameOrNumber)
-            .ToList();
-
-        model.RoomId = 0;
-        inventoryItems.Clear();
+        errorMessage = null;
         successMessage = null;
-        await Task.CompletedTask;
+        selectedRoomTypeId = 0;
+        selectedRoomId = 0;
+        commercialRows.Clear();
+        physicalRows.Clear();
+
+        var firstType = RoomTypesForSelectedHotel.FirstOrDefault();
+        if (firstType is not null)
+            selectedRoomTypeId = firstType.Id;
+
+        await LoadCommercialCalendar();
+    }
+
+    private async Task OnRoomTypeChanged()
+    {
+        successMessage = null;
+        await LoadCommercialCalendar();
     }
 
     private async Task OnRoomChanged()
     {
         successMessage = null;
-        await LoadInventory();
+        await LoadPhysicalPreview();
     }
 
-    private async Task LoadInventory()
-    {
-        try
-        {
-            errorMessage = null;
-
-            if (model.RoomId <= 0)
-            {
-                inventoryItems.Clear();
-                return;
-            }
-
-            inventoryItems = await Http.GetFromJsonAsync<List<AdminRoomInventoryDto>>(
-                $"api/admin/room-inventories?roomId={model.RoomId}") ?? new();
-        }
-        catch
-        {
-            errorMessage = "No se pudo cargar el inventario.";
-        }
-    }
-
-    private async Task SaveInventory()
+    private async Task GenerateHorizon()
     {
         errorMessage = null;
         successMessage = null;
@@ -293,91 +543,258 @@
             return;
         }
 
-        if (model.RoomId <= 0)
+        try
+        {
+            isGeneratingHorizon = true;
+
+            var request = new GenerateInventoryHorizonRequest
+            {
+                HotelId = selectedHotelId,
+                StartDate = DateTime.Today,
+                MonthsAhead = horizonMonths
+            };
+
+            var response = await Http.PostAsJsonAsync("api/admin/room-inventories/generate-horizon", request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = await response.Content.ReadAsStringAsync();
+                return;
+            }
+
+            successMessage = "Calendario de venta preparado y sincronizado correctamente.";
+            await LoadCommercialCalendar();
+            await LoadPhysicalPreview();
+        }
+        catch
+        {
+            errorMessage = "Ocurrió un error al preparar el inventario.";
+        }
+        finally
+        {
+            isGeneratingHorizon = false;
+        }
+    }
+
+    private async Task LoadCommercialCalendar()
+    {
+        if (selectedHotelId <= 0 || selectedRoomTypeId <= 0 || !calendarStartDate.HasValue)
+        {
+            commercialRows.Clear();
+            return;
+        }
+
+        try
+        {
+            isLoadingCommercial = true;
+            errorMessage = null;
+
+            var start = calendarStartDate.Value.Date;
+            var end = start.AddDays(Math.Max(calendarDays, 1) - 1);
+
+            commercialRows = await Http.GetFromJsonAsync<List<CommercialInventoryCalendarDto>>(
+                $"api/admin/room-inventories/commercial-calendar?hotelId={selectedHotelId}&roomTypeId={selectedRoomTypeId}&startDate={start:yyyy-MM-dd}&endDate={end:yyyy-MM-dd}") ?? new();
+        }
+        catch
+        {
+            errorMessage = "No se pudo cargar el calendario comercial.";
+        }
+        finally
+        {
+            isLoadingCommercial = false;
+        }
+    }
+
+    private async Task SaveCommercialRules()
+    {
+        errorMessage = null;
+        successMessage = null;
+
+        if (selectedHotelId <= 0)
+        {
+            errorMessage = "Debe seleccionar un hotel.";
+            return;
+        }
+
+        if (selectedRoomTypeId <= 0)
+        {
+            errorMessage = "Debe seleccionar un tipo de habitación.";
+            return;
+        }
+
+        if (!rulesStartDate.HasValue || !rulesEndDate.HasValue)
+        {
+            errorMessage = "Debe ingresar un rango válido para las reglas.";
+            return;
+        }
+
+        if (rulesEndDate.Value.Date < rulesStartDate.Value.Date)
+        {
+            errorMessage = "La fecha final de reglas no puede ser menor que la fecha inicial.";
+            return;
+        }
+
+        if (ruleMinLengthOfStay.HasValue && ruleMaxLengthOfStay.HasValue && ruleMinLengthOfStay > ruleMaxLengthOfStay)
+        {
+            errorMessage = "El mínimo de noches no puede ser mayor que el máximo.";
+            return;
+        }
+
+        try
+        {
+            isSavingRules = true;
+
+            var request = new UpsertCommercialRulesRequest
+            {
+                HotelId = selectedHotelId,
+                RoomTypeId = selectedRoomTypeId,
+                StartDate = rulesStartDate.Value.Date,
+                EndDate = rulesEndDate.Value.Date,
+                IsClosed = ruleIsClosed,
+                ClosedToArrival = ruleClosedToArrival,
+                ClosedToDeparture = ruleClosedToDeparture,
+                MinLengthOfStay = NormalizeStay(ruleMinLengthOfStay),
+                MaxLengthOfStay = NormalizeStay(ruleMaxLengthOfStay)
+            };
+
+            var response = await Http.PostAsJsonAsync("api/admin/room-inventories/commercial-rules", request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = await response.Content.ReadAsStringAsync();
+                return;
+            }
+
+            successMessage = "Reglas comerciales guardadas correctamente.";
+            await LoadCommercialCalendar();
+        }
+        catch
+        {
+            errorMessage = "Ocurrió un error al guardar las reglas comerciales.";
+        }
+        finally
+        {
+            isSavingRules = false;
+        }
+    }
+
+    private async Task SaveRoomOperationalStatus()
+    {
+        errorMessage = null;
+        successMessage = null;
+
+        if (selectedRoomId <= 0)
         {
             errorMessage = "Debe seleccionar una habitación.";
             return;
         }
 
-        if (!startDateValue.HasValue)
+        if (!operationDate.HasValue)
         {
-            errorMessage = "Debe ingresar una fecha de inicio válida.";
+            errorMessage = "Debe seleccionar una fecha operativa.";
             return;
         }
-
-        if (!endDateValue.HasValue)
-        {
-            errorMessage = "Debe ingresar una fecha fin válida.";
-            return;
-        }
-
-        var startDate = startDateValue.Value.Date;
-        var endDate = endDateValue.Value.Date;
-
-        if (endDate < startDate)
-        {
-            errorMessage = "La fecha fin no puede ser menor que la fecha inicio.";
-            return;
-        }
-
-        if (model.QuantityTotal < 0)
-        {
-            errorMessage = "La cantidad total no puede ser negativa.";
-            return;
-        }
-
-        if (model.QuantityTotal > 1)
-        {
-            errorMessage = "Para una habitación individual, la disponibilidad total no puede ser mayor que 1.";
-            return;
-        }
-
-        var request = new UpsertRoomInventoryRangeRequest
-        {
-            RoomId = model.RoomId,
-            StartDate = startDate,
-            EndDate = endDate,
-            QuantityTotal = model.QuantityTotal
-        };
 
         try
         {
+            isSavingRoomStatus = true;
+            var selected = selectedRoom;
+
+            var request = new UpsertRoomInventoryRangeRequest
+            {
+                RoomId = selectedRoomId,
+                StartDate = operationDate.Value.Date,
+                EndDate = operationDate.Value.Date,
+                QuantityTotal = roomOperationalStatus
+            };
+
             var response = await Http.PostAsJsonAsync("api/admin/room-inventories/upsert-range", request);
 
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                successMessage = "Inventario actualizado correctamente.";
-                await LoadInventory();
+                errorMessage = await response.Content.ReadAsStringAsync();
                 return;
             }
 
-            errorMessage = await response.Content.ReadAsStringAsync();
+            successMessage = roomOperationalStatus == 1
+                ? "La habitación quedó disponible operativamente para esa fecha."
+                : "La habitación quedó fuera de servicio para esa fecha.";
+
+            await LoadPhysicalPreview();
+
+            if (selected is not null && selected.RoomTypeId == selectedRoomTypeId)
+                await LoadCommercialCalendar();
         }
         catch
         {
-            errorMessage = "Ocurrió un error al guardar el inventario.";
+            errorMessage = "Ocurrió un error al guardar el estado operativo.";
+        }
+        finally
+        {
+            isSavingRoomStatus = false;
         }
     }
 
-    private void ResetForm()
+    private async Task LoadPhysicalPreview()
     {
-        selectedHotelId = 0;
-        model = new UpsertRoomInventoryRangeRequest();
-        filteredRooms.Clear();
-        inventoryItems.Clear();
-        startDateValue = DateTime.Today;
-        endDateValue = DateTime.Today.AddDays(7);
-        errorMessage = null;
-        successMessage = null;
+        if (selectedRoomId <= 0)
+        {
+            physicalRows.Clear();
+            return;
+        }
+
+        try
+        {
+            var start = operationDate?.Date ?? DateTime.Today;
+            var end = start.AddDays(13);
+
+            physicalRows = await Http.GetFromJsonAsync<List<AdminRoomInventoryDto>>(
+                $"api/admin/room-inventories?roomId={selectedRoomId}&startDate={start:yyyy-MM-dd}&endDate={end:yyyy-MM-dd}") ?? new();
+        }
+        catch
+        {
+            errorMessage = "No se pudo cargar la vista operativa de la habitación.";
+        }
     }
 
-    private static string GetAvailabilityText(AdminRoomInventoryDto item)
+    private void ClearRulesForm()
     {
-        if (item.QuantityTotal <= 0)
-            return "Bloqueada";
+        ruleIsClosed = false;
+        ruleClosedToArrival = false;
+        ruleClosedToDeparture = false;
+        ruleMinLengthOfStay = null;
+        ruleMaxLengthOfStay = null;
+        rulesStartDate = DateTime.Today;
+        rulesEndDate = DateTime.Today.AddDays(7);
+        successMessage = null;
+        errorMessage = null;
+    }
+
+    private static int? NormalizeStay(int? value)
+    {
+        if (!value.HasValue || value.Value <= 0)
+            return null;
+
+        return value.Value;
+    }
+
+
+    private static string GetRoomOptionText(RoomOption room)
+    {
+        var state = room.IsActive ? string.Empty : " (inactiva)";
+        return $"{room.NameOrNumber} - {room.RoomTypeName}{state}";
+    }
+
+    private static string GetCommercialStatusText(CommercialInventoryCalendarDto item)
+    {
+        if (item.IsClosed)
+            return "Venta cerrada";
 
         if (item.QuantityAvailable <= 0)
             return "Sin cupo";
+
+        if (item.ClosedToArrival || item.ClosedToDeparture || item.MinLengthOfStay.HasValue || item.MaxLengthOfStay.HasValue)
+            return "Con reglas";
 
         if (item.QuantityReserved > 0)
             return "Parcial";
@@ -385,13 +802,54 @@
         return "Disponible";
     }
 
-    private static string GetAvailabilityBadgeClass(AdminRoomInventoryDto item)
+    private static string GetCommercialBadgeClass(CommercialInventoryCalendarDto item)
     {
-        if (item.QuantityTotal <= 0 || item.QuantityAvailable <= 0)
+        if (item.IsClosed || item.QuantityAvailable <= 0)
             return "inventory-badge inventory-badge--blocked";
+
+        if (item.ClosedToArrival || item.ClosedToDeparture || item.MinLengthOfStay.HasValue || item.MaxLengthOfStay.HasValue)
+            return "inventory-badge inventory-badge--rule";
 
         if (item.QuantityReserved > 0)
             return "inventory-badge inventory-badge--partial";
+
+        return "inventory-badge inventory-badge--available";
+    }
+
+    private static string GetRulesText(CommercialInventoryCalendarDto item)
+    {
+        var rules = new List<string>();
+
+        if (item.ClosedToArrival)
+            rules.Add("No llegada");
+
+        if (item.ClosedToDeparture)
+            rules.Add("No salida");
+
+        if (item.MinLengthOfStay.HasValue)
+            rules.Add($"Mín. {item.MinLengthOfStay} noche(s)");
+
+        if (item.MaxLengthOfStay.HasValue)
+            rules.Add($"Máx. {item.MaxLengthOfStay} noche(s)");
+
+        return rules.Count == 0 ? "-" : string.Join(", ", rules);
+    }
+
+    private static string GetPhysicalStatusText(AdminRoomInventoryDto item)
+    {
+        if (item.QuantityTotal <= 0)
+            return "Fuera de servicio";
+
+        if (item.QuantityAvailable <= 0)
+            return "Ocupada / comprometida";
+
+        return "Disponible";
+    }
+
+    private static string GetPhysicalBadgeClass(AdminRoomInventoryDto item)
+    {
+        if (item.QuantityTotal <= 0 || item.QuantityAvailable <= 0)
+            return "inventory-badge inventory-badge--blocked";
 
         return "inventory-badge inventory-badge--available";
     }
@@ -415,6 +873,28 @@
         public bool IsActive { get; set; }
     }
 
+    public class RoomTypeOption
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+    }
+
+    public class CommercialInventoryCalendarDto
+    {
+        public int Id { get; set; }
+        public int HotelId { get; set; }
+        public int RoomTypeId { get; set; }
+        public DateTime Date { get; set; }
+        public int QuantityTotal { get; set; }
+        public int QuantityReserved { get; set; }
+        public int QuantityAvailable { get; set; }
+        public bool IsClosed { get; set; }
+        public bool ClosedToArrival { get; set; }
+        public bool ClosedToDeparture { get; set; }
+        public int? MinLengthOfStay { get; set; }
+        public int? MaxLengthOfStay { get; set; }
+    }
+
     public class AdminRoomInventoryDto
     {
         public int Id { get; set; }
@@ -426,6 +906,26 @@
         public int QuantityTotal { get; set; }
         public int QuantityReserved { get; set; }
         public int QuantityAvailable { get; set; }
+    }
+
+    public class GenerateInventoryHorizonRequest
+    {
+        public int HotelId { get; set; }
+        public DateTime? StartDate { get; set; }
+        public int MonthsAhead { get; set; }
+    }
+
+    public class UpsertCommercialRulesRequest
+    {
+        public int HotelId { get; set; }
+        public int RoomTypeId { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public bool IsClosed { get; set; }
+        public bool ClosedToArrival { get; set; }
+        public bool ClosedToDeparture { get; set; }
+        public int? MinLengthOfStay { get; set; }
+        public int? MaxLengthOfStay { get; set; }
     }
 
     public class UpsertRoomInventoryRangeRequest

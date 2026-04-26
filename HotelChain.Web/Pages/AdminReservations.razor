@@ -6,6 +6,9 @@
 @inject NavigationManager Navigation
 
 <h3>Administración de reservaciones</h3>
+<p class="text-muted admin-res-intro">
+    Panel operativo tipo hotel/PMS: llegadas, salidas, huéspedes en casa, cuenta de estancia, historial y asignación física de habitación.
+</p>
 
 @if (!string.IsNullOrWhiteSpace(successMessage))
 {
@@ -29,36 +32,55 @@
 else
 {
     <div class="admin-res-summary-grid mb-4">
-        <div class="admin-res-summary-card">
-            <div class="admin-res-summary-card__label">Total</div>
-            <div class="admin-res-summary-card__value">@reservations.Count</div>
-        </div>
+        <button type="button" class="admin-res-summary-card admin-res-summary-card--button" @onclick="ShowAllReservations">
+            <span class="admin-res-summary-card__label">Total</span>
+            <strong class="admin-res-summary-card__value">@reservations.Count</strong>
+        </button>
 
-        <div class="admin-res-summary-card">
-            <div class="admin-res-summary-card__label">Pendientes</div>
-            <div class="admin-res-summary-card__value">@reservations.Count(x => x.Status == "PENDING")</div>
-        </div>
+        <button type="button" class="admin-res-summary-card admin-res-summary-card--button" @onclick="ShowArrivalsToday">
+            <span class="admin-res-summary-card__label">Llegadas hoy</span>
+            <strong class="admin-res-summary-card__value">@reservations.Count(IsArrivalToday)</strong>
+        </button>
 
-        <div class="admin-res-summary-card">
-            <div class="admin-res-summary-card__label">Confirmadas</div>
-            <div class="admin-res-summary-card__value">@reservations.Count(x => x.Status == "CONFIRMED")</div>
-        </div>
+        <button type="button" class="admin-res-summary-card admin-res-summary-card--button" @onclick="ShowDeparturesToday">
+            <span class="admin-res-summary-card__label">Salidas hoy</span>
+            <strong class="admin-res-summary-card__value">@reservations.Count(IsDepartureToday)</strong>
+        </button>
 
-        <div class="admin-res-summary-card">
-            <div class="admin-res-summary-card__label">Check-in</div>
-            <div class="admin-res-summary-card__value">@reservations.Count(x => x.Status == "CHECKED_IN")</div>
-        </div>
+        <button type="button" class="admin-res-summary-card admin-res-summary-card--button" @onclick="ShowInHouse">
+            <span class="admin-res-summary-card__label">En casa</span>
+            <strong class="admin-res-summary-card__value">@reservations.Count(x => x.Status == "CHECKED_IN")</strong>
+        </button>
 
-        <div class="admin-res-summary-card">
-            <div class="admin-res-summary-card__label">Cerradas / no-show</div>
-            <div class="admin-res-summary-card__value">@reservations.Count(x => x.Status == "CHECKED_OUT" || x.Status == "NO_SHOW")</div>
-        </div>
+        <button type="button" class="admin-res-summary-card admin-res-summary-card--button" @onclick="ShowPendingAccount">
+            <span class="admin-res-summary-card__label">Cuenta pendiente</span>
+            <strong class="admin-res-summary-card__value">@reservations.Count(x => x.OutstandingChargesTotal > 0)</strong>
+        </button>
     </div>
 
-    <div class="card p-3 mb-3">
+    <div class="admin-res-panel mb-3">
+        <div class="admin-res-panel__header">
+            <div>
+                <h5>Filtros operativos</h5>
+                <p>Usa vistas rápidas para recepción: llegadas, salidas, huéspedes alojados y cuentas pendientes.</p>
+            </div>
+            <button class="btn admin-res-btn-secondary btn-sm" @onclick="LoadReservations">Actualizar</button>
+        </div>
+
         <div class="row g-3 align-items-end">
-            <div class="col-md-4">
-                <label class="form-label">Filtrar por estado</label>
+            <div class="col-md-3">
+                <label class="form-label">Hotel</label>
+                <select class="form-select" @bind="selectedHotelFilter">
+                    <option value="">Todos los hoteles</option>
+                    @foreach (var hotel in HotelOptions)
+                    {
+                        <option value="@hotel">@hotel</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label">Estado</label>
                 <select class="form-select" @bind="selectedStatusFilter">
                     <option value="">Todos</option>
                     <option value="PENDING">PENDING</option>
@@ -72,134 +94,341 @@ else
                 </select>
             </div>
 
-            <div class="col-md-4">
-                <label class="form-label">Buscar por código</label>
-                <input class="form-control" @bind="codeFilter" placeholder="Ej. R-20260420-AB12CD" />
+            <div class="col-md-3">
+                <label class="form-label">Vista rápida</label>
+                <select class="form-select" @bind="quickFilter">
+                    <option value="">Todas</option>
+                    <option value="ARRIVALS_TODAY">Llegadas de hoy</option>
+                    <option value="DEPARTURES_TODAY">Salidas de hoy</option>
+                    <option value="IN_HOUSE">Huéspedes en casa</option>
+                    <option value="PENDING_ACCOUNT">Cuenta pendiente</option>
+                    <option value="PENDING_PAYMENT">Pendientes de pago</option>
+                    <option value="NO_ROOM">Confirmadas sin habitación asignada</option>
+                </select>
             </div>
 
-            <div class="col-md-4">
-                <div class="text-muted">Mostrando @FilteredReservations.Count reservación(es).</div>
+            <div class="col-md-2">
+                <label class="form-label">Desde check-in</label>
+                <InputDate @bind-Value="fromDate" class="form-control" />
             </div>
+
+            <div class="col-md-2">
+                <label class="form-label">Hasta check-in</label>
+                <InputDate @bind-Value="toDate" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Buscar</label>
+                <input class="form-control" @bind="searchFilter" placeholder="Código, huésped, correo, pasaporte, hotel, habitación..." />
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label">Registros por página</label>
+                <select class="form-select" @bind="pageSize">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 d-flex gap-2">
+                <button class="btn admin-res-btn-info" @onclick="() => currentPage = 1">Aplicar filtros</button>
+                <button class="btn admin-res-btn-secondary" @onclick="ClearFilters">Limpiar filtros</button>
+            </div>
+        </div>
+
+        <div class="admin-res-filter-footer">
+            Mostrando <strong>@PagedReservations.Count</strong> de <strong>@FilteredReservations.Count</strong> reservación(es).
+            Página <strong>@CurrentPage</strong> de <strong>@TotalPages</strong>.
         </div>
     </div>
 
     @if (FilteredReservations.Count == 0)
     {
-        <p>No hay reservaciones que coincidan con los filtros actuales.</p>
+        <div class="admin-res-empty">No hay reservaciones que coincidan con los filtros actuales.</div>
     }
     else
     {
-        <div class="admin-res-grid">
-            @foreach (var r in FilteredReservations)
-            {
-                <article class="admin-res-card">
-                    <div class="admin-res-card__top">
-                        <div>
-                            <div class="admin-res-card__eyebrow">Código</div>
-                            <h4>@r.Code</h4>
-                        </div>
-
-                        <div class="@GetStatusBadgeClass(r.Status)">@r.Status</div>
-                    </div>
-
-                    <div class="admin-res-card__hotel">@r.Hotel</div>
-
-                    <div class="admin-res-card__body">
-                        <div class="admin-res-feature">
-                            <span class="admin-res-feature__label">Check-in</span>
-                            <strong>@r.CheckIn.ToString("dd/MM/yyyy")</strong>
-                        </div>
-
-                        <div class="admin-res-feature">
-                            <span class="admin-res-feature__label">Check-out</span>
-                            <strong>@r.CheckOut.ToString("dd/MM/yyyy")</strong>
-                        </div>
-
-                        <div class="admin-res-feature">
-                            <span class="admin-res-feature__label">Noches</span>
-                            <strong>@r.Nights</strong>
-                        </div>
-
-                        <div class="admin-res-feature">
-                            <span class="admin-res-feature__label">Huéspedes</span>
-                            <strong>@r.Guests</strong>
-                        </div>
-
-                        <div class="admin-res-feature">
-                            <span class="admin-res-feature__label">Base</span>
-                            <strong>Q @r.BaseAmount.ToString("0.00")</strong>
-                        </div>
-
-                        <div class="admin-res-feature">
-                            <span class="admin-res-feature__label">Cargos</span>
-                            <strong>Q @r.ChargesTotal.ToString("0.00")</strong>
-                        </div>
-
-                        <div class="admin-res-feature">
-                            <span class="admin-res-feature__label">Pendiente cuenta</span>
-                            <strong>Q @r.OutstandingChargesTotal.ToString("0.00")</strong>
-                        </div>
-
-                        <div class="admin-res-feature">
-                            <span class="admin-res-feature__label">Cuenta</span>
-                            <strong>@(r.IsStayAccountSettled ? "Liquidada" : "Pendiente")</strong>
-                        </div>
-
-                        <div class="admin-res-feature">
-                            <span class="admin-res-feature__label">Total final</span>
-                            <strong>Q @r.GrandTotal.ToString("0.00")</strong>
-                        </div>
-
-                        <div class="admin-res-feature">
-                            <span class="admin-res-feature__label">Tipo</span>
-                            <strong>@(string.IsNullOrWhiteSpace(r.RoomType) ? "-" : r.RoomType)</strong>
-                        </div>
-
-                        <div class="admin-res-feature">
-                            <span class="admin-res-feature__label">Habitación asignada</span>
-                            <strong>@(string.IsNullOrWhiteSpace(r.AssignedRoomName) ? "Pendiente" : r.AssignedRoomName)</strong>
-                        </div>
-
-                        <div class="admin-res-feature">
-                            <span class="admin-res-feature__label">Pago</span>
-                            <strong>@GetPaymentText(r)</strong>
-                        </div>
-
-                        @if (r.IsPaid && !string.IsNullOrWhiteSpace(r.CardLast4))
+        <div class="admin-res-table-card">
+            <div class="table-responsive">
+                <table class="table align-middle admin-res-table">
+                    <thead>
+                        <tr>
+                            <th>Reserva</th>
+                            <th>Huésped</th>
+                            <th>Estancia</th>
+                            <th>Habitación</th>
+                            <th>Cuenta</th>
+                            <th>Estado</th>
+                            <th class="admin-res-actions-col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var r in PagedReservations)
                         {
-                            <div class="admin-res-feature">
-                                <span class="admin-res-feature__label">Tarjeta</span>
-                                <strong>**** @r.CardLast4</strong>
-                            </div>
+                            <tr>
+                                <td>
+                                    <strong>@r.Code</strong>
+                                    <div class="text-muted small">@r.Hotel</div>
+                                    <div class="text-muted small">Creada: @r.CreatedAt.ToString("dd/MM/yyyy HH:mm")</div>
+                                </td>
+                                <td>
+                                    <strong>@GetGuestName(r)</strong>
+                                    <div class="text-muted small">@GetGuestDetails(r)</div>
+                                    @if (!string.IsNullOrWhiteSpace(r.GuestEmail))
+                                    {
+                                        <div class="text-muted small">@r.GuestEmail</div>
+                                    }
+                                </td>
+                                <td>
+                                    <strong>@r.CheckIn.ToString("dd/MM/yyyy") → @r.CheckOut.ToString("dd/MM/yyyy")</strong>
+                                    <div class="text-muted small">@r.Nights noche(s), @r.Guests huésped(es)</div>
+                                </td>
+                                <td>
+                                    <strong>@(string.IsNullOrWhiteSpace(r.RoomType) ? "-" : r.RoomType)</strong>
+                                    <div class="text-muted small">Física: @(HasAssignedRoom(r) ? r.AssignedRoomName : "Pendiente de check-in")</div>
+                                </td>
+                                <td>
+                                    <strong>Q @r.GrandTotal.ToString("0.00")</strong>
+                                    <div class="text-muted small">Base Q @r.BaseAmount.ToString("0.00") · Cargos Q @r.ChargesTotal.ToString("0.00")</div>
+                                    @if (r.OutstandingChargesTotal > 0)
+                                    {
+                                        <span class="badge bg-warning text-dark">Pendiente Q @r.OutstandingChargesTotal.ToString("0.00")</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success">Cuenta liquidada</span>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="@GetStatusBadgeClass(r.Status)">@r.Status</span>
+                                    <div class="text-muted small mt-1">Pago: @GetPaymentText(r)</div>
+                                </td>
+                                <td>
+                                    <div class="admin-res-actions">
+                                        <button class="btn btn-sm admin-res-btn-secondary" @onclick="() => OpenDetailModal(r)">Detalle</button>
+                                        <button class="btn btn-sm admin-res-btn-secondary" @onclick="() => GoToCheckout(r.Code)">Comprobante</button>
+                                        <button class="btn btn-sm admin-res-btn-secondary" @onclick="() => OpenChargesModal(r)">Cuenta</button>
+                                        <button class="btn btn-sm admin-res-btn-success" disabled="@(!CanCheckIn(r))" @onclick="() => OpenCheckInModal(r)">Check-in</button>
+                                        <button class="btn btn-sm admin-res-btn-success" disabled="@(!CanCheckOut(r))" @onclick="() => CheckOutReservation(r)">Check-out</button>
+                                        <button class="btn btn-sm admin-res-btn-warning" disabled="@(!CanMarkNoShow(r))" @onclick="() => MarkNoShow(r)">No-show</button>
+                                        <button class="btn btn-sm admin-res-btn-info" disabled="@(!CanChangeDates(r))" @onclick="() => OpenChangeDatesModal(r)">Fechas</button>
+                                        <button class="btn btn-sm admin-res-btn-danger" disabled="@(!CanCancel(r) || cancelingReservationId == r.Id)" @onclick="() => CancelReservation(r)">
+                                            @(cancelingReservationId == r.Id ? "Cancelando..." : "Cancelar")
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
                         }
+                    </tbody>
+                </table>
+            </div>
 
-                        <div class="admin-res-feature">
-                            <span class="admin-res-feature__label">UserId</span>
-                            <strong class="admin-res-feature__small">@(r.UserId?.ToString() ?? "-")</strong>
-                        </div>
-
-                        <div class="admin-res-feature admin-res-feature--wide">
-                            <span class="admin-res-feature__label">Creada</span>
-                            <strong>@r.CreatedAt.ToString("dd/MM/yyyy HH:mm")</strong>
-                        </div>
-                    </div>
-
-                    <div class="admin-res-card__footer">
-                        <button class="btn admin-res-btn-secondary btn-sm" @onclick="() => GoToCheckout(r.Code)">Ver checkout</button>
-                        <button class="btn admin-res-btn-outline btn-sm" @onclick="() => GoToHotel(r.HotelId)">Ver hotel</button>
-                        <button class="btn admin-res-btn-secondary btn-sm" @onclick="() => OpenChargesModal(r)">Cuenta</button>
-                        <button class="btn admin-res-btn-success btn-sm" disabled="@(!CanCheckIn(r))" @onclick="() => CheckInReservation(r)">Check-in</button>
-                        <button class="btn admin-res-btn-success btn-sm" disabled="@(!CanCheckOut(r))" @onclick="() => CheckOutReservation(r)">Check-out</button>
-                        <button class="btn admin-res-btn-warning btn-sm" disabled="@(!CanMarkNoShow(r))" @onclick="() => MarkNoShow(r)">No-show</button>
-                        <button class="btn admin-res-btn-info btn-sm" disabled="@(!CanChangeDates(r))" @onclick="() => OpenChangeDatesModal(r)">Cambiar fecha</button>
-                        <button class="btn admin-res-btn-danger btn-sm" disabled="@(!CanCancel(r) || cancelingReservationId == r.Id)" @onclick="() => CancelReservation(r)">
-                            @(cancelingReservationId == r.Id ? "Cancelando..." : "Cancelar")
-                        </button>
-                    </div>
-                </article>
-            }
+            <div class="admin-res-pagination">
+                <button class="btn admin-res-btn-secondary btn-sm" disabled="@(CurrentPage <= 1)" @onclick="PreviousPage">Anterior</button>
+                <span>Página @CurrentPage de @TotalPages</span>
+                <button class="btn admin-res-btn-secondary btn-sm" disabled="@(CurrentPage >= TotalPages)" @onclick="NextPage">Siguiente</button>
+            </div>
         </div>
     }
+}
+
+@if (showDetailModal && selectedReservation is not null)
+{
+    <div class="admin-res-modal-backdrop">
+        <div class="admin-res-modal-card admin-res-modal-card--wide">
+            <div class="admin-res-modal-card__header">
+                <div>
+                    <h4>Detalle de reservación</h4>
+                    <div class="text-muted">@selectedReservation.Code · @selectedReservation.Hotel</div>
+                </div>
+                <button type="button" class="admin-res-modal-close" @onclick="CloseDetailModal">×</button>
+            </div>
+
+            <div class="admin-res-modal-card__body">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Huésped</span>
+                            <strong>@GetGuestName(selectedReservation)</strong>
+                            <div class="text-muted small">@GetGuestDetails(selectedReservation)</div>
+                            <div class="text-muted small">@selectedReservation.GuestEmail</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Estancia</span>
+                            <strong>@selectedReservation.CheckIn.ToString("dd/MM/yyyy") → @selectedReservation.CheckOut.ToString("dd/MM/yyyy")</strong>
+                            <div class="text-muted small">@selectedReservation.Nights noche(s), @selectedReservation.Guests huésped(es)</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Habitación</span>
+                            <strong>@selectedReservation.RoomType</strong>
+                            <div class="text-muted small">Física: @(HasAssignedRoom(selectedReservation) ? selectedReservation.AssignedRoomName : "Pendiente")</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Pago inicial</span>
+                            <strong>@GetPaymentText(selectedReservation)</strong>
+                            @if (selectedReservation.IsPaid && !string.IsNullOrWhiteSpace(selectedReservation.CardLast4))
+                            {
+                                <div class="text-muted small">Tarjeta **** @selectedReservation.CardLast4</div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Cuenta estancia</span>
+                            <strong>@(selectedReservation.IsStayAccountSettled ? "Liquidada" : "Pendiente")</strong>
+                            <div class="text-muted small">Pendiente Q @selectedReservation.OutstandingChargesTotal.ToString("0.00")</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="admin-res-feature">
+                            <span class="admin-res-feature__label">Total final</span>
+                            <strong>Q @selectedReservation.GrandTotal.ToString("0.00")</strong>
+                            <div class="text-muted small">Base + cargos no anulados</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-res-panel admin-res-panel--inner">
+                    <div class="admin-res-panel__header">
+                        <div>
+                            <h5>Historial operativo</h5>
+                            <p>Auditoría de cambios, cancelaciones, check-in, cargos, liquidación y check-out.</p>
+                        </div>
+                    </div>
+
+                    @if (auditsLoading)
+                    {
+                        <p class="text-muted">Cargando historial...</p>
+                    }
+                    else if (audits.Count == 0)
+                    {
+                        <p class="text-muted mb-0">Aún no hay eventos de auditoría para esta reserva.</p>
+                    }
+                    else
+                    {
+                        <div class="admin-res-timeline">
+                            @foreach (var audit in audits)
+                            {
+                                <div class="admin-res-timeline__item">
+                                    <div class="admin-res-timeline__dot"></div>
+                                    <div>
+                                        <strong>@audit.Action</strong>
+                                        <span class="text-muted small"> · @audit.CreatedAt.ToString("dd/MM/yyyy HH:mm") · @audit.Actor</span>
+                                        <div class="text-muted small">
+                                            @if (!string.IsNullOrWhiteSpace(audit.OldStatus) || !string.IsNullOrWhiteSpace(audit.NewStatus))
+                                            {
+                                                <span>@audit.OldStatus → @audit.NewStatus</span>
+                                            }
+                                        </div>
+                                        @if (!string.IsNullOrWhiteSpace(audit.Reason))
+                                        {
+                                            <div>@audit.Reason</div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="admin-res-modal-card__footer">
+                <button class="btn admin-res-btn-secondary" @onclick="CloseDetailModal">Cerrar</button>
+                <button class="btn admin-res-btn-secondary" @onclick="() => GoToCheckout(selectedReservation.Code)">Ver comprobante</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (showCheckInModal && selectedReservation is not null)
+{
+    <div class="admin-res-modal-backdrop">
+        <div class="admin-res-modal-card admin-res-modal-card--wide">
+            <div class="admin-res-modal-card__header">
+                <div>
+                    <h4>Check-in y asignación de habitación</h4>
+                    <div class="text-muted">@selectedReservation.Code · @selectedReservation.Hotel</div>
+                </div>
+                <button type="button" class="admin-res-modal-close" @onclick="CloseCheckInModal">×</button>
+            </div>
+
+            <div class="admin-res-modal-card__body">
+                @if (!string.IsNullOrWhiteSpace(checkInError))
+                {
+                    <div class="alert alert-danger">@checkInError</div>
+                }
+
+                <p class="text-muted">
+                    Selecciona una habitación física disponible para esta estancia. También puedes dejar asignación automática.
+                </p>
+
+                <div class="form-check admin-res-room-option">
+                    <input class="form-check-input" type="radio" name="roomOption" checked="@(!selectedCheckInRoomId.HasValue)" @onchange="() => selectedCheckInRoomId = null" />
+                    <label class="form-check-label">
+                        <strong>Asignación automática</strong>
+                        <span class="text-muted d-block">El sistema elegirá una habitación física disponible del tipo reservado.</span>
+                    </label>
+                </div>
+
+                @if (availableRoomsLoading)
+                {
+                    <p class="text-muted">Cargando habitaciones disponibles...</p>
+                }
+                else if (availableRooms.Count == 0)
+                {
+                    <div class="alert alert-warning">No hay habitaciones físicas disponibles para seleccionar manualmente. Revisa inventario físico/comercial.</div>
+                }
+                else
+                {
+                    <div class="table-responsive mt-3">
+                        <table class="table table-sm align-middle">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Habitación</th>
+                                    <th>Tipo</th>
+                                    <th>Capacidad</th>
+                                    <th>Cama</th>
+                                    <th>Área</th>
+                                    <th>Tarifa ref.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var room in availableRooms)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input class="form-check-input" type="radio" name="roomOption" checked="@(selectedCheckInRoomId == room.Id)" @onchange="() => selectedCheckInRoomId = room.Id" />
+                                        </td>
+                                        <td><strong>@room.NameOrNumber</strong></td>
+                                        <td>@room.RoomType</td>
+                                        <td>@room.MaxGuests</td>
+                                        <td>@(string.IsNullOrWhiteSpace(room.BedType) ? "-" : room.BedType)</td>
+                                        <td>@(room.AreaSquareMeters.HasValue ? $"{room.AreaSquareMeters:0.##} m²" : "-")</td>
+                                        <td>Q @room.BasePricePerNight.ToString("0.00")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+
+            <div class="admin-res-modal-card__footer">
+                <button class="btn admin-res-btn-secondary" @onclick="CloseCheckInModal">Cerrar</button>
+                <button class="btn admin-res-btn-success" @onclick="ConfirmCheckIn" disabled="@isCheckingIn">
+                    @(isCheckingIn ? "Registrando..." : "Confirmar check-in")
+                </button>
+            </div>
+        </div>
+    </div>
 }
 
 @if (showChangeDatesModal && selectedReservation is not null)
@@ -246,15 +475,14 @@ else
     </div>
 }
 
-
 @if (showChargesModal && selectedReservation is not null)
 {
     <div class="admin-res-modal-backdrop">
-        <div class="admin-res-modal-card">
+        <div class="admin-res-modal-card admin-res-modal-card--wide">
             <div class="admin-res-modal-card__header">
                 <div>
                     <h4>Cuenta de estancia</h4>
-                    <div class="text-muted">@selectedReservation.Code</div>
+                    <div class="text-muted">@selectedReservation.Code · @GetGuestName(selectedReservation)</div>
                 </div>
                 <button type="button" class="admin-res-modal-close" @onclick="CloseChargesModal">×</button>
             </div>
@@ -303,7 +531,7 @@ else
                     </div>
                 </div>
 
-                <div class="card p-3 mb-3">
+                <div class="admin-res-panel admin-res-panel--inner mb-3">
                     <h5 class="mb-3">Agregar cargo</h5>
                     <div class="row g-3">
                         <div class="col-md-4">
@@ -386,46 +614,46 @@ else
                         </table>
                     </div>
                 }
+
+                @if (CanSettleCharges(selectedReservation) && chargesOutstandingTotal > 0)
+                {
+                    <div class="admin-res-panel admin-res-panel--inner mt-3">
+                        <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                            <div>
+                                <h5 class="mb-1">Pago de cuenta de estancia</h5>
+                                <p class="text-muted mb-0">Ingresa los datos de cobro para liquidar los cargos pendientes antes del check-out.</p>
+                            </div>
+                            <div class="text-end">
+                                <span class="admin-res-feature__label">Monto a cobrar</span>
+                                <strong>Q @chargesOutstandingTotal.ToString("0.00")</strong>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Número de tarjeta</label>
+                                <input class="form-control" @bind="settlementCardNumber" placeholder="4111111111111111" maxlength="19" />
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">CVV</label>
+                                <input class="form-control" @bind="settlementCvv" placeholder="123" maxlength="4" />
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Monto</label>
+                                <input class="form-control" value="@($"Q {chargesOutstandingTotal:0.00}")" disabled />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Nombre en tarjeta</label>
+                                <input class="form-control" @bind="settlementCardHolderName" placeholder="Nombre del huésped" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Dirección de cobro</label>
+                                <input class="form-control" @bind="settlementBillingAddress" placeholder="Dirección de facturación" />
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
-
-            @if (CanSettleCharges(selectedReservation) && chargesOutstandingTotal > 0)
-            {
-                <div class="card p-3 mb-3 admin-res-settlement-card">
-                    <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
-                        <div>
-                            <h5 class="mb-1">Pago de cuenta de estancia</h5>
-                            <p class="text-muted mb-0">Ingresa los datos de cobro para liquidar los cargos pendientes antes del check-out.</p>
-                        </div>
-                        <div class="text-end">
-                            <span class="admin-res-feature__label">Monto a cobrar</span>
-                            <strong>Q @chargesOutstandingTotal.ToString("0.00")</strong>
-                        </div>
-                    </div>
-
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Número de tarjeta</label>
-                            <input class="form-control" @bind="settlementCardNumber" placeholder="4111111111111111" maxlength="19" />
-                        </div>
-                        <div class="col-md-3">
-                            <label class="form-label">CVV</label>
-                            <input class="form-control" @bind="settlementCvv" placeholder="123" maxlength="4" />
-                        </div>
-                        <div class="col-md-3">
-                            <label class="form-label">Monto</label>
-                            <input class="form-control" value="@($"Q {chargesOutstandingTotal:0.00}")" disabled />
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Nombre en tarjeta</label>
-                            <input class="form-control" @bind="settlementCardHolderName" placeholder="Nombre del huésped" />
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Dirección de cobro</label>
-                            <input class="form-control" @bind="settlementBillingAddress" placeholder="Dirección de facturación" />
-                        </div>
-                    </div>
-                </div>
-            }
 
             <div class="admin-res-modal-card__footer">
                 <button class="btn admin-res-btn-secondary" @onclick="CloseChargesModal">Cerrar</button>
@@ -440,44 +668,49 @@ else
 }
 
 <style>
+    .admin-res-intro { margin-top: -0.25rem; }
     .admin-res-alert { border-radius: 16px; }
-    .admin-res-loading__card {
-        background: #ffffff; border: 1px solid #e2e8f0; border-radius: 24px;
-        padding: 2rem; box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
-    }
-    .admin-res-loading__card h4 { margin-bottom: 0.5rem; font-weight: 800; }
-    .admin-res-loading__card p { margin: 0; color: #64748b; }
-    .admin-res-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
-    .admin-res-summary-card {
-        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-        border: 1px solid #e2e8f0; border-radius: 22px; padding: 1rem 1.1rem;
+    .admin-res-loading__card,
+    .admin-res-panel,
+    .admin-res-table-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 22px;
+        padding: 1rem;
         box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
     }
-    .admin-res-summary-card__label { color: #64748b; font-size: 0.82rem; text-transform: uppercase; font-weight: 700; }
-    .admin-res-summary-card__value { color: #0f172a; font-size: 2rem; font-weight: 800; }
-    .admin-res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1rem; }
-    .admin-res-card {
+    .admin-res-loading__card { padding: 2rem; }
+    .admin-res-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; }
+    .admin-res-summary-card {
         background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-        border: 1px solid #e2e8f0; border-radius: 24px; padding: 1.2rem;
-        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07); display: flex; flex-direction: column; gap: 1rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 22px;
+        padding: 1rem 1.1rem;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+        text-align: left;
     }
-    .admin-res-card__top { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; }
-    .admin-res-card__eyebrow { font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; margin-bottom: 0.2rem; font-weight: 700; }
-    .admin-res-card__top h4 { margin: 0; color: #0f172a; font-weight: 800; font-size: 1.15rem; }
-    .admin-res-card__hotel { font-size: 1rem; font-weight: 700; color: #1e293b; }
-    .admin-res-card__body { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
-    .admin-res-feature { background: rgba(255,255,255,0.78); border: 1px solid #e2e8f0; border-radius: 18px; padding: 0.85rem; }
-    .admin-res-feature--wide { grid-column: 1 / -1; }
-    .admin-res-feature__label { display: block; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; margin-bottom: 0.25rem; font-weight: 700; }
-    .admin-res-feature strong { color: #0f172a; font-size: 0.98rem; }
-    .admin-res-feature__small { font-size: 0.85rem; word-break: break-word; }
-    .admin-res-card__footer { margin-top: auto; display: flex; flex-wrap: wrap; gap: 0.6rem; }
-    .status-badge { display: inline-flex; align-items: center; justify-content: center; padding: 0.38rem 0.75rem; border-radius: 999px; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+    .admin-res-summary-card--button { cursor: pointer; transition: transform .16s ease, border-color .16s ease; }
+    .admin-res-summary-card--button:hover { transform: translateY(-2px); border-color: #94a3b8; }
+    .admin-res-summary-card__label { display:block; color: #64748b; font-size: 0.78rem; text-transform: uppercase; font-weight: 800; letter-spacing: .04em; }
+    .admin-res-summary-card__value { display:block; color: #0f172a; font-size: 1.9rem; font-weight: 900; }
+    .admin-res-panel__header { display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; margin-bottom:1rem; }
+    .admin-res-panel__header h5 { margin:0; font-weight:900; }
+    .admin-res-panel__header p { margin:.15rem 0 0; color:#64748b; font-size:.9rem; }
+    .admin-res-panel--inner { box-shadow:none; background:#f8fafc; }
+    .admin-res-filter-footer { margin-top:1rem; color:#64748b; font-size:.9rem; }
+    .admin-res-empty { background:#fff; border:1px dashed #cbd5e1; border-radius:18px; padding:1.5rem; color:#64748b; }
+    .admin-res-table th { font-size:.78rem; text-transform:uppercase; letter-spacing:.05em; color:#64748b; border-bottom:1px solid #cbd5e1; }
+    .admin-res-table td { vertical-align:top; }
+    .admin-res-actions-col { min-width: 260px; }
+    .admin-res-actions { display:flex; flex-wrap:wrap; gap:.4rem; }
+    .admin-res-pagination { display:flex; justify-content:flex-end; align-items:center; gap:.75rem; padding-top:.75rem; border-top:1px solid #e2e8f0; }
+    .status-badge { display: inline-flex; align-items: center; justify-content: center; padding: 0.32rem 0.7rem; border-radius: 999px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.02em; }
     .status-badge--pending { background: #fef3c7; color: #92400e; }
     .status-badge--confirmed { background: #dcfce7; color: #166534; }
+    .status-badge--inhouse { background: #dbeafe; color:#1d4ed8; }
     .status-badge--cancelled { background: #fee2e2; color: #991b1b; }
     .status-badge--default { background: #e2e8f0; color: #334155; }
-    .admin-res-btn-secondary, .admin-res-btn-outline, .admin-res-btn-danger, .admin-res-btn-info, .admin-res-btn-success, .admin-res-btn-warning { border-radius: 14px; font-weight: 700; }
+    .admin-res-btn-secondary, .admin-res-btn-outline, .admin-res-btn-danger, .admin-res-btn-info, .admin-res-btn-success, .admin-res-btn-warning { border-radius: 12px; font-weight: 800; }
     .admin-res-btn-secondary { background: #fff; border: 1px solid #cbd5e1; color: #0f172a; }
     .admin-res-btn-outline { background: transparent; border: 1px solid #94a3b8; color: #0f172a; }
     .admin-res-btn-danger { background: #dc2626; color: #fff; border: none; }
@@ -485,12 +718,19 @@ else
     .admin-res-btn-success { background: #16a34a; color: #fff; border: none; }
     .admin-res-btn-warning { background: #f59e0b; color: #fff; border: none; }
     .admin-res-modal-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.55); display: flex; align-items: center; justify-content: center; padding: 1rem; z-index: 1050; }
-    .admin-res-modal-card { background: #fff; border-radius: 24px; width: min(760px, 100%); box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28); }
+    .admin-res-modal-card { background: #fff; border-radius: 24px; width: min(760px, 100%); max-height: 92vh; overflow:auto; box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28); }
+    .admin-res-modal-card--wide { width:min(1040px, 100%); }
     .admin-res-modal-card__header, .admin-res-modal-card__body, .admin-res-modal-card__footer { padding: 1.2rem 1.3rem; }
     .admin-res-modal-card__header { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; border-bottom: 1px solid #e2e8f0; }
-    .admin-res-modal-card__header h4 { margin: 0; font-weight: 800; }
+    .admin-res-modal-card__header h4 { margin: 0; font-weight: 900; }
     .admin-res-modal-card__footer { display: flex; justify-content: flex-end; gap: 0.75rem; border-top: 1px solid #e2e8f0; }
     .admin-res-modal-close { border: none; background: transparent; font-size: 1.7rem; line-height: 1; color: #64748b; }
+    .admin-res-feature { background: rgba(255,255,255,0.78); border: 1px solid #e2e8f0; border-radius: 18px; padding: 0.85rem; min-height:100%; }
+    .admin-res-feature__label { display: block; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; margin-bottom: 0.25rem; font-weight: 800; }
+    .admin-res-timeline { display:flex; flex-direction:column; gap:1rem; }
+    .admin-res-timeline__item { display:grid; grid-template-columns:16px 1fr; gap:.75rem; }
+    .admin-res-timeline__dot { width:12px; height:12px; border-radius:999px; background:#2563eb; margin-top:.35rem; box-shadow:0 0 0 4px #dbeafe; }
+    .admin-res-room-option { border:1px solid #e2e8f0; border-radius:16px; padding:1rem 1rem 1rem 2.4rem; background:#f8fafc; }
 </style>
 
 @code {
@@ -498,10 +738,29 @@ else
     private string? errorMessage;
     private string? successMessage;
     private int? cancelingReservationId;
+
     private string? selectedStatusFilter;
-    private string? codeFilter;
+    private string? selectedHotelFilter;
+    private string quickFilter = "";
+    private string? searchFilter;
+    private DateTime? fromDate;
+    private DateTime? toDate;
+    private int currentPage = 1;
+    private int pageSize = 25;
 
     private AdminReservationDto? selectedReservation;
+
+    private bool showDetailModal;
+    private List<AdminReservationAuditDto> audits = new();
+    private bool auditsLoading;
+
+    private bool showCheckInModal;
+    private List<AdminAvailableRoomDto> availableRooms = new();
+    private bool availableRoomsLoading;
+    private int? selectedCheckInRoomId;
+    private string? checkInError;
+    private bool isCheckingIn;
+
     private bool showChangeDatesModal;
     private DateTime? changeCheckIn;
     private DateTime? changeCheckOut;
@@ -529,10 +788,28 @@ else
     private string settlementCardHolderName = "";
     private string settlementBillingAddress = "";
 
+    private List<string> HotelOptions =>
+        (reservations ?? new())
+            .Select(r => r.Hotel)
+            .Where(h => !string.IsNullOrWhiteSpace(h))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(h => h)
+            .ToList();
+
     private List<AdminReservationDto> FilteredReservations =>
         (reservations ?? new())
-            .Where(r => string.IsNullOrWhiteSpace(selectedStatusFilter) || r.Status == selectedStatusFilter)
-            .Where(r => string.IsNullOrWhiteSpace(codeFilter) || r.Code.Contains(codeFilter, StringComparison.OrdinalIgnoreCase))
+            .Where(MatchesFilters)
+            .OrderByDescending(r => r.CheckIn)
+            .ThenByDescending(r => r.CreatedAt)
+            .ToList();
+
+    private int TotalPages => Math.Max(1, (int)Math.Ceiling(FilteredReservations.Count / (double)Math.Max(1, pageSize)));
+    private int CurrentPage => Math.Min(Math.Max(1, currentPage), TotalPages);
+
+    private List<AdminReservationDto> PagedReservations =>
+        FilteredReservations
+            .Skip((CurrentPage - 1) * pageSize)
+            .Take(pageSize)
             .ToList();
 
     protected override async Task OnInitializedAsync()
@@ -553,11 +830,198 @@ else
             }
 
             Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            reservations = await Http.GetFromJsonAsync<List<AdminReservationDto>>("/api/admin/reservations");
+            reservations = await Http.GetFromJsonAsync<List<AdminReservationDto>>("/api/admin/reservations") ?? new();
         }
         catch (Exception ex)
         {
             errorMessage = $"Error cargando reservaciones: {ex.Message}";
+        }
+    }
+
+    private bool MatchesFilters(AdminReservationDto r)
+    {
+        if (!string.IsNullOrWhiteSpace(selectedHotelFilter) &&
+            !string.Equals(r.Hotel, selectedHotelFilter, StringComparison.OrdinalIgnoreCase))
+            return false;
+
+        if (!string.IsNullOrWhiteSpace(selectedStatusFilter) && r.Status != selectedStatusFilter)
+            return false;
+
+        if (fromDate.HasValue && r.CheckIn.Date < fromDate.Value.Date)
+            return false;
+
+        if (toDate.HasValue && r.CheckIn.Date > toDate.Value.Date)
+            return false;
+
+        if (!string.IsNullOrWhiteSpace(quickFilter))
+        {
+            var matchesQuick = quickFilter switch
+            {
+                "ARRIVALS_TODAY" => IsArrivalToday(r),
+                "DEPARTURES_TODAY" => IsDepartureToday(r),
+                "IN_HOUSE" => r.Status == "CHECKED_IN",
+                "PENDING_ACCOUNT" => r.OutstandingChargesTotal > 0,
+                "PENDING_PAYMENT" => !r.IsPaid,
+                "NO_ROOM" => r.Status == "CONFIRMED" && !HasAssignedRoom(r),
+                _ => true
+            };
+
+            if (!matchesQuick)
+                return false;
+        }
+
+        if (!string.IsNullOrWhiteSpace(searchFilter))
+        {
+            var text = $"{r.Code} {r.Hotel} {r.RoomType} {r.AssignedRoomName} {GetGuestName(r)} {r.GuestEmail} {r.GuestPassportNumber} {r.GuestCountry}";
+            if (!text.Contains(searchFilter, StringComparison.OrdinalIgnoreCase))
+                return false;
+        }
+
+        return true;
+    }
+
+    private void ShowAllReservations() => SetQuickFilter("");
+    private void ShowArrivalsToday() => SetQuickFilter("ARRIVALS_TODAY");
+    private void ShowDeparturesToday() => SetQuickFilter("DEPARTURES_TODAY");
+    private void ShowInHouse() => SetQuickFilter("IN_HOUSE");
+    private void ShowPendingAccount() => SetQuickFilter("PENDING_ACCOUNT");
+
+    private void SetQuickFilter(string value)
+    {
+        quickFilter = value;
+        currentPage = 1;
+    }
+
+    private void ClearFilters()
+    {
+        selectedHotelFilter = null;
+        selectedStatusFilter = null;
+        quickFilter = "";
+        searchFilter = null;
+        fromDate = null;
+        toDate = null;
+        currentPage = 1;
+    }
+
+    private void PreviousPage()
+    {
+        if (CurrentPage > 1)
+            currentPage = CurrentPage - 1;
+    }
+
+    private void NextPage()
+    {
+        if (CurrentPage < TotalPages)
+            currentPage = CurrentPage + 1;
+    }
+
+    private async Task OpenDetailModal(AdminReservationDto reservation)
+    {
+        selectedReservation = reservation;
+        showDetailModal = true;
+        await LoadAudits(reservation.Id);
+    }
+
+    private void CloseDetailModal()
+    {
+        showDetailModal = false;
+        audits = new();
+        selectedReservation = null;
+    }
+
+    private async Task LoadAudits(int reservationId)
+    {
+        try
+        {
+            auditsLoading = true;
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            audits = await Http.GetFromJsonAsync<List<AdminReservationAuditDto>>($"/api/admin/reservations/{reservationId}/audits") ?? new();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error cargando historial: {ex.Message}";
+        }
+        finally
+        {
+            auditsLoading = false;
+        }
+    }
+
+    private async Task OpenCheckInModal(AdminReservationDto reservation)
+    {
+        selectedReservation = reservation;
+        selectedCheckInRoomId = null;
+        checkInError = null;
+        showCheckInModal = true;
+        await LoadAvailableRooms(reservation.Id);
+    }
+
+    private void CloseCheckInModal()
+    {
+        showCheckInModal = false;
+        availableRooms = new();
+        selectedCheckInRoomId = null;
+        checkInError = null;
+        selectedReservation = null;
+    }
+
+    private async Task LoadAvailableRooms(int reservationId)
+    {
+        try
+        {
+            availableRoomsLoading = true;
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            availableRooms = await Http.GetFromJsonAsync<List<AdminAvailableRoomDto>>($"/api/admin/reservations/{reservationId}/available-rooms") ?? new();
+        }
+        catch (Exception ex)
+        {
+            checkInError = $"Error cargando habitaciones disponibles: {ex.Message}";
+        }
+        finally
+        {
+            availableRoomsLoading = false;
+        }
+    }
+
+    private async Task ConfirmCheckIn()
+    {
+        if (selectedReservation is null)
+            return;
+
+        try
+        {
+            isCheckingIn = true;
+            checkInError = null;
+            errorMessage = null;
+            successMessage = null;
+
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await Http.PostAsJsonAsync($"/api/admin/reservations/{selectedReservation.Id}/check-in", new AdminCheckInRequest
+            {
+                RoomId = selectedCheckInRoomId
+            });
+
+            if (!response.IsSuccessStatusCode)
+            {
+                checkInError = await response.Content.ReadAsStringAsync();
+                return;
+            }
+
+            var code = selectedReservation.Code;
+            CloseCheckInModal();
+            successMessage = $"Check-in registrado correctamente ({code}).";
+            await LoadReservations();
+        }
+        catch (Exception ex)
+        {
+            checkInError = $"Error registrando check-in: {ex.Message}";
+        }
+        finally
+        {
+            isCheckingIn = false;
         }
     }
 
@@ -696,14 +1160,17 @@ else
         }
     }
 
-    private async Task CheckInReservation(AdminReservationDto reservation)
-        => await PostAdminAction($"/api/admin/reservations/{reservation.Id}/check-in", reservation.Code, "Check-in registrado correctamente");
-
     private async Task CheckOutReservation(AdminReservationDto reservation)
         => await PostAdminAction($"/api/admin/reservations/{reservation.Id}/check-out", reservation.Code, "Check-out registrado correctamente");
 
     private async Task MarkNoShow(AdminReservationDto reservation)
-        => await PostAdminAction($"/api/admin/reservations/{reservation.Id}/no-show", reservation.Code, "Reserva marcada como no-show");
+    {
+        var confirmed = await JS.InvokeAsync<bool>("confirm", $"¿Marcar la reserva {reservation.Code} como NO-SHOW?");
+        if (!confirmed)
+            return;
+
+        await PostAdminAction($"/api/admin/reservations/{reservation.Id}/no-show", reservation.Code, "Reserva marcada como no-show");
+    }
 
     private async Task PostAdminAction(string url, string code, string successText)
     {
@@ -736,7 +1203,6 @@ else
         }
     }
 
-
     private async Task OpenChargesModal(AdminReservationDto reservation)
     {
         selectedReservation = reservation;
@@ -759,6 +1225,7 @@ else
         newChargeDescription = "";
         newChargeAmount = null;
         ResetSettlementForm();
+        selectedReservation = null;
     }
 
     private async Task LoadCharges()
@@ -955,11 +1422,15 @@ else
         settlementBillingAddress = "";
     }
 
-    private static bool CanAddCharges(AdminReservationDto reservation) => reservation.Status == "CHECKED_IN";
-    private static bool CanVoidCharges(AdminReservationDto reservation) => reservation.Status != "CHECKED_OUT" && reservation.Status != "CANCELED" && reservation.Status != "NO_SHOW" && reservation.Status != "EXPIRED";
-
     private void GoToHotel(int hotelId) => Navigation.NavigateTo($"/hotels/{hotelId}");
     private void GoToCheckout(string code) => Navigation.NavigateTo($"/checkout?code={code}");
+
+    private static bool CanAddCharges(AdminReservationDto reservation) => reservation.Status == "CHECKED_IN";
+    private static bool CanVoidCharges(AdminReservationDto reservation) => reservation.Status != "CHECKED_OUT" && reservation.Status != "CANCELED" && reservation.Status != "NO_SHOW" && reservation.Status != "EXPIRED";
+    private static bool CanCheckOut(AdminReservationDto reservation) => reservation.Status == "CHECKED_IN" && reservation.OutstandingChargesTotal <= 0;
+    private static bool CanSettleCharges(AdminReservationDto reservation) => reservation.Status == "CHECKED_IN";
+    private static bool CanChangeDates(AdminReservationDto reservation) => reservation.Status == "PENDING" || reservation.Status == "CONFIRMED";
+    private static bool CanCancel(AdminReservationDto reservation) => reservation.Status == "PENDING" || reservation.Status == "CONFIRMED";
 
     private static bool CanCheckIn(AdminReservationDto reservation)
     {
@@ -969,9 +1440,6 @@ else
                && today < reservation.CheckOut.Date;
     }
 
-    private static bool CanCheckOut(AdminReservationDto reservation) => reservation.Status == "CHECKED_IN" && reservation.OutstandingChargesTotal <= 0;
-    private static bool CanSettleCharges(AdminReservationDto reservation) => reservation.Status == "CHECKED_IN";
-
     private static bool CanMarkNoShow(AdminReservationDto reservation)
     {
         var today = DateTime.Now.Date;
@@ -980,14 +1448,49 @@ else
                && today < reservation.CheckOut.Date;
     }
 
-    private static bool CanChangeDates(AdminReservationDto reservation) => reservation.Status == "PENDING" || reservation.Status == "CONFIRMED";
-    private static bool CanCancel(AdminReservationDto reservation) => reservation.Status == "PENDING" || reservation.Status == "CONFIRMED";
+    private static bool IsArrivalToday(AdminReservationDto reservation)
+    {
+        var today = DateTime.Now.Date;
+        return reservation.CheckIn.Date == today && reservation.Status == "CONFIRMED";
+    }
+
+    private static bool IsDepartureToday(AdminReservationDto reservation)
+    {
+        var today = DateTime.Now.Date;
+        return reservation.CheckOut.Date == today && reservation.Status == "CHECKED_IN";
+    }
+
+    private static bool HasAssignedRoom(AdminReservationDto reservation)
+        => !string.IsNullOrWhiteSpace(reservation.AssignedRoomName)
+           && reservation.AssignedRoomName != "-"
+           && !reservation.AssignedRoomName.Equals("Sin asignar", StringComparison.OrdinalIgnoreCase);
+
+    private static string GetGuestName(AdminReservationDto reservation)
+    {
+        var fullName = $"{reservation.GuestFirstName} {reservation.GuestLastName}".Trim();
+        return string.IsNullOrWhiteSpace(fullName) ? "Huésped sin nombre" : fullName;
+    }
+
+    private static string GetGuestDetails(AdminReservationDto reservation)
+    {
+        var parts = new List<string>();
+        if (!string.IsNullOrWhiteSpace(reservation.GuestCountry))
+            parts.Add(reservation.GuestCountry);
+
+        if (!string.IsNullOrWhiteSpace(reservation.GuestPassportNumber))
+            parts.Add($"Pasaporte: {reservation.GuestPassportNumber}");
+
+        if (parts.Count == 0 && reservation.UserId.HasValue)
+            parts.Add($"Usuario: {reservation.UserId}");
+
+        return parts.Count == 0 ? "-" : string.Join(" · ", parts);
+    }
 
     private static string GetStatusBadgeClass(string status) => status switch
     {
         "PENDING" => "status-badge status-badge--pending",
         "CONFIRMED" => "status-badge status-badge--confirmed",
-        "CHECKED_IN" => "status-badge status-badge--confirmed",
+        "CHECKED_IN" => "status-badge status-badge--inhouse",
         "CHECKED_OUT" => "status-badge status-badge--default",
         "NO_SHOW" => "status-badge status-badge--cancelled",
         "CANCELED" => "status-badge status-badge--cancelled",
@@ -1019,6 +1522,11 @@ else
         public string Reason { get; set; } = "";
     }
 
+    private class AdminCheckInRequest
+    {
+        public int? RoomId { get; set; }
+    }
+
     private class AdminReservationDto
     {
         public int Id { get; set; }
@@ -1044,8 +1552,35 @@ else
         public bool IsPaid { get; set; }
         public string? CardLast4 { get; set; }
         public Guid? UserId { get; set; }
+        public string? GuestFirstName { get; set; }
+        public string? GuestLastName { get; set; }
+        public string? GuestEmail { get; set; }
+        public string? GuestCountry { get; set; }
+        public string? GuestPassportNumber { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? ExpiresAt { get; set; }
+    }
+
+    private class AdminAvailableRoomDto
+    {
+        public int Id { get; set; }
+        public string NameOrNumber { get; set; } = "";
+        public string RoomType { get; set; } = "";
+        public int MaxGuests { get; set; }
+        public string? BedType { get; set; }
+        public decimal? AreaSquareMeters { get; set; }
+        public decimal BasePricePerNight { get; set; }
+    }
+
+    private class AdminReservationAuditDto
+    {
+        public int Id { get; set; }
+        public string Action { get; set; } = "";
+        public string? OldStatus { get; set; }
+        public string? NewStatus { get; set; }
+        public string? Reason { get; set; }
+        public string? Actor { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 
     private class SettleChargesRequest

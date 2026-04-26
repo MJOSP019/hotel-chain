@@ -21,7 +21,10 @@ public class AdminRoomInventoriesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetByRoom([FromQuery] int roomId)
+    public async Task<IActionResult> GetByRoom(
+        [FromQuery] int roomId,
+        [FromQuery] DateTime? startDate,
+        [FromQuery] DateTime? endDate)
     {
         if (roomId <= 0)
             return BadRequest("roomId es requerido.");
@@ -30,10 +33,24 @@ public class AdminRoomInventoriesController : ControllerBase
         if (!roomExists)
             return BadRequest("La habitación no existe.");
 
-        var items = await _db.RoomInventories
+        var query = _db.RoomInventories
             .Include(x => x.Room)
                 .ThenInclude(r => r.Hotel)
-            .Where(x => x.RoomId == roomId)
+            .Where(x => x.RoomId == roomId);
+
+        if (startDate.HasValue)
+        {
+            var start = startDate.Value.Date;
+            query = query.Where(x => x.Date >= start);
+        }
+
+        if (endDate.HasValue)
+        {
+            var end = endDate.Value.Date;
+            query = query.Where(x => x.Date <= end);
+        }
+
+        var items = await query
             .OrderBy(x => x.Date)
             .Select(x => new AdminRoomInventoryDto
             {
@@ -51,6 +68,7 @@ public class AdminRoomInventoriesController : ControllerBase
 
         return Ok(items);
     }
+
 
     [HttpGet("commercial-calendar")]
     public async Task<IActionResult> GetCommercialCalendar([FromQuery] int hotelId, [FromQuery] int roomTypeId, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate)

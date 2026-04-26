@@ -1,3 +1,4 @@
+using HotelChain.Web.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using HotelChain.Web;
@@ -24,5 +25,5 @@ builder.Services.AddHttpClient("Api", client =>
 // HttpClient principal que usará la app
 builder.Services.AddScoped(sp =>
     sp.GetRequiredService<IHttpClientFactory>().CreateClient("Api"));
-
+builder.Services.AddScoped<ReservationCartService>();
 await builder.Build().RunAsync();

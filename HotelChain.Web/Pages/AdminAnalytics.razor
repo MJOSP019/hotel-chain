@@ -1,9 +1,13 @@
 @page "/admin/analytics"
+@using System.Globalization
 @using System.Net.Http.Json
 @inject HttpClient Http
 @inject IJSRuntime JS
 
-<h3>Analytics de búsquedas</h3>
+<h3>Analytics de demanda hotelera</h3>
+<p class="text-muted">
+    Dashboard gerencial de búsquedas: demanda por destino, fechas de estadía, anticipación, duración, precios, canal y conversión estimada.
+</p>
 
 @if (!string.IsNullOrWhiteSpace(errorMessage))
 {
@@ -14,12 +18,18 @@
     <div class="alert alert-success">@successMessage</div>
 }
 
-<div class="card p-3 mb-3">
-    <h5>Filtros</h5>
+<div class="hc-analytics-card mb-3">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+        <div>
+            <h5 class="mb-1">Filtros de análisis</h5>
+            <p class="text-muted mb-0">Separa fecha de búsqueda y fecha de estadía para analizar demanda real futura.</p>
+        </div>
+        <button class="btn btn-outline-primary btn-sm" @onclick="Refresh" disabled="@isLoading">Actualizar</button>
+    </div>
 
-    <div class="row">
-        <div class="col-md-3 mb-2">
-            <label>Origen</label>
+    <div class="row g-2">
+        <div class="col-md-2">
+            <label class="form-label">Canal</label>
             <select class="form-select" @bind="filters.Source">
                 <option value="">Todos</option>
                 <option value="WEB">WEB</option>
@@ -27,8 +37,8 @@
             </select>
         </div>
 
-        <div class="col-md-3 mb-2">
-            <label>Ciudad</label>
+        <div class="col-md-3">
+            <label class="form-label">Ciudad / destino</label>
             <select class="form-select" @bind="filters.CityId">
                 <option value="">Todas</option>
                 @foreach (var city in cities)
@@ -38,25 +48,18 @@
             </select>
         </div>
 
-        <div class="col-md-3 mb-2">
-            <label>Desde</label>
+        <div class="col-md-2">
+            <label class="form-label">Búsqueda desde</label>
             <InputDate class="form-control" @bind-Value="filters.From" />
         </div>
 
-        <div class="col-md-3 mb-2">
-            <label>Hasta</label>
+        <div class="col-md-2">
+            <label class="form-label">Búsqueda hasta</label>
             <InputDate class="form-control" @bind-Value="filters.To" />
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-2 mb-2">
-            <label>Huéspedes</label>
-            <input type="number" min="1" class="form-control" @bind="filters.Guests" />
-        </div>
-
-        <div class="col-md-3 mb-2">
-            <label>Tipo habitación</label>
+        <div class="col-md-3">
+            <label class="form-label">Tipo habitación</label>
             <select class="form-select" @bind="filters.RoomTypeId">
                 <option value="">Todos</option>
                 @foreach (var roomType in roomTypes)
@@ -66,146 +69,158 @@
             </select>
         </div>
 
-        <div class="col-md-2 mb-2">
-            <label>Rating mín.</label>
+        <div class="col-md-2">
+            <label class="form-label">Check-in desde</label>
+            <InputDate class="form-control" @bind-Value="filters.CheckInFrom" />
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label">Check-in hasta</label>
+            <InputDate class="form-control" @bind-Value="filters.CheckInTo" />
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label">Huéspedes</label>
+            <input type="number" min="1" class="form-control" @bind="filters.Guests" />
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label">Rating mín.</label>
             <input type="number" min="0" max="5" step="0.1" class="form-control" @bind="filters.MinRating" />
         </div>
 
-        <div class="col-md-2 mb-2">
-            <label>Precio mín.</label>
+        <div class="col-md-2">
+            <label class="form-label">Precio mín.</label>
             <input type="number" min="0" step="0.01" class="form-control" @bind="filters.MinPrice" />
         </div>
 
-        <div class="col-md-3 mb-2">
-            <label>Precio máx.</label>
+        <div class="col-md-2">
+            <label class="form-label">Precio máx.</label>
             <input type="number" min="0" step="0.01" class="form-control" @bind="filters.MaxPrice" />
         </div>
     </div>
 
-    <div class="d-flex gap-2 mt-3">
-        <button class="btn btn-primary" @onclick="SearchFromFirstPage" disabled="@isLoading">
-            @(isLoading ? "Buscando..." : "Buscar")
-        </button>
+    <div class="row g-2 mt-2 align-items-end">
+        <div class="col-md-4">
+            <label class="form-label">Correo para reporte</label>
+            <input class="form-control" placeholder="correo@ejemplo.com" @bind="filters.ReportEmail" />
+        </div>
 
-        <button class="btn btn-outline-secondary" @onclick="ClearFilters" disabled="@isLoading">
-            Limpiar
-        </button>
+        <div class="col-md-8 d-flex flex-wrap gap-2">
+            <button class="btn btn-primary" @onclick="SearchFromFirstPage" disabled="@isLoading">
+                @(isLoading ? "Buscando..." : "Aplicar filtros")
+            </button>
 
-        <button type="button" class="btn btn-outline-success" @onclick="ExportCsv" disabled="@(isLoading || isExporting)">
-            @(isExporting ? "Exportando..." : "Exportar CSV")
-        </button>
+            <button class="btn btn-outline-secondary" @onclick="ClearFilters" disabled="@isLoading">
+                Limpiar
+            </button>
+
+            <button type="button" class="btn btn-outline-success" @onclick="ExportCsv" disabled="@(isLoading || isExporting)">
+                @(isExporting ? "Exportando..." : "Descargar CSV")
+            </button>
+
+            <button type="button" class="btn btn-success" @onclick="SendCsvByEmail" disabled="@(isLoading || isSendingEmail)">
+                @(isSendingEmail ? "Enviando..." : "Enviar CSV por correo")
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="hc-kpi-grid mb-3">
+    @KpiCard("Total búsquedas", dashboard.TotalSearches.ToString("N0"), "Búsquedas filtradas")
+    @KpiCard("WEB", dashboard.WebSearches.ToString("N0"), "Portal propio")
+    @KpiCard("REST", dashboard.IntegrationSearches.ToString("N0"), "Integración B2B")
+    @KpiCard("Destino líder", dashboard.TopCity, "Mayor demanda")
+    @KpiCard("Tipo líder", dashboard.TopRoomType, "Preferencia comercial")
+    @KpiCard("Noches prom.", dashboard.AverageNights.ToString("0.0"), "Duración buscada")
+    @KpiCard("Anticipación", $"{dashboard.AverageLeadTimeDays:0.0} días", "Lead time promedio")
+    @KpiCard("Conversión est.", $"{dashboard.EstimatedConversionRate:0.0}%", $"{dashboard.EstimatedReservations} reservas")
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-lg-4">
+        @AnalyticsChart("Demanda por destino", dashboard.TopCities, "Sin destinos para mostrar.")
+    </div>
+
+    <div class="col-lg-4">
+        @AnalyticsDateChart("Fechas de check-in más buscadas", dashboard.ByCheckInDate, "Sin fechas de check-in.")
+    </div>
+
+    <div class="col-lg-4">
+        @AnalyticsChart("Preferencia por tipo de habitación", dashboard.ByRoomType, "Sin tipos de habitación.")
+    </div>
+
+    <div class="col-lg-4">
+        @AnalyticsChart("Anticipación de búsqueda", dashboard.LeadTimeBuckets, "Sin datos de anticipación.")
+    </div>
+
+    <div class="col-lg-4">
+        @AnalyticsChart("Duración de estadía buscada", dashboard.ByLengthOfStay, "Sin duración de estadía.")
+    </div>
+
+    <div class="col-lg-4">
+        @AnalyticsChart("Sensibilidad por rango de precio", dashboard.PriceDemand, "Sin filtros de precio.")
     </div>
 </div>
 
 <div class="row g-3 mb-3">
-    <div class="col-md-4">
-        <div class="card p-3 h-100">
-            <div class="text-muted small">Total búsquedas</div>
-            <div class="fs-2 fw-bold">@dashboard.TotalSearches</div>
-        </div>
+    <div class="col-lg-6">
+        @AnalyticsDateChart("Búsquedas por día", dashboard.BySearchDay, "Sin búsquedas por día.")
     </div>
 
-    <div class="col-md-4">
-        <div class="card p-3 h-100">
-            <div class="text-muted small">Fuentes distintas</div>
-            <div class="fs-2 fw-bold">@dashboard.BySource.Count</div>
-        </div>
-    </div>
+    <div class="col-lg-6">
+        <div class="hc-analytics-card h-100">
+            <h5 class="mb-1">Embudo comercial por destino</h5>
+            <p class="text-muted small">Conversión estimada = reservas / búsquedas para los filtros activos.</p>
 
-    <div class="col-md-4">
-        <div class="card p-3 h-100">
-            <div class="text-muted small">Ciudades en dashboard</div>
-            <div class="fs-2 fw-bold">@dashboard.TopCities.Count</div>
-        </div>
-    </div>
-</div>
-
-<div class="row g-3 mb-3">
-    <div class="col-lg-4">
-        <div class="card p-3 h-100">
-            <h5>Búsquedas por origen</h5>
-
-            @if (dashboard.BySource.Count == 0)
+            @if (dashboard.ConversionByCity.Count == 0)
             {
-                <p class="text-muted mb-0">Sin datos para mostrar.</p>
+                <p class="text-muted mb-0">Sin datos para calcular conversión.</p>
             }
             else
             {
-                @foreach (var item in dashboard.BySource)
-                {
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between mb-1">
-                            <span>@item.Label</span>
-                            <strong>@item.Count</strong>
-                        </div>
-                        <div class="hc-chart-track">
-                            <div class="hc-chart-bar" style="width:@GetBarWidth(item.Count, dashboard.BySourceMaxCount)%"></div>
-                        </div>
-                    </div>
-                }
-            }
-        </div>
-    </div>
-
-    <div class="col-lg-4">
-        <div class="card p-3 h-100">
-            <h5>Top ciudades</h5>
-
-            @if (dashboard.TopCities.Count == 0)
-            {
-                <p class="text-muted mb-0">Sin datos para mostrar.</p>
-            }
-            else
-            {
-                @foreach (var item in dashboard.TopCities)
-                {
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between mb-1">
-                            <span>@item.Label</span>
-                            <strong>@item.Count</strong>
-                        </div>
-                        <div class="hc-chart-track">
-                            <div class="hc-chart-bar" style="width:@GetBarWidth(item.Count, dashboard.TopCitiesMaxCount)%"></div>
-                        </div>
-                    </div>
-                }
-            }
-        </div>
-    </div>
-
-    <div class="col-lg-4">
-        <div class="card p-3 h-100">
-            <h5>Búsquedas por día</h5>
-
-            @if (dashboard.ByDay.Count == 0)
-            {
-                <p class="text-muted mb-0">Sin datos para mostrar.</p>
-            }
-            else
-            {
-                @foreach (var item in dashboard.ByDay)
-                {
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between mb-1">
-                            <span>@item.Date.ToString("dd/MM")</span>
-                            <strong>@item.Count</strong>
-                        </div>
-                        <div class="hc-chart-track">
-                            <div class="hc-chart-bar" style="width:@GetBarWidth(item.Count, dashboard.ByDayMaxCount)%"></div>
-                        </div>
-                    </div>
-                }
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle">
+                        <thead>
+                            <tr>
+                                <th>Destino</th>
+                                <th class="text-end">Búsquedas</th>
+                                <th class="text-end">Reservas</th>
+                                <th class="text-end">Conv.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in dashboard.ConversionByCity)
+                            {
+                                <tr>
+                                    <td>@item.Label</td>
+                                    <td class="text-end">@item.Searches</td>
+                                    <td class="text-end">@item.Reservations</td>
+                                    <td class="text-end"><strong>@item.ConversionRate.ToString("0.0")%</strong></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             }
         </div>
     </div>
 </div>
 
-<div class="card p-3">
-    <div class="d-flex justify-content-between align-items-center mb-2">
-        <h5 class="mb-0">Búsquedas registradas</h5>
-        <span class="text-muted">
-            Total: @totalItems registro@(totalItems == 1 ? "" : "s")
-        </span>
+<div class="hc-analytics-card">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
+        <div>
+            <h5 class="mb-1">Búsquedas registradas</h5>
+            <p class="text-muted mb-0">Listado operativo paginado de 25 registros por defecto.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <span class="text-muted">Total: @totalItems registro@(totalItems == 1 ? "" : "s")</span>
+            <select class="form-select form-select-sm hc-page-size" @bind="pageSize" @bind:after="SearchFromFirstPage">
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
     </div>
 
     @if (isLoading && searches.Count == 0)
@@ -219,18 +234,21 @@
     else
     {
         <div class="table-responsive">
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
-                        <th>Fecha</th>
-                        <th>Origen</th>
-                        <th>Ciudad</th>
+                        <th>Fecha búsqueda</th>
+                        <th>Canal</th>
+                        <th>Usuario / agencia</th>
+                        <th>Destino</th>
                         <th>Check-in</th>
                         <th>Check-out</th>
+                        <th>Noches</th>
+                        <th>Anticipación</th>
                         <th>Huéspedes</th>
-                        <th>Precio</th>
-                        <th>Tipo habitación</th>
-                        <th>Rating mín.</th>
+                        <th>Precio buscado</th>
+                        <th>Tipo</th>
+                        <th>Rating</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -238,12 +256,24 @@
                     {
                         <tr>
                             <td>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
-                            <td>@item.Source</td>
+                            <td>
+                                <span class="hc-badge">@item.Source</span>
+                            </td>
+                            <td>
+                                <strong>@item.UserDisplay</strong>
+                                @if (!string.IsNullOrWhiteSpace(item.UserEmail))
+                                {
+                                    <br />
+                                    <span class="text-muted small">@item.UserEmail</span>
+                                }
+                            </td>
                             <td>@item.City</td>
                             <td>@item.CheckIn.ToString("dd/MM/yyyy")</td>
                             <td>@item.CheckOut.ToString("dd/MM/yyyy")</td>
+                            <td>@item.Nights</td>
+                            <td>@item.LeadTimeDays día@(item.LeadTimeDays == 1 ? "" : "s")</td>
                             <td>@item.Guests</td>
-                            <td>@FormatPriceRange(item.MinPrice, item.MaxPrice)</td>
+                            <td>@item.PriceRangeLabel</td>
                             <td>@(string.IsNullOrWhiteSpace(item.RoomType) ? "-" : item.RoomType)</td>
                             <td>@(item.MinRating.HasValue ? item.MinRating.Value.ToString("0.0") : "-")</td>
                         </tr>
@@ -275,10 +305,67 @@
 </div>
 
 <style>
+    .hc-analytics-card {
+        background: #fff;
+        border: 1px solid #d7dde5;
+        border-radius: 14px;
+        padding: 1rem;
+        box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    .hc-kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+        gap: .75rem;
+    }
+
+    .hc-kpi {
+        background: #fff;
+        border: 1px solid #d7dde5;
+        border-radius: 14px;
+        padding: .85rem;
+        min-height: 92px;
+        box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    .hc-kpi-label {
+        font-size: .72rem;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+        color: #64748b;
+        font-weight: 700;
+    }
+
+    .hc-kpi-value {
+        font-size: 1.35rem;
+        font-weight: 800;
+        line-height: 1.15;
+        margin-top: .3rem;
+        color: #0f172a;
+    }
+
+    .hc-kpi-hint {
+        font-size: .76rem;
+        color: #64748b;
+        margin-top: .25rem;
+    }
+
+    .hc-chart-row {
+        margin-bottom: .9rem;
+    }
+
+    .hc-chart-label {
+        display: flex;
+        justify-content: space-between;
+        gap: .5rem;
+        margin-bottom: .2rem;
+        font-size: .9rem;
+    }
+
     .hc-chart-track {
         width: 100%;
-        height: 12px;
-        background: #e9ecef;
+        height: 10px;
+        background: #e9eef5;
         border-radius: 999px;
         overflow: hidden;
     }
@@ -289,13 +376,29 @@
         border-radius: 999px;
         min-width: 6px;
     }
+
+    .hc-badge {
+        display: inline-block;
+        border-radius: 999px;
+        padding: .2rem .55rem;
+        background: #e7f0ff;
+        color: #0d47a1;
+        font-size: .74rem;
+        font-weight: 700;
+    }
+
+    .hc-page-size {
+        width: 88px;
+    }
 </style>
 
 @code {
     private const string SearchesEndpoint = "api/admin/analytics/searches";
     private const string DashboardEndpoint = "api/admin/analytics/searches/dashboard";
     private const string ExportEndpoint = "api/admin/analytics/searches/export";
-    private const string CitiesEndpoint = "api/public/cities";
+    private const string ExportEmailEndpoint = "api/admin/analytics/searches/export-email";
+    private const string AdminCitiesEndpoint = "api/admin/cities";
+    private const string PublicCitiesEndpoint = "api/public/cities";
     private const string RoomTypesEndpoint = "api/public/room-types";
     private const int DefaultPageSize = 25;
 
@@ -303,12 +406,13 @@
     private List<CityDto> cities = new();
     private List<RoomTypeDto> roomTypes = new();
 
-    private DashboardVm dashboard = new();
+    private DashboardDto dashboard = new();
 
     private string? errorMessage;
     private string? successMessage;
     private bool isLoading;
     private bool isExporting;
+    private bool isSendingEmail;
 
     private FilterModel filters = new();
 
@@ -328,11 +432,18 @@
     {
         try
         {
-            cities = await Http.GetFromJsonAsync<List<CityDto>>(CitiesEndpoint) ?? new();
+            cities = await Http.GetFromJsonAsync<List<CityDto>>(AdminCitiesEndpoint) ?? new();
         }
-        catch (Exception ex)
+        catch
         {
-            errorMessage = $"No se pudieron cargar las ciudades: {ex.Message}";
+            try
+            {
+                cities = await Http.GetFromJsonAsync<List<CityDto>>(PublicCitiesEndpoint) ?? new();
+            }
+            catch (Exception ex)
+            {
+                errorMessage = $"No se pudieron cargar las ciudades: {ex.Message}";
+            }
         }
     }
 
@@ -346,6 +457,11 @@
         {
             errorMessage = $"No se pudieron cargar los tipos de habitación: {ex.Message}";
         }
+    }
+
+    private async Task Refresh()
+    {
+        await LoadAllAnalyticsData();
     }
 
     private async Task SearchFromFirstPage()
@@ -365,20 +481,12 @@
         try
         {
             var url = BuildUrl(DashboardEndpoint, includePaging: false);
-            var result = await Http.GetFromJsonAsync<DashboardDto>(url);
-
-            dashboard = new DashboardVm
-            {
-                TotalSearches = result?.TotalSearches ?? 0,
-                BySource = result?.BySource ?? new(),
-                TopCities = result?.TopCities ?? new(),
-                ByDay = result?.ByDay ?? new()
-            };
+            dashboard = await Http.GetFromJsonAsync<DashboardDto>(url) ?? new();
         }
         catch (Exception ex)
         {
             errorMessage = $"Error cargando dashboard: {ex.Message}";
-            dashboard = new DashboardVm();
+            dashboard = new DashboardDto();
         }
     }
 
@@ -447,7 +555,7 @@
                 base64
             });
 
-            successMessage = "CSV exportado correctamente.";
+            successMessage = "CSV descargado correctamente.";
         }
         catch (Exception ex)
         {
@@ -459,10 +567,55 @@
         }
     }
 
+    private async Task SendCsvByEmail()
+    {
+        if (string.IsNullOrWhiteSpace(filters.ReportEmail))
+        {
+            errorMessage = "Ingresa un correo para enviar el reporte.";
+            successMessage = null;
+            return;
+        }
+
+        try
+        {
+            isSendingEmail = true;
+            errorMessage = null;
+            successMessage = null;
+
+            var url = BuildUrl(ExportEmailEndpoint, includePaging: false);
+            var response = await Http.PostAsJsonAsync(url, new EmailExportRequest
+            {
+                Email = filters.ReportEmail
+            });
+
+            var responseText = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = string.IsNullOrWhiteSpace(responseText)
+                    ? "No se pudo enviar el reporte por correo."
+                    : responseText;
+                return;
+            }
+
+            successMessage = "Reporte enviado por correo correctamente.";
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error enviando reporte por correo: {ex.Message}";
+        }
+        finally
+        {
+            isSendingEmail = false;
+        }
+    }
+
     private async Task ClearFilters()
     {
-        filters = new FilterModel();
+        var currentEmail = filters.ReportEmail;
+        filters = new FilterModel { ReportEmail = currentEmail };
         currentPage = 1;
+        pageSize = DefaultPageSize;
         successMessage = null;
         errorMessage = null;
         await LoadAllAnalyticsData();
@@ -502,6 +655,12 @@
         if (filters.To.HasValue)
             queryParams.Add($"to={filters.To.Value:yyyy-MM-dd}");
 
+        if (filters.CheckInFrom.HasValue)
+            queryParams.Add($"checkInFrom={filters.CheckInFrom.Value:yyyy-MM-dd}");
+
+        if (filters.CheckInTo.HasValue)
+            queryParams.Add($"checkInTo={filters.CheckInTo.Value:yyyy-MM-dd}");
+
         if (filters.Guests.HasValue && filters.Guests.Value > 0)
             queryParams.Add($"guests={filters.Guests.Value}");
 
@@ -509,13 +668,13 @@
             queryParams.Add($"roomTypeId={filters.RoomTypeId.Value}");
 
         if (filters.MinRating.HasValue)
-            queryParams.Add($"minRating={filters.MinRating.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
+            queryParams.Add($"minRating={filters.MinRating.Value.ToString(CultureInfo.InvariantCulture)}");
 
         if (filters.MinPrice.HasValue)
-            queryParams.Add($"minPrice={filters.MinPrice.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
+            queryParams.Add($"minPrice={filters.MinPrice.Value.ToString(CultureInfo.InvariantCulture)}");
 
         if (filters.MaxPrice.HasValue)
-            queryParams.Add($"maxPrice={filters.MaxPrice.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
+            queryParams.Add($"maxPrice={filters.MaxPrice.Value.ToString(CultureInfo.InvariantCulture)}");
 
         if (includePaging)
         {
@@ -523,33 +682,30 @@
             queryParams.Add($"pageSize={pageSize}");
         }
 
-        if (queryParams.Count == 0)
-            return baseEndpoint;
-
-        return $"{baseEndpoint}?{string.Join("&", queryParams)}";
+        return queryParams.Count == 0
+            ? baseEndpoint
+            : $"{baseEndpoint}?{string.Join("&", queryParams)}";
     }
 
-    private static decimal GetBarWidth(int count, int maxCount)
+    private static int MaxCount(List<DashboardCountItem> items)
+    {
+        return items.Count == 0 ? 0 : items.Max(x => x.Count);
+    }
+
+    private static int MaxDateCount(List<DashboardDateItem> items)
+    {
+        return items.Count == 0 ? 0 : items.Max(x => x.Count);
+    }
+
+    private static string BarWidth(int count, int maxCount)
     {
         if (maxCount <= 0 || count <= 0)
-            return 0;
+            return "0%";
 
         var width = (decimal)count * 100m / maxCount;
-        return width < 4m ? 4m : Math.Min(width, 100m);
-    }
+        var normalized = width < 4m ? 4m : Math.Min(width, 100m);
 
-    private static string FormatPriceRange(decimal? minPrice, decimal? maxPrice)
-    {
-        if (!minPrice.HasValue && !maxPrice.HasValue)
-            return "-";
-
-        if (minPrice.HasValue && maxPrice.HasValue)
-            return $"Q {minPrice.Value:0.00} - Q {maxPrice.Value:0.00}";
-
-        if (minPrice.HasValue)
-            return $"Desde Q {minPrice.Value:0.00}";
-
-        return $"Hasta Q {maxPrice!.Value:0.00}";
+        return normalized.ToString("0.##", CultureInfo.InvariantCulture) + "%";
     }
 
     private class FilterModel
@@ -558,11 +714,14 @@
         public int? CityId { get; set; }
         public DateTime? From { get; set; }
         public DateTime? To { get; set; }
+        public DateTime? CheckInFrom { get; set; }
+        public DateTime? CheckInTo { get; set; }
         public int? Guests { get; set; }
         public int? RoomTypeId { get; set; }
         public double? MinRating { get; set; }
         public decimal? MinPrice { get; set; }
         public decimal? MaxPrice { get; set; }
+        public string? ReportEmail { get; set; }
     }
 
     private class SearchAuditDto
@@ -571,11 +730,18 @@
         public int CityId { get; set; }
         public string City { get; set; } = "";
         public Guid? UserId { get; set; }
+        public string UserDisplay { get; set; } = "";
+        public string UserEmail { get; set; } = "";
+        public string UserCountry { get; set; } = "";
+        public string UserPassportNumber { get; set; } = "";
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }
+        public int Nights { get; set; }
+        public int LeadTimeDays { get; set; }
         public int Guests { get; set; }
         public decimal? MinPrice { get; set; }
         public decimal? MaxPrice { get; set; }
+        public string PriceRangeLabel { get; set; } = "";
         public int? RoomTypeId { get; set; }
         public string? RoomType { get; set; }
         public double? MinRating { get; set; }
@@ -587,6 +753,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; } = "";
+        public string? CountryCode { get; set; }
     }
 
     private class RoomTypeDto
@@ -607,9 +774,26 @@
     private class DashboardDto
     {
         public int TotalSearches { get; set; }
+        public int WebSearches { get; set; }
+        public int IntegrationSearches { get; set; }
+        public int DistinctCities { get; set; }
+        public decimal AverageGuests { get; set; }
+        public decimal AverageNights { get; set; }
+        public decimal AverageLeadTimeDays { get; set; }
+        public string TopCity { get; set; } = "-";
+        public string TopRoomType { get; set; } = "-";
+        public int EstimatedReservations { get; set; }
+        public decimal EstimatedConversionRate { get; set; }
         public List<DashboardCountItem> BySource { get; set; } = new();
-        public List<DashboardCityItem> TopCities { get; set; } = new();
-        public List<DashboardDayItem> ByDay { get; set; } = new();
+        public List<DashboardCountItem> TopCities { get; set; } = new();
+        public List<DashboardDateItem> BySearchDay { get; set; } = new();
+        public List<DashboardDateItem> ByCheckInDate { get; set; } = new();
+        public List<DashboardCountItem> ByRoomType { get; set; } = new();
+        public List<DashboardCountItem> ByGuests { get; set; } = new();
+        public List<DashboardCountItem> ByLengthOfStay { get; set; } = new();
+        public List<DashboardCountItem> LeadTimeBuckets { get; set; } = new();
+        public List<DashboardCountItem> PriceDemand { get; set; } = new();
+        public List<DashboardConversionItem> ConversionByCity { get; set; } = new();
     }
 
     private class DashboardCountItem
@@ -618,28 +802,74 @@
         public int Count { get; set; }
     }
 
-    private class DashboardCityItem
-    {
-        public int CityId { get; set; }
-        public string Label { get; set; } = "";
-        public int Count { get; set; }
-    }
-
-    private class DashboardDayItem
+    private class DashboardDateItem
     {
         public DateTime Date { get; set; }
         public int Count { get; set; }
     }
 
-    private class DashboardVm
+    private class DashboardConversionItem
     {
-        public int TotalSearches { get; set; }
-        public List<DashboardCountItem> BySource { get; set; } = new();
-        public List<DashboardCityItem> TopCities { get; set; } = new();
-        public List<DashboardDayItem> ByDay { get; set; } = new();
-
-        public int BySourceMaxCount => BySource.Count == 0 ? 0 : BySource.Max(x => x.Count);
-        public int TopCitiesMaxCount => TopCities.Count == 0 ? 0 : TopCities.Max(x => x.Count);
-        public int ByDayMaxCount => ByDay.Count == 0 ? 0 : ByDay.Max(x => x.Count);
+        public string Label { get; set; } = "";
+        public int Searches { get; set; }
+        public int Reservations { get; set; }
+        public decimal ConversionRate { get; set; }
     }
+
+    private class EmailExportRequest
+    {
+        public string? Email { get; set; }
+    }
+
+    private RenderFragment KpiCard(string Label, string Value, string Hint) => @<div class="hc-kpi">
+        <div class="hc-kpi-label">@Label</div>
+        <div class="hc-kpi-value">@Value</div>
+        <div class="hc-kpi-hint">@Hint</div>
+    </div>;
+
+    private RenderFragment AnalyticsChart(string Title, List<DashboardCountItem> Items, string EmptyText) => @<div class="hc-analytics-card h-100">
+        <h5 class="mb-2">@Title</h5>
+        @if (Items.Count == 0)
+        {
+            <p class="text-muted mb-0">@EmptyText</p>
+        }
+        else
+        {
+            @foreach (var item in Items)
+            {
+                <div class="hc-chart-row">
+                    <div class="hc-chart-label">
+                        <span>@item.Label</span>
+                        <strong>@item.Count</strong>
+                    </div>
+                    <div class="hc-chart-track">
+                        <div class="hc-chart-bar" style="width:@BarWidth(item.Count, MaxCount(Items))"></div>
+                    </div>
+                </div>
+            }
+        }
+    </div>;
+
+    private RenderFragment AnalyticsDateChart(string Title, List<DashboardDateItem> Items, string EmptyText) => @<div class="hc-analytics-card h-100">
+        <h5 class="mb-2">@Title</h5>
+        @if (Items.Count == 0)
+        {
+            <p class="text-muted mb-0">@EmptyText</p>
+        }
+        else
+        {
+            @foreach (var item in Items)
+            {
+                <div class="hc-chart-row">
+                    <div class="hc-chart-label">
+                        <span>@item.Date.ToString("dd/MM")</span>
+                        <strong>@item.Count</strong>
+                    </div>
+                    <div class="hc-chart-track">
+                        <div class="hc-chart-bar" style="width:@BarWidth(item.Count, MaxDateCount(Items))"></div>
+                    </div>
+                </div>
+            }
+        }
+    </div>;
 }

@@ -7,6 +7,7 @@
 @inject IHttpClientFactory HttpClientFactory
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
+@inject HotelChain.Web.Services.ReservationCartService Cart
 
 <PageTitle>Detalle del hotel</PageTitle>
 
@@ -296,8 +297,8 @@
                                     @GetRoomHint()
                                 </p>
 
-                                <button class="btn hotel-btn-primary hotel-btn-primary--full" @onclick="() => ReserveRoom(room.RoomTypeId)">
-                                    Reservar esta opción
+                                <button class="btn hotel-btn-primary hotel-btn-primary--full" @onclick="() => AddRoomToCart(room)">
+                                    Agregar al carrito
                                 </button>
                             </div>
                         </article>
@@ -1531,6 +1532,53 @@
             if (review.Replies is not null && review.Replies.Any())
                 CollapseRepliesByDefault(review.Replies);
         }
+    }
+
+
+    private async Task AddRoomToCart(HotelRoomOptionDto room)
+    {
+        errorMessage = null;
+        successMessage = null;
+
+        if (hotel is null)
+        {
+            errorMessage = "No se pudo cargar la información del hotel.";
+            return;
+        }
+
+        if (!searchCheckIn.HasValue || !searchCheckOut.HasValue || !searchGuests.HasValue)
+        {
+            errorMessage = "Para agregar al carrito necesitas llegar con fechas y número de huéspedes desde la búsqueda.";
+            return;
+        }
+
+        if (searchCheckOut.Value.Date <= searchCheckIn.Value.Date)
+        {
+            errorMessage = "Check-out debe ser mayor que check-in.";
+            return;
+        }
+
+        var item = new ReservationCartItem
+        {
+            HotelId = Id,
+            HotelName = hotel.Name,
+            RoomTypeId = room.RoomTypeId,
+            RoomType = room.RoomType,
+            CheckIn = searchCheckIn.Value.Date,
+            CheckOut = searchCheckOut.Value.Date,
+            Guests = searchGuests.Value,
+            Quantity = 1,
+            PricePerNight = room.BasePricePerNight,
+            MaxGuests = room.MaxGuests,
+            AvailableUnits = room.AvailableUnits,
+            ImageUrl = room.ImageUrl,
+            BedType = room.BedType,
+            AreaSquareMeters = room.AreaSquareMeters
+        };
+
+        await Cart.AddAsync(item);
+
+        successMessage = $"✅ {room.RoomType} agregado al carrito.";
     }
 
     private async Task ReserveRoom(int roomTypeId)

@@ -55,6 +55,7 @@ public class AdminHotelsController : ControllerBase
                 Amenities = h.Amenities,
                 CityId = h.CityId,
                 CityName = h.City.Name,
+                CityCountryCode = h.City.CountryCode,
                 IsActive = h.IsActive
             })
             .ToListAsync();
@@ -87,6 +88,7 @@ public class AdminHotelsController : ControllerBase
                 Amenities = h.Amenities,
                 CityId = h.CityId,
                 CityName = h.City.Name,
+                CityCountryCode = h.City.CountryCode,
                 IsActive = h.IsActive
             })
             .FirstOrDefaultAsync();
@@ -106,26 +108,27 @@ public class AdminHotelsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] SaveHotelRequest req)
     {
-        if (string.IsNullOrWhiteSpace(req.Code))
-            return BadRequest("Code es requerido.");
-
         if (string.IsNullOrWhiteSpace(req.Name))
             return BadRequest("Name es requerido.");
 
         if (string.IsNullOrWhiteSpace(req.Address))
             return BadRequest("Address es requerido.");
 
-        var cityExists = await _db.Cities.AnyAsync(c => c.Id == req.CityId);
-        if (!cityExists)
+        var city = await _db.Cities.FirstOrDefaultAsync(c => c.Id == req.CityId);
+        if (city == null)
             return BadRequest("CityId inválido.");
 
-        var codeExists = await _db.Hotels.AnyAsync(h => h.Code == req.Code);
+        var hotelCode = string.IsNullOrWhiteSpace(req.Code)
+            ? await GenerateHotelCodeAsync(city.CountryCode)
+            : req.Code.Trim().ToUpperInvariant();
+
+        var codeExists = await _db.Hotels.AnyAsync(h => h.Code == hotelCode);
         if (codeExists)
             return BadRequest("Ya existe un hotel con ese código.");
 
         var hotel = new Hotel
         {
-            Code = req.Code.Trim(),
+            Code = hotelCode,
             Name = req.Name.Trim(),
             Address = req.Address.Trim(),
             Description = string.IsNullOrWhiteSpace(req.Description) ? null : req.Description.Trim(),
@@ -174,11 +177,12 @@ public class AdminHotelsController : ControllerBase
         if (!cityExists)
             return BadRequest("CityId inválido.");
 
-        var codeExists = await _db.Hotels.AnyAsync(h => h.Code == req.Code && h.Id != id);
+        var requestedCode = req.Code.Trim().ToUpperInvariant();
+        var codeExists = await _db.Hotels.AnyAsync(h => h.Code == requestedCode && h.Id != id);
         if (codeExists)
             return BadRequest("Ya existe otro hotel con ese código.");
 
-        hotel.Code = req.Code.Trim();
+        hotel.Code = requestedCode;
         hotel.Name = req.Name.Trim();
         hotel.Address = req.Address.Trim();
         hotel.Description = string.IsNullOrWhiteSpace(req.Description) ? null : req.Description.Trim();
@@ -195,6 +199,38 @@ public class AdminHotelsController : ControllerBase
             hotel.Code,
             hotel.Name
         });
+    }
+
+    private async Task<string> GenerateHotelCodeAsync(string countryCode)
+    {
+        var cleanCountryCode = string.IsNullOrWhiteSpace(countryCode)
+            ? "XX"
+            : new string(countryCode
+                .Trim()
+                .ToUpperInvariant()
+                .Where(char.IsLetterOrDigit)
+                .ToArray());
+
+        if (string.IsNullOrWhiteSpace(cleanCountryCode))
+            cleanCountryCode = "XX";
+
+        var prefix = $"H-{cleanCountryCode}-";
+
+        var existingCodes = await _db.Hotels
+            .Where(h => h.Code.StartsWith(prefix))
+            .Select(h => h.Code)
+            .ToListAsync();
+
+        var maxSequence = 0;
+
+        foreach (var code in existingCodes)
+        {
+            var suffix = code[prefix.Length..];
+            if (int.TryParse(suffix, out var sequence) && sequence > maxSequence)
+                maxSequence = sequence;
+        }
+
+        return $"{prefix}{maxSequence + 1:000}";
     }
 
     /// <summary>

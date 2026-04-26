@@ -1,9 +1,9 @@
-﻿@using System.Net.Http.Headers
-@using System.Text.Json
+﻿@using System.Text.Json
 @implements IDisposable
 @inject IJSRuntime JS
 @inject NavigationManager Nav
 @inject HttpClient Http
+@inject HotelChain.Web.Services.ReservationCartService Cart
 
 <div class="hc-nav">
     <button type="button" class="hc-nav__toggle" title="Abrir/cerrar menú" @onclick="ToggleNavMenu">
@@ -12,15 +12,50 @@
 
     <div class="@(collapseNavMenu ? "hc-nav__panel hc-nav__panel--collapsed" : "hc-nav__panel")">
         <nav class="hc-nav__links">
-            <NavLink class="hc-nav__link" href="" Match="NavLinkMatch.All">
-                Inicio
-            </NavLink>
 
-            <NavLink class="hc-nav__link" href="search">
-                Buscar hoteles
-            </NavLink>
+            <div class="hc-nav__primary">
+                <NavLink class="hc-nav__link" href="" Match="NavLinkMatch.All">
+                    Inicio
+                </NavLink>
 
-            <div class="hc-nav__group hc-nav__group--info">
+                <NavLink class="hc-nav__link" href="search">
+                    Buscar hoteles
+                </NavLink>
+
+                <NavLink class="hc-nav__link hc-nav__cart-link" href="cart">
+                    Carrito
+                    @if (cartCount > 0)
+                    {
+                        <span class="hc-nav__cart-badge">@cartCount</span>
+                    }
+                </NavLink>
+
+                @if (canSeeMyReservations)
+                {
+                    <NavLink class="hc-nav__link" href="my-reservations">
+                        Mis viajes
+                    </NavLink>
+                }
+
+                @if (!isLoggedIn)
+                {
+                    <NavLink class="hc-nav__link" href="login">
+                        Iniciar sesión
+                    </NavLink>
+
+                    <NavLink class="hc-nav__link hc-nav__link--primary" href="register">
+                        Inscríbete
+                    </NavLink>
+                }
+                else
+                {
+                    <button type="button" class="hc-nav__link hc-nav__link--button" @onclick="Logout">
+                        Cerrar sesión
+                    </button>
+                }
+            </div>
+
+            <div class="hc-nav__secondary">
                 <span class="hc-nav__group-label">Información del hotel</span>
 
                 <div class="hc-nav__admin-links hc-nav__admin-links--info">
@@ -46,27 +81,9 @@
                 </div>
             </div>
 
-            @if (canSeeMyReservations)
-            {
-                <NavLink class="hc-nav__link" href="my-reservations">
-                    Mis viajes
-                </NavLink>
-            }
-
-            @if (!isLoggedIn)
-            {
-                <NavLink class="hc-nav__link" href="login">
-                    Iniciar sesión
-                </NavLink>
-
-                <NavLink class="hc-nav__link hc-nav__link--primary" href="register">
-                    Inscríbete
-                </NavLink>
-            }
-
             @if (isAdmin)
             {
-                <div class="hc-nav__group">
+                <div class="hc-nav__secondary hc-nav__secondary--admin">
                     <span class="hc-nav__group-label">Administración</span>
 
                     <div class="hc-nav__admin-links">
@@ -96,13 +113,6 @@
                     </div>
                 </div>
             }
-
-            @if (isLoggedIn)
-            {
-                <button type="button" class="hc-nav__link hc-nav__link--button" @onclick="Logout">
-                    Cerrar sesión
-                </button>
-            }
         </nav>
     </div>
 </div>
@@ -130,10 +140,28 @@
 
     .hc-nav__links {
         display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.7rem;
+    }
+
+    .hc-nav__primary,
+    .hc-nav__secondary,
+    .hc-nav__admin-links {
+        display: flex;
         align-items: center;
         justify-content: flex-end;
         flex-wrap: wrap;
         gap: 0.55rem;
+    }
+
+    .hc-nav__secondary {
+        padding-top: 0.55rem;
+        border-top: 1px solid #eef2f7;
+    }
+
+    .hc-nav__secondary--admin {
+        margin-top: 0.2rem;
     }
 
     .hc-nav__link,
@@ -148,7 +176,7 @@
         border: 1px solid transparent;
         background: transparent;
         color: #111827;
-        font-weight: 600;
+        font-weight: 700;
         transition: all 0.18s ease;
         white-space: nowrap;
     }
@@ -183,29 +211,36 @@
         cursor: pointer;
     }
 
-    .hc-nav__group {
+    .hc-nav__cart-link {
+        gap: 0.45rem;
+    }
+
+    .hc-nav__cart-badge {
         display: inline-flex;
         align-items: center;
-        gap: 0.55rem;
-        margin-left: 0.25rem;
-        padding-left: 0.75rem;
-        border-left: 1px solid #e5e7eb;
-        flex-wrap: wrap;
+        justify-content: center;
+        min-width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        background: #0f172a;
+        color: #ffffff;
+        font-size: 0.75rem;
+        font-weight: 900;
+        padding: 0 0.35rem;
+    }
+
+    .hc-nav__link.active .hc-nav__cart-badge {
+        background: #ffffff;
+        color: #0f172a;
     }
 
     .hc-nav__group-label {
         font-size: 0.78rem;
-        font-weight: 800;
+        font-weight: 900;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.06em;
         color: #6b7280;
-    }
-
-    .hc-nav__admin-links {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 0.45rem;
+        margin-right: 0.15rem;
     }
 
     .hc-nav__admin-link {
@@ -219,8 +254,9 @@
         color: #374151;
         border: 1px solid #e5e7eb;
         font-size: 0.9rem;
-        font-weight: 600;
+        font-weight: 700;
         transition: all 0.18s ease;
+        white-space: nowrap;
     }
 
     .hc-nav__admin-link:hover {
@@ -233,16 +269,6 @@
         background: #e5e7eb;
         color: #111827;
         border-color: #d1d5db;
-    }
-
-    .hc-nav__group--info {
-        margin-left: 0;
-        padding-left: 0;
-        border-left: none;
-    }
-
-    .hc-nav__admin-links--info {
-        gap: 0.4rem;
     }
 
     @@media (max-width: 991.98px) {
@@ -262,17 +288,28 @@
             border-radius: 20px;
             box-shadow: 0 22px 50px rgba(15, 23, 42, 0.14);
             padding: 0.9rem;
+            z-index: 50;
         }
 
         .hc-nav__panel--collapsed {
             display: none;
         }
 
-        .hc-nav__links {
+        .hc-nav__links,
+        .hc-nav__primary,
+        .hc-nav__secondary,
+        .hc-nav__admin-links {
             justify-content: flex-start;
             align-items: stretch;
             flex-direction: column;
             gap: 0.45rem;
+        }
+
+        .hc-nav__secondary {
+            width: 100%;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 0.8rem;
+            margin-top: 0.35rem;
         }
 
         .hc-nav__link,
@@ -283,22 +320,8 @@
             border-radius: 14px;
         }
 
-        .hc-nav__group {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            gap: 0.55rem;
-            margin-left: 0;
-            padding-left: 0;
-            border-left: none;
-            border-top: 1px solid #e5e7eb;
-            padding-top: 0.8rem;
-            margin-top: 0.35rem;
-        }
-
-        .hc-nav__admin-links {
-            flex-direction: column;
-            align-items: stretch;
+        .hc-nav__group-label {
+            margin: 0 0 0.2rem;
         }
     }
 
@@ -316,18 +339,23 @@
     private bool isRegistered;
     private bool isWebService;
     private bool canSeeMyReservations;
+    private int cartCount;
 
     protected override async Task OnInitializedAsync()
     {
         Nav.LocationChanged += OnLocationChanged;
+        Cart.OnChange += OnCartChanged;
+
         await RefreshAuthState();
+        await RefreshCartCount();
     }
 
     private async void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
     {
         await RefreshAuthState();
+        await RefreshCartCount();
 
-        if (collapseNavMenu == false)
+        if (!collapseNavMenu)
             collapseNavMenu = true;
 
         await InvokeAsync(StateHasChanged);
@@ -366,6 +394,17 @@
         }
     }
 
+    private async Task RefreshCartCount()
+    {
+        cartCount = await Cart.GetCountAsync();
+    }
+
+    private async void OnCartChanged()
+    {
+        await RefreshCartCount();
+        await InvokeAsync(StateHasChanged);
+    }
+
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
@@ -375,11 +414,13 @@
     {
         await JS.InvokeVoidAsync("auth.clearToken");
         Http.DefaultRequestHeaders.Authorization = null;
+
         isLoggedIn = false;
         isAdmin = false;
         isRegistered = false;
         isWebService = false;
         canSeeMyReservations = false;
+
         collapseNavMenu = true;
         Nav.NavigateTo("/login");
     }
@@ -444,5 +485,6 @@
     public void Dispose()
     {
         Nav.LocationChanged -= OnLocationChanged;
+        Cart.OnChange -= OnCartChanged;
     }
 }

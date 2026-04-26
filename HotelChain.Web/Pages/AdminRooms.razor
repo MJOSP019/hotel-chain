@@ -5,6 +5,10 @@
 @inject IJSRuntime JS
 
 <h3>Administración de habitaciones</h3>
+<p class="text-muted">
+    Administra habitaciones físicas del hotel. En operación real se crean habitaciones por hotel y tipo,
+    se agrupan por categoría comercial y se evita mostrar listados enormes usando filtros, resumen y paginación.
+</p>
 
 @if (!string.IsNullOrWhiteSpace(errorMessage))
 {
@@ -15,13 +19,27 @@
     <div class="alert alert-success">@successMessage</div>
 }
 
-<div class="row">
-    <div class="col-md-5">
-        <div class="card p-3">
-            <h5>@(isEditMode ? "Editar habitación" : "Crear habitación")</h5>
+<div class="row g-3">
+    <div class="col-lg-4">
+        <div class="card p-3 mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="mb-0">Alta / edición</h5>
+                @if (isEditMode)
+                {
+                    <span class="badge bg-warning text-dark">Editando</span>
+                }
+                else
+                {
+                    <span class="badge bg-primary">Individual</span>
+                }
+            </div>
+
+            <small class="text-muted d-block mb-3">
+                Usa este formulario para crear o modificar una habitación física específica, por ejemplo 101, 202A o PH-01.
+            </small>
 
             <div class="mb-2">
-                <label>Hotel</label>
+                <label class="form-label">Hotel</label>
                 <select class="form-select" @bind="model.HotelId">
                     <option value="0">Seleccione un hotel</option>
                     @foreach (var hotel in hotels)
@@ -32,8 +50,90 @@
             </div>
 
             <div class="mb-2">
-                <label>Tipo de habitación</label>
+                <label class="form-label">Tipo comercial</label>
                 <select class="form-select" @bind="model.RoomTypeId">
+                    <option value="0">Seleccione un tipo</option>
+                    @foreach (var roomType in roomTypes)
+                    {
+                        <option value="@roomType.Id">@roomType.Name</option>
+                    }
+                </select>
+                <small class="text-muted">Doble, Junior Suite, Suite, Gran Suite, etc.</small>
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Número / identificador físico</label>
+                <input class="form-control" @bind="model.NameOrNumber" placeholder="Ej. 101, 203A, PH-01" />
+            </div>
+
+            <div class="row">
+                <div class="col-6 mb-2">
+                    <label class="form-label">Precio noche</label>
+                    <input type="number" step="0.01" class="form-control" @bind="model.BasePricePerNight" />
+                </div>
+                <div class="col-6 mb-2">
+                    <label class="form-label">Huéspedes</label>
+                    <input type="number" class="form-control" @bind="model.MaxGuests" />
+                </div>
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Tipo de cama</label>
+                <input class="form-control" @bind="model.BedType" placeholder="Ej. King bed, 2 camas dobles" />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Área (m²)</label>
+                <input type="number" step="0.01" class="form-control" @bind="model.AreaSquareMeters" />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Descripción comercial</label>
+                <textarea class="form-control" rows="3" @bind="model.ShortDescription" placeholder="Vista, amenidades internas, ubicación dentro del hotel, etc."></textarea>
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">URL de imagen</label>
+                <input class="form-control" @bind="model.ImageUrl" placeholder="https://..." />
+            </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" @bind="model.IsActive" />
+                <label class="form-check-label">Activa para venta futura</label>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary" disabled="@isSaving" @onclick="SaveRoom">
+                    @(isSaving ? "Guardando..." : isEditMode ? "Actualizar habitación" : "Crear habitación")
+                </button>
+                <button class="btn btn-outline-secondary" @onclick="ResetForm">Limpiar</button>
+            </div>
+        </div>
+
+        <div class="card p-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="mb-0">Alta por lote</h5>
+                <span class="badge bg-success">Rango</span>
+            </div>
+
+            <small class="text-muted d-block mb-3">
+                Útil cuando se abre un piso o bloque completo. Todas las habitaciones del lote comparten hotel, tipo, tarifa y características.
+            </small>
+
+            <div class="mb-2">
+                <label class="form-label">Hotel</label>
+                <select class="form-select" @bind="bulkModel.HotelId">
+                    <option value="0">Seleccione un hotel</option>
+                    @foreach (var hotel in hotels)
+                    {
+                        <option value="@hotel.Id">@hotel.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Tipo comercial</label>
+                <select class="form-select" @bind="bulkModel.RoomTypeId">
                     <option value="0">Seleccione un tipo</option>
                     @foreach (var roomType in roomTypes)
                     {
@@ -42,107 +142,272 @@
                 </select>
             </div>
 
-            <div class="mb-2">
-                <label>Nombre o número</label>
-                <input class="form-control" @bind="model.NameOrNumber" />
+            <div class="row">
+                <div class="col-6 mb-2">
+                    <label class="form-label">Desde</label>
+                    <input type="number" class="form-control" @bind="bulkModel.StartNumber" />
+                </div>
+                <div class="col-6 mb-2">
+                    <label class="form-label">Hasta</label>
+                    <input type="number" class="form-control" @bind="bulkModel.EndNumber" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 mb-2">
+                    <label class="form-label">Prefijo</label>
+                    <input class="form-control" @bind="bulkModel.Prefix" placeholder="Opcional" />
+                </div>
+                <div class="col-6 mb-2">
+                    <label class="form-label">Sufijo</label>
+                    <input class="form-control" @bind="bulkModel.Suffix" placeholder="Opcional" />
+                </div>
+            </div>
+
+            <small class="text-muted d-block mb-2">
+                Ejemplo: prefijo A-, desde 101, hasta 105 → A-101, A-102, A-103...
+            </small>
+
+            <div class="row">
+                <div class="col-6 mb-2">
+                    <label class="form-label">Precio noche</label>
+                    <input type="number" step="0.01" class="form-control" @bind="bulkModel.BasePricePerNight" />
+                </div>
+                <div class="col-6 mb-2">
+                    <label class="form-label">Huéspedes</label>
+                    <input type="number" class="form-control" @bind="bulkModel.MaxGuests" />
+                </div>
             </div>
 
             <div class="mb-2">
-                <label>Precio base por noche</label>
-                <input type="number" step="0.01" class="form-control" @bind="model.BasePricePerNight" />
+                <label class="form-label">Tipo de cama</label>
+                <input class="form-control" @bind="bulkModel.BedType" placeholder="Ej. 2 camas dobles" />
             </div>
 
             <div class="mb-2">
-                <label>Máximo de huéspedes</label>
-                <input type="number" class="form-control" @bind="model.MaxGuests" />
+                <label class="form-label">Área (m²)</label>
+                <input type="number" step="0.01" class="form-control" @bind="bulkModel.AreaSquareMeters" />
             </div>
 
             <div class="mb-2">
-                <label>Tipo de cama</label>
-                <input class="form-control" @bind="model.BedType" placeholder="Ej. King bed, 2 camas dobles" />
+                <label class="form-label">Descripción comercial</label>
+                <textarea class="form-control" rows="2" @bind="bulkModel.ShortDescription"></textarea>
             </div>
 
             <div class="mb-2">
-                <label>Área (m²)</label>
-                <input type="number" step="0.01" class="form-control" @bind="model.AreaSquareMeters" />
+                <label class="form-label">URL de imagen</label>
+                <input class="form-control" @bind="bulkModel.ImageUrl" placeholder="https://..." />
             </div>
 
-            <div class="mb-2">
-                <label>Descripción corta</label>
-                <textarea class="form-control" rows="3" @bind="model.ShortDescription" placeholder="Descripción breve comercial de la habitación."></textarea>
-            </div>
-
-            <div class="mb-2">
-                <label>URL de imagen</label>
-                <input class="form-control" @bind="model.ImageUrl" placeholder="https://..." />
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" @bind="bulkModel.IsActive" />
+                <label class="form-check-label">Crear activas</label>
             </div>
 
             <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" @bind="model.IsActive" />
-                <label class="form-check-label">Activa</label>
+                <input class="form-check-input" type="checkbox" @bind="bulkModel.SkipExisting" />
+                <label class="form-check-label">Omitir habitaciones que ya existan</label>
             </div>
 
-            <button class="btn btn-primary me-2" @onclick="SaveRoom">
-                @(isEditMode ? "Actualizar" : "Crear")
-            </button>
-
-            <button class="btn btn-secondary" @onclick="ResetForm">
-                Limpiar
-            </button>
+            <div class="d-grid gap-2">
+                <button class="btn btn-success" disabled="@isBulkSaving" @onclick="SaveBulkRooms">
+                    @(isBulkSaving ? "Creando lote..." : "Crear lote de habitaciones")
+                </button>
+                <button class="btn btn-outline-secondary" @onclick="ResetBulkForm">Limpiar lote</button>
+            </div>
         </div>
     </div>
 
-    <div class="col-md-7">
-        <div class="card p-3">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5>Habitaciones</h5>
-
-                <select class="form-select w-auto"
-                        @bind="selectedHotelFilter"
-                        @bind:after="OnHotelFilterChanged">
-                    <option value="0">Todos los hoteles</option>
-                    @foreach (var hotel in hotels)
-                    {
-                        <option value="@hotel.Id">@hotel.Name</option>
-                    }
-                </select>
+    <div class="col-lg-8">
+        <div class="card p-3 mb-3">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                <div>
+                    <h5 class="mb-0">Resumen operativo</h5>
+                    <small class="text-muted">Agrupado por hotel y tipo de habitación.</small>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary" @onclick="ReloadData">Actualizar</button>
             </div>
 
-            @if (rooms.Count == 0)
+            @if (summary.Count == 0)
             {
-                <p>No hay habitaciones registradas.</p>
+                <p class="text-muted mb-0">No hay resumen disponible con los filtros actuales.</p>
             }
             else
             {
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-sm align-middle">
                         <thead>
                             <tr>
                                 <th>Hotel</th>
                                 <th>Tipo</th>
-                                <th>Nombre/Número</th>
+                                <th>Activas</th>
+                                <th>Inactivas</th>
                                 <th>Precio</th>
-                                <th>Huéspedes</th>
-                                <th>Cama</th>
-                                <th>Área</th>
+                                <th>Máx.</th>
+                                <th>Camas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in summary)
+                            {
+                                <tr>
+                                    <td>@item.HotelName</td>
+                                    <td>@item.RoomTypeName</td>
+                                    <td><span class="badge bg-success">@item.ActiveRooms</span></td>
+                                    <td><span class="badge bg-secondary">@item.InactiveRooms</span></td>
+                                    <td>
+                                        @if (item.MinPrice == item.MaxPrice)
+                                        {
+                                            <span>@item.MinPrice.ToString("0.00")</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@item.MinPrice.ToString("0.00") - @item.MaxPrice.ToString("0.00")</span>
+                                        }
+                                    </td>
+                                    <td>@item.MaxGuests</td>
+                                    <td>@(string.IsNullOrWhiteSpace(item.BedTypes) ? "-" : item.BedTypes)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+
+        <div class="card p-3">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                <div>
+                    <h5 class="mb-0">Habitaciones físicas</h5>
+                    <small class="text-muted">
+                        Mostrando @rooms.Count de @pagedRooms.TotalCount registros filtrados.
+                        Activas: @pagedRooms.ActiveCount · Inactivas: @pagedRooms.InactiveCount
+                    </small>
+                </div>
+            </div>
+
+            <div class="row g-2 mb-3">
+                <div class="col-md-4">
+                    <label class="form-label">Hotel</label>
+                    <select class="form-select"
+                            @bind="selectedHotelFilter"
+                            @bind:after="ApplyFilters">
+                        <option value="0">Todos los hoteles</option>
+                        @foreach (var hotel in hotels)
+                        {
+                            <option value="@hotel.Id">@hotel.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Tipo</label>
+                    <select class="form-select"
+                            @bind="selectedRoomTypeFilter"
+                            @bind:after="ApplyFilters">
+                        <option value="0">Todos</option>
+                        @foreach (var roomType in roomTypes)
+                        {
+                            <option value="@roomType.Id">@roomType.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Buscar</label>
+                    <input class="form-control" @bind="searchText" placeholder="Número, hotel, cama..." />
+                </div>
+
+                <div class="col-md-2">
+                    <label class="form-label">Página</label>
+                    <select class="form-select"
+                            @bind="pageSize"
+                            @bind:after="ApplyFilters">
+                        <option value="8">8</option>
+                        <option value="12">12</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                    </select>
+                </div>
+
+                <div class="col-12 d-flex flex-wrap align-items-center gap-2">
+                    <button class="btn btn-outline-primary btn-sm" @onclick="ApplyFilters">Aplicar filtros</button>
+                    <button class="btn btn-outline-secondary btn-sm" @onclick="ClearFilters">Limpiar filtros</button>
+
+                    <div class="form-check ms-md-auto">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               @bind="includeInactive"
+                               @bind:after="ApplyFilters" />
+                        <label class="form-check-label">Mostrar inactivas</label>
+                    </div>
+                </div>
+            </div>
+
+            @if (rooms.Count == 0)
+            {
+                <p class="text-muted">No hay habitaciones registradas con los filtros actuales.</p>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle">
+                        <thead>
+                            <tr>
+                                <th>Habitación</th>
+                                <th>Hotel</th>
+                                <th>Tipo</th>
+                                <th>Tarifa</th>
+                                <th>Capacidad</th>
+                                <th>Características</th>
                                 <th>Estado</th>
-                                <th></th>
+                                <th style="width: 170px;"></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var room in rooms)
                             {
                                 <tr>
+                                    <td>
+                                        <strong>@room.NameOrNumber</strong>
+                                        @if (!string.IsNullOrWhiteSpace(room.ImageUrl))
+                                        {
+                                            <div class="mt-1">
+                                                <img src="@room.ImageUrl"
+                                                     alt="Imagen habitación @room.NameOrNumber"
+                                                     style="width: 72px; height: 48px; object-fit: cover; border-radius: 6px;"
+                                                     onerror="this.style.display='none'" />
+                                            </div>
+                                        }
+                                    </td>
                                     <td>@room.HotelName</td>
                                     <td>@room.RoomTypeName</td>
-                                    <td>@room.NameOrNumber</td>
                                     <td>@room.BasePricePerNight.ToString("0.00")</td>
-                                    <td>@room.MaxGuests</td>
-                                    <td>@(string.IsNullOrWhiteSpace(room.BedType) ? "-" : room.BedType)</td>
-                                    <td>@(room.AreaSquareMeters.HasValue ? $"{room.AreaSquareMeters.Value:0.##} m²" : "-")</td>
-                                    <td>@(room.IsActive ? "Activa" : "Inactiva")</td>
+                                    <td>@room.MaxGuests huésped(es)</td>
                                     <td>
-                                        <div class="d-flex gap-2">
+                                        <div>@(string.IsNullOrWhiteSpace(room.BedType) ? "Cama no especificada" : room.BedType)</div>
+                                        <small class="text-muted">
+                                            @(room.AreaSquareMeters.HasValue ? $"{room.AreaSquareMeters.Value:0.##} m²" : "Área no especificada")
+                                        </small>
+                                        @if (!string.IsNullOrWhiteSpace(room.ShortDescription))
+                                        {
+                                            <div>
+                                                <small>@room.ShortDescription</small>
+                                            </div>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (room.IsActive)
+                                        {
+                                            <span class="badge bg-success">Activa</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">Inactiva</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="d-flex flex-wrap gap-2">
                                             <button class="btn btn-sm btn-outline-primary"
                                                     disabled="@(!room.IsActive)"
                                                     @onclick="() => EditRoom(room.Id)">
@@ -154,7 +419,7 @@
                                                 <button class="btn btn-sm btn-outline-danger"
                                                         disabled="@(deactivatingRoomId == room.Id || reactivatingRoomId == room.Id)"
                                                         @onclick="() => DeactivateRoom(room)">
-                                                    @(deactivatingRoomId == room.Id ? "Desactivando..." : "Desactivar")
+                                                    @(deactivatingRoomId == room.Id ? "..." : "Desactivar")
                                                 </button>
                                             }
                                             else
@@ -162,31 +427,34 @@
                                                 <button class="btn btn-sm btn-outline-success"
                                                         disabled="@(reactivatingRoomId == room.Id || deactivatingRoomId == room.Id)"
                                                         @onclick="() => ReactivateRoom(room)">
-                                                    @(reactivatingRoomId == room.Id ? "Reactivando..." : "Reactivar")
+                                                    @(reactivatingRoomId == room.Id ? "..." : "Reactivar")
                                                 </button>
                                             }
                                         </div>
                                     </td>
                                 </tr>
-
-                                @if (!string.IsNullOrWhiteSpace(room.ShortDescription) || !string.IsNullOrWhiteSpace(room.ImageUrl))
-                                {
-                                    <tr class="table-light">
-                                        <td colspan="9">
-                                            @if (!string.IsNullOrWhiteSpace(room.ShortDescription))
-                                            {
-                                                <div><strong>Descripción:</strong> @room.ShortDescription</div>
-                                            }
-                                            @if (!string.IsNullOrWhiteSpace(room.ImageUrl))
-                                            {
-                                                <div><strong>Imagen:</strong> @room.ImageUrl</div>
-                                            }
-                                        </td>
-                                    </tr>
-                                }
                             }
                         </tbody>
                     </table>
+                </div>
+
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+                    <small class="text-muted">
+                        Página @pagedRooms.Page de @pagedRooms.TotalPages
+                    </small>
+
+                    <div class="btn-group">
+                        <button class="btn btn-outline-secondary btn-sm"
+                                disabled="@(currentPage <= 1)"
+                                @onclick="PreviousPage">
+                            Anterior
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm"
+                                disabled="@(currentPage >= pagedRooms.TotalPages)"
+                                @onclick="NextPage">
+                            Siguiente
+                        </button>
+                    </div>
                 </div>
             }
         </div>
@@ -195,13 +463,24 @@
 
 @code {
     private List<AdminRoomDto> rooms = new();
+    private List<RoomTypeOperationalSummaryDto> summary = new();
     private List<HotelOption> hotels = new();
     private List<RoomTypeOption> roomTypes = new();
 
+    private PagedRoomsResponse pagedRooms = new();
     private SaveRoomRequest model = new() { IsActive = true };
+    private BulkCreateRoomsRequest bulkModel = CreateDefaultBulkModel();
+
     private bool isEditMode = false;
+    private bool isSaving = false;
+    private bool isBulkSaving = false;
     private int editingRoomId = 0;
     private int selectedHotelFilter = 0;
+    private int selectedRoomTypeFilter = 0;
+    private int currentPage = 1;
+    private int pageSize = 12;
+    private bool includeInactive = true;
+    private string searchText = string.Empty;
     private int? deactivatingRoomId;
     private int? reactivatingRoomId;
 
@@ -213,7 +492,7 @@
         await SetToken();
         await LoadHotels();
         await LoadRoomTypes();
-        await LoadRooms();
+        await ReloadData();
     }
 
     private async Task SetToken()
@@ -252,19 +531,49 @@
         }
     }
 
-    private async Task LoadRooms()
+    private async Task ReloadData()
+    {
+        await LoadSummary();
+        await LoadPagedRooms();
+    }
+
+    private async Task LoadSummary()
+    {
+        try
+        {
+            var url = "api/admin/rooms/summary";
+            if (selectedHotelFilter > 0)
+                url += $"?hotelId={selectedHotelFilter}";
+
+            summary = await Http.GetFromJsonAsync<List<RoomTypeOperationalSummaryDto>>(url) ?? new();
+        }
+        catch
+        {
+            errorMessage = "No se pudo cargar el resumen operativo.";
+        }
+    }
+
+    private async Task LoadPagedRooms()
     {
         try
         {
             errorMessage = null;
 
-            var url = "api/admin/rooms";
-            if (selectedHotelFilter > 0)
-            {
-                url += $"?hotelId={selectedHotelFilter}";
-            }
+            var query = $"api/admin/rooms/paged?page={currentPage}&pageSize={pageSize}&includeInactive={includeInactive.ToString().ToLowerInvariant()}";
 
-            rooms = await Http.GetFromJsonAsync<List<AdminRoomDto>>(url) ?? new();
+            if (selectedHotelFilter > 0)
+                query += $"&hotelId={selectedHotelFilter}";
+
+            if (selectedRoomTypeFilter > 0)
+                query += $"&roomTypeId={selectedRoomTypeFilter}";
+
+            if (!string.IsNullOrWhiteSpace(searchText))
+                query += $"&search={Uri.EscapeDataString(searchText.Trim())}";
+
+            pagedRooms = await Http.GetFromJsonAsync<PagedRoomsResponse>(query) ?? new PagedRoomsResponse();
+            rooms = pagedRooms.Items ?? new();
+
+            currentPage = Math.Max(1, pagedRooms.Page);
         }
         catch
         {
@@ -277,44 +586,12 @@
         errorMessage = null;
         successMessage = null;
 
-        if (model.HotelId <= 0)
-        {
-            errorMessage = "Debe seleccionar un hotel.";
+        if (!ValidateSingleRoom())
             return;
-        }
-
-        if (model.RoomTypeId <= 0)
-        {
-            errorMessage = "Debe seleccionar un tipo de habitación.";
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(model.NameOrNumber))
-        {
-            errorMessage = "El nombre o número es obligatorio.";
-            return;
-        }
-
-        if (model.BasePricePerNight <= 0)
-        {
-            errorMessage = "El precio debe ser mayor a 0.";
-            return;
-        }
-
-        if (model.MaxGuests <= 0)
-        {
-            errorMessage = "La cantidad máxima de huéspedes debe ser mayor a 0.";
-            return;
-        }
-
-        if (model.AreaSquareMeters.HasValue && model.AreaSquareMeters.Value <= 0)
-        {
-            errorMessage = "El área en metros cuadrados debe ser mayor a 0.";
-            return;
-        }
 
         try
         {
+            isSaving = true;
             HttpResponseMessage response;
 
             if (isEditMode)
@@ -333,18 +610,150 @@
                     : "Habitación creada correctamente.";
 
                 ResetForm();
-                await LoadRooms();
+                currentPage = 1;
+                await ReloadData();
                 return;
             }
 
-            errorMessage = await response.Content.ReadAsStringAsync();
-            if (string.IsNullOrWhiteSpace(errorMessage))
-                errorMessage = "No se pudo guardar la habitación.";
+            errorMessage = await GetErrorText(response, "No se pudo guardar la habitación.");
         }
         catch
         {
             errorMessage = "Ocurrió un error al guardar la habitación.";
         }
+        finally
+        {
+            isSaving = false;
+        }
+    }
+
+    private async Task SaveBulkRooms()
+    {
+        errorMessage = null;
+        successMessage = null;
+
+        if (!ValidateBulkRooms())
+            return;
+
+        try
+        {
+            isBulkSaving = true;
+            var response = await Http.PostAsJsonAsync("api/admin/rooms/bulk", bulkModel);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<BulkCreateResult>();
+                successMessage = result?.Message ?? "Lote de habitaciones creado correctamente.";
+
+                currentPage = 1;
+                await ReloadData();
+                return;
+            }
+
+            errorMessage = await GetErrorText(response, "No se pudo crear el lote de habitaciones.");
+        }
+        catch
+        {
+            errorMessage = "Ocurrió un error al crear el lote de habitaciones.";
+        }
+        finally
+        {
+            isBulkSaving = false;
+        }
+    }
+
+    private bool ValidateSingleRoom()
+    {
+        if (model.HotelId <= 0)
+        {
+            errorMessage = "Debe seleccionar un hotel.";
+            return false;
+        }
+
+        if (model.RoomTypeId <= 0)
+        {
+            errorMessage = "Debe seleccionar un tipo de habitación.";
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(model.NameOrNumber))
+        {
+            errorMessage = "El número o identificador físico es obligatorio.";
+            return false;
+        }
+
+        if (model.BasePricePerNight <= 0)
+        {
+            errorMessage = "El precio debe ser mayor a 0.";
+            return false;
+        }
+
+        if (model.MaxGuests <= 0)
+        {
+            errorMessage = "La capacidad máxima debe ser mayor a 0.";
+            return false;
+        }
+
+        if (model.AreaSquareMeters.HasValue && model.AreaSquareMeters.Value <= 0)
+        {
+            errorMessage = "El área debe ser mayor a 0.";
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidateBulkRooms()
+    {
+        if (bulkModel.HotelId <= 0)
+        {
+            errorMessage = "Debe seleccionar un hotel para el lote.";
+            return false;
+        }
+
+        if (bulkModel.RoomTypeId <= 0)
+        {
+            errorMessage = "Debe seleccionar un tipo de habitación para el lote.";
+            return false;
+        }
+
+        if (bulkModel.StartNumber <= 0 || bulkModel.EndNumber <= 0)
+        {
+            errorMessage = "El rango de habitaciones debe ser mayor a 0.";
+            return false;
+        }
+
+        if (bulkModel.EndNumber < bulkModel.StartNumber)
+        {
+            errorMessage = "El número final no puede ser menor que el número inicial.";
+            return false;
+        }
+
+        if ((bulkModel.EndNumber - bulkModel.StartNumber + 1) > 100)
+        {
+            errorMessage = "Solo puedes crear hasta 100 habitaciones por lote.";
+            return false;
+        }
+
+        if (bulkModel.BasePricePerNight <= 0)
+        {
+            errorMessage = "El precio del lote debe ser mayor a 0.";
+            return false;
+        }
+
+        if (bulkModel.MaxGuests <= 0)
+        {
+            errorMessage = "La capacidad máxima del lote debe ser mayor a 0.";
+            return false;
+        }
+
+        if (bulkModel.AreaSquareMeters.HasValue && bulkModel.AreaSquareMeters.Value <= 0)
+        {
+            errorMessage = "El área del lote debe ser mayor a 0.";
+            return false;
+        }
+
+        return true;
     }
 
     private async Task EditRoom(int id)
@@ -364,7 +773,7 @@
 
             if (!room.IsActive)
             {
-                errorMessage = "No se puede editar una habitación inactiva.";
+                errorMessage = "No se puede editar una habitación inactiva. Reactívala primero.";
                 return;
             }
 
@@ -384,6 +793,8 @@
                 ImageUrl = room.ImageUrl,
                 IsActive = room.IsActive
             };
+
+            successMessage = $"Editando habitación {room.NameOrNumber}.";
         }
         catch
         {
@@ -401,7 +812,7 @@
 
         try
         {
-            var confirm = await JS.InvokeAsync<bool>("confirm", $"¿Deseas desactivar la habitación {room.NameOrNumber} del hotel {room.HotelName}?");
+            var confirm = await JS.InvokeAsync<bool>("confirm", $"¿Deseas desactivar la habitación {room.NameOrNumber} del hotel {room.HotelName}? Se retirará del inventario comercial futuro.");
             if (!confirm)
                 return;
 
@@ -411,7 +822,7 @@
 
             if (!response.IsSuccessStatusCode)
             {
-                errorMessage = await response.Content.ReadAsStringAsync();
+                errorMessage = await GetErrorText(response, "No se pudo desactivar la habitación.");
                 return;
             }
 
@@ -422,7 +833,7 @@
                 ResetForm();
             }
 
-            await LoadRooms();
+            await ReloadData();
         }
         catch (Exception ex)
         {
@@ -444,7 +855,7 @@
 
         try
         {
-            var confirm = await JS.InvokeAsync<bool>("confirm", $"¿Deseas reactivar la habitación {room.NameOrNumber} del hotel {room.HotelName}?");
+            var confirm = await JS.InvokeAsync<bool>("confirm", $"¿Deseas reactivar la habitación {room.NameOrNumber} del hotel {room.HotelName}? Se agregará al inventario comercial futuro.");
             if (!confirm)
                 return;
 
@@ -454,12 +865,12 @@
 
             if (!response.IsSuccessStatusCode)
             {
-                errorMessage = await response.Content.ReadAsStringAsync();
+                errorMessage = await GetErrorText(response, "No se pudo reactivar la habitación.");
                 return;
             }
 
             successMessage = $"Habitación {room.NameOrNumber} reactivada correctamente.";
-            await LoadRooms();
+            await ReloadData();
         }
         catch (Exception ex)
         {
@@ -482,9 +893,62 @@
         editingRoomId = 0;
     }
 
-    private async Task OnHotelFilterChanged()
+    private void ResetBulkForm()
     {
-        await LoadRooms();
+        bulkModel = CreateDefaultBulkModel();
+    }
+
+    private async Task ApplyFilters()
+    {
+        currentPage = 1;
+        await ReloadData();
+    }
+
+    private async Task ClearFilters()
+    {
+        selectedHotelFilter = 0;
+        selectedRoomTypeFilter = 0;
+        searchText = string.Empty;
+        includeInactive = true;
+        currentPage = 1;
+        await ReloadData();
+    }
+
+    private async Task PreviousPage()
+    {
+        if (currentPage <= 1)
+            return;
+
+        currentPage--;
+        await LoadPagedRooms();
+    }
+
+    private async Task NextPage()
+    {
+        if (currentPage >= pagedRooms.TotalPages)
+            return;
+
+        currentPage++;
+        await LoadPagedRooms();
+    }
+
+    private static BulkCreateRoomsRequest CreateDefaultBulkModel()
+    {
+        return new BulkCreateRoomsRequest
+        {
+            StartNumber = 101,
+            EndNumber = 110,
+            MaxGuests = 2,
+            BasePricePerNight = 1,
+            IsActive = true,
+            SkipExisting = true
+        };
+    }
+
+    private static async Task<string> GetErrorText(HttpResponseMessage response, string fallback)
+    {
+        var content = await response.Content.ReadAsStringAsync();
+        return string.IsNullOrWhiteSpace(content) ? fallback : content;
     }
 
     public class AdminRoomDto
@@ -516,6 +980,58 @@
         public string? ShortDescription { get; set; }
         public string? ImageUrl { get; set; }
         public bool IsActive { get; set; } = true;
+    }
+
+    public class BulkCreateRoomsRequest
+    {
+        public int HotelId { get; set; }
+        public int RoomTypeId { get; set; }
+        public int StartNumber { get; set; }
+        public int EndNumber { get; set; }
+        public string? Prefix { get; set; }
+        public string? Suffix { get; set; }
+        public int MaxGuests { get; set; }
+        public decimal BasePricePerNight { get; set; }
+        public string? BedType { get; set; }
+        public decimal? AreaSquareMeters { get; set; }
+        public string? ShortDescription { get; set; }
+        public string? ImageUrl { get; set; }
+        public bool IsActive { get; set; } = true;
+        public bool SkipExisting { get; set; } = true;
+    }
+
+    public class BulkCreateResult
+    {
+        public string Message { get; set; } = string.Empty;
+        public int Created { get; set; }
+        public int Skipped { get; set; }
+        public List<string> Rooms { get; set; } = new();
+    }
+
+    public class PagedRoomsResponse
+    {
+        public List<AdminRoomDto> Items { get; set; } = new();
+        public int TotalCount { get; set; }
+        public int ActiveCount { get; set; }
+        public int InactiveCount { get; set; }
+        public int Page { get; set; } = 1;
+        public int PageSize { get; set; } = 12;
+        public int TotalPages { get; set; } = 1;
+    }
+
+    public class RoomTypeOperationalSummaryDto
+    {
+        public int HotelId { get; set; }
+        public string HotelName { get; set; } = string.Empty;
+        public int RoomTypeId { get; set; }
+        public string RoomTypeName { get; set; } = string.Empty;
+        public int ActiveRooms { get; set; }
+        public int InactiveRooms { get; set; }
+        public int TotalRooms { get; set; }
+        public decimal MinPrice { get; set; }
+        public decimal MaxPrice { get; set; }
+        public int MaxGuests { get; set; }
+        public string BedTypes { get; set; } = string.Empty;
     }
 
     public class HotelOption

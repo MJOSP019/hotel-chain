@@ -304,54 +304,64 @@ public class ReservationsController : ControllerBase
             await tx.CommitAsync();
         }
 
-        var activeCharges = res.Charges
-            .Where(c => !c.IsVoided)
-            .OrderBy(c => c.CreatedAt)
-            .ToList();
+            var activeCharges = res.Charges
+        .Where(c => !c.IsVoided)
+        .OrderBy(c => c.CreatedAt)
+        .ToList();
 
-        var baseAmount = res.TotalAmount;
-        var chargesTotal = activeCharges.Sum(c => c.Amount);
-        var grandTotal = baseAmount + chargesTotal;
+    var baseAmount = res.TotalAmount;
+    var chargesTotal = activeCharges.Sum(c => c.Amount);
+    var settledChargesTotal = activeCharges.Where(c => c.IsSettled).Sum(c => c.Amount);
+    var outstandingChargesTotal = activeCharges.Where(c => !c.IsSettled).Sum(c => c.Amount);
+    var grandTotal = baseAmount + chargesTotal;
 
-        return Ok(new
+    return Ok(new
+    {
+        res.Id,
+        res.Code,
+        Hotel = res.Hotel.Name,
+        res.CheckIn,
+        res.CheckOut,
+        Nights = Math.Max(1, (res.CheckOut.Date - res.CheckIn.Date).Days),
+        res.Guests,
+        res.Status,
+
+        BaseAmount = baseAmount,
+        ChargesTotal = chargesTotal,
+        SettledChargesTotal = settledChargesTotal,
+        OutstandingChargesTotal = outstandingChargesTotal,
+        GrandTotal = grandTotal,
+        TotalAmount = grandTotal,
+        IsStayAccountSettled = outstandingChargesTotal <= 0,
+
+        IsPaid = res.Payment != null && res.Payment.Status == "APPROVED",
+        PaymentStatus = res.Payment?.Status ?? "PENDING",
+        CardLast4 = res.Payment != null ? $"**** {res.Payment.Last4}" : null,
+
+        Charges = activeCharges.Select(c => new
         {
-            res.Id,
-            res.Code,
-            Hotel = res.Hotel.Name,
-            res.CheckIn,
-            res.CheckOut,
-            res.Guests,
-            res.Status,
-            BaseAmount = baseAmount,
-            ChargesTotal = chargesTotal,
-            GrandTotal = grandTotal,
-            TotalAmount = grandTotal,
+            c.Id,
+            c.Category,
+            c.Description,
+            c.Amount,
+            c.CreatedAt,
+            c.CreatedBy,
+            c.IsSettled,
+            c.SettledAt,
+            c.SettledBy
+        }),
 
-            IsPaid = res.Payment != null,
-            PaymentStatus = res.Payment?.Status,
-            CardLast4 = res.Payment != null ? $"**** {res.Payment.Last4}" : null,
-
-            Charges = activeCharges.Select(c => new
-            {
-                c.Id,
-                c.Category,
-                c.Description,
-                c.Amount,
-                c.CreatedAt,
-                c.CreatedBy
-            }),
-
-            Rooms = res.Rooms.Select(x => new
-            {
-                x.RoomTypeId,
-                RoomType = x.RoomType.Name,
-                x.RoomId,
-                RoomName = x.Room != null ? x.Room.NameOrNumber : "Sin asignar",
-                x.PricePerNight,
-                x.Nights,
-                x.Subtotal
-            })
-        });
+        Rooms = res.Rooms.Select(x => new
+        {
+            x.RoomTypeId,
+            RoomType = x.RoomType.Name,
+            x.RoomId,
+            RoomName = x.Room != null ? x.Room.NameOrNumber : "Pendiente de check-in",
+            x.PricePerNight,
+            x.Nights,
+            x.Subtotal
+        })
+    });
     }
 
     /// <summary>

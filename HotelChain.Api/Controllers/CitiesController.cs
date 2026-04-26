@@ -9,14 +9,24 @@ namespace HotelChain.Api.Controllers;
 public class CitiesController : ControllerBase
 {
     private readonly HotelChainDbContext _db;
-    public CitiesController(HotelChainDbContext db) => _db = db;
+
+    public CitiesController(HotelChainDbContext db)
+    {
+        _db = db;
+    }
 
     [HttpGet]
     public async Task<IActionResult> Get()
     {
         var cities = await _db.Cities
+            .Where(c => _db.Hotels.Any(h => h.CityId == c.Id && h.IsActive))
             .OrderBy(c => c.Name)
-            .Select(c => new { c.Id, c.Name, c.CountryCode })
+            .Select(c => new
+            {
+                c.Id,
+                c.Name,
+                c.CountryCode
+            })
             .ToListAsync();
 
         return Ok(cities);

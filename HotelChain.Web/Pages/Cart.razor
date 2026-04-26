@@ -1,0 +1,536 @@
+@page "/cart"
+@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@using HotelChain.Web.Models
+@inject HotelChain.Web.Services.ReservationCartService CartService
+@inject HttpClient Http
+@inject IJSRuntime JS
+@inject NavigationManager Nav
+
+<PageTitle>Carrito de reservación</PageTitle>
+
+<div class="cart-page">
+    <section class="cart-hero">
+        <div>
+            <div class="cart-eyebrow">Carrito de compras</div>
+            <h1>Revisa tu selección antes de confirmar la reserva</h1>
+            <p>
+                Guarda opciones de habitación, compara el total de la estadía y confirma la opción que deseas pasar a checkout.
+            </p>
+        </div>
+
+        <a class="cart-btn cart-btn--secondary" href="/search">Seguir buscando</a>
+    </section>
+
+    @if (!string.IsNullOrWhiteSpace(error))
+    {
+        <div class="alert alert-danger cart-alert">@error</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(success))
+    {
+        <div class="alert alert-success cart-alert">@success</div>
+    }
+
+    @if (isLoading)
+    {
+        <div class="cart-card">
+            <h3>Cargando carrito...</h3>
+        </div>
+    }
+    else if (items.Count == 0)
+    {
+        <div class="cart-empty cart-card">
+            <h2>Tu carrito está vacío</h2>
+            <p>Agrega una habitación desde la búsqueda o desde el detalle de un hotel.</p>
+            <a class="cart-btn cart-btn--primary" href="/search">Buscar habitaciones</a>
+        </div>
+    }
+    else
+    {
+        <div class="cart-layout">
+            <section class="cart-list">
+                @foreach (var item in items)
+                {
+                    <article class="cart-card cart-item">
+                        <div class="cart-item__image">
+                            @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
+                            {
+                                <img src="@item.ImageUrl" alt="@item.RoomType" />
+                            }
+                            else
+                            {
+                                <div class="cart-item__placeholder">@item.RoomType</div>
+                            }
+                        </div>
+
+                        <div class="cart-item__body">
+                            <div class="cart-item__top">
+                                <div>
+                                    <div class="cart-item__hotel">@item.HotelName</div>
+                                    <h2>@item.RoomType</h2>
+                                    <p>
+                                        @item.CheckIn.ToString("dd/MM/yyyy") - @item.CheckOut.ToString("dd/MM/yyyy")
+                                        · @item.Nights noche(s)
+                                        · @item.Guests huésped(es)
+                                    </p>
+                                </div>
+
+                                <button class="cart-remove" @onclick="() => Remove(item.Id)">Quitar</button>
+                            </div>
+
+                            <div class="cart-item__facts">
+                                <div>
+                                    <span>Tarifa</span>
+                                    <strong>Q @item.PricePerNight.ToString("0.00") / noche</strong>
+                                </div>
+
+                                <div>
+                                    <span>Cantidad</span>
+                                    <select value="@item.Quantity" @onchange="e => ChangeQuantity(item.Id, e.Value?.ToString())">
+                                        @for (var i = 1; i <= GetMaxQuantity(item); i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <span>Capacidad</span>
+                                    <strong>Hasta @item.MaxGuests huésped(es)</strong>
+                                </div>
+
+                                <div>
+                                    <span>Subtotal</span>
+                                    <strong>Q @item.Subtotal.ToString("0.00")</strong>
+                                </div>
+                            </div>
+
+                            <div class="cart-item__actions">
+                                <button class="cart-btn cart-btn--primary"
+                                        @onclick="() => CreateReservationFromItem(item)"
+                                        disabled="@(processingItemId == item.Id)">
+                                    @(processingItemId == item.Id ? "Creando reserva..." : "Confirmar y pasar a checkout")
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                }
+            </section>
+
+            <aside class="cart-card cart-summary">
+                <div class="cart-eyebrow">Resumen</div>
+                <h2>Total del carrito</h2>
+
+                <div class="cart-summary__row">
+                    <span>Opciones</span>
+                    <strong>@items.Count</strong>
+                </div>
+
+                <div class="cart-summary__row">
+                    <span>Habitaciones</span>
+                    <strong>@items.Sum(x => x.Quantity)</strong>
+                </div>
+
+                <div class="cart-summary__row cart-summary__row--total">
+                    <span>Total estimado</span>
+                    <strong>Q @items.Sum(x => x.Subtotal).ToString("0.00")</strong>
+                </div>
+
+                <p>
+                    La disponibilidad se valida nuevamente al confirmar la reserva.
+                    Esto evita vender habitaciones que ya no estén disponibles.
+                </p>
+
+                <button class="cart-btn cart-btn--secondary cart-summary__clear" @onclick="ClearCart">
+                    Vaciar carrito
+                </button>
+            </aside>
+        </div>
+    }
+</div>
+
+<style>
+    .cart-page {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 2rem 1rem 3rem;
+    }
+
+    .cart-hero {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: #fff;
+        border-radius: 28px;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: center;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+        margin-bottom: 1.25rem;
+    }
+
+    .cart-hero h1 {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        line-height: 1;
+        font-weight: 900;
+        max-width: 760px;
+    }
+
+    .cart-hero p {
+        max-width: 720px;
+        color: rgba(255,255,255,0.82);
+        margin: 0.9rem 0 0;
+        line-height: 1.7;
+    }
+
+    .cart-eyebrow {
+        display: inline-flex;
+        border-radius: 999px;
+        padding: 0.35rem 0.75rem;
+        background: #eef2ff;
+        color: #1e3a8a;
+        font-size: 0.74rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 0.8rem;
+    }
+
+    .cart-card {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 24px;
+        padding: 1.25rem;
+        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
+    }
+
+    .cart-alert {
+        border-radius: 18px;
+    }
+
+    .cart-empty {
+        text-align: center;
+        padding: 3rem 1.5rem;
+    }
+
+    .cart-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 340px;
+        gap: 1.25rem;
+        align-items: start;
+    }
+
+    .cart-list {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .cart-item {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 1rem;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .cart-item__image img,
+    .cart-item__placeholder {
+        width: 100%;
+        height: 100%;
+        min-height: 230px;
+        object-fit: cover;
+        display: block;
+        background: #e5e7eb;
+    }
+
+    .cart-item__placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #334155;
+        font-weight: 900;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .cart-item__body {
+        padding: 1.25rem;
+    }
+
+    .cart-item__top {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .cart-item__hotel {
+        color: #64748b;
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .cart-item h2 {
+        margin: 0.25rem 0;
+        color: #0f172a;
+        font-weight: 900;
+    }
+
+    .cart-item p {
+        color: #64748b;
+        margin: 0;
+    }
+
+    .cart-remove {
+        border: none;
+        background: #fee2e2;
+        color: #991b1b;
+        border-radius: 999px;
+        padding: 0.45rem 0.75rem;
+        font-weight: 800;
+        height: fit-content;
+    }
+
+    .cart-item__facts {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+
+    .cart-item__facts div,
+    .cart-summary__row {
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        background: #f8fafc;
+        padding: 0.85rem;
+    }
+
+    .cart-item__facts span,
+    .cart-summary__row span {
+        display: block;
+        color: #64748b;
+        font-size: 0.72rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.25rem;
+    }
+
+    .cart-item__facts strong,
+    .cart-summary__row strong {
+        color: #0f172a;
+    }
+
+    .cart-item__facts select {
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid #cbd5e1;
+        min-height: 36px;
+    }
+
+    .cart-item__actions {
+        margin-top: 1rem;
+    }
+
+    .cart-btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 999px;
+        padding: 0.8rem 1.1rem;
+        font-weight: 900;
+        text-decoration: none;
+        border: 1px solid transparent;
+    }
+
+    .cart-btn--primary {
+        background: #0f172a;
+        color: #fff;
+    }
+
+    .cart-btn--primary:hover {
+        color: #fff;
+        background: #020617;
+    }
+
+    .cart-btn--secondary {
+        background: #fff;
+        color: #0f172a;
+        border-color: #cbd5e1;
+    }
+
+    .cart-summary {
+        position: sticky;
+        top: 120px;
+    }
+
+    .cart-summary h2 {
+        margin: 0 0 1rem;
+        font-weight: 900;
+        color: #0f172a;
+    }
+
+    .cart-summary__row {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .cart-summary__row--total {
+        background: #e0ecff;
+        border-color: #bfdbfe;
+    }
+
+    .cart-summary p {
+        color: #64748b;
+        line-height: 1.65;
+        margin: 1rem 0;
+    }
+
+    .cart-summary__clear {
+        width: 100%;
+    }
+
+    @@media (max-width: 900px) {
+        .cart-layout,
+        .cart-item {
+            grid-template-columns: 1fr;
+        }
+
+        .cart-summary {
+            position: static;
+        }
+
+        .cart-item__facts {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .cart-hero {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>
+
+@code {
+    private List<ReservationCartItem> items = new();
+    private bool isLoading = true;
+    private string? error;
+    private string? success;
+    private string? processingItemId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCart();
+    }
+
+    private async Task LoadCart()
+    {
+        isLoading = true;
+        items = await CartService.GetItemsAsync();
+        isLoading = false;
+    }
+
+    private int GetMaxQuantity(ReservationCartItem item)
+    {
+        return item.AvailableUnits > 0
+            ? Math.Max(1, item.AvailableUnits)
+            : 1;
+    }
+
+    private async Task ChangeQuantity(string id, string? value)
+    {
+        if (!int.TryParse(value, out var quantity))
+            quantity = 1;
+
+        await CartService.ChangeQuantityAsync(id, quantity);
+        await LoadCart();
+    }
+
+    private async Task Remove(string id)
+    {
+        await CartService.RemoveAsync(id);
+        await LoadCart();
+    }
+
+    private async Task ClearCart()
+    {
+        await CartService.ClearAsync();
+        await LoadCart();
+    }
+
+    private async Task CreateReservationFromItem(ReservationCartItem item)
+    {
+        error = null;
+        success = null;
+        processingItemId = item.Id;
+
+        try
+        {
+            var token = await JS.InvokeAsync<string>("auth.getToken");
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                error = "Necesitas iniciar sesión para confirmar una reserva desde el carrito.";
+                Nav.NavigateTo("/login");
+                return;
+            }
+
+            var body = new
+            {
+                hotelId = item.HotelId,
+                roomTypeId = item.RoomTypeId,
+                checkIn = item.CheckIn,
+                checkOut = item.CheckOut,
+                guests = item.Guests
+            };
+
+            var req = new HttpRequestMessage(HttpMethod.Post, "/api/public/reservations");
+            req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            req.Content = JsonContent.Create(body);
+
+            var resp = await Http.SendAsync(req);
+
+            if (!resp.IsSuccessStatusCode)
+            {
+                var txt = await resp.Content.ReadAsStringAsync();
+                error = string.IsNullOrWhiteSpace(txt)
+                    ? $"Error HTTP {(int)resp.StatusCode}"
+                    : txt;
+                return;
+            }
+
+            var data = await resp.Content.ReadFromJsonAsync<ReserveResponse>();
+
+            if (data is null || string.IsNullOrWhiteSpace(data.Code))
+            {
+                error = "La reserva fue creada, pero no se recibió el código.";
+                return;
+            }
+
+            await CartService.RemoveAsync(item.Id);
+            Nav.NavigateTo($"/checkout?code={data.Code}");
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+        finally
+        {
+            processingItemId = null;
+        }
+    }
+
+    private class ReserveResponse
+    {
+        public int Id { get; set; }
+        public string Code { get; set; } = "";
+        public string Status { get; set; } = "";
+        public decimal TotalAmount { get; set; }
+    }
+}

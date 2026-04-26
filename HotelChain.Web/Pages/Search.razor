@@ -1,9 +1,11 @@
 @page "/search"
 @using System.Net.Http.Headers
 @using Microsoft.AspNetCore.WebUtilities
+@using HotelChain.Web.Models
 @inject HttpClient Http
 @inject IJSRuntime JS
 @inject NavigationManager Nav
+@inject HotelChain.Web.Services.ReservationCartService Cart
 
 <PageTitle>Buscar y reservar</PageTitle>
 
@@ -110,13 +112,31 @@
                         <option value="5">5 estrellas</option>
                     </select>
                 </div>
+
+                <div class="col-md-4">
+                    <label class="search-label-m">Ordenar por</label>
+                    <select class="form-select search-input-m" @bind="sortOption">
+                        <option value="price">Menor precio</option>
+                        <option value="rating">Mejor rating</option>
+                        <option value="availability">Más disponibilidad</option>
+                        <option value="capacity">Mayor capacidad</option>
+                    </select>
+                </div>
             </div>
 
             <div class="search-actions-m">
                 <button class="btn btn-dark search-btn-m search-btn-m--primary" @onclick="DoSearch" disabled="@isLoading">
                     @(isLoading ? "Buscando..." : "Buscar hoteles")
                 </button>
-                <a class="btn search-btn-m search-btn-m--secondary" href="/login">Iniciar sesión</a>
+
+                @if (isLoggedIn)
+                {
+                    <a class="btn search-btn-m search-btn-m--secondary" href="/my-reservations">Mis reservaciones</a>
+                }
+                else
+                {
+                    <a class="btn search-btn-m search-btn-m--secondary" href="/login">Iniciar sesión</a>
+                }
             </div>
 
             @if (!string.IsNullOrWhiteSpace(success))
@@ -193,7 +213,7 @@
             else
             {
                 <div class="hotel-list-m">
-                    @foreach (var hotel in groupedHotels)
+                    @foreach (var hotel in SortedHotels)
                     {
                         var heroRoom = hotel.FeaturedRooms.FirstOrDefault() ?? hotel.CheapestRoom;
 
@@ -234,6 +254,9 @@
                                         <span>Desde</span>
                                         <strong>Q @hotel.StartingPrice.ToString("0.00")</strong>
                                         <small>por noche</small>
+                                        <div class="hotel-card-m__total">
+                                            @GetNights() noche(s) · Total estimado Q @GetStayTotal(hotel.StartingPrice).ToString("0.00")
+                                        </div>
                                     </div>
                                 </div>
 
@@ -259,8 +282,12 @@
                                         {
                                             <div class="room-mini-m">
                                                 <div class="room-mini-m__name">@room.RoomType</div>
-                                                <div class="room-mini-m__detail">@room.AvailableUnits disponible(s)</div>
-                                                <div class="room-mini-m__price">Q @room.BasePricePerNight.ToString("0.00")</div>
+                                                <div class="room-mini-m__detail">@room.AvailableUnits disponible(s) · hasta @room.MaxGuests huésped(es)</div>
+                                                <div class="room-mini-m__price">Q @room.BasePricePerNight.ToString("0.00") por noche</div>
+                                                <div class="room-mini-m__total">Total estadía Q @GetStayTotal(room.BasePricePerNight).ToString("0.00")</div>
+                                                <button class="btn btn-dark search-btn-m search-btn-m--primary search-btn-m--xs" @onclick="() => AddToCart(room)">
+                                                    Agregar al carrito
+                                                </button>
                                             </div>
                                         }
                                     </div>
@@ -268,10 +295,10 @@
 
                                 <div class="hotel-card-m__footer">
                                     <button class="btn search-btn-m search-btn-m--secondary search-btn-m--sm" @onclick="() => GoToHotel(hotel.HotelId)">
-                                        Ver detalle del hotel
+                                        Ver habitaciones
                                     </button>
-                                    <button class="btn btn-dark search-btn-m search-btn-m--primary search-btn-m--sm" @onclick="() => ReserveCheapest(hotel)">
-                                        Reservar desde Q @hotel.StartingPrice.ToString("0.00")
+                                    <button class="btn btn-dark search-btn-m search-btn-m--primary search-btn-m--sm" @onclick="() => AddCheapestToCart(hotel)">
+                                        Agregar opción más económica
                                     </button>
                                 </div>
                             </div>
@@ -487,6 +514,13 @@
         font-size: 0.95rem;
     }
 
+    .search-btn-m--xs {
+        width: 100%;
+        margin-top: 0.75rem;
+        padding: 0.62rem 0.85rem;
+        font-size: 0.86rem;
+    }
+
     .search-alert-m {
         border-radius: 18px;
     }
@@ -677,6 +711,14 @@
         color: #6b7280;
     }
 
+    .hotel-card-m__total,
+    .room-mini-m__total {
+        margin-top: 0.35rem;
+        color: #374151;
+        font-size: 0.86rem;
+        font-weight: 700;
+    }
+
     .hotel-card-m__meta-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -834,7 +876,9 @@
     private List<SearchRestrictionMessageDto> restrictionMessages = new();
     private string? error;
     private bool isLoading;
+    private bool isLoggedIn;
     private string? success;
+    private string sortOption = "price";
 
     private SearchRequest model = new()
     {
@@ -853,6 +897,9 @@
         cities = await Http.GetFromJsonAsync<List<CityDto>>("/api/public/cities");
         roomTypes = await Http.GetFromJsonAsync<List<RoomTypeDto>>("/api/public/room-types");
 
+        var token = await JS.InvokeAsync<string>("auth.getToken");
+        isLoggedIn = !string.IsNullOrWhiteSpace(token);
+
         var uri = Nav.ToAbsoluteUri(Nav.Uri);
         var qs = QueryHelpers.ParseQuery(uri.Query);
 
@@ -867,6 +914,21 @@
 
         if (qs.TryGetValue("checkOut", out var checkOutStr) && DateTime.TryParse(checkOutStr, out var checkOut))
             model.CheckOut = checkOut;
+
+        if (qs.TryGetValue("roomTypeId", out var roomTypeStr) && int.TryParse(roomTypeStr, out var roomTypeId))
+            model.RoomTypeId = roomTypeId;
+
+        if (qs.TryGetValue("minPrice", out var minPriceStr) && decimal.TryParse(minPriceStr, out var minPrice))
+            model.MinPrice = minPrice;
+
+        if (qs.TryGetValue("maxPrice", out var maxPriceStr) && decimal.TryParse(maxPriceStr, out var maxPrice))
+            model.MaxPrice = maxPrice;
+
+        if (qs.TryGetValue("minRating", out var minRatingStr) && double.TryParse(minRatingStr, out var minRating))
+            model.MinRating = minRating;
+
+        if (qs.TryGetValue("sort", out var sortStr) && IsValidSort(sortStr.ToString()))
+            sortOption = sortStr.ToString();
 
         if (model.CityId > 0)
             await DoSearch();
@@ -956,6 +1018,7 @@
                     StartingPrice = orderedRooms.Min(x => x.BasePricePerNight),
                     RoomOptionsCount = orderedRooms.Count,
                     MaxGuests = orderedRooms.Max(x => x.MaxGuests),
+                    AvailableUnits = orderedRooms.Sum(x => x.AvailableUnits),
                     RoomTypes = orderedRooms
                         .Select(x => x.RoomType)
                         .Where(x => !string.IsNullOrWhiteSpace(x))
@@ -968,6 +1031,74 @@
             .OrderBy(x => x.StartingPrice)
             .ThenByDescending(x => x.AverageRating)
             .ToList();
+    }
+
+    private IEnumerable<GroupedHotelResult> SortedHotels => SortGroupedHotels(groupedHotels ?? new());
+
+    private IEnumerable<GroupedHotelResult> SortGroupedHotels(IEnumerable<GroupedHotelResult> hotels)
+    {
+        return sortOption switch
+        {
+            "rating" => hotels.OrderByDescending(x => x.AverageRating).ThenBy(x => x.StartingPrice),
+            "availability" => hotels.OrderByDescending(x => x.AvailableUnits).ThenBy(x => x.StartingPrice),
+            "capacity" => hotels.OrderByDescending(x => x.MaxGuests).ThenBy(x => x.StartingPrice),
+            _ => hotels.OrderBy(x => x.StartingPrice).ThenByDescending(x => x.AverageRating)
+        };
+    }
+
+    private bool IsValidSort(string? value)
+    {
+        return value is "price" or "rating" or "availability" or "capacity";
+    }
+
+    private int GetNights()
+    {
+        return Math.Max(1, (model.CheckOut.Date - model.CheckIn.Date).Days);
+    }
+
+    private decimal GetStayTotal(decimal pricePerNight)
+    {
+        return pricePerNight * GetNights();
+    }
+
+
+    private async Task AddToCart(SearchResultDto r)
+    {
+        success = null;
+        error = null;
+
+        if (model.CheckOut.Date <= model.CheckIn.Date)
+        {
+            error = "Check-out debe ser mayor que check-in.";
+            return;
+        }
+
+        var item = new ReservationCartItem
+        {
+            HotelId = r.HotelId,
+            HotelName = r.Hotel,
+            RoomTypeId = r.RoomTypeId,
+            RoomType = r.RoomType,
+            CheckIn = model.CheckIn.Date,
+            CheckOut = model.CheckOut.Date,
+            Guests = model.Guests,
+            Quantity = 1,
+            PricePerNight = r.BasePricePerNight,
+            MaxGuests = r.MaxGuests,
+            AvailableUnits = r.AvailableUnits,
+            ImageUrl = r.ImageUrl,
+            BedType = r.BedType,
+            AreaSquareMeters = r.AreaSquareMeters
+        };
+
+        await Cart.AddAsync(item);
+
+        success = $"✅ {r.RoomType} en {r.Hotel} agregado al carrito.";
+    }
+
+    private async Task AddCheapestToCart(GroupedHotelResult hotel)
+    {
+        await AddToCart(hotel.CheapestRoom);
     }
 
     private async Task Reserve(SearchResultDto r)
@@ -1007,7 +1138,7 @@
             }
 
             var data = await resp.Content.ReadFromJsonAsync<ReserveResponse>();
-            success = $"✅ Reserva creada: {data!.Code} (Total: {data.TotalAmount})";
+            success = $"✅ Reserva creada: {data!.Code} (Total: Q {data.TotalAmount:0.00})";
             Nav.NavigateTo($"/checkout?code={data.Code}");
         }
         catch (Exception ex)
@@ -1028,10 +1159,19 @@
             ["cityId"] = model.CityId > 0 ? model.CityId.ToString() : null,
             ["checkIn"] = model.CheckIn.ToString("yyyy-MM-dd"),
             ["checkOut"] = model.CheckOut.ToString("yyyy-MM-dd"),
-            ["guests"] = model.Guests.ToString()
+            ["guests"] = model.Guests.ToString(),
+            ["roomTypeId"] = model.RoomTypeId?.ToString(),
+            ["minPrice"] = model.MinPrice?.ToString("0.##"),
+            ["maxPrice"] = model.MaxPrice?.ToString("0.##"),
+            ["minRating"] = model.MinRating?.ToString("0.##"),
+            ["sort"] = sortOption
         };
 
-        var url = QueryHelpers.AddQueryString($"/hotels/{hotelId}", query);
+        var cleanQuery = query
+    .Where(x => !string.IsNullOrWhiteSpace(x.Value))
+    .ToDictionary(x => x.Key, x => x.Value);
+
+    var url = QueryHelpers.AddQueryString($"/hotels/{hotelId}", cleanQuery);
         Nav.NavigateTo(url);
     }
 
@@ -1120,6 +1260,7 @@
         public decimal StartingPrice { get; set; }
         public int RoomOptionsCount { get; set; }
         public int MaxGuests { get; set; }
+        public int AvailableUnits { get; set; }
         public List<string> RoomTypes { get; set; } = new();
         public List<SearchResultDto> FeaturedRooms { get; set; } = new();
         public SearchResultDto CheapestRoom { get; set; } = new();
