@@ -50,6 +50,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddControllers();
+builder.Services.AddHttpClient();
 
 // ===============================================
 // CORS

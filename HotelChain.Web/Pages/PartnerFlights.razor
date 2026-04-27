@@ -1,0 +1,720 @@
+@page "/partner-flights"
+@using System.Net.Http.Json
+@inject IHttpClientFactory HttpClientFactory
+
+<div class="hc-partner-page">
+    <section class="hc-partner-hero">
+        <p class="hc-partner-eyebrow">Integración B2B · Hotel + Vuelo</p>
+        <h1>Vuelos aliados para tu hospedaje</h1>
+        <p>
+            Esta pantalla pertenece al sistema de hoteles. El portal hotelero llama a su propio backend C#,
+            y el backend C# consume el servicio Java de aerolínea conectado a Oracle.
+        </p>
+    </section>
+
+    <section class="hc-partner-card hc-flow-card">
+        <div>
+            <h2>Flujo técnico demostrado</h2>
+            <p class="hc-partner-muted">
+                No hay llamada directa del frontend hotelero a Oracle ni a la aerolínea.
+            </p>
+        </div>
+        <div class="hc-flow">
+            <span>HotelChain.Web</span>
+            <strong>→</strong>
+            <span>HotelChain.Api</span>
+            <strong>→</strong>
+            <span>Java Airline API</span>
+            <strong>→</strong>
+            <span>Oracle</span>
+        </div>
+    </section>
+
+    <section class="hc-partner-card">
+        <h2>Buscar vuelos de aerolínea aliada</h2>
+        <p class="hc-partner-muted">
+            La búsqueda se registra como integración empresarial y consulta vuelos disponibles con inventario real.
+        </p>
+
+        <div class="hc-partner-grid">
+            <label>
+                Origen
+                <select @bind="originCode">
+                    <option value="GUA">GUA - Ciudad de Guatemala</option>
+                    <option value="SAL">SAL - San Salvador</option>
+                    <option value="MEX">MEX - Ciudad de México</option>
+                    <option value="MIA">MIA - Miami</option>
+                    <option value="MAD">MAD - Madrid</option>
+                </select>
+            </label>
+
+            <label>
+                Destino
+                <select @bind="destinationCode">
+                    <option value="MIA">MIA - Miami</option>
+                    <option value="MEX">MEX - Ciudad de México</option>
+                    <option value="MAD">MAD - Madrid</option>
+                    <option value="GUA">GUA - Ciudad de Guatemala</option>
+                    <option value="SAL">SAL - San Salvador</option>
+                </select>
+            </label>
+
+            <label>
+                Fecha de salida
+                <input type="date" @bind="departureDate" @bind:format="yyyy-MM-dd" />
+            </label>
+
+            <label>
+                Pasajeros
+                <input type="number" min="1" @bind="passengers" />
+            </label>
+
+            <label>
+                Tipo de asiento
+                <select @bind="seatType">
+                    <option value="TURISTA">Turista</option>
+                    <option value="BUSINESS">Business</option>
+                </select>
+            </label>
+        </div>
+
+        <button class="hc-partner-btn" @onclick="SearchFlights" disabled="@isLoading">
+            @(isLoading ? "Consultando aerolínea..." : "Buscar vuelos aliados")
+        </button>
+    </section>
+
+    <section class="hc-partner-card">
+        <h2>Datos del pasajero</h2>
+        <p class="hc-partner-muted">
+            Estos datos se enviarán desde el backend de hoteles hacia el servicio Java de aerolínea.
+        </p>
+
+        <div class="hc-partner-grid">
+            <label>
+                Nombres
+                <input type="text" @bind="firstName" />
+            </label>
+
+            <label>
+                Apellidos
+                <input type="text" @bind="lastName" />
+            </label>
+
+            <label>
+                Correo electrónico
+                <input type="email" @bind="email" />
+            </label>
+
+            <label>
+                Fecha de nacimiento
+                <input type="date" @bind="dateOfBirth" @bind:format="yyyy-MM-dd" />
+            </label>
+
+            <label>
+                Nacionalidad
+                <input type="text" @bind="nationality" />
+            </label>
+        </div>
+    </section>
+
+    <section class="hc-partner-card">
+        <h2>Checkout simulado</h2>
+        <p class="hc-partner-muted">
+            El hotel envía datos de cobro al backend C#, y este los reenvía al servicio REST Java de aerolínea.
+        </p>
+
+        <div class="hc-partner-grid">
+            <label>
+                Número de tarjeta
+                <input type="text" @bind="cardNumber" />
+            </label>
+
+            <label>
+                CVV
+                <input type="text" @bind="cvv" />
+            </label>
+
+            <label>
+                Nombre en tarjeta
+                <input type="text" @bind="cardHolderName" />
+            </label>
+
+            <label>
+                Dirección de cobro
+                <input type="text" @bind="billingAddress" />
+            </label>
+        </div>
+    </section>
+
+    @if (!string.IsNullOrWhiteSpace(errorMessage))
+    {
+        <div class="hc-partner-alert hc-partner-error">
+            @errorMessage
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(successMessage))
+    {
+        <div class="hc-partner-alert hc-partner-success">
+            @successMessage
+        </div>
+    }
+
+    <section class="hc-partner-card">
+        <h2>Resultados desde AeroLink Airlines</h2>
+        <p class="hc-partner-muted">
+            Estos resultados vienen desde Oracle por medio del backend Java de aerolínea.
+        </p>
+
+        @if (flights.Count == 0 && !isLoading)
+        {
+            <div class="hc-partner-empty">
+                Realiza una búsqueda para consultar vuelos disponibles.
+            </div>
+        }
+
+        @foreach (var flight in flights)
+        {
+            <article class="hc-flight-result">
+                <div>
+                    <strong>@flight.FlightCode</strong>
+                    <h3>@flight.OriginCity → @flight.DestinationCity</h3>
+                    <p>@flight.DepartureTime · @flight.SeatType · @flight.FlightType</p>
+
+                    @if (!string.IsNullOrWhiteSpace(flight.ScaleCity))
+                    {
+                        <p>Escala en @flight.ScaleCity</p>
+                    }
+                </div>
+
+                <div class="hc-flight-side">
+                    <strong>$@flight.Price</strong>
+                    <span>@flight.AvailableSeats asientos disponibles</span>
+
+                    <button class="hc-partner-btn hc-reserve-btn"
+                            @onclick="() => ReserveFlight(flight)"
+                            disabled="@isLoading">
+                        Reservar vuelo aliado
+                    </button>
+                </div>
+            </article>
+        }
+    </section>
+
+    <section class="hc-partner-card">
+        <h2>Consultar o cancelar reserva aliada</h2>
+        <p class="hc-partner-muted">
+            Permite validar un código único de reserva y cancelar el vuelo para liberar inventario en Oracle.
+        </p>
+
+        <div class="hc-lookup-row">
+            <input type="text" placeholder="Ej. F-20260426-ABC123" @bind="reservationCodeToLookup" />
+            <button class="hc-partner-btn hc-lookup-btn" @onclick="LookupReservation" disabled="@isLoading">
+                Consultar reserva
+            </button>
+        </div>
+
+        @if (reservationDetail is not null)
+        {
+            <article class="hc-flight-result">
+                <div>
+                    <strong>@reservationDetail.ReservationCode</strong>
+                    <h3>@reservationDetail.FlightCode · @reservationDetail.OriginCity → @reservationDetail.DestinationCity</h3>
+                    <p>@reservationDetail.FirstName @reservationDetail.LastName · @reservationDetail.Email</p>
+                    <p>@reservationDetail.Passengers pasajeros · Total $@reservationDetail.TotalAmount</p>
+                </div>
+
+                <div class="hc-flight-side">
+                    <strong class="@(reservationDetail.Status == "CANCELED" ? "hc-canceled" : string.Empty)">@reservationDetail.Status</strong>
+
+                    @if (reservationDetail.Status != "CANCELED")
+                    {
+                        <button class="hc-partner-btn hc-cancel-btn"
+                                @onclick="() => CancelReservation(reservationDetail.ReservationCode)"
+                                disabled="@isLoading">
+                            Cancelar y liberar asientos
+                        </button>
+                    }
+                </div>
+            </article>
+        }
+    </section>
+</div>
+
+<style>
+    .hc-partner-page {
+        padding: 28px;
+    }
+
+    .hc-partner-hero {
+        background: linear-gradient(135deg, #111827, #334155);
+        color: white;
+        border-radius: 28px;
+        padding: 36px;
+        margin-bottom: 24px;
+    }
+
+    .hc-partner-eyebrow {
+        text-transform: uppercase;
+        letter-spacing: .14em;
+        font-size: 12px;
+        color: #facc15;
+        font-weight: 800;
+        margin-bottom: 8px;
+    }
+
+    .hc-partner-hero h1 {
+        margin: 0 0 8px;
+        font-size: 36px;
+    }
+
+    .hc-partner-hero p {
+        margin: 0;
+        max-width: 860px;
+        color: #e5e7eb;
+    }
+
+    .hc-partner-card {
+        background: white;
+        border: 1px solid #eadfce;
+        border-radius: 24px;
+        padding: 28px;
+        margin-bottom: 22px;
+        box-shadow: 0 16px 36px rgba(15, 23, 42, .08);
+    }
+
+    .hc-flow-card {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .hc-flow {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .hc-flow span {
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: #faf7f0;
+        border: 1px solid #eadfce;
+        font-weight: 800;
+    }
+
+    .hc-partner-card h2 {
+        margin: 0 0 6px;
+    }
+
+    .hc-partner-muted {
+        margin: 0 0 20px;
+        color: #64748b;
+    }
+
+    .hc-partner-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(180px, 1fr));
+        gap: 16px;
+    }
+
+    .hc-partner-grid label {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-weight: 700;
+    }
+
+    .hc-partner-grid input,
+    .hc-partner-grid select,
+    .hc-lookup-row input {
+        min-height: 44px;
+        border-radius: 14px;
+        border: 1px solid #d1d5db;
+        padding: 10px 14px;
+    }
+
+    .hc-partner-btn {
+        margin-top: 22px;
+        border: none;
+        border-radius: 999px;
+        padding: 12px 22px;
+        background: #c59b3d;
+        color: white;
+        font-weight: 800;
+        cursor: pointer;
+    }
+
+    .hc-partner-btn:disabled {
+        opacity: .65;
+        cursor: not-allowed;
+    }
+
+    .hc-partner-alert {
+        padding: 16px 20px;
+        border-radius: 18px;
+        margin-bottom: 18px;
+        font-weight: 700;
+    }
+
+    .hc-partner-error {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .hc-partner-success {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .hc-partner-empty {
+        padding: 28px;
+        border-radius: 18px;
+        border: 1px dashed #d6c4a6;
+        color: #64748b;
+        text-align: center;
+    }
+
+    .hc-flight-result {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 20px;
+        border-radius: 20px;
+        background: #faf7f0;
+        border: 1px solid #eadfce;
+        margin-top: 14px;
+    }
+
+    .hc-flight-result h3 {
+        margin: 6px 0;
+    }
+
+    .hc-flight-result p {
+        margin: 4px 0;
+        color: #475569;
+    }
+
+    .hc-flight-side {
+        min-width: 220px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+    }
+
+    .hc-flight-side strong {
+        font-size: 28px;
+    }
+
+    .hc-flight-side span {
+        color: #64748b;
+    }
+
+    .hc-reserve-btn,
+    .hc-cancel-btn,
+    .hc-lookup-btn {
+        margin-top: 12px;
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+
+    .hc-cancel-btn {
+        background: #991b1b;
+    }
+
+    .hc-canceled {
+        color: #991b1b;
+    }
+
+    .hc-lookup-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        margin-bottom: 18px;
+    }
+
+    @@media (max-width: 900px) {
+        .hc-partner-grid,
+        .hc-lookup-row {
+            grid-template-columns: 1fr;
+        }
+
+        .hc-flow-card,
+        .hc-flight-result {
+            flex-direction: column;
+        }
+
+        .hc-flight-side {
+            align-items: flex-start;
+        }
+    }
+</style>
+
+@code {
+    private string originCode = "GUA";
+    private string destinationCode = "MIA";
+    private DateTime departureDate = new DateTime(2026, 5, 10);
+    private int passengers = 2;
+    private string seatType = "TURISTA";
+
+    private string firstName = "Josue";
+    private string lastName = "Pineda";
+    private string email = "cliente@demo.com";
+    private DateTime dateOfBirth = new DateTime(2000, 1, 1);
+    private string nationality = "Guatemalteca";
+    private string cardNumber = "4111111111111111";
+    private string cvv = "123";
+    private string cardHolderName = "Josue Pineda";
+    private string billingAddress = "Ciudad de Guatemala";
+
+    private bool isLoading = false;
+    private string errorMessage = string.Empty;
+    private string successMessage = string.Empty;
+    private string reservationCodeToLookup = string.Empty;
+
+    private List<PartnerFlight> flights = new();
+    private PartnerReservationDetail? reservationDetail;
+
+    private async Task SearchFlights()
+    {
+        await SearchFlightsInternal(clearSuccessMessage: true);
+    }
+
+    private async Task SearchFlightsInternal(bool clearSuccessMessage)
+    {
+        isLoading = true;
+        errorMessage = string.Empty;
+
+        if (clearSuccessMessage)
+        {
+            successMessage = string.Empty;
+        }
+
+        flights.Clear();
+
+        try
+        {
+            var api = HttpClientFactory.CreateClient("Api");
+            var departureDateValue = departureDate.ToString("yyyy-MM-dd");
+
+            var url =
+                $"api/partner-airline/flights" +
+                $"?originCode={originCode}" +
+                $"&destinationCode={destinationCode}" +
+                $"&departureDate={departureDateValue}" +
+                $"&passengers={passengers}" +
+                $"&seatType={seatType}";
+
+            var result = await api.GetFromJsonAsync<List<PartnerFlight>>(url);
+            flights = result ?? new List<PartnerFlight>();
+
+            if (flights.Count == 0)
+            {
+                errorMessage = "No se encontraron vuelos aliados para los filtros seleccionados.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"No fue posible consultar la aerolínea aliada. Detalle: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task ReserveFlight(PartnerFlight flight)
+    {
+        isLoading = true;
+        errorMessage = string.Empty;
+        successMessage = string.Empty;
+
+        try
+        {
+            var api = HttpClientFactory.CreateClient("Api");
+
+            var request = new PartnerReservationRequest
+            {
+                FlightId = flight.Id,
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                Passengers = passengers,
+                DateOfBirth = dateOfBirth.ToString("yyyy-MM-dd"),
+                Nationality = nationality,
+                CardNumber = cardNumber,
+                Cvv = cvv,
+                CardHolderName = cardHolderName,
+                BillingAddress = billingAddress
+            };
+
+            var response = await api.PostAsJsonAsync("api/partner-airline/reservations", request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var detail = await response.Content.ReadAsStringAsync();
+                errorMessage = $"No se pudo reservar el vuelo aliado. Detalle: {detail}";
+                return;
+            }
+
+            var reservation = await response.Content.ReadFromJsonAsync<PartnerReservationResponse>();
+
+            if (reservation is null)
+            {
+                errorMessage = "La aerolínea aliada no devolvió datos de reserva.";
+                return;
+            }
+
+            reservationCodeToLookup = reservation.ReservationCode;
+            successMessage = $"Reserva de vuelo confirmada. Código: {reservation.ReservationCode}. Total: ${reservation.TotalAmount}.";
+
+            await SearchFlightsInternal(clearSuccessMessage: false);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"No fue posible reservar en la aerolínea aliada. Detalle: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task LookupReservation()
+    {
+        if (string.IsNullOrWhiteSpace(reservationCodeToLookup))
+        {
+            errorMessage = "Ingresa un código de reserva para consultar.";
+            return;
+        }
+
+        isLoading = true;
+        errorMessage = string.Empty;
+        successMessage = string.Empty;
+        reservationDetail = null;
+
+        try
+        {
+            var api = HttpClientFactory.CreateClient("Api");
+            reservationDetail = await api.GetFromJsonAsync<PartnerReservationDetail>($"api/partner-airline/reservations/{reservationCodeToLookup}");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"No fue posible consultar la reserva aliada. Detalle: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task CancelReservation(string code)
+    {
+        isLoading = true;
+        errorMessage = string.Empty;
+        successMessage = string.Empty;
+
+        try
+        {
+            var api = HttpClientFactory.CreateClient("Api");
+            var response = await api.PostAsync($"api/partner-airline/reservations/{code}/cancel", null);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var detail = await response.Content.ReadAsStringAsync();
+                errorMessage = $"No se pudo cancelar la reserva aliada. Detalle: {detail}";
+                return;
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<PartnerCancelReservationResponse>();
+
+            if (result is null)
+            {
+                errorMessage = "La aerolínea aliada no devolvió confirmación de cancelación.";
+                return;
+            }
+
+            successMessage = $"Reserva cancelada. Código: {result.ReservationCode}. Asientos liberados: {result.ReleasedSeats}.";
+            await LookupReservation();
+            await SearchFlightsInternal(clearSuccessMessage: false);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"No fue posible cancelar en la aerolínea aliada. Detalle: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private class PartnerFlight
+    {
+        public int Id { get; set; }
+        public string FlightCode { get; set; } = string.Empty;
+        public string OriginCode { get; set; } = string.Empty;
+        public string OriginCity { get; set; } = string.Empty;
+        public string DestinationCode { get; set; } = string.Empty;
+        public string DestinationCity { get; set; } = string.Empty;
+        public string DepartureTime { get; set; } = string.Empty;
+        public string ArrivalTime { get; set; } = string.Empty;
+        public string SeatType { get; set; } = string.Empty;
+        public string FlightType { get; set; } = string.Empty;
+        public string? ScaleCity { get; set; }
+        public decimal Price { get; set; }
+        public int AvailableSeats { get; set; }
+    }
+
+    private class PartnerReservationRequest
+    {
+        public int FlightId { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public int Passengers { get; set; }
+        public string? DateOfBirth { get; set; }
+        public string? Nationality { get; set; }
+        public string CardNumber { get; set; } = string.Empty;
+        public string Cvv { get; set; } = string.Empty;
+        public string CardHolderName { get; set; } = string.Empty;
+        public string BillingAddress { get; set; } = string.Empty;
+    }
+
+    private class PartnerReservationResponse
+    {
+        public string ReservationCode { get; set; } = string.Empty;
+        public string Status { get; set; } = string.Empty;
+        public decimal TotalAmount { get; set; }
+        public int Passengers { get; set; }
+        public string FlightCode { get; set; } = string.Empty;
+    }
+
+    private class PartnerReservationDetail
+    {
+        public string ReservationCode { get; set; } = string.Empty;
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public int Passengers { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string Status { get; set; } = string.Empty;
+        public string CreatedAt { get; set; } = string.Empty;
+        public string FlightCode { get; set; } = string.Empty;
+        public string OriginCity { get; set; } = string.Empty;
+        public string DestinationCity { get; set; } = string.Empty;
+        public string DepartureTime { get; set; } = string.Empty;
+        public string ArrivalTime { get; set; } = string.Empty;
+    }
+
+    private class PartnerCancelReservationResponse
+    {
+        public string ReservationCode { get; set; } = string.Empty;
+        public string OldStatus { get; set; } = string.Empty;
+        public string NewStatus { get; set; } = string.Empty;
+        public int ReleasedSeats { get; set; }
+        public string Message { get; set; } = string.Empty;
+    }
+}
